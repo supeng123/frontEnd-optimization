@@ -64,3 +64,37 @@ module.exports = {
     ]
 }
 ~~~
+## Webpack command
+~~~
+example: 3-1: (*need to go to this directory first)
+webpack bundle
+webpack inputfile --outputfile
+
+webpack app.js --bundle.js 
+or webpack --config webpack --config webpack.config.js
+
+example: 3-2: 
+babel
+install babel-loader babel-core babel-preset-env
+
+Babel Presets 
+targets
+target.browsers
+target.browsers: "last 2 versions"
+target.broswers: "1%"
+browserslist
+
+install babel-polyfill babel-runtime --save babel-plugin-transform-runtime --save-dev
+Babel polyfill enable to run on low level browers 
+runtime transform deisgned for frameworks
+
+create .babelrc file, and move presets to this file
+**remember that compiled failed alway related to the versions of babel-core, if
+you use the latest version. all the other babel-runtime, polyfill need to use the latest vesion
+
+example: 3-3: 
+typescript
+npm install typescript ts-loader --save-dev
+
+tsconfig.json
+~~~
