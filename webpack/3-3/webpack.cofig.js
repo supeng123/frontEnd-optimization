@@ -1,6 +1,6 @@
 module.exports = {
     entry: {
-        app: './app.js'
+        app: './src/app.ts'
     },
     output: {
         filename: '[name].[hash:5].js'
@@ -8,22 +8,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.tsx?$/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        // presets: [
-                        //     [
-                        //         'babel-preset-env',
-                        //         {
-                        //             targets: {
-                        //                 // chrome: 52,
-                        //                 browsers: ['> 1%', 'last 2 versions']
-                        //             }
-                        //         }
-                        //     ]
-                        // ]
-                    }
+                    loader: 'ts-loader'
                 },
                 exclude: '/node_modules/'
             }
