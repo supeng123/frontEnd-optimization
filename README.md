@@ -213,3 +213,139 @@ class Dog implements Animal {
     }
 }
 ~~~
+## 5.Generic Paradigm
+~~~
+//input and output are the same type,
+in the following example, T could be replace by other letter, only if
+three of those are the same
+function getData<T>(value: T): T {
+    return value
+}
+
+getData<string>('this is a string')
+
+class MinClass<T> {
+    public list:T[] = [];
+
+    add(value:T):void {
+        this.list.push(value);
+    }
+
+    min():T{
+        let minNum = this.list[0];
+        this.list.forEach(item => {
+            if (minNum > item) minNum = item;
+        });
+        return minNum;
+    }
+}
+
+//instantiate the class with type
+let m1 = new MinClass<number>()
+let m1 = new MinClass<string>()
+~~~
+
+### generic interface
+~~~
+interface ConfigFn{
+    <T>(value:T, value2:T):T;
+}
+
+const getData:ConfigFn = function<T>(value: T, value2: T):T{
+    return value + value2;
+}
+
+getData<string>('supeng','sunminjuan')
+
+//alternative way
+interface ConfigFn<T>{
+    (value:T, value2:T):T
+}
+
+function getData<T>(value:T, value2:T):T{
+    return value + value2;
+}
+
+const myGetData:ConfigFn<string> = getData;
+
+myGetData('s', 's')
+~~~
+
+~~~
+class MySqlDb<T>{
+    add(info:T):boolean{
+        console.log(info)
+        return true;
+    }
+}
+
+class User{
+    name:string | undefined;
+    password:string | undefined;
+}
+
+var u = new User();
+u.name = 'su';
+u.password = '123';
+var Db = new MySqlDb<User>();
+Db.add(u);
+~~~
+
+~~~
+interface DBI<T> {
+    add(info:T): boolean;
+    update(info:T, id:number): boolean;
+    delete(id:number): boolean;
+    get(id:number): any[];
+}
+
+class MysqlDb <T> implements DBT<T>{
+    add(info:T): boolean {
+
+    };
+    update(info:T, id:number): boolean {
+
+    };
+    delete(id:number): boolean {
+
+    };
+    get(id:number): any[] {
+
+    };
+}
+
+const oMysql = new MysqlDb<User>();
+oMysql.add(u)
+
+~~~
+### export inport 
+~~~
+//only one was exported
+export default function aaa ():void{
+
+}
+import default from 'xxxx'
+
+//multiple were exported
+export function aaa ():void{
+
+}
+export function bbb ():void{
+    
+}
+import {aaa, bbb} from 'xxxx'
+
+//alternative multiple were exported
+function aaa ():void{
+
+}
+function bbb ():void{
+    
+}
+export {aaa, bbb};
+import {aaa, bbb} from 'xxxx'
+
+export nameSpace A {
+    put all your implementations with same names here, and export them
+}
+~~~
