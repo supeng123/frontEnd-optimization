@@ -177,5 +177,110 @@ import(/* webpackChunkName: 'lodash'*/ "lodash").then(function(_) {
     console.log(_.join(["1", "2"]));
 });
 
+~~~
 
+
+### Css loader
+~~~
+exmaple: 3-5:
+
+style-loader: insert css styles to html document
+css-loader: import css to other files
+*warning: css-loader should be putting at the front of style-loader, in webpack, should put at the end of loaders
+{
+    test: /\.css$/,
+    use: [
+        {
+            loader: 'style-loader'
+        },
+        {
+            loader: 'css-loader'
+        }
+    ]
+}
+
+or use file loader with url to seperate the css
+{
+    test: /\.css$/,
+    use: [
+        {
+            loader: 'style-loader/url'
+        },
+        {
+            loader: 'file-loader'
+        }
+    ]
+}
+
+use style-loader provider other method called "use" and "unuse" to define when the style can be used in document
+options: {
+    //insert the style into the id selector
+    insertInto: "#app",
+    //insert one style if set to true
+    singleton: true,
+    //in root directory at the same level of webpack.config.js, change the css style when browser is runing
+    transform: './css.tranform.js'
+}
+
+//css.transform.js
+module.exports = function(css){
+    console.log(css)
+    console.log(window.innerWidth)
+    if (window.innerWidth >= 768){
+        return css.repalce('red', 'green')
+    } else {
+        return css.repalce('red', 'black')
+    }
+    
+}
+
+use css-loader
+options ={
+    //(other name cofigured)
+    alias:
+    //@import
+    importLoader:
+    //compressed or not
+    Miimize:
+    //use css-modules
+    modules:
+    //define the output class name
+    localIdentName:
+}
+
+css modules
+:local
+:global
+composes
+compose... from with
+
+//sass-loader less-loader node-sass
+
+//two ways extract css
+extract-loader
+
+ExtractTextWebpackPlugin //need manully add the separated css file to index.html
+fallback: the css files need to extract
+allChunks: false
+
+
+postcss-loader
+auto-prefix
+//compress the css nodes
+css-nano
+postcss-next
+
+{
+    loader: 'postcss-loader',
+    options: {
+        plugins: () => [
+            autoprefixer({
+                browsers: [
+                    'Chrome >= 60',
+                    'Firefox >= 54'
+                ]
+            })
+        ]
+    }
+}
 ~~~
