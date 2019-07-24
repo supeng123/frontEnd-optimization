@@ -284,3 +284,30 @@ postcss-next
     }
 }
 ~~~
+
+### Tree shaking
+~~~
+remove the unused codes
+exmaple: 3-6:
+new webpack.optimize.UglifyJsPlugin()
+
+babel-plugin-lodash to tree shake lodash becuase lodash itself doen't support tree shaking 
+
+purifycss-webpack
+
+options
+paths: glob.sync([])
+npm install glob-al --save-dev
+~~~
+
+### Pictures optimization
+~~~
+exmaple: 3-7:
+1.import images into css
+2.merge multiple images to sprite images to reduce the number of https request
+3.compress images
+4.use base64 compile codes.
+
+//file-loader, url-loader, img-loader, postcss-sprites
+
+~~~
