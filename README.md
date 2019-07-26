@@ -349,3 +349,121 @@ export nameSpace A {
     put all your implementations with same names here, and export them
 }
 ~~~
+
+### Class Decoration
+~~~
+function logClass(params: any) {
+    // the params is referred to HttpClient
+    console.log(params)
+
+    params.prototype.apiUrl= 'xxxx';
+    params.prototype.run = function() {
+        console.log('run')
+    }
+}
+
+@logClass
+class HttpClient{
+    contructor() {
+
+    }
+
+    getData() {
+
+    }
+}
+
+var http:any = new HttpClient();
+console.log(http.apiURl)
+console.log(http.run())
+
+//decoration with arguments
+function logArgumentsClass(params: string) {
+    return function (target:any) {
+        //target is HttpClient
+        console.log(target)
+        console.log(params)
+    }
+}
+
+@logClass('hello')
+class HttpClient{
+    contructor() {
+
+    }
+
+    getData() {
+
+    }
+}
+
+
+//decoration rewrite the constructor
+function anotherLogClass(target:any) {
+       //target is HttpClient
+        console.log(target)
+
+        return class extends target {
+            apiUrl:string = "after modified apiUrl"
+
+            getData() {
+                console.log(this.apiUrl)
+            }
+        }
+
+}
+
+@anotherLogClass
+class HttpClient{
+    public apiUrl:string | undefined
+    contructor() {
+        this.apiUrl = "before modifed apiUrl"
+    }
+
+    getData() {
+        console.log(this.apiUrl)
+    }
+}
+
+~~~
+
+### Method Decoration
+~~~
+//has three paramters
+function logMethod(params: any) {
+    return function(target:any, methodName:any, desc:any) {
+        console.log(target)
+        console.log(methodName)
+        console.log(desc)
+
+        target.run = function() {
+            console.log('run')
+        }
+
+        //modify the decoration method getData
+        //1. save current method
+        var oMethod = desc.value;
+
+        desc.value = function(...args:any[]){
+            arges.map((value) => String(value));
+
+            oMethod.apply(this, args)
+        }
+    }
+}
+
+class HttpClient{
+    public apiUrl:string | undefined
+    contructor() {
+        this.apiUrl = "before modifed apiUrl"
+    }
+
+    @logMethod('http://baidu.com')
+    getData() {
+        console.log(this.apiUrl)
+    }
+}
+
+the order of different type of decorations
+attribute > method > method parameter > class
+~~~
