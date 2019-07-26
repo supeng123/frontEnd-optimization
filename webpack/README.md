@@ -310,4 +310,160 @@ exmaple: 3-7:
 
 //file-loader, url-loader, img-loader, postcss-sprites
 
+{
+    test: /\.(png|jpg|jpeg|gif)$/,
+    use: [
+        // {
+        //     loader: 'file-loader',
+        //     options: {
+        //         // outputPath: './',
+        //         publicPath: '',
+        //         useRelativePath: true
+        //     }
+            
+        // },
+        {
+            loader: 'url-loader',
+            options: {
+                //compress to base64
+                limit: 20,
+                outputPath: './',
+                publicPath: '',
+                useRelativePath: true,
+                name: '[name][hash:5].min.[ext]',
+            }
+        },
+        {
+            loader: 'img-loader',
+            options: {
+                //compress png images
+                pngquant: {
+                    quality: 80
+                }
+            }  
+        }
+    ]
+}
+
+
+{
+    loader: 'postcss-loader',
+    options: {
+        ident: postcss,
+        plugins: [
+            //merge all images to one sprite
+            require('postcss-sprites')({
+                spritePath: 'dist/assets/imgs/sprites',
+                //needs to set retina images name @2x. for example, 1@2x.png
+                retina: true
+            }),
+            // require('postcss-next')()
+        ]
+    }
+},
+
+//font set 
+{
+    test: /\.(eot|woff2|woff|ttf|svg)4/,
+    use: [
+        {
+            loader: 'url-loader',
+            options: {
+                limit: 20,
+                outputPath: './',
+                publicPath: '',
+                useRelativePath: true,
+                name: '[name][hash:5].min.[ext]',
+            }
+        }
+    ]
+}
+
+//add three party frameworks
+webpack.providePlugin
+
+plugins: [
+    new webpack.ProvidePlugin({
+        //inject jquery to all modules only if jquery is installed as dependencies
+        $: 'jquery'
+    })
+]
+
+//if juqery was not installed but we manually download to one specified directory, use resolve
+so webpack can automatically find this third party packages
+
+resolve: {
+    alias: {
+        jquery$: path.resolve(__dirname, 'src/libs/jquery.min.js')
+    }
+}
+
+//alternative way to import third party packages, use imports-loader
+{
+    test: path.resolve(__dirname, 'src/app.js'),
+    use: [
+        {
+            loader: 'imports-loader',
+            options: {
+                $: 'jquery'
+            }
+        }
+    ]
+}
+~~~
+
+### HTML configuration
+~~~
+example 3.7
+HtmlWebpackPlugin
+
+ new HtmlWebpackPlugin({
+    filname: 'index.html',
+    template: './index.html',
+    //inject the maual cofiguratio in html or not
+    inject: false,
+
+    //entry name, if not specified, will inject all script to one entry index.html
+    chunks:['app'],
+    minify: {
+        collapseWhitespace: true
+    }
+})
+
+html-loader to deal with src of images( the images you insert to html manually not by webpack)
+
+ {
+    test: /\.html$/,
+    use: [
+        {
+            loader: 'html-loader',
+            options: {
+                attrs: ['img:src', 'img:data-src']
+            }
+        }
+    ]
+}
+** need to remember the outout path was decided by url-loader useRelativePath, need to comment out this configuration
+and add outputPath:'assets/imgs/', outputPath is based on path in output, but this will cause imgs in css can not found
+its relative path, so need to change publicPath to the root directory
+
+//inject the common codes in html to reduce http requests
+inline-manifest-webpack-plugin
+html-webpack-inline-chunk-plugin
+
+new HtmlInlineChunkPlugin({
+    inlineChunks: ['manifest']
+}),
+new HtmlWebpackPlugin({
+    filname: 'index.html',
+    template: './index.html',
+    //inject the maual configuration in html or not
+    inject: false,
+
+    //entry name, if not specified, will inject all script to one entry index.html, need to commoment out when using HtmlInlineChunkPlugin
+    // chunks:['app'],
+    minify: {
+        collapseWhitespace: true
+    }
+}),
 ~~~

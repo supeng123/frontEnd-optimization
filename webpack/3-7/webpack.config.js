@@ -6,6 +6,9 @@ var extractLess = new ExtractTextWebpackPlugin({
     filename: 'css/[name].bundle.css'
 })
 
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlInlineChunkPlugin = require('html-webpack-inline-chunk-plugin')
+
 
 module.exports = {
     entry: {
@@ -18,6 +21,17 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /.\js$/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['env']
+                        }
+                    }
+                ]
+            },
             {
                 test: /\.less$/,
                 use: extractLess.extract({
@@ -110,6 +124,17 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.html$/,
+                use: [
+                    {
+                        loader: 'html-loader',
+                        options: {
+                            attrs: ['img:src', 'img:data-src']
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -118,11 +143,56 @@ module.exports = {
         // new webpack.ProvidePlugin({
         //     //inject jquery to all modules
         //     $: 'jquery'
-        // })
+        // }),
+        new HtmlInlineChunkPlugin({
+            inlineChunks: ['manifest']
+        }),
+        new HtmlWebpackPlugin({
+            filname: 'index.html',
+            template: './index.html',
+            //inject the maual configuration in html or not
+            inject: false,
+
+            //entry name, if not specified, will inject all script to one entry index.html, need to commoment out when using HtmlInlineChunkPlugin
+            // chunks:['app'],
+            minify: {
+                collapseWhitespace: true
+            }
+        }),
+        
     ],
     resolve: {
         alias: {
             jquery$: path.resolve(__dirname, 'src/libs/jquery.min.js')
+        }
+    },
+    optimization: {
+        minimize: false,
+        runtimeChunk: {
+            "name": "manifest"
+        },
+        splitChunks: {
+          chunks: 'all',
+          minSize: 0,
+          minChunks: 1,
+          maxAsyncRequests: 5,
+          maxInitialRequests: 3,
+          automaticNameDelimiter: '~',
+          name: true,
+          cacheGroups: {
+            commons: {
+                test: /\.src\/\.jsx?$/,
+                name: "commons",
+                chunks: "all",
+                minChunks: 2,
+                filename: '[name].bundle.js',
+                minSize: 0
+            },
+            vendars: {
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10
+            },
+            }
         }
     }
 }
