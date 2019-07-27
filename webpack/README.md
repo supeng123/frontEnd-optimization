@@ -37,7 +37,7 @@ module.exports = {
         vendor: 'vendor.js'
     },
     output: {
-        filename: '[name].min.[hash:5].js',
+        filename: '[name].min.[hash:5].js', //or "https://www.supeng.site"
         publicPath: __dirname + ”/dist/“
     }
 }
@@ -48,6 +48,8 @@ Loaders: process the files, like js, css, jsx
 //example
 module.exports = {
     module: {
+        //don't need to analyze the code relations in jquery
+        noParse: /jquery/
         rules : [
             {
                 test: /\.css$/,
@@ -90,7 +92,7 @@ browserslist
 
 install babel-polyfill babel-runtime --save babel-plugin-transform-runtime --save-dev
 Babel polyfill enable to run on low level browers 
-runtime transform deisgned for frameworks
+runtime transform deisgned for frameworks not affect the global variables
 
 create .babelrc file, and move presets to this file
 **remember that compiled failed alway related to the versions of babel-core, if
@@ -129,34 +131,38 @@ exmaple: 3-4:
 chachGroup name defined the output bundle name, if
 chunkFilename is not set in output, the filename will be available.
 optimization: {
-        minimize: false,
-        runtimeChunk: {
-            "name": "manifest"
+    //for tree shaking
+    usedExports: true
+    minimize: false,
+    runtimeChunk: {
+        "name": "manifest"
+    },
+    splitChunks: {
+        chunks: 'all',
+        minSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: 3,
+        automaticNameDelimiter: '~',
+        name: true,
+        cacheGroups: {
+        commons: {
+            test: /\.src\/\.jsx?$/,
+            name: "commons",
+            chunks: "all",
+            minChunks: 2,
+            filename: '[name].bundle.js',
+            minSize: 0
         },
-        splitChunks: {
-          chunks: 'all',
-          minSize: 0,
-          minChunks: 1,
-          maxAsyncRequests: 5,
-          maxInitialRequests: 3,
-          automaticNameDelimiter: '~',
-          name: true,
-          cacheGroups: {
-            commons: {
-                test: /\.src\/\.jsx?$/,
-                name: "commons",
-                chunks: "all",
-                minChunks: 2,
-                filename: '[name].bundle.js',
-                minSize: 0
-            },
-            vendars: {
-              test: /[\\/]node_modules[\\/]/,
-              priority: -10
-            },
-            }
+        vendars: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10
+        },
         }
     }
+}
+
+//need to set "sideEffects: false" in package.json in case of babel-polyfill not find other used module
 ~~~
 
 ### Codes split and lazy load
@@ -238,12 +244,12 @@ use css-loader
 options ={
     //(other name cofigured)
     alias:
-    //@import
-    importLoader:
+    //always@import less-loader and postcss-loader first
+    importLoader:2
     //compressed or not
     Miimize:
-    //use css-modules
-    modules:
+    //use css-modules only for current module, not affact global style
+    modules:true
     //define the output class name
     localIdentName:
 }
@@ -395,8 +401,10 @@ so webpack can automatically find this third party packages
 resolve: {
     alias: {
         jquery$: path.resolve(__dirname, 'src/libs/jquery.min.js')
+        bootstrap: "bootstrap/dist/css/bootstrap.css"
     }
 }
+then only need to use "import bootstrap in js to use it"
 
 //alternative way to import third party packages, use imports-loader
 {
@@ -409,6 +417,11 @@ resolve: {
             }
         }
     ]
+}
+
+//don't use jquery after bundling
+externals: {
+    jquery: "jQuery"
 }
 ~~~
 
@@ -466,4 +479,156 @@ new HtmlWebpackPlugin({
         collapseWhitespace: true
     }
 }),
+
+npm install clean-webpack-plugin
+
+new CleanWebpackPlugin(['dist'])
+~~~
+
+### Webpack-dev-serve
+~~~
+npm install webapck-dev-server --save-dev
+*** in package.json, add one command like "server": "webpack-dev-server --open"
+in to scripts, then "npm run server"
+
+options {
+    //check the building progress
+    inline:
+    //directory
+    contentBase: './dist'
+    port:
+    //html5 history
+    historyApiFallBack
+    //generator https certificate
+    https:
+    proxy:
+    hot:
+    //only compile when page used
+    lazy:
+    //give user hint
+    overlay:
+    //cross origin configuration
+    open: false
+}
+
+devServer: {
+    port: 9001,
+    inline: true,
+    historyApiFallback: {
+        rewrites: [
+            {
+                //from: 'pages/a',
+                from: '/^\/([a-zA-A0-9]+\/?)([a-zA-A0-9]+)/',
+                //to 'pages/a.html',
+                to: function(context){
+                    return '/'+ context.match[1]+'.html'
+                }
+            }
+        ]
+    },
+    proxy: {
+        '/api': {
+            target: 'https://m.weibo.cn',
+            changeOrigin: true,
+            logLevel: 'debug',
+            pathRewrite: {
+                '^/comments': '/api/comments'
+            },
+            headers: {
+                'Cookie': ''
+            }
+        }
+    },
+    hot: true,
+    hotOnly: true
+},
+plugins: [
+    //only change the updated the status, not the one already exist
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NameModulesPlugin()
+],
+
+HMR
+** css loader will effect the style of page change, so css ould not be extracted to other file during developement
+other framewrorks will invoke module.hot.accept to reload updated codes
+module.hot.decline
+
+
+//http-proxy-middleware
+options{
+    target
+    changeOrigin
+    headers
+    logLevel
+    pathRewrite
+}
+
+~~~
+
+### Source map
+~~~
+devtool : 'eval',
+
+devtool: source-map //without uglify and other loaders, the output codes are identical to codes in development
+recommend 'cheap-module-source-map' in production
+'cheap-module-eval-source-map' in development
+if css need source map, also need to set its loader separately sourceMap: true
+
+~~~
+
+### Eslint
+~~~
+npm install eslint eslint-loader eslint-plugin-html
+
+three ways to config eslint
+webpack config| .eslintrc.* | package.json eslintConfig
+
+https://standardjs.com
+eslint-config-standard
+eslint-plugin-html
+eslint-friendly-formatter
+eslint-plugin-promise
+eslint-plugin-standard
+eslint-plugin-import
+eslint-plugin-node
+eslint-config-xxx
+
+eslint-loader
+{
+    loader: 'eslint-loader',
+    options: {
+        formatter:require('eslint-friendly-formatter')
+    }
+}
+options: {
+    failOnWaring
+    failOnError
+    formatter
+    outputReport
+}
+devServer.overlay
+
+in .eslintrc.js
+
+module.exports = {
+    root: true,
+    extends: 'standard',
+    plugins:['html'],
+    env: {
+        browser: true,
+        node: true
+    },
+    globals: {
+        //jquery global $
+        $: ture
+    }
+    rules: {
+        indent: ['error', 4]
+    }
+}
+*** don't use imports-loader for third party 
+new webpack.providePlugin({
+    $: 'jquery'
+})
+
 ~~~
