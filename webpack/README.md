@@ -40,6 +40,11 @@ module.exports = {
         filename: '[name].min.[hash:5].js', //or "https://www.supeng.site"
         publicPath: __dirname + ”/dist/“
     }
+    //in production mode use other output file
+    output: {
+        filename: '[name].[contenthash].js',
+        chunkFilename: '[name].[contenthash].js'
+    }
 }
 //this case, there would be two output file, one is index.min.hashxxxx.js, the other is vendor.min.hashxxxx.js
 
@@ -131,33 +136,44 @@ exmaple: 3-4:
 chachGroup name defined the output bundle name, if
 chunkFilename is not set in output, the filename will be available.
 optimization: {
-    //for tree shaking
+    //for tree shaking, need to ignore css tree shaking by setting package.json set "sideEffects: ["*css"]"
     usedExports: true
     minimize: false,
+    //the relation between entry bundle and other chunk bundle, don't need it after webpack+
     runtimeChunk: {
         "name": "manifest"
     },
     splitChunks: {
+        //splict sync and async codes, need to config cacheGroups
         chunks: 'all',
-        minSize: 0,
+        //only split the codes large than minSize
+        minSize: 300000,
+        //only module being used large than 1 time to split the codes
         minChunks: 1,
         maxAsyncRequests: 5,
+        //first page initial bundles only has 3
         maxInitialRequests: 3,
         automaticNameDelimiter: '~',
         name: true,
         cacheGroups: {
-        commons: {
-            test: /\.src\/\.jsx?$/,
-            name: "commons",
-            chunks: "all",
-            minChunks: 2,
-            filename: '[name].bundle.js',
-            minSize: 0
-        },
-        vendars: {
-            test: /[\\/]node_modules[\\/]/,
-            priority: -10
-        },
+            commons: {
+                test: /\.src\/\.jsx?$/,
+                name: "commons",
+                chunks: "all",
+                minChunks: 2,
+                filename: '[name].bundle.js',
+                minSize: 0
+            },
+            vendars: {
+                test: /[\\/]node_modules[\\/]/,
+                priority: -10
+            },
+            defaut: {
+                filename: 'diy.bundle.js',
+                // for module has been used, reused it in old bundle
+                reuseExistingChunk: true
+                minChunks: 2
+            }
         }
     }
 }
@@ -169,6 +185,7 @@ optimization: {
 ~~~
 exmaple: 3-4:
 use import dynamically invoke the implementations
+npm install babel-plugin-dynamic-import-webpack --save-dev, set the babelrc
 see detail in pageA.js
 
 import(/* webpackChunkName: 'subPageA'*/ "./subPageA").then(function(subPageA) {
@@ -268,6 +285,36 @@ extract-loader
 ExtractTextWebpackPlugin //need manully add the separated css file to index.html
 fallback: the css files need to extract
 allChunks: false
+
+using mini-css-extract-plugin, need to use in production mode
+//example
+module: {
+    rules: [
+        {
+            test: /\.scss$/,
+            use: [
+                MiniCssExtractPlugin.loader,
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 2
+                    }
+                },
+                'sass-loader',
+                'postcss-loader'
+            ]
+        }
+    ]
+},
+plugins: [
+    new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[name].chunk.css'
+    })
+],
+optimization: {
+    minimizer: [new OptimizeCssAssetsPlugin({})]
+}
 
 
 postcss-loader
@@ -385,7 +432,7 @@ exmaple: 3-7:
     ]
 }
 
-//add three party frameworks
+//***add three party frameworks, so jquery don't need to import any more
 webpack.providePlugin
 
 plugins: [
@@ -620,7 +667,7 @@ module.exports = {
     },
     globals: {
         //jquery global $
-        $: ture
+        $: true
     }
     rules: {
         indent: ['error', 4]
@@ -630,5 +677,47 @@ module.exports = {
 new webpack.providePlugin({
     $: 'jquery'
 })
+~~~
 
+### Preloading & Prefetching
+~~~
+check the coverage of the executing codes
+Command + shift + p ,search Coverage to check
+
+then use import the async loading codes
+
+use webapckPrefetch to load the codes in advance
+//
+document.addEventListener('click', ()=> {
+    import(/* webpackPrefetch: true*/ './click.js'). then(func => func());
+})
+~~~
+
+### PWA
+~~~
+npm install workbox-webpack-plugin --save-dev
+
+plugins: [
+    new WorkboxPlugin.GeneratwSw(
+        {
+            clients: true,
+            skipWaiting: true
+        }
+    )
+]
+//also need to inject service worker in project codes
+if('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+        .then(registration => {
+            console.log("service work registed")
+        }).catch(error => console.log("does not work"))
+    })
+}
+~~~
+
+### Other optimization 
+~~~
+use webpack-dll in development mode to reduce common compile times
+use html plugin to generate multiple entry pages.
 ~~~
