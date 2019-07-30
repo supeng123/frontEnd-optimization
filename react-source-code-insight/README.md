@@ -159,6 +159,8 @@ ReactSyncRoot(
   hydrate: boolean,
 )
 
+createContainer---->
+
 //children is </app>, firberRoot is root._internalRoot, parentCoponent is null
 then invoke upateContainer(children, fiberRoot, parentComponent, callback)
 
@@ -172,5 +174,111 @@ updateContainer(
 )
 
 scheduleWork(current, expirationTime);
+
+~~~
+
+### FiberRoot
+~~~
+the start point of the whole app
+recode the whole process
+createContainer() --->
+FiberRootNode(containerInfo, tag, hydrate)
+//persistent updates.
+pendingChildren 
+// tree structure, the top point of the tree
+current: Fiber
+earliestSuspendedTime
+lastestSuspendedTime
+latestPingedTime
+
+finishedWork
+//mark the suspense promise
+timeoutHandle
+
+nextExpirationTimeToWorkon: ExpirationTime
+expirationTime
+
+~~~
+
+### Fiber
+~~~
+every reactElement has a Fiber object to record the node status, build the relation the congrate the whole tree
+
+tag:
+type: functional or class component
+stateNode: the instance of the node
+
+//new state
+pendingProps
+//old state
+memorizedProps
+//computerlize
+updateQueue
+
+//pointer to its parent node
+return: Fiber | null,
+// Singly Linked List Tree Structure.
+child: Fiber | null,
+sibling: Fiber | null,
+index: number,
+~~~
+
+### Update
+~~~
+recode the changes of components status, saved in updateQueue
+
+updateContainer---->updateContainerAtExpirationTime---->
+scheduleRootUpdate(
+    current,
+    element,
+    expirationTime,
+    suspenseConfig,
+    callback,
+  )
+
+then in ReactUpdateQueue.js 
+createUpdate(
+  expirationTime: ExpirationTime,
+  suspenseConfig: null | SuspenseConfig,
+):Update
+the return update object with properties
+tag = {
+    UpdateState = 0;
+    ReplaceState = 1;
+    ForceUpdate = 2;
+    CaptureUpdate = 3;
+}
+payload = {ReactNodeList}<App>element
+
+then execute enqueueUpdate----->createUpdateQueue
+export function createUpdateQueue<State>(baseState: State): UpdateQueue<State> {
+  const queue: UpdateQueue<State> = {
+    baseState,
+    firstUpdate: null,
+    lastUpdate: null,
+    firstCapturedUpdate: null,
+    lastCapturedUpdate: null,
+    firstEffect: null,
+    lastEffect: null,
+    firstCapturedEffect: null,
+    lastCapturedEffect: null,
+  };
+  return queue;
+}
+~~~
+
+### expiration time
+~~~
+// to enhance the effiency when setState in short period time
+currentTime = first execution time now() - js init time now()
+current = Fiber
+
+in ReactFiberWorkLoop.js
+computerExpirationForFiber(currentTime, current)
+~~~
+
+### setState & forceUpdate
+~~~
+update the node fiber, the type of updating is different
 
 ~~~
