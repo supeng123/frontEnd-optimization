@@ -280,5 +280,49 @@ computerExpirationForFiber(currentTime, current)
 ### setState & forceUpdate
 ~~~
 update the node fiber, the type of updating is different
+~~~
+
+### road-map
+~~~
+scheduleWork---->
+addRootToScheduler---->
+if expirationTime Sync 
+performSyncWork()
+
+or
+scheduelCallbackWithExpirationTiem() //then start the async schedule work
+scheduleDefferredCallback----> add to callbackList
+----> requestWork ----> animation Tick
+---->performAsyncWork
+
+performWork() for async and sync
+---->perfromRootWork
+
+
+scheduleCallbackForRoot()
+scheduleSyncCallback()
+scheduleCallback()
+
+batchedUpdates
+export function batchedUpdates<A, R>(fn: A => R, a: A): R {
+  const prevExecutionContext = executionContext;
+  executionContext |= BatchedContext;
+  try {
+    return fn(a);
+  } finally {
+    executionContext = prevExecutionContext;
+    if (executionContext === NoContext) {
+      // Flush the immediate callbacks that were scheduled during this batch
+      flushSyncCallbackQueue();
+    }
+  }
+}
+return fn(a) represents the page element event callback is invoking such as onclick = callback;
+when run multiple setStates, the isBatchingUpdates is true and returned without updating states
+after all the setState were invoked, if the fn(a) was wrapped by setTimeout(fn(a),0), it will 
+invoke each the setState one by one.
+
+setState is sync, but it doesn't represent each state will update immediately, it depends on the context of
+the function, if it's in the batch means you have multiple setState, it will update when the last setState invoked
 
 ~~~
