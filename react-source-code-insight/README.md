@@ -326,3 +326,17 @@ setState is sync, but it doesn't represent each state will update immediately, i
 the function, if it's in the batch means you have multiple setState, it will update when the last setState invoked
 
 ~~~
+
+### Scheduler
+~~~
+ReactFiberWorkLoop.js
+scheduleSyncCallback() ----> Scheduler_scheduleCallback()
+Scheduler.js
+unstable_scheduleCallback()---->
+
+In ScheduleHostConfig.default.js
+requestHostCallback()
+//then react will render the content to dom within 33 milliseconds if there is time available or idle
+
+flushwork()
+~~~
