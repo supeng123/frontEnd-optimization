@@ -339,4 +339,41 @@ requestHostCallback()
 //then react will render the content to dom within 33 milliseconds if there is time available or idle
 
 flushwork()
+
+then back to ReactFiberWorkLoop.js
+
+renderRoot(root, Sync, true)
+~~~
+
+### ReactFiberBeginWork
+~~~
+beginWork() ---->
+
+updateFunctionComponent(
+    current,
+    workInProgress,
+    Component,
+    resolvedProps,
+    renderExpirationTime,
+)
+
+renderWithHooks(
+    current,
+    workInProgress,
+    Component,
+    nextProps,
+    context,
+    renderExpirationTime,
+);
+
+reconcileChildren(
+    current,
+    workInProgress,
+    nextChildren,
+    renderExpirationTime,
+  );
+//generate fiber children tree based on props.children
+//check Fiber object can be reused
+
+reconcileChildFibers()
 ~~~
