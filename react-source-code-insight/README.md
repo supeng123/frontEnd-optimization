@@ -376,4 +376,18 @@ reconcileChildren(
 //check Fiber object can be reused
 
 reconcileChildFibers()
+
+
+//class component update
+updateClassInstance()
+instance = new ctor(props, context)
+instance.state
+adoptClassInstance(woringProgress instance)
+intance.updater = classComponentUpdater
+woringProgress.stateNode = instance
+
+mountClassInstance()
+setState using processUpdateQueue
+
+finishClassComponent()
 ~~~
