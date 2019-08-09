@@ -20,3 +20,18 @@ remove the no need words like blank spaces and html comments
 merge resources
 disadvantages: extend first page render time, caches update frequently
 ~~~
+### Image optimization
+~~~
+the difference between png8/png24/pgn32,
+png8 --- 256 different colors + support transparent
+png24 --- 2*24 different colors + does not support transparent
+png32 --- 2*24 different colors + support transparent
+
+jpg-- for thoes does not need the transparent pictures
+png-- for thoes does need the transparent pictures
+webp -- for android
+svg -- for simple illustration
+
+css sprite reduce the http requests, but the size will be enlarged
+image inline embed images into html
+~~~

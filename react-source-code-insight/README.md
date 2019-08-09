@@ -391,3 +391,17 @@ setState using processUpdateQueue
 
 finishClassComponent()
 ~~~
+
+### completeUniteOfWork
+~~~
+to check if it's interrupted to invoke different function
+to check if it has sibiling node to invoke diffent operation
+give value to effect chain after the completion of node
+
+//when the node has no error
+beginwork()
+lasteffect node needs change it will propogate to the root node
+firsteffct node needs change it will propogate to the root node
+
+unwindwork()
+~~~
