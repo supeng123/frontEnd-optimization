@@ -35,3 +35,52 @@ svg -- for simple illustration
 css sprite reduce the http requests, but the size will be enlarged
 image inline embed images into html
 ~~~
+### Loading process of Css and Javascript
+~~~
+Html-->Dom--->
+Css--->Cssom--->
+then the render tree will be generated
+
+**features
+simutaneously loading the static resources, execute orderly,
+will block other resouce loading
+denpendency relationship
+the way import static resources
+
+add <style>in to header element to avoid blank blink page
+css will block the execution of Javascript, becuase the js code will rewrite the style of the css based on loaded css
+javascript will block the rendering process of the page like document.write() change the dom structure
+
+~~~
+### Lazy loading && Preloading
+~~~
+reduce the invalid resource loading
+
+var viewHeight = document.documentElement.clientHeight
+
+function lazyLoad () {
+    var eles = document.querySelectorAll('img[data-original][lazyload]')
+    Array.prototype.forEach.call(eles, (item, index) => {
+        var rect
+        if (item.dataset.original === '') return
+        rect = item.getBoundingClientRect()
+
+        if (rect.bottom >=0 && rect.top < viewHeight) {
+            function() {
+                var img = new Image()
+                img.src = item.dataset.url
+                img.onload = function () {
+                    item.src = img.src
+                }
+                item.removeAttribute('data-original')
+                item.removeAttribute('lazyload')
+            }()
+        }
+    })
+}
+
+lazyLoad()
+document.addEventListener('scroll', lazyLoad)
+
+preload js
+~~~

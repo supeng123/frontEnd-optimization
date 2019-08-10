@@ -403,5 +403,15 @@ beginwork()
 lasteffect node needs change it will propogate to the root node
 firsteffct node needs change it will propogate to the root node
 
+diffProperties(
+  domElement: Element,
+  tag: string,
+  lastRawProps: Object,
+  nextRawProps: Object,
+  rootContainerElement: Element | Document,
+)
+
+compare the oldProps and newProps and put all new updates to the updatePayload
+
 unwindwork()
 ~~~
