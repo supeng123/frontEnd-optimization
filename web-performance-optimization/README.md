@@ -84,3 +84,20 @@ document.addEventListener('scroll', lazyLoad)
 
 preload js
 ~~~
+
+### Repaint and Reflow
+~~~
+reflow will change the layout of the page
+such as top left width height border margin padding display position clear float
+repaint will change the style of the page
+such as background-color border-style shadow border-radius, opacity, translate
+
+solution
+tranform, perspective, video, canvas, flash, translate3D, z-index to create a new image layer to avoid reflow
+use opacity to replace visibility
+
+reduce the time get the positon of the element, like get the element offset// document.body.clientHeight
+display the element ,so the reflow only execute one
+add all style in one class, avoid using mutiple classes
+use table as less as possible
+~~~
