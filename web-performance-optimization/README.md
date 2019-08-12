@@ -101,3 +101,22 @@ display the element ,so the reflow only execute one
 add all style in one class, avoid using mutiple classes
 use table as less as possible
 ~~~
+
+### Browser storage
+~~~
+cookie, httponly, don't use cookie for cdn which supports static resources
+localStorage
+features 
+5m size, saved in client, designed for browser
+sessionStorage
+features: maintain the information of form, data will be removed after reloading browser
+indexedDB
+features: maintain the large quantity structive data, and offline version
+service worker
+pwa
+features: support offline, render optimizaiton, information push, intercept network request, functioning in background
+use lighthouse to check the usage rate of pwd
+
+chrome://inspect/#serive-workers
+chrome://serviceworker-internals
+~~~
