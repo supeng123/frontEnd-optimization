@@ -108,14 +108,131 @@ cookie, httponly, don't use cookie for cdn which supports static resources
 localStorage
 features 
 5m size, saved in client, designed for browser
+
+if(window.cookie && window.localStorage) {
+    localStorage.setItem('gender', 'girl')
+    localStorage.setItem('testScript', responseScript)
+} else {
+    localStorage.getItem('gender')
+    eval(responseScript)
+}
+    
 sessionStorage
 features: maintain the information of form, data will be removed after reloading browser
 indexedDB
 features: maintain the large quantity structive data, and offline version
+
+function openDB (name, callback) {
+    var request = window.indexDB.open(name)
+    request.onerror = function (e) {
+        console.log('open indexDB error')
+    }
+
+    request.onsuccess = function (e) {
+        myDB.db = e.target.result
+        callback && callback()
+    }
+
+    request.onupgradeneeded = function () {
+        var store = myDB.db.createObjectStore('books', {
+            keyPath: 'isbn'
+        })
+        var titleIndex = store.createIndex('by_title', 'title', {
+            unique: true
+        })
+
+        var authorIndex = store.createIndex('by_author', 'author', {})
+
+        store.put({
+            title: 'Query memories',
+            author: 'Fred'
+            isbn: 123456
+        })
+
+        store.put({
+            title: 'suloag',
+            author: 'sunm',
+            isbn: 233456
+        })
+
+        store.put({
+            title: 'suloagyyui',
+            author: 'sunm',
+            isbn: 23356
+        })
+    }
+}
+
+var myDB = {
+        name: 'testDB',
+        version: '1.0.0'
+        db:  null
+    }
+
+openDB(myDB.name, function() {
+    myDB.db.close()
+    window.indexDB.deleteDatabase(myDB.db)
+})
+
+function addData (db) {
+    var transaction = db.transaction('books', 'readwrite')
+    var store = transaction.objectStore('books')
+
+    //get info from indexDB
+    var request = store.get(123456)
+    request.onsuccess = function (e) {
+        console.log(e.target.result)
+    }
+
+    //add info into indexDB
+    store.add ({
+        title: 'suloagyyui',
+        author: 'sunminjuan',
+        isbn: 23356
+    })
+
+    //remove info from indexDB
+    store.delete(123456)
+
+    //update info from indexDB
+    store.get(222).onsuccess = function (e) {
+        books = e.target.result
+        books.author = 'James'
+        var request = store.put(books)
+        request.onsuccess = function () {
+            console.log('update success')
+        }
+    }
+}
+
+addData(myDB.db)
+
+
 service worker
 pwa
 features: support offline, render optimizaiton, information push, intercept network request, functioning in background
 use lighthouse to check the usage rate of pwd
+
+if (navigator.serviceWorker) {
+    navigator.serviceWorker.register('./service-worker.js', {scope: './'})
+        .then((req) => {
+
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+    var sendBtn = document.getElementById('send-button')
+    var msgInput = document.getElementById('send-msg')
+    sendBtn.addEventListener('click', () => {
+        navigator.serviceWorker.controller.postMessage(msgInput.value)
+    })
+
+    var msgBox = document.getElementById('msgBox')
+    navigator.addEventListener('message', (msg) => {
+        msgBox.innerHTML = msgBox.innerHtml + ('<li>' + msg.data.message + '</li>')
+    })
+}
 
 chrome://inspect/#serive-workers
 chrome://serviceworker-internals
