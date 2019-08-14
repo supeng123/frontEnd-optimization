@@ -1,3 +1,20 @@
+- [Modulization](#modulization)
+- [Core functions](#core-functions)
+- [Webpack command](#webpack-command)
+- [Babel settings](#babel-settings)
+- [Typescript settings](#typescript-settings)
+- [Plugin settings](#plugin-settings)
+  - [Codes split and lazy load](#codes-split-and-lazy-load)
+  - [Css loader](#css-loader)
+  - [Tree shaking](#tree-shaking)
+  - [Pictures optimization](#pictures-optimization)
+  - [HTML configuration](#html-configuration)
+  - [Webpack-dev-serve](#webpack-dev-serve)
+  - [Source map](#source-map)
+  - [Eslint](#eslint)
+  - [Preloading & Prefetching](#preloading--prefetching)
+  - [PWA](#pwa)
+  - [Other optimization](#%08other-optimization)
 ## Modulization
 
 ~~~

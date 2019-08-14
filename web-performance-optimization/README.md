@@ -1,3 +1,11 @@
+- [Merge and compress Internet resources](#merge-and-compress-internet-resources)
+  - [Compress html && css && javascript](#compress-html--css--javascript)
+  - [Image optimization](#image-optimization)
+  - [Loading process of Css and Javascript](#loading-process-of-css-and-javascript)
+  - [Lazy loading && Preloading](#lazy-loading--preloading)
+  - [Repaint and Reflow](#repaint-and-reflow)
+  - [Browser storage](#browser-storage)
+  - [Browser http header](#browser-http-header)
 ## Merge and compress Internet resources
 ~~~
 potential optimization points on the process of http request
