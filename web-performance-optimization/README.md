@@ -237,3 +237,41 @@ if (navigator.serviceWorker) {
 chrome://inspect/#serive-workers
 chrome://serviceworker-internals
 ~~~
+
+### Browser http header
+~~~
+Cache-Control strategy
+max-age, the priority is higher than expires, will not send any http request if it's not outDated
+s-maxage, designed for public cache
+private
+public
+no-cache, will send request to server to see if out dated
+no-store, will not use any cache strategy if it's been set to true
+
+response
+last-modified: 
+disadvantages: don't know exactly the time the resoures changed, don't know if the files content changed een the time has already been changed
+request
+if-modified-since
+
+response
+Etag, compare the hashcode is changed or not
+request
+If-None-Match
+
+var expires = new Date()
+expires.setTime(expires.getTime() + config.Expires.maxAge * 1000)
+response.setHeader('Expires', expires.toUTCString())
+response.setHeader('Cache-Control', "max-age=" + config.Expires.maxAge * 1000)
+
+f.stat(realPath, function(error, stat) {
+    var lastModified = stat.mtime.toUTCString()
+    response.setHeader('Last-Modified', lastModified)
+})
+
+const lastModifiedFromClient = request.headers['if-modified-since']
+if (lastModifiedFromClient && lastModified == lastModifiedFromClient) {
+    response.writeHead(304, 'not modified')
+    response.end
+}
+~~~
