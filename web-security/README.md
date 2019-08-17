@@ -91,3 +91,23 @@ script-src style-src worker-swrc
 
 ctx.set(`Content-Security-Policy`: `default-src 'self' `)
 ~~~
+
+## CSRF
+~~~
+Cross Site Request Forge
+definition: the frontend of website A logined into the backend of website A, and hold the credentials, the fronted of Website B logined into the backend of Webesite A with it's credentials
+~~~
+### how to defend CSRF
+~~~
+1. set cookies "sameSite"
+ctx.cookies.set('userid': user.id, {
+    httpOnly: false,
+    sameSite: 'strict'
+})
+2. add verication information in frontend page, like verication codes, token
+3. verify referer from B website
+const referer = ctx.request.headers.referer
+if (!/^https?:\/\/localhost/.test(referer) ) {
+    throw new Error('referer error')
+}
+~~~
