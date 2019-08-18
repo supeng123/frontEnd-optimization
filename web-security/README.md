@@ -3,7 +3,7 @@
 Cross Site Script
 1.it can get the contents from the client page,
 2.get the cookies
-3.hajack the frontend code logic
+3.hijack the frontend code logic
 4.send http requests
 5.steal the website data
 6.steal the information of users
@@ -110,4 +110,35 @@ const referer = ctx.request.headers.referer
 if (!/^https?:\/\/localhost/.test(referer) ) {
     throw new Error('referer error')
 }
+~~~
+
+## Cookies
+~~~
+1.could be written from backend to set cookie by http request
+ctx.cookies.set('useId: 2')
+2.could be read and written from frontend
+document.cookie="useId=2"
+document.cookie
+3.should be from the same domain
+
+features: domain/expired date/path/http-only/secure/sameSite
+
+use cookie signature with id to encrypt the credentials
+
+xss can read the cookie, so use httpOnly to prevent attackers from stealing cookies,
+csrf can use the cookie to forge credentials, so use sameSite to prevent attackers from using cookies
+~~~
+
+## Click hijack
+~~~
+useer unconciously click the attacker's page with transparent under attack page
+<body style="background:url(111.png) no-repeat">
+    <iframe style="opacity:0" src="http://xxx.com/post/15" width= "800" height="600" sandbox="allow-forms"></iframe>
+</body>
+
+solution
+1. using javascript to prevent website being embeded
+if(top.location === window.location)
+2. X-FRAME-OPTIONS
+ctx.set('X-Frame-Options', 'DENY')
 ~~~
