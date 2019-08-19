@@ -142,3 +142,21 @@ if(top.location === window.location)
 2. X-FRAME-OPTIONS
 ctx.set('X-Frame-Options', 'DENY')
 ~~~
+
+## HTTP manipulation
+~~~
+redirector to new website, telecommunication hijack, intranet hijack, malicious advertise
+
+TLS/SSL encryption
+
+1.server apply certificate from certification association center,
+2.CA will check the validation of server domain
+3.client send http request
+4.server provide the certification
+5.client build-in certificates list will verify the cerficate from server
+
+https.createServer({
+    key: fs.readFileSync('./cert/private.key'),
+    cert: fs.readFileSync('./cert/fullchain.crt')
+})
+~~~
