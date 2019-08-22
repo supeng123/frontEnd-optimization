@@ -52,3 +52,26 @@ let obj2 = SingleInstance.getInstance()
 
 console.log(obj1 === obj2)
 ~~~
+
+### Adaptor Pattern
+~~~
+class OldCharge() {
+    chargeBattery() {
+        return 'battery is in charging'
+    }
+}
+
+class Adaptor {
+    constructor() {
+        this.adapter = new OldCharge()
+    }
+
+    charging() {
+        let info = this.adapter.chargeBattery()
+        return `${info}->220v->adaptor`
+    }
+}
+
+let newAdaptor = new Adaptor()
+newAdaptor.charging()
+~~~
