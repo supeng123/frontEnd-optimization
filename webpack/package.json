@@ -22,6 +22,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "lodash": "^4.17.15",
+    "styled-components": "^4.3.2",
     "webpack": "^4.36.1"
   },
   "devDependencies": {
