@@ -1,13 +1,19 @@
 import React from 'react';
 import Header from './common/header/header'
 import { GlobalStyle } from './style'
+import { Provider } from 'react-redux'
+
+import store from './redux/store'
+
 
 function App() {
   return (
-    <div className="App">
-    <GlobalStyle></GlobalStyle>
-    <Header></Header>
-    </div>
+    <Provider store={store}>
+      <React.Fragment>
+        <GlobalStyle></GlobalStyle>
+        <Header></Header>
+      </React.Fragment>
+    </Provider>  
   );
 }
 

@@ -75,3 +75,50 @@ class Adaptor {
 let newAdaptor = new Adaptor()
 newAdaptor.charging()
 ~~~
+
+### Decoration Pattern
+~~~
+class Circle {
+    draw() {
+        console.log('draw a circle')
+    }
+}
+
+class Decorator {
+    constructor(circle) {
+        this.circle = circle
+    }
+
+    draw() {
+        this.circle.draw()
+        this.setRedBorder(circle)
+    }
+    
+    setRedBorder(circle) {
+        console('add red border')
+    }
+}
+
+const newDecorator = new Decorator(new Circle())
+newDecorator.draw()
+
+function mixins(...list) {
+    return function (target) {
+        Object.assign(target.prototype, ...list)
+    }
+}
+
+const Foo = {
+    foo() {
+        alert('foo')
+    }
+}
+
+@mixins(Foo)
+class Myclass {
+
+}
+
+let obj = new Myclass()
+obj.foo()
+~~~

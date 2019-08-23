@@ -46,6 +46,35 @@ export const NavItem = styled.div`
     }
 `
 
+export const SearchWrapper = styled.div`
+    position: relative;
+    float: left;
+    .slide-enter {
+        transition: all .2s ease-out;
+    }
+    .slide-enter-active {
+        width: 240px;
+    }
+    .slide-exit {
+        transition: all .2s ease-out;
+    }
+    .slide-exit-active {
+        width: 160px;
+    }
+    .iconfont {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        width: 30px;
+        line-height: 30px;
+        border-radius: 15px;
+        text-align: center;
+        &.focused {
+            background-color: #777;
+        }
+    }
+`
+
 export const NavSearch = styled.input.attrs({
     placeholder: 'Search'
 })`
@@ -55,13 +84,17 @@ export const NavSearch = styled.input.attrs({
     outline: none;
     border-radius: 19px;
     margin-top: 9px;
-    padding 0 20px;
+    padding 0 30px 0 20px;
     box-sizing: border-box;
     background-color: #eee;
     font-size: 14px;
     margin-left: 20px;
+    color: #777;
     &::placeholder {
         color: #999;
+    }
+    &.focused {
+        width: 200px;
     }
 `
 
