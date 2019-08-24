@@ -122,3 +122,67 @@ class Myclass {
 let obj = new Myclass()
 obj.foo()
 ~~~
+
+### Proxy Pattern
+~~~
+class ReadImg {
+    constructor(filename) {
+        this.filename = filename
+        this.loadFromDisk()
+    }
+
+    display() {
+        console.log('display...' + this.filename)
+    }
+
+    loadFromDisk() {
+        console.log('loading...' + this.filename)
+    }
+}
+
+class ProxyImg {
+    constructor(filename) {
+        this.readImg = new ReadImg(filename)
+    }
+
+    display() {
+        this.readImg.display()
+    }
+}
+
+let proxyImg = new ProxyImg('1.png')
+proxImg.display()
+
+let star = {
+    name: 'MR Zhang',
+    age: 25,
+    phone: '13954562435'
+}
+
+let agent = new Proxy(star, {
+    get: function (target, key) {
+        if (key === 'phone') {
+            return '13384969493'
+        }
+        if (key === 'price') {
+            return 120000
+        }
+        return target[key]
+    }
+
+    set: function (target, key, value) {
+        if (key === 'customPrice') {
+            if (val < 100000) {
+                throw new Error('price is too low')
+            } else {
+                target[key] = value
+                return true
+            }   
+        }
+    }
+})
+
+console.log(agent.name)
+console.log(agent.phone)
+console.log(agent.price)
+~~~
