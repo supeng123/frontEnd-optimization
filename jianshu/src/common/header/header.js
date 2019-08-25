@@ -17,23 +17,33 @@ import {
     SearchInfo
 } from './header-style'
 
-import { searchFocus, searchBlur, getList } from './store/header-action-types'
+import { searchFocus, searchBlur, getList, mouseEnter, mouseLeave, changePageList } from './store/header-action-types'
 
 class Header extends Component {
-
+    
     getListArea = () => {
-        if (this.props.focused) {
+        const {focused, page, totalPage, list, mouseIn, handleMouseEnter, handleMouseLeave, handleChangePage} = this.props
+        const pageList = []
+        const newList = list.toJS()
+
+        if (newList.length>1) {
+            for (let i = ((page-1)*2); i < page * 2; i++ ) {
+                pageList.push(
+                    <SearchInfoItem key={i} >{newList[i]}</SearchInfoItem>
+                )
+            }
+        }
+        
+        if (focused || mouseIn) {
             return (
-                <SearchInfo>
+                <SearchInfo onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                         <SearchInfoTitle>
                             Hottest topic
-                            <SearchSwitchInfo>Change other topics</SearchSwitchInfo>
+                            <SearchSwitchInfo key = 'none' onClick={() => handleChangePage(page, totalPage)}>Change other topics</SearchSwitchInfo>
                         </SearchInfoTitle>
                         <SearchInfoList>
                             {
-                                this.props.list.map((item) => {
-                                    return <SearchInfoItem key={item}>{item}</SearchInfoItem>
-                                })
+                                pageList
                             }
                             
                         </SearchInfoList>
@@ -46,6 +56,7 @@ class Header extends Component {
     }
 
     render() {
+        const {focused, page, handleInputFocus, handleInputBlur} = this.props
         return (
         <HeaderWrapper>
             <Logo></Logo>
@@ -56,16 +67,16 @@ class Header extends Component {
                 <NavItem className='right'>Aa</NavItem>
                 <SearchWrapper>
                     <CSSTransition
-                        in={this.props.focused}
+                        in={focused}
                         timeout={200}
                         classNames="slide">
                         <NavSearch
-                            className={this.props.focused ? 'focused' : ''}
-                            onFocus = {this.props.handleInputFocus}
-                            onBlur = {this.props.handleInputBlur}
+                            className={focused ? 'focused' : ''}
+                            onFocus = {handleInputFocus}
+                            onBlur = {handleInputBlur}
                         ></NavSearch>
                     </CSSTransition>
-                    <i className={this.props.focused ? 'focused iconfont' : 'iconfont'}>&#xe614;</i>
+                    <i className={focused ? 'focused iconfont' : 'iconfont'}>&#xe614;</i>
                     {this.getListArea()}
                 </SearchWrapper>
                 
@@ -86,7 +97,10 @@ class Header extends Component {
 export default connect( 
     (state) => ({
         focused: state.get('header').get('focused'),
-        list: state.getIn(['header', 'list'])
+        list: state.getIn(['header', 'list']),
+        page: state.getIn(['header', 'page']),
+        mouseIn: state.getIn(['header', 'mouseIn']),
+        totalPage: state.getIn(['header', 'totalPage'])
     }),
 
     (dispatch) => {
@@ -97,6 +111,20 @@ export default connect(
             handleInputFocus() {
                 dispatch(getList())
                 dispatch(searchFocus())
+            },
+            handleMouseEnter() {
+                dispatch(mouseEnter())
+            },
+            handleMouseLeave() {
+                dispatch(mouseLeave())
+            },
+            handleChangePage(page, totalPage) {
+                if (page < totalPage) {
+                    dispatch(changePageList(page + 1))
+                } else {
+                    dispatch(changePageList(1))
+                }
+                
             }
         }
     }
