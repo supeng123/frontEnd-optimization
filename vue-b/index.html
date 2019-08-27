@@ -85,3 +85,32 @@
         </script>
     </body>
 </html>
+
+// add class for element
+
+<div @class="handleDivClick"
+    :class="[activated, activatedOne]"></div>
+
+    <div @class="handleDivClick"
+    :class="{activated: activatedTwo}"
+    :style= "[styleObj, {fontSize: '20px'}]"
+    ></div>
+
+var vm = new Vue({
+    el: '',
+    data: {
+        activated: "",
+        activatedOne: "activated-one",
+        activatedTwo: true,
+        styleObj: {
+            color: "red"
+        }
+    }
+    methods: {
+        handleDivClick: function() {
+            this.activated = this.activate === "activated" ? "" : "activated"
+        }
+    }
+})
+
+//methods, computed, watch
