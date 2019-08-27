@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-class Recommend extends Component {
+class Recommend extends PureComponent {
     render() {
         return (
             <div>Recommend</div>

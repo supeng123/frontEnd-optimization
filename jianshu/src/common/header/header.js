@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import {
@@ -19,7 +19,7 @@ import {
 
 import { searchFocus, searchBlur, getList, mouseEnter, mouseLeave, changePageList } from './store/header-action-types'
 
-class Header extends Component {
+class Header extends PureComponent {
     
     getListArea = () => {
         const {focused, page, totalPage, list, mouseIn, handleMouseEnter, handleMouseLeave, handleChangePage} = this.props
