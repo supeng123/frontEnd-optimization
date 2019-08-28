@@ -6,7 +6,7 @@ import store from './redux/store'
 import { GlobalStyle } from './style'
 import Header from './common/header/header'
 import Home from './pages/home/home'
-import Detail from './pages/detail/detail'
+import Detail from './pages/detail/loadable'
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <BrowserRouter>
           <React.Fragment>
             <Route path='/' exact component={Home}></Route>
-            <Route path='/detail' exact component={Detail}></Route>
+            <Route path='/detail/:id' exact component={Detail}></Route>
           </React.Fragment>
         </BrowserRouter>
         
