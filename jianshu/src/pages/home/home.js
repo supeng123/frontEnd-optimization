@@ -1,15 +1,21 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, { PureComponent } from 'react'
+
 import { connect } from 'react-redux'
 import Topic from './components/Topic'
 import List from './components/List'
 import Writer from './components/Writer'
 import Recommend from './components/Recommend'
 
-import { HomeWrapper, HomeLeft, HomeRight } from './home-style'
+import { HomeWrapper, HomeLeft, HomeRight, BackTop } from './home-style'
+import { getHomeInfo, toggleTopShow } from './store/actions'
 
 
-class Home extends Component {
+class Home extends PureComponent {
+
+    handleScrollTop() {
+        window.scrollTo(0, 0)
+    }
+
     render() {
         return (
             <HomeWrapper>
@@ -23,31 +29,43 @@ class Home extends Component {
                     <Recommend></Recommend>
                     <Writer></Writer>
                 </HomeRight>
+                {
+                    this.props.showScroll ? <BackTop onClick={this.handleScrollTop.bind(this)}>back to top</BackTop> : null
+                }
+                
             </HomeWrapper>
         )
     }
 
     componentDidMount() {
-        axios.get('./api/home.json')
-        .then((res) => {
-            const result = res.data.data
-            const action = {
-                type: 'change_home-data',
-                topicList: result.topicList,
-                articleList: result.articleList
-            }
-            this.props.changeHomeData(action)
-        })
+        this.props.changeHomeData();
+        this.bindEvent();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.props.changeScrollTopShow)
+    }
+
+    bindEvent() {
+        window.addEventListener('scroll', this.props.changeScrollTopShow)
     }
 }
 
 export default connect((state) => ({
-
+    showScroll: state.getIn(['home', 'showScroll'])
 }),
 (dispatch) => {
     return {
-        changeHomeData(action) {
+        changeHomeData() {
+            const action = getHomeInfo()
             dispatch(action)
+        },
+        changeScrollTopShow(e) {
+            if (document.documentElement.scrollTop > 400 ) {
+                dispatch(toggleTopShow(true))
+            } else {
+                dispatch(toggleTopShow(false))
+            }
         }
     }
 }
