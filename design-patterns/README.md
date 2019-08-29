@@ -346,3 +346,28 @@ circle.draw()
 let triangle = new Shape('triangle', yellow)
 triangle.draw()
 ~~~
+
+### Command Pattern
+~~~
+var setCommand = function(button, fn) {
+    button.onClick = function() {
+        fn()
+    }
+}
+
+var menu = {
+    reFresh: function() {
+        console.log('refresh')
+    }
+}
+
+var commandObj = function(reciever) {
+    return function() {
+        reciever.reFresh()
+    }
+}
+
+var commanObj1 = commonObj(menu)
+setCommand(btn, commonObj)
+
+~~~

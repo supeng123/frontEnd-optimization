@@ -113,4 +113,70 @@ var vm = new Vue({
     }
 })
 
+Vue.set(vm.styleObj, "background-color", "black")
+vm.$set(vm.styleObj, "background-color", "black")
 //methods, computed, watch
+// template used like fragment in react
+// get native event <child @click.native="handleClick"></child>
+// Vue.prototype.bus = new Vue(), bus.on('change')
+// use slot to replace v-html
+
+<div id="root">
+    <body-content>
+        <div class="header" slot='header'>header</div>
+        <div class="footer" slot='footer'>footer</div>
+    </body-content>
+</div>
+
+Vue.component('body-content', {
+    template: `
+        <div>
+            <slot name='header'></slot>
+            <div>content</div>
+            <slot name='foot'></slot>
+        </div>
+    `
+})
+
+var vm = new Vue({
+    el: '#root'
+})
+
+//component v-once
+<div id="root">
+    <body-content>
+        <component :is="type"></component>
+        <child-one v-if="type === 'child-one'"></child-one>
+        <child-two v-if="type === 'child-two'"></child-two>
+        <button @click="handlBtnClick">click</button>
+    </body-content>
+</div>
+
+Vue.component('child-one', {
+    template: `
+        <div v-once>child-one</div>
+    `
+})
+
+Vue.component('child-two', {
+    template: `
+        <div v-once>child-two</div>
+    `
+})
+
+var vm = new Vue({
+    el: '#root'
+    data: {
+        type: 'child-one'
+    }
+    methods: {
+        handleBtnClick: function() {
+            this.type = (this.type === 'child-one') ? 'child-two' : 'child-one'
+        }
+    }
+})
+
+城市 HANGZHOU
+地区 BINJIANG
+街道 PUYAN
+身份证日期 2017年08月01日---2037年08月01日
