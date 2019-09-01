@@ -573,20 +573,101 @@ const routes = [
     }
     {
         path: '/app',
-        component: Todo
+        component: Todo,
+        name: 'appPage',
+        meta: {
+            title： ’this is app‘,
+            keyWords: 'the page keywors',
+            descripiton: 'this page description'
+        },
+        children: [
+            {
+                path: 'test',
+                component: 
+            }
+        ]
     },
     {
         path: '/login',
         component: Login
+    },
+    {
+        path: '/loginexact/:id',
+        component: Exact,
+        name: 'loginexactPage',
+        props: true,
+    },
+    {
+        path: '/multiple/view',
+        component: {
+            default: Multiple,
+            a: Login
+        },
+        name: 'multipleView'，
+        beforeEnter(to, from, next) {
+           console.log('app route before enter') 
+           next()
+        }
     }
 ]
 
 import Router from 'vue-router'
 export default () => {
     return new Router({
-        routes
+        routes，
+        mode: 'history',
+        //will add/base/ after host
+        base: '/base',
+        linkActiveClass: 'active-link',
+        linkExactActiveClass: 'exact-active-link'，
+        scrollBehavior (to, from. savedPosition) {
+            if (savedPosition) {
+                return savedPosition
+            } else {
+                return {x : 0, y : 0}
+            }
+        },
+        parseQuery (query) {
+
+        },
+        stringifyQuery(obj) {
+
+        },
+        fallback: true
     })
 }
 
-<router-view />
+
+<router-link  to="login"> Login </router-link>
+<router-link  :to="{name: 'appPage'}"> app </router-link>
+<router-link  :to="{name: 'loginexactPage'}"> loginexactPage </router-link>
+
+<transition name='fade'>
+    <router-view />
+</transition>
+
+ <router-view name='a' />
+
+//get route parameters this.$route or use props:['id'] in component
+~~~
+### router guard
+~~~
+import createRouter from './config/router'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
+const router = createRouter()
+router.beforeEach((to, from ,next) => {
+    if (to.fullPath === 'app') {
+         next('/login')
+    }
+})
+
+router.beforeResolve((to, from ,next) => {
+    next()
+})
+
+router.afterResolve((to, from) => {
+
+})
 ~~~
