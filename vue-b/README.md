@@ -671,3 +671,221 @@ router.afterResolve((to, from) => {
 
 })
 ~~~
+##  Vuex
+### define vuex
+~~~
+store.js
+import Vuex from 'vuex'
+
+export default () => {
+    return new Vuex.Store({
+                state: {
+                    count: 0
+                },
+                mutations: {
+                    updateCount (state, num) {
+                        state.count = num
+                    }
+                }
+})
+
+//put store in the root component
+import Vuex from 'vuex'
+import Vue from 'vue'
+import createStore from './store/store.js'
+import createRouter from './store/router.js'
+
+Vue.use(Vuex)
+const store = createStore()
+const router = createRouter()
+
+new Vue({
+    router,
+    store,
+    render: (h) => h(App)
+}).$mount('#root')
+
+
+app.js
+
+mounted() {
+    console.log(this.$store)
+    let i = 1
+    setInterval(() => {
+        this.state.commit('updateCount', i++)
+    })
+}
+computed: {
+    count() {
+        return this.$store.state.count
+    }
+}
+~~~
+### vuex getter and setter
+~~~
+getters are equal to computed
+export default {
+    fullName (state) {
+        return `${state.firstName} ${state.lastName}`
+    }
+}
+
+computed: {
+    fullName () {
+        return this.$store.getters.fullName
+    }
+}
+
+import {mapState, mapGetters} from 'vuex'
+
+computed: {
+    ...mapState(['count'])
+}
+or 
+computed: {
+    ...mapState({
+        count: (state) => state.count
+    }),
+    ...mapGetters(['fullname'])
+}
+//the use {{count}} in template
+~~~
+### mutation and action
+~~~
+//action for async , use dispatch
+//mutation for sync, use commit
+export default {
+    updateCountSync(store, data) {
+        setTimeout(() => {
+            store.commit('updateCount', data.num)
+        }, data.time)
+    }
+}
+
+this.$store.dispatch('updateCountSync', {
+    num: 5,
+    time: 2000
+})
+or
+this.updateCountSync({num: 5, time: 2000})
+
+methods: {
+    ...mapActions(['updateCountSync']),
+    ...mapMutations(['updateCount'])
+}
+~~~
+### vuex modules
+~~~
+export default () => {
+    return new Vuex.Store({
+        strict: idDev,
+        state: defaultState,
+        mutations,
+        getters,
+        actions,
+        modules: {
+            aModule: {
+                numespaced: true,
+                state: {
+                    text: 1
+                },
+                mutations: {
+                    updateText(state, text){
+                        state.text = text
+                    }
+                },
+                getters: {
+                    textPlus(state, getters, rootState) {
+                        return state.text + 1
+                    }
+                },
+                actions: {
+                    add ({state, commit, rootState}) {
+                        commit('updateText', rootState.count, {root: true})
+                    }
+                }
+            },
+            bModule: {
+                state: {
+                    count: 0
+                }
+            }
+        }
+    })
+}
+
+computed: {
+    textA() {
+        return this.$store,state.aModule.text
+    }
+}
+or 
+computed: {
+    ...mapState({
+        text: (state) => state.aModule.text
+    }),
+    ...mapGetters({
+        'fullname': 'fullname',
+        textPlus: 'aModule/textPlus'
+    })
+},
+methods: {
+    ...mapActions(['aModule/add'])
+    ...mapMutations(['aModule/updateText']),
+    
+}
+
+
+this.['aModule/updateText']('123')
+this.['aModule/add']('123')
+~~~
+### hot update
+~~~
+if (module.hot) {
+    module.hot.accept([
+        './state/state',
+        './mutations/mutations',
+        './actions/actions'
+        './getters/getters',
+    ], () => {
+        const newState = require('./state/state').default
+        const newMutations = require('./mutations/mutations').default
+        const newActions = require('./actions/actions').default
+        const newGetters = require('./getters/getters').default
+
+        store.hotUpdate({
+            state: newState,
+            mutations: newMutations,
+            newActions: newActions,
+            newGetters: newGetters,
+        })
+    })
+
+    return store
+}
+~~~
+### vuex other api
+~~~
+store.registerModule('cModule', {
+    state: {
+        text: 3
+    }
+})
+store.unRegisterModule('cModule')
+
+store.watch((state) => {
+    return state.count + 1
+}, (newCounter) => {
+    console.log(newCounter)
+})
+
+store.subscribe((mutation, state) => {
+    console.log(mutation.type)
+    console.log(mutation.payload)
+})
+
+store.subscribeAction((action, state) => {
+    console.log(action.type)
+    console.log(action.payload)
+})
+~~~
