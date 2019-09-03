@@ -889,3 +889,134 @@ store.subscribeAction((action, state) => {
     console.log(action.payload)
 })
 ~~~
+## DIY Component
+~~~
+<template>
+    <transition name="fade">
+        <div class="notification"
+        :style = "style"
+        :v-show= "visible"
+        >
+            <span class="content">{{content}}</span>
+            <a class="btn" @click="handleClose">{{btn || close}}</a>
+        <div>
+    </transition>
+</template>
+
+export default {
+    name: 'Notification',
+    props: {
+        content: {
+            type:String,
+            required: true
+        }
+        btn: {
+            type: String,
+            default: 'close'
+        },
+    },
+    data() {
+            return {
+                visible: true
+            }
+    },
+    methods: {
+        handleClose (e) {
+            e.preventDefault(),
+            this.$emit('close')
+        }
+    },
+    computed: {
+        style() {
+
+        }
+    }
+}
+
+//extend notification
+
+import Notification from './notification.vue'
+export default {
+    extends: Notification,
+    computed: {
+        style() {
+            return {
+                position: 'fixed';
+                right: '20px'
+                bottom: `{this.verticalOffset}px`
+            }
+        }
+    },
+    data() {
+        return {
+            verticalOffset: 0,
+            autoClose: 3000
+        }
+    },
+    mounted(){
+        this.createTimer()
+    },
+    beforeDestory() {
+        this.clearTimer()
+    }
+    methods: {
+        createTimer() {
+            if (this.autoClose) {
+                this.timer = setTimeout(() => {
+                    this.visible = false
+                }, this.autoClose)
+            }
+        },
+        clearTimer() {
+            if (this.timer) clearTimeout(this.timer)
+        }
+    }
+} 
+
+import Vue from 'vue'
+import Component from './func-notification'
+const NotificationConstructor = Vue.extend(Component)
+
+const instances = []
+let seed = 1
+
+const removeInstance = (instance) => {
+    if (!instance) return 
+    const = instances.length
+    const index = instance.findIndex(inst => instance.id === inst.id)
+    instances.splice(index, 1)
+}
+
+const notify = (options) => {
+    const {autoClose, ...rest} = options
+    const instance = new NotificationConstructor({
+        propsData: {...rest},
+        data: {
+            autoClose: autoClose === undefined ? 3000 : autoClose
+        }
+    })
+    const id = `notification_${seed++}`
+    instance.id = id
+    instance.vm = instance.$mount()
+    document.body.appendChild(instance.vm.$el)
+
+    let veticalOffset = 0
+    instance.forEach(item => {
+        verticalOffset += item.$el.offsetHeight + 16
+    })
+    verticalOffset += 16
+    intance.verticalOffset = verticalOffset
+    instances.push(instance)
+    instance.vm.$on('closed', () => {
+        removeInstance(instance)
+        document.body.removeChild(intance.vm.$el)
+        instance.vm.$destroy()
+    })
+    instance.vm.$on('close', () => {
+        instance.vm.visible = false
+    })
+    return instance.vm
+}
+
+export default notify
+~~~
