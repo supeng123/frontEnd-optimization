@@ -180,3 +180,65 @@ var vm = new Vue({
 地区 BINJIANG
 街道 PUYAN
 身份证日期 2017年08月01日---2037年08月01日
+=======
+//methods, computed, watch
+
+//tr 
+
+<table @change="">
+    <tbody ref='hello' @click="handleClick">
+        <tr is="row"></tr>
+        <tr is="row"></tr>
+        <tr is="row"></tr>
+    </tbody>
+</table>
+
+Vue.component('row', {
+    template: '<tr><td>{{content}}</td></tr>',
+    data: function() {
+        return {
+            content: 'this is content'
+        }
+    }
+})
+
+var vm = new Vue({
+    el: '#root',
+    components: {
+        row: row
+    }
+    methods: {
+        handleClick: function() {
+            console.log(this.$refs.hello.innerHtml)
+            this.emit('change', 'innerhtml')
+        }
+    }
+})
+
+//slot
+<div id="root">
+    <child :content="123">
+        <template slot-scope="props">
+        <h1>{{props.item}}</h1>
+        </template>
+    </child>
+</div>
+
+Vue.component('child', {
+    data: function() {
+        return {
+            list: [1,2,3,4]
+        }
+    },
+    props: {
+        <!-- content: [Number, String] -->
+        <!-- content: {type: String} -->
+    }
+    template: `
+        <div>
+            <ul>
+                <slot v-for="item of list" :item=item></slot>
+            </ul>
+        </div>
+    `
+})
