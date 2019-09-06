@@ -93,3 +93,14 @@ SELECT last_name, commission_rate, FROM employees WHERE commission_rate <=> NULL
 //is not null
 SELECT last_name, commission_rate, FROM employees WHERE commission_rate IS NOT NULL;
 ~~~
+
+### Sequence Select
+~~~
+// order by desc
+SELECT * FROM employees WHERE department_id >= 90 ORDER BY salary DESC
+
+//order by alias
+SELECT * , salary*12(1 + IFNULL(commission_rate, 0)) AS money FROM employees ORDER BY money ASC
+//order by expressions and multiple parameters
+SELECT LENGTH(last_name) AS string_length, last_name, salary FROM employees ORDER BY LENGTH(last_name) DESC, id ASC
+~~~
