@@ -104,3 +104,85 @@ SELECT * , salary*12(1 + IFNULL(commission_rate, 0)) AS money FROM employees ORD
 //order by expressions and multiple parameters
 SELECT LENGTH(last_name) AS string_length, last_name, salary FROM employees ORDER BY LENGTH(last_name) DESC, id ASC
 ~~~
+### String Functions
+~~~
+SELECT CONCAT(UPPER(last_name), LOWER(first_name)) AS names FROM employees;
+
+SELECT SUBSTR('this is the first time', 1, 5) AS out_put;
+
+SELECT CONCAT(UPPER(SUBSTR(last_name, 1, 1)), LOWER(first_name)) AS out_put;
+
+//return the first index, if does not find, return zero
+SELECT INSTR('this is is the balal', 'balal') AS out_put;
+
+SELECT LENGTH(TRIM('   is ')) AS out_put;
+SELECT TRIM('a' FROM 'aaaaabbbbbaccacaaaaa') AS out_put;
+
+SELECT LPAD('lllll', 10 , '*') AS out_put;
+
+SELECT REPLACE('LLLLLLLLLLBBBBB', 'B', 'C') AS out_put;
+~~~
+### Math Functions
+~~~
+SELECT ROUND(-1.55);
+
+SELECT CEIL(1.52);
+
+SELECT FLOOR(1.52);
+
+SELECT TRUNCATE(1.52, 1);
+
+SELECT MOD(10, 3);
+~~~
+
+### Date Function
+~~~
+SELECT NOW();
+
+SELECT CURDATE();
+
+SELECT CURTIME();
+
+SELECT YEAR(NOW()) AS NIAN;
+SELECT MONTH(NOW()) AS NIAN;
+SELECT DAY(NOW()) AS NIAN;
+
+// str_to_date
+SELECT STR_TO_DATE('1998-3-2', '%Y-%c-%d') AS output;
+
+//date_format
+SELECT DATE_FORMAT(NOW(), '%y年%m月%d日') AS output;
+
+SELECT last_name, DATE_FORMAT(hiredate, '%m/%d %y') AS time FROM employees;
+~~~
+### Process Control Functions
+~~~
+SELECT last_name, commission_pct, IF(commission_pct IS NULL, 'no money', 'yes money') AS info FROM employees;
+
+SELECT salary AS originMoney, department_id,
+CASE department_id
+WHEN 30 THEN salary*1.1
+WHEN 40 THEN salary*1.5
+WHEN 50 THEN salary*1.7
+ELSE salary
+END AS newMoney
+FROM employees
+
+SELECT salary AS originMoney, department_id,
+CASE
+WHEN salary> 20000 THEN 'A'
+WHEN salary> 15000 THEN 'B'
+WHEN salary> 10000 THEN 'C'
+ELSE 'D'
+END AS level
+FROM employees
+
+~~~ 
+### Group Functions
+~~~
+SELECT SUM(salary) FROM employees;
+SELECT AVG(salary) FROM employees;
+SELECT MIN(salary) FROM employees;
+SELECT MAX(salary) FROM employees;
+SELECT COUNT(salary) FROM employees;
+~~~
