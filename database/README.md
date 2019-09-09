@@ -271,3 +271,49 @@ group by (filter condition)
 having (filter condition)
 order by (ASC|DESC)
 ~~~
+#### sql99 inner join
+~~~
+SELECT last_name, department_name FROM employees AS e
+INNER JOIN department AS d
+ON e.department_id = d.department_id;
+
+SELECT last_name, department_name, job_title
+FROM employees AS e
+INNER JOIN departments AS d ON e.department_id = d.department_id
+INNER JOIN jobs AS j ON e.job_id = j.job_id
+ORDER BY department_name DESC;
+
+SELECT salary, grade_level, COUNT(*)
+FROM employees AS e
+INNER JOIN job_grades AS g
+ON e.salary BETWEEN g.lower_sal and g.high_sal;
+GROUP BY grade_level
+HAVING COUNT(*) > 20
+ORDER BY grade_level DESC
+~~~
+
+#### sql99 outer join
+~~~
+left , right depend on which table being chosed as primary table, generally we chose the paramters
+from primary table so this table will be the primary table
+
+SELECT g.name b.name
+FROM boys AS b
+RIGHT OUTER JOIN girls AS g
+ON g.boyfriend_id = b.id
+WHERE b.id IS NULL
+
+//alternative 
+SELECT g.name b.name
+FROM girls AS g
+LEFT OUTER JOIN boys AS b
+ON g.boyfriend_id = b.id
+WHERE b.id IS NULL
+
+
+SELECT e.*, d.department_name
+FROM departments AS d
+LEFT OUTER JOIN employees e
+ON d.department_id = e.department_id
+WHERE d.department_name IN ('SAL', 'IT')
+~~~
