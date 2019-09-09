@@ -211,6 +211,10 @@ SELECT MIN(salary), manager_id FROM employees WHERE mangaer_id > 102 GROUP BY ma
 ~~~
 SELECT name, bodyName FROM boys, beauty WHRER beauty.boyfriend_id = boys.id;
 
+SELECT bo.* FROM boys AS bo WHERE bo.id IN (SELECT boyfriend_id FROM beauty)
+
+SELECT bo.* FROM boys AS bo WHERE bo.id EXIST (SELECT boyfriend_id FROM beauty WHERE bo.id = beauty.boyfriend_id)
+
 types
 //inner join
 equal join
@@ -316,4 +320,99 @@ FROM departments AS d
 LEFT OUTER JOIN employees e
 ON d.department_id = e.department_id
 WHERE d.department_name IN ('SAL', 'IT')
+~~~
+### Child Join
+~~~
+// after WHERE or HAVING
+//single row (inlude > < <> =>), all the child show return single row
+SELECT * 
+FROM employees
+WHERE salary > (
+    SELECT salary FROM employees WHERE last_name = 'Abel'
+);
+
+SELECT last_name, job_id, salary
+FROM employees
+WHERE job_id = (
+    SELECT job_id FROM employees WHERE employee_id = 141
+) AND salary > (
+    SELECT salary FROM employees WHERE employee_id = 143
+) OR salary = (
+    SELECT MIN(salary) FROM employees
+);
+
+
+SELECT MIN(salary), department_id 
+FROM employees
+GROUP BY department_id
+HAVING MIN(salary) > (
+    SELECT MIN(salary)
+    FROM employees
+    WHERE department_id = 50
+)
+
+//multiple rows( in, any/some, all)
+SELECT last_name
+FROM employees
+WHERE department_id IN (
+    SELECT department_id FROM departments WHERE location_id IN (1400, 1700)
+)
+
+//alternative
+SELECT last_name FROM employees AS e
+LEFT OUT JOIN departments AS d
+ON e.department_id IN d.location_id
+WHERE d.location_id IN (1400, 1700)
+
+
+SELECT last_name, employee_id, job_id, salary
+FROM employees
+WHERE salary < ANY(
+    SELECT DISTINCT salary
+    FROM employees
+    WHERE job_id = 'IT_PROG'
+) AND job_id <> 'IT_PROG'
+
+//alternative
+SELECT last_name, employee_id, job_id, salary
+FROM employees
+WHERE salary <(
+    SELECT MIN(salary)
+    FROM employees
+    WHERE job_id = 'IT_PROG'
+) AND job_id <> 'IT_PROG'
+
+//mutiple column, multiple row
+SELECT * 
+FROM employees
+WHERE (employee_id, salary) = (
+    SELECT MIN(employee_id), MAX(salary) FROM employees
+);
+~~~
+### child selection after select
+~~~
+SELECT d.*, (
+    SELECT COUNTS(*)
+    FROM employees e
+    where e.dapartment_id = d.department_id
+) AS counts FROM departments d;
+
+//alternative
+SELECT COUNTS(*) 
+FROM employees e
+JOIN departments d
+WHERE e.department_id = d.department_id
+GROUP BY department_id
+~~~
+### child selection after from
+~~~
+SELECT ag_dep.*, g.grade_level
+FROM (
+    SELECT AVG(salary) ag, department_id
+    FROM employees
+    GROUP BY department_id
+) ag_dep
+INNER JOIN job_grades g
+ON ag_dep.ag BETWEEN lowest_sal AND highest_salary;
+
 ~~~
