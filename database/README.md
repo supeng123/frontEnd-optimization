@@ -361,7 +361,7 @@ WHERE department_id IN (
 //alternative
 SELECT last_name FROM employees AS e
 LEFT OUT JOIN departments AS d
-ON e.department_id IN d.location_id
+ON e.department_id = d.department_id
 WHERE d.location_id IN (1400, 1700)
 
 
@@ -414,5 +414,33 @@ FROM (
 ) ag_dep
 INNER JOIN job_grades g
 ON ag_dep.ag BETWEEN lowest_sal AND highest_salary;
+
+~~~
+## Data Manipulation Language
+~~~
+INSERT INTO beauty(id, name, sex, borndate, phone, photo, boyfriend_id)
+VALUES(13, 'tangyix', 'female', '1990-4-30', '12243453455',NULL, 2)
+
+INSERT INTO beauty
+VALUES(13, 'tangyix', 'female', '1990-4-30', '12243453455',NULL, 2)
+,(14, 'tangyixi', 'female', '1990-4-30', '12243453455',NULL, 1)
+,(15, 'ee', 'male', '1990-4-30', '12243453455',NULL, 2);
+
+INSERT INTO beauty
+SET SET id=19, name='liti', phone='1242356535'
+
+UPDATE beauty SET phone='31242455' WHERE name LIKE '%tang%';
+
+UPDATE boys bo 
+INNER JOIN beauty b 
+ON bo.id = b.boyfriend_id
+SET b.phone = '114'
+WHERE bo.boyname = 'zzzz'
+
+UPDATE boys bo
+RIGHT JOIN beauty b
+ON bo.id = b.boyfriend_id
+SET b.boyfriend_id = 2
+WHERE b.id IS NULL
 
 ~~~
