@@ -320,8 +320,34 @@ FROM departments AS d
 LEFT OUTER JOIN employees e
 ON d.department_id = e.department_id
 WHERE d.department_name IN ('SAL', 'IT')
+~~~ 
+
+#### other examples
 ~~~
-### Child Join
+SELECT employee_id, last_name, salary, e.department_id
+FROM employee e
+INNER JOIN (
+    SELECT AVG(salary) ag, department_id FROM employees GROUP BY department_id
+) ag_dep
+ON e.department_id = ag_dep.department_id
+WHERE salary > ag_dep.ag;
+
+SELECT employee_id FROM employees WHERE department_id = ANY(
+    SELECT DISTINCT department_id FROM departments WHERE location = 1700
+)
+
+SELECT substr(email, 1, instr(email, '@') -1 ) FROM studentInfo
+~~~
+
+#### pagination
+~~~
+//limit offset (from 0 start), size( the number you want to give)
+//generally the limit formulation could be (offset -1) * size, size
+SELECT * FROM employees WHERE commission_pct IS NOT NULL
+ORDER BY salary DESC
+LIMIT 0 10;
+
+~~~### Child Join
 ~~~
 // after WHERE or HAVING
 //single row (inlude > < <> =>), all the child show return single row
