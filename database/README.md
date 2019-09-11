@@ -540,3 +540,23 @@ SELECT id, au_name
 FROM newDatabase.author
 WHERE nation="China"
 ~~~
+### Types
+~~~
+INT, using UNSIGNED to delare the paramter can be - or +
+FLOAT(M,D), M for the int part + D part, D for the decimal part
+DOUBLE(M,D)
+DECIMAL(M,D)
+CHAR
+VARCHAE save the memory
+TEXT
+BLOB
+
+ENUM
+SET
+
+DATETIME
+TIMESTAMP
+CREATE TABLE tab_char(
+    c1 ENUM('a', 'b', 'c')
+)
+~~~
