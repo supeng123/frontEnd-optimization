@@ -347,7 +347,9 @@ SELECT * FROM employees WHERE commission_pct IS NOT NULL
 ORDER BY salary DESC
 LIMIT 0 10;
 
-~~~### Child Join
+~~~
+
+### Child Join
 ~~~
 // after WHERE or HAVING
 //single row (inlude > < <> =>), all the child show return single row
@@ -469,4 +471,72 @@ ON bo.id = b.boyfriend_id
 SET b.boyfriend_id = 2
 WHERE b.id IS NULL
 
+DELETE FROM beauty WHERE phone LIKE '%9%';
+
+DELETE b
+FROM beauty b
+INNER JOIN boys bo
+ON b.boyfriend_id = bo.id
+WHRE bo.boyname = 'zwj'
+
+truncate table beauty
+~~~
+### Data Define Language
+~~~
+//define database
+CREATE DATABASE IF NOT EXISTS books;
+USE books;
+ALTER DATABASE books CHRACTER SET UTF8
+DROP DATABASE IF EXISTS books;
+
+//define table
+CREATE TABLE IF NOT EXISTS book (
+    id INT,
+    bname VARCHAR(20),
+    price DOUBLE,
+    authorId INT,
+    publishDate DATETIME
+)
+
+DESC book
+
+DROP TABLE IF EXISTS book
+~~~
+#### modify table
+~~~
+//modify the column of table
+ALTER TABLE book CHANGE COLUMN publishDate pubDate DATETIME;
+
+//modify the column type of table
+ALTER TABLE book MODIFY COLUMN publishDate TIMESTAMP;
+
+//add new column
+ALTER TABLE book ADD COLUMN annual DOUBLE;
+
+//delete one column
+ALTER TABLE book DROP COLUMN annual;
+
+//modify the table name
+ALTER TABLE book RENAME TO book_author;
+~~~
+#### copy table
+~~~
+//copy part of table structure
+CREATE TABLE copy1
+SELECT id, au_name
+FROM author
+WHERE 0;
+
+//copy all table structure
+CREATE TABLE copy2 LIKE author;
+
+//copy all the table structure and data
+CREATE TABLE copy3
+SELECT * FROM author;
+
+//copy part of table structure and data
+CREATE TABLE copy4
+SELECT id, au_name
+FROM newDatabase.author
+WHERE nation="China"
 ~~~
