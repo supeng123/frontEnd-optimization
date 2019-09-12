@@ -560,3 +560,54 @@ CREATE TABLE tab_char(
     c1 ENUM('a', 'b', 'c')
 )
 ~~~
+### Transaction
+~~~
+//prerequiste
+set autocommit=0;
+start transaction;
+//actions
+UPDATE account SET balance =500 WHERE username= 'lll';
+SAVEPOINT a;
+UPDATE account SET balance =500 WHERE username= 'zzz';
+ROLLBACK TO a;
+//commit
+commit
+//rollback;
+
+SET names gbk;
+
+select @@tx_isolation
+set session transaction isolation level read uncommitted;
+
+set session transaction isolation level read committed;
+
+set session transaction isolation level repeatable read;
+
+set session transaction isolation level serializable;
+~~~
+### View
+~~~
+//create view
+CREATE VIEW myview
+AS
+SELECT last_name, department_name, job_title
+FROM employees e
+JOIN departments d ON e.department_od = d.department_id
+JOIN jobs j ON j.job_id = e.job_id
+
+SELECT * FROM myview WHERE last_name LIKE '%sun%';
+
+//example 2
+CREATE VIEW myview2
+AS
+SELECT AVG(salary) ag, department_id
+FROM employees
+GROUP BY department_id;
+
+SELECT myview2.ag, g.grade_level
+FROM myview2
+JOIN job_grades g
+ON myview2.ag BETWEEN g.lowest_sal AND g.highest_sal;
+
+
+~~~
