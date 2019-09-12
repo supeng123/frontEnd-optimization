@@ -560,6 +560,59 @@ CREATE TABLE tab_char(
     c1 ENUM('a', 'b', 'c')
 )
 ~~~
+### Constraints
+~~~
+types(NOT NULL | DEFAULT | PRIMARY KEY | UNIQUE | FOREIGN KEY | CHECK)
+// column contraint
+CREATE TABLE stuinfo (
+    id INT PRIMARY KEY,
+    studName VARCHAR(20) NOT NULL,
+    gender CHAR(1) CHECK(gender='male' or gender='female'),
+    seat INT UNIQUE,
+    age INT DEFAULT 18,
+    majorId INT FOREIGN KEY REFFERENCES major(id)
+)
+
+CREATE TABLE major(
+    id INT PRIMARY KEY,
+    majorName VARCHAR(20)
+)
+
+//table contraint
+
+CREATE TABLE stuinfo (
+    id INT,
+    studName VARCHAR(20),
+    gender CHAR(1),
+    seat INT,
+    age INT,
+    majorId INT
+
+    CONSTRAINT pk PRIMARY KEY(id),
+    CONSTRAINT uq UNIQUE(seat),
+    CONSTRAINT ck CHECK(gender='male' or gender='female'),
+    CONSTRAINT fk FOREIGN KEY(majorid) REFERENCES major(id),
+)
+
+UNIQUE & PRIMARY KEY
+UNIQUE can be null, only one null can be occured, PRIMARY KEY can not be null
+UNIQUE only be more than one column, PRIMARY KEY can only have one column
+
+ALTER TABLE stuinfo MODIFY COLUMN stuName VARCHAR(20) NOT NULL;
+
+ALTER TABLE stuinfo MODIFY COLUMN id INT PRIMARY KEY;
+
+ALTER TABLE stuinfo ADD CONSTRAINT fk_stuinfo_major FOREIGN KEY(majorId) REFERENCES major(id);
+
+ALTER TABLE stuinfo DROP PRIMARY KEY;
+
+ALTER TABLE stuinfo DROP FROREIGN KEY fk_stuinfo_major;
+
+//set marked column
+AUTO_INCREMENT
+
+SET auto_increment_increment = 3
+~~~
 ### Transaction
 ~~~
 //prerequiste
@@ -805,5 +858,3 @@ CALL pro_while(20)$;
 
 ~~~
 ## Advanced SQL
-~~~
-~~~
