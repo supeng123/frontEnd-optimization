@@ -609,5 +609,103 @@ FROM myview2
 JOIN job_grades g
 ON myview2.ag BETWEEN g.lowest_sal AND g.highest_sal;
 
+~~~
 
+#### modify view
+~~~
+CREATE OR REPLACE VIEW myv3
+AS
+SELECT AVG(salary), job_id
+FROM employees
+GROUP BY job_id;
+
+ALTER VIEW myv3
+AS
+SELECT * FROM employees;
+~~~
+#### delete view
+~~~
+DROP VIEW myv1, myv2, myv3,
+
+DESC myv3
+
+truncate does not support rollback
+~~~
+### Variables
+~~~
+//system variables
+SHOW GLOBAL | SESSION VARIABLES like '%char%';
+select @@gloabal|session .varaible(autocommit)
+set @@global.autocommit = 0;
+
+DECLARE m INT DEFAULT 1
+
+SET m=2
+
+SELECT m
+~~~
+### Save Process(group)
+~~~
+//syntax, arguments should have pattern(IN|OUT|INOUT), paramter_name, parameter_type
+CREATE PROCEDURE save_process_name (arguments)
+BEGIN
+
+END
+
+CALL save_process_name(arguments)
+
+//example
+SELECT * FROM admin;
+
+DELIMITER $
+CREATE PROCEDURE myp1()
+BEGIN
+    INSERT INTO admin(username, password)
+    VALUES('john', '0000'),('rose', '0000'),('jack', '0000'),('tom', '0000')
+END $
+
+CALL myp1()$
+
+SELECT * FROM admin$
+
+//check username and password
+CREATE PROCEDURE myp2(IN username VARCHAR(20), IN password VARCHAR(20))
+BEGIN
+    DECLARE result INT DEFAULT 0; //initialize variable
+
+    SELECT COUNT(*) INTO result //pass the value
+    FROM admin
+    WHERE admin.username = username
+    AND admin.password = password;
+
+    SELECT IF(result > 0, 'success', 'fail') //use the variable
+END $
+
+CALL myp2('slogan', '123466')$
+~~~
+#### process in & out
+~~~
+CREATE PROCEDURE myp3(IN beautyname VARCHAR(20), OUT boyname VARCHAR(20), OUT userCP INT)
+BEGIN
+    SELECT bo.boyName, bo.userCP INTO boyname, userCP
+    FROM boys bo
+    INNER JOIN beauty b
+    ON bo.id = b.boyfriend_id
+    WHERE b.name = beautyname;
+END $
+
+CALL myp3('slogan', @bName, @usercp)$
+SELECT @bName,@usercp $
+
+
+CREATE PROCEDURE myp4(INOUT a INT, INOUT b INT)
+BEGIN
+    SET a=a*2
+    SET b=b*2
+END $
+
+SET @m=10
+SET @n=20
+CALL myp8(@m,@n)$
+SELECT @m,@n$
 ~~~
