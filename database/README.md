@@ -166,7 +166,7 @@ WHEN 40 THEN salary*1.5
 WHEN 50 THEN salary*1.7
 ELSE salary
 END AS newMoney
-FROM employees
+FROM employees;
 
 SELECT salary AS originMoney, department_id,
 CASE
@@ -175,7 +175,7 @@ WHEN salary> 15000 THEN 'B'
 WHEN salary> 10000 THEN 'C'
 ELSE 'D'
 END AS level
-FROM employees
+FROM employees;
 
 ~~~ 
 ### Group Functions
@@ -708,4 +708,76 @@ SET @m=10
 SET @n=20
 CALL myp8(@m,@n)$
 SELECT @m,@n$
+~~~
+#### drop and check procedure
+~~~
+DROP PROCEDURE p1
+
+SHOW CREATE PROCEDURE myp1;
+
+CREATE PROCEDURE test_p5(IN beautyname VARCHAR(20), OUT str VARCHAR(30))
+BEGIN
+    SELECT CONCAT(beautyname, 'and', IFNULL(boyname, 'null')) INTO str
+    FROM boys bo
+    RIGHT JOIN beauty b
+    ON b.boyfriend_id = bo.id
+    WHERE b.name=beautyname
+END $
+
+CALL test_p5('sunminjuan', @str)$
+SELECT @str$
+~~~
+
+### Functions
+~~~
+//syntax
+CREATE FUNCTION function_name(arguments) RETURNS return_type
+BEGIN
+AND
+
+//example
+CREATE FUNCTION my_f1() RETURNS INT
+BEGIN
+    DECLARE c INT DEFAULT 0;
+    SELECT COUNT(*) INTO c
+    FROM employees;
+    RETURN c;
+END $
+
+SELECT my_f1()$
+
+//example2
+CREATE FUNCTION my_f2(deptName VARCHAR(20)) RETURNS DOUBLE
+BEGIN
+    DECLARE @sal=0;
+    SELECT AVG(salary) INTO @sal
+    FROM employees e
+    JOIN departments d
+    ON e.department_id = d.departemnt_id
+    WHERE d.department_name = deptName;
+    RETURN @sal
+END $
+
+SELECT my_f2('IT')
+
+SHOW CREATE FUNCTION my_f2
+DROP FUNCTION my_f2
+~~~
+### Conditoinal Process
+~~~
+CREATE PROCEDURE test_case(IN score INT)
+BEGIN
+    CASE
+    WHEN score>=90 AND score<=100 THEN SELECT 'A';
+    WHEN score>=80 THEN SELECT 'B';
+    WHEN score>=70 THEN SELECT 'c';
+    ELSE SELECT 'D';
+    END CASE;
+END $
+
+CALL test_case(88)$
+~~~
+
+## Advanced SQL
+~~~
 ~~~
