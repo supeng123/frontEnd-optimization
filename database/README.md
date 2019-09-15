@@ -758,12 +758,12 @@ BEGIN
     RETURN @sal
 END $
 
-SELECT my_f2('IT')
+SELECT my_f2('IT')$
 
 SHOW CREATE FUNCTION my_f2
 DROP FUNCTION my_f2
 ~~~
-### Conditoinal Process
+### Conditoinal Process & Function
 ~~~
 CREATE PROCEDURE test_case(IN score INT)
 BEGIN
@@ -776,8 +776,34 @@ BEGIN
 END $
 
 CALL test_case(88)$
-~~~
 
+//if example
+CREATE FUNCTION test_if(score INT) RETURNS CHAR
+BEGIN
+    IF score>=90 AND score<=100 THEN RETURN 'A';
+    ELSEIF score>=80 THEN RETURN 'B';
+    ELSE score>=70 THEN RETURN 'C';
+    ELSE RETURN 'D';
+    END IF;
+END$
+
+SELECT test_if(88)
+
+//iterator
+CREATE PROCEDURE pro_while(IN insertCount INT)
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    a:WHILE i<insertCount DO
+        INSERT INTO admin(username, password) VALUES (CONCAT('rose',i), '777');
+        IF i>=20 THEN LEAVE a;
+        END IF;
+        SET i=i+1;
+    END WHILE a;
+END
+
+CALL pro_while(20)$;
+
+~~~
 ## Advanced SQL
 ~~~
 ~~~
