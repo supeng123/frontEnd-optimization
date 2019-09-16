@@ -858,3 +858,47 @@ CALL pro_while(20)$;
 
 ~~~
 ## Advanced SQL
+~~~
+//check if mysql has been installed
+rpm -qa|grep -i mysql
+
+rpm -ivh Mysql-packages.rpm
+
+//check if the mysql serve started
+ps -ef|grep mysql
+cat /etc/passwd|grep mysql
+cat /etc/group|grep mysql
+
+mysqladmin --version
+
+//start mysql server
+service mysql start
+
+//config the mysql password
+/usr/bin/mysqladmin -u root password 123456
+
+//config mysql server to automatically started after IOS begin
+chkconfig mysql on
+chkconfig --list|grep mysql
+ntsysv
+
+//modify the defaut mysql settings
+cp /usr/share/mysql/my-default.cnf /etc/my.cnf
+
+//modify the string charactor
+show variables like '%char%'
+
+vim /etc/my.cnf
+set nu
+//[client/socket]
+default-charactor-set=utf8
+//[mysqlld/port]
+charactor_set_server=utf8
+charactor_set_client=utf8
+collation-server=utf8_general_cli
+//[mysql/no-auto-rehash]
+default-character-set=utf8
+
+show engines;
+show variables like "%storage_engine%";
+~~~
