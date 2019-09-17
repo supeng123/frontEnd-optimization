@@ -337,6 +337,18 @@ SELECT employee_id FROM employees WHERE department_id = ANY(
 )
 
 SELECT substr(email, 1, instr(email, '@') -1 ) FROM studentInfo
+
+//full join
+SELECT last_name, salary, department_id
+FROM employees e
+LEFT JOIN departments d
+ON e.department_id = d.id
+UNION
+SELECT last_name, salary, department_id
+FROM employees e
+RIGHT JOIN departments d
+ON e.department_id = d.id
+
 ~~~
 
 #### pagination
@@ -901,4 +913,8 @@ default-character-set=utf8
 
 show engines;
 show variables like "%storage_engine%";
+~~~
+### index
+~~~
+
 ~~~
