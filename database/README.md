@@ -916,5 +916,40 @@ show variables like "%storage_engine%";
 ~~~
 ### index
 ~~~
+//syntax
+CREATE [UNIQUE] INDEX index_name ON my_table(column_name(length));
+ALTER my_table ADD [UNIQUE] INDEX [index_name] ON (column_name(length));
 
+DROP INDEX [index_name] ON my_table
+
+SHOW INDEX FROM table_name\G
+~~~
+### Explain
+~~~
+explain select * from tb_emp;
+~~~
+#### id
+~~~
+1. if id is identical, the sequence is from top to bottom
+2. if id is not identical and has subquery, the number of id will create gradually, the priority belongs to one has bigger number
+3. if id has two types above, will exist at the same time.
+~~~
+#### select_type
+~~~
+SIMPLE
+PRIMARY 
+SUBQUERY
+DERIVED
+UNION
+UNION RESULT
+~~~
+#### type
+~~~
+system
+const
+eq_ref // only one record can be matched in table, often can be seen in primary key or unique key
+ref //can be more than one record
+range //between and, IN <>
+index //from index,
+ALL all the records in the table
 ~~~
