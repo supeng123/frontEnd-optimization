@@ -1,0 +1,285 @@
+## Command Format
+~~~
+COMMAND[- OPTIONS] [arguments]
+ls -ald
+-h *total size
+-d *directory
+-l *list
+-a *all
+-i *id
+
+l|d|-
+link|directory|file
+
+x|r|w
+execute|read|write
+
+u|g|o
+user|group|other
+~~~
+### mkdir(make directory) && rmdir(remove empty directory)
+~~~
+*-p iteratable
+~~~
+### cp
+~~~
+*-r copy the whole direcory
+*-p save the directoy original information,like the time of creation
+cp /tmp/slogan/text.txt /home/slogan/result.txt
+~~~
+### mv
+~~~
+mv /tmp/slogan/text.txt /home/slogan/result.txt
+mv /tmp/slogan /home/suminjuan
+~~~
+### rm
+~~~
+*-r directoy
+*-f force
+~~~
+### cat && more && less && head && tail
+~~~
+check the file content
+*-n with the number
+
+less /service (with n check all service marked places)
+~~~
+### ln
+~~~
+*-s soft link
+in -s /etc/issue /tmp/issue.soft
+~~~
+## File Jurisdiction
+
+### chmod
+~~~
+//syntax
+chmod [{ugoa}{+-=}{r(4)|w(2)|x(1)}][mode]
+*-R iterable
+
+//add exector right to one file
+chmod u+x lovestory.txt
+chmod 100 lovestory.txt
+
+//add write right to group and remove read right to other
+chmod g+w, o-r lovestory.txt
+chmod 024 lovestory.txt
+
+//use = regardless the file's previous rights
+chmod g=rwx lovestory.txt
+chmod 070 -R lovestory
+
+//other user can delete the file if its parent directory has write right
+even if the file only has read right
+~~~
+### chown
+~~~
+//only root user can use chown
+chown root /home/lina/love.txt
+
+//add user
+useradd supeng
+chown supeng /home/lina/love.txt
+~~~
+### chgrp
+~~~
+//add group
+groupadd lampbrother
+
+chgrp lampbrother fengjie
+
+//check the file juridiction
+umask -S
+~~~
+## Find
+~~~
+//syntax
+* find [scope][condition]
+
+//search files include name init in /etc by name
+find /etc -name init
+find /etc -name *init*
+find /etc -name int???
+find /etc -iname int???// capital iname
+
+//search files size in /etc by size
+find /etc -size 204800 //size is equal to 100m
+
+//search files by owner
+find /home -user supeng
+
+//search files by group
+find /home -group supeng
+
+//search files by time
+fint /etc -cmin(change property)|-mmin(modify content)|-amin(access) -|+5
+
+//union search(-a(and)|-o(or))
+fint /etc -size +163840 -a -size -204800
+
+//by file type(d(directory)|f(file)|l(link))
+find /etc -type d -a -type f
+
+//check the find result
+find /etc -name init -exec ls -l {}\;
+find /etc -name init -ok ls -l {}\;
+
+//by iname
+find /etc -inum 31531 -exec rm -rf {}\;
+~~~
+### locate
+~~~
+//search named inittab files regradless its capital
+locate -i inittab
+//update files info
+updatedb
+~~~
+### which && whereis
+~~~
+//find where the command is
+which cp
+whereis cp
+~~~
+### grep
+~~~
+//find the right row and column in file's content
+grep -i multiuser /etc/inittab
+
+//ignore the rows with #
+grep -v ^# /etc/inittab
+~~~
+## Help
+~~~
+*man (manual)
+//check the command specification
+man cp
+
+//check the config files should not include the abosulute directory of configuration file
+man services
+man 5 passwd
+man 1 passwd
+
+whatis for command
+apropos for configuration file
+
+help umask
+~~~
+## User Management
+~~~
+useradd supeng
+passwd supeng ...
+
+//check the remote login users
+who|w (tty(local)|pts(other terminal))
+~~~
+## Compress and Uncompress
+~~~
+//compress or uncompress file
+*gzip file_name
+*gunzip file_name
+
+//compress directory
+tar -[c(bundle)|v(detail)|f(targetfile)|z(compress)][after_compress_name][need_compress_directory]
+tar -zcf file_directory.tar directory
+//uncompress directory
+tar -zxvf file_directory.tar.gz
+
+zip supeng.zip supeng
+*-r directory
+unzip supeng.zip
+~~~
+## Broadcase Info
+~~~
+wall message_info
+write user_name message_info
+mail user_name
+
+last && lastlog check the user login info
+
+netstat
+*-t tcp
+*-u udp
+*l monitoring
+*r router
+*-n show ipaddress and port
+
+<!-- traceroute -->
+//mount hardware equipment to linux
+1.check if blank directory been created
+mkdir -p /mnt/cdrom
+2.mount hardware to the directory
+mount /dev/sr0 /mnt/cdrom
+
+umount /mnt/cdrom
+~~~
+## ShutDown && Reboot
+~~~
+shutdown -h 20:30(now) //don't do it
+poweroff
+
+reboot
+init 6
+
+//check the running time level
+runlevel
+
+logout
+~~~
+## Editor Vim
+~~~
+//check the row number
+:set nu && :set nonu
+
+//first row and last row
+gg & G
+
+//specifc row number
+: n
+
+//head and tail of row
+0 & $
+
+//copy paster
+yy && nyy (n represents how many rows)
+dd && ndd
+p && P
+
+//search string
+/string_you_want_to_find
+
+//insert type AIO
+aio|AIO
+~~~
+## RPM
+~~~
+//commands
+rpm -ivh package_full_name
+* -i install
+* -v verbose check detail info
+* -h hash    check progress
+* -e erase  uninstall
+* -U upgrade upgrade packages
+--nodeps check dependencies
+
+//search rpm
+*-q query
+*-i information of rpm
+*-l list of directory
+*-R check require packages
+*-f (rpm -qf /var/pacakge_full_name) check the package from the directory
+rpm -q httpd
+
+//RPM verify
+*-V verify
+rpm -v package_name
+~~~
+## Yum
+~~~
+yum list
+
+yum search package_name
+
+yum -y install gcc
+
+yum grouplist
+~~~
