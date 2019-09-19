@@ -949,7 +949,23 @@ system
 const
 eq_ref // only one record can be matched in table, often can be seen in primary key or unique key
 ref //can be more than one record
-range //between and, IN <>
+range //between and, IN <>, will cause [Using filesort], so this column should not be used as index column
 index //from index,
 ALL all the records in the table
+~~~
+#### possible_keys && key && key_len
+~~~
+key is more important,
+key length declares how complicated the index is
+~~~
+#### ref && rows
+~~~
+manifest which column of index has been used, it can be constant
+the less the rows are, the better the performance
+~~~
+#### extra
+~~~
+Using filesort //need to order by the sequence of indexs
+Using temporary //need to group by the sequence of indexs
+Using index //means good
 ~~~
