@@ -171,6 +171,31 @@ passwd supeng ...
 
 //check the remote login users
 who|w (tty(local)|pts(other terminal))
+
+//configuration files
+//etc/passwd|etc/.shadow|etc/group
+root:x:0:0:root: root/bash
+username:password_mark:user_id(0 is root_user):user_group_id
+* if you want to change user has root right, change user_id to zero
+
+usradd -u 666 -G root,bin -c "test user" -d/liming -s/bin /bash
+grep liming /etc/paswd
+passwd liming 'password'
+* -S  status, check the password status in .shadow
+* -l  lock, lock user
+* -u  unlock,
+
+//change or delete user info and password
+usermod -G root liming
+chage -l
+chage -d 0 linming //require user to change password the first time login
+
+userdel -r liming
+
+//switch user
+su - root
+su - slogan
+env
 ~~~
 ## Compress and Uncompress
 ~~~
