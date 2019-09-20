@@ -969,3 +969,29 @@ Using filesort //need to order by the sequence of indexs
 Using temporary //need to group by the sequence of indexs
 Using index //means good
 ~~~
+### Two tables
+~~~
+LEFT JOIN, create index in right table
+RIGHT JOIN, create index in left table
+
+EXPLAIN
+SELECT * FROM class
+LEFT JOIN book
+ON class.card=book.card
+LEFT JOIN phone
+ON book.card=phone.card;
+
+create index for book.card, phone.card
+use small result to drive the big result
+~~~
+### Index Practice
+~~~
+1.obey the most left index name, don't change the order of index name (123, [23,13 are not right])
+2.index column can not be used functions (left())
+3.use less *, select more index columns, so extra results could be using index, and even >< between can be used
+4.don't use <> !, that will result invalid index
+5.don't use is null, is not null
+6.use less like wildcard, make sure % is on the right of the query string, if %string% is needed, create string's index first
+7.use less or
+
+~~~
