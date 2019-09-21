@@ -995,3 +995,59 @@ use small result to drive the big result
 7.use less or
 
 ~~~
+### Query Optimazition
+~~~
+use small result to drive the big result
+when the result of A table bigger than B, use IN
+when the result of A table smaller than B, use EXISTS
+EXISTS
+SELECT ... FROM table A WHERE EXISTS(subquery B)
+
+sortBuffer, order by use less *, increase the sortBuffer
+Key a_b_c(a,b,c)
+//ways that need to avoid
+ORDER BY a Asc, B Desc, C Desc
+WHERE g = onst ORDER BY b, c //a is missing
+WHERE a = const ORDER BY c, //b is missing
+WHERE a= const ORDER BY a, d //d is undefined
+WHWRE a in(...) ORDER BY b, c //invalid in range
+~~~
+### Slow Query Logs
+~~~
+set global slow_query_log=1;
+
+SHOW VARIABLES LIKE 'long_query_time%'
+set global long_query_time=3;
+
+set global log_bin_trust_funciton_creators=1;
+
+show global status like '%Slow_queries%'
+
+mysqldumpslow
+
+mysqldumpslow -s r -t 10 /var/lib/mysql/slogan.log
+mysqldumpslow -s c -t 10 /var/lib/mysql/slogan.log | more
+
+show variables like 'profiling'
+set profiling=on
+
+show profiles;
+show profiles cpu, block for query (number);
+//four bad results
+1.coverting HEAP to MyISAM
+2.Creating tmp table
+3.Copying to temp table on disk
+4.locked
+
+//global logs
+set global genneral_log=1;
+set global log_output='table'
+
+select * from mysql.general_log;
+~~~
+### Lock
+~~~
+lock table tb_name1 read, tb_name2 write;
+show open tables;
+unlock tables;
+~~~
