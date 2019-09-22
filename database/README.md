@@ -1050,4 +1050,45 @@ select * from mysql.general_log;
 lock table tb_name1 read, tb_name2 write;
 show open tables;
 unlock tables;
+
+show status like 'table%'
+show status like 'innodb_row_lock%'
+
+//rows lock
+if one session assign the wrong type value to origin type, the other session will be locked as table lock
+example// table has index a-b, the b column's type is string, if assign a number to string, it will cause
+the other session be locked until the fist session commit
+
+when session A uses range condition to modify the table, the session B modify the table in session A range.
+that could be cuasing Gap lock until session A commit.
+
+//the solution
+
+BEGIN
+SELECT * FROM test_innodb_lock WHERE a=8 FOR UPDATE;
+COMMIT;
+~~~
+### Object&Subject Duplication
+~~~
+//change the my.conf file of Object machine
+server-id=1
+log-bin=/my_directory/data/mysqlbin
+basedir=/my_directory/
+tempdir=/my_directory/
+datadir=/my_directory/data/
+binlog-ignore-db=mysql
+
+//change the my.conf file of Subject machine
+Server-id=2
+
+authrize the rights to subject machine
+GRANT REPLICATION SLAVE ON *.* TO 'zhangsn'@'192.168.12.134' IDENTIFIED BY '12345'
+flush priviliges;
+show master status;
+
+CHANGE MASTER TO  MASTER_HOST='192.168.22.11',
+MASTER_USER='zhangsn',MASTER_PASSWORD='12345',MASTER_LOG_FILE='mysqlbin.xxxxx',MASTER_LOG_POS='xxx'
+start slave;
+show slave status;
+stop slave;
 ~~~
