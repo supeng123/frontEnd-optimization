@@ -1,0 +1,244 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <div id="app">{{message}}</div>
+        <div id="app-2">
+            <span v-bind:title="message">
+                鼠标悬停几秒钟查看此处动态绑定的提示信息！
+            </span>
+        </div>
+        <div id="app-3">
+            <p v-if="seen">现在你看到我了</p>
+        </div>
+
+        <div id="app-4">
+            <ol>
+                <li v-for="todo in todos">
+                {{ todo.text }}
+                </li>
+            </ol>
+        </div>
+
+        <div id="app-5">
+            <p>{{ message }}</p>
+            <button v-on:click="reverseMessage">反转消息</button>
+        </div>
+
+        <div id="app-6">
+            <p>{{ message }}</p>
+            <input v-model="message">
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello Vue'
+                }
+            })
+
+            var app2 = new Vue({
+                el: '#app-2',
+                data: {
+                    message: '页面加载于 ' + new Date().toLocaleString()
+                }
+                })
+
+            var app3 = new Vue({
+                el: '#app-3',
+                data: {
+                    seen: true
+                }
+            })
+
+            var app4 = new Vue({
+                el: '#app-4',
+                data: {
+                    todos: [
+                    { text: '学习 JavaScript' },
+                    { text: '学习 Vue' },
+                    { text: '整个牛项目' }
+                    ]
+                }
+            })
+
+            var app5 = new Vue({
+                el: '#app-5',
+                data: {
+                    message: 'Hello Vue.js!'
+                },
+                methods: {
+                    reverseMessage: function () {
+                        this.message = this.message.split('').reverse().join('')
+                    }
+                }
+            })
+
+            var app6 = new Vue({
+                el: '#app-6',
+                data: {
+                    message: 'Hello Vue!'
+                }
+            })
+        </script>
+    </body>
+</html>
+
+// add class for element
+
+<div @class="handleDivClick"
+    :class="[activated, activatedOne]"></div>
+
+    <div @class="handleDivClick"
+    :class="{activated: activatedTwo}"
+    :style= "[styleObj, {fontSize: '20px'}]"
+    ></div>
+
+var vm = new Vue({
+    el: '',
+    data: {
+        activated: "",
+        activatedOne: "activated-one",
+        activatedTwo: true,
+        styleObj: {
+            color: "red"
+        }
+    }
+    methods: {
+        handleDivClick: function() {
+            this.activated = this.activate === "activated" ? "" : "activated"
+        }
+    }
+})
+
+Vue.set(vm.styleObj, "background-color", "black")
+vm.$set(vm.styleObj, "background-color", "black")
+//methods, computed, watch
+// template used like fragment in react
+// get native event <child @click.native="handleClick"></child>
+// Vue.prototype.bus = new Vue(), bus.on('change')
+// use slot to replace v-html
+
+<div id="root">
+    <body-content>
+        <div class="header" slot='header'>header</div>
+        <div class="footer" slot='footer'>footer</div>
+    </body-content>
+</div>
+
+Vue.component('body-content', {
+    template: `
+        <div>
+            <slot name='header'></slot>
+            <div>content</div>
+            <slot name='foot'></slot>
+        </div>
+    `
+})
+
+var vm = new Vue({
+    el: '#root'
+})
+
+//component v-once
+<div id="root">
+    <body-content>
+        <component :is="type"></component>
+        <child-one v-if="type === 'child-one'"></child-one>
+        <child-two v-if="type === 'child-two'"></child-two>
+        <button @click="handlBtnClick">click</button>
+    </body-content>
+</div>
+
+Vue.component('child-one', {
+    template: `
+        <div v-once>child-one</div>
+    `
+})
+
+Vue.component('child-two', {
+    template: `
+        <div v-once>child-two</div>
+    `
+})
+
+var vm = new Vue({
+    el: '#root'
+    data: {
+        type: 'child-one'
+    }
+    methods: {
+        handleBtnClick: function() {
+            this.type = (this.type === 'child-one') ? 'child-two' : 'child-one'
+        }
+    }
+})
+
+城市 HANGZHOU
+地区 BINJIANG
+街道 PUYAN
+身份证日期 2017年08月01日---2037年08月01日
+=======
+//methods, computed, watch
+
+//tr 
+
+<table @change="">
+    <tbody ref='hello' @click="handleClick">
+        <tr is="row"></tr>
+        <tr is="row"></tr>
+        <tr is="row"></tr>
+    </tbody>
+</table>
+
+Vue.component('row', {
+    template: '<tr><td>{{content}}</td></tr>',
+    data: function() {
+        return {
+            content: 'this is content'
+        }
+    }
+})
+
+var vm = new Vue({
+    el: '#root',
+    components: {
+        row: row
+    }
+    methods: {
+        handleClick: function() {
+            console.log(this.$refs.hello.innerHtml)
+            this.emit('change', 'innerhtml')
+        }
+    }
+})
+
+//slot
+<div id="root">
+    <child :content="123">
+        <template slot-scope="props">
+        <h1>{{props.item}}</h1>
+        </template>
+    </child>
+</div>
+
+Vue.component('child', {
+    data: function() {
+        return {
+            list: [1,2,3,4]
+        }
+    },
+    props: {
+        <!-- content: [Number, String] -->
+        <!-- content: {type: String} -->
+    }
+    template: `
+        <div>
+            <ul>
+                <slot v-for="item of list" :item=item></slot>
+            </ul>
+        </div>
+    `
+})
