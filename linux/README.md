@@ -308,3 +308,60 @@ yum -y install gcc
 
 yum grouplist
 ~~~
+## ACL
+~~~
+getfacl /project
+setfacl -m du:user_name:rx -R file_name 
+setfacl -m m:rx /project/
+* -m modify
+* u user
+* m mask limit max right, even if the user has all the right
+* -R recurisivly
+* d default
+
+//SetUID for binary files
+chmod 4777 /project
+
+//chattr change the attribute of the file or directory
+lsattr
+chattr 
+* -i  files can't be modified
+* -a  can only append content to file
+~~~
+## File System
+~~~
+//check the dirctory
+df -h
+//check the directory's files
+du -sh /directory
+//check the disk status
+dumpe2fs /dev/sda3
+
+//check the equipments that have been amountted
+mount l
+
+//system ext4 is default, iso9660 is light disk
+mount [-t file_system][-l ]
+*create empty mount directory: mkdir /mnt/cdrom/
+*mount the light disk: mount -t iso9660 /dev/cdrom /mnt/cdrom/
+*or other way mount the light disk: mount /dev/sr0 /mnt/cdrom/
+*umount light disk: umount /mnt/cdrom
+
+*mount uDisk: mount -t vfat /dev/sdb1 /mnt/usb/
+fdisk -l
+
+//to ensure has the right to execute the file
+mount -o remount, exec /home
+
+fdisk partprobe to create sections forcelly
+formalize new section: mkfs -t ext4 /dev/sdb1
+
+//automatically mount the new disk in
+vi /etc/fstab
+/dev/sdb1 /disk1 ext4 default 1 2
+mount -a
+~~~
+## Shell
+~~~
+~~~
+
