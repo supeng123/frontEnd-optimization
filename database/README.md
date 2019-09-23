@@ -337,6 +337,18 @@ SELECT employee_id FROM employees WHERE department_id = ANY(
 )
 
 SELECT substr(email, 1, instr(email, '@') -1 ) FROM studentInfo
+
+//full join
+SELECT last_name, salary, department_id
+FROM employees e
+LEFT JOIN departments d
+ON e.department_id = d.id
+UNION
+SELECT last_name, salary, department_id
+FROM employees e
+RIGHT JOIN departments d
+ON e.department_id = d.id
+
 ~~~
 
 #### pagination
@@ -858,3 +870,225 @@ CALL pro_while(20)$;
 
 ~~~
 ## Advanced SQL
+~~~
+//check if mysql has been installed
+rpm -qa|grep -i mysql
+
+rpm -ivh Mysql-packages.rpm
+
+//check if the mysql serve started
+ps -ef|grep mysql
+cat /etc/passwd|grep mysql
+cat /etc/group|grep mysql
+
+mysqladmin --version
+
+//start mysql server
+service mysql start
+
+//config the mysql password
+/usr/bin/mysqladmin -u root password 123456
+
+//config mysql server to automatically started after IOS begin
+chkconfig mysql on
+chkconfig --list|grep mysql
+ntsysv
+
+//modify the defaut mysql settings
+cp /usr/share/mysql/my-default.cnf /etc/my.cnf
+
+//modify the string charactor
+show variables like '%char%'
+
+vim /etc/my.cnf
+set nu
+//[client/socket]
+default-charactor-set=utf8
+//[mysqlld/port]
+charactor_set_server=utf8
+charactor_set_client=utf8
+collation-server=utf8_general_cli
+//[mysql/no-auto-rehash]
+default-character-set=utf8
+
+show engines;
+show variables like "%storage_engine%";
+~~~
+### index
+~~~
+//syntax
+CREATE [UNIQUE] INDEX index_name ON my_table(column_name(length));
+ALTER my_table ADD [UNIQUE] INDEX [index_name] ON (column_name(length));
+
+DROP INDEX [index_name] ON my_table
+
+SHOW INDEX FROM table_name\G
+~~~
+### Explain
+~~~
+explain select * from tb_emp;
+~~~
+#### id
+~~~
+1. if id is identical, the sequence is from top to bottom
+2. if id is not identical and has subquery, the number of id will create gradually, the priority belongs to one has bigger number
+3. if id has two types above, will exist at the same time.
+~~~
+#### select_type
+~~~
+SIMPLE
+PRIMARY 
+SUBQUERY
+DERIVED
+UNION
+UNION RESULT
+~~~
+#### type
+~~~
+system
+const
+eq_ref // only one record can be matched in table, often can be seen in primary key or unique key
+ref //can be more than one record
+range //between and, IN <>, will cause [Using filesort], so this column should not be used as index column
+index //from index,
+ALL all the records in the table
+~~~
+#### possible_keys && key && key_len
+~~~
+key is more important,
+key length declares how complicated the index is
+~~~
+#### ref && rows
+~~~
+manifest which column of index has been used, it can be constant
+the less the rows are, the better the performance
+~~~
+#### extra
+~~~
+Using filesort //need to order by the sequence of indexs
+Using temporary //need to group by the sequence of indexs
+Using index //means good
+~~~
+### Two tables
+~~~
+LEFT JOIN, create index in right table
+RIGHT JOIN, create index in left table
+
+EXPLAIN
+SELECT * FROM class
+LEFT JOIN book
+ON class.card=book.card
+LEFT JOIN phone
+ON book.card=phone.card;
+
+create index for book.card, phone.card
+use small result to drive the big result
+~~~
+### Index Practice
+~~~
+1.obey the most left index name, don't change the order of index name (123, [23,13 are not right])
+2.index column can not be used functions (left())
+3.use less *, select more index columns, so extra results could be using index, and even >< between can be used
+4.don't use <> !, that will result invalid index
+5.don't use is null, is not null
+6.use less like wildcard, make sure % is on the right of the query string, if %string% is needed, create string's index first
+7.use less or
+
+~~~
+### Query Optimazition
+~~~
+use small result to drive the big result
+when the result of A table bigger than B, use IN
+when the result of A table smaller than B, use EXISTS
+EXISTS
+SELECT ... FROM table A WHERE EXISTS(subquery B)
+
+sortBuffer, order by use less *, increase the sortBuffer
+Key a_b_c(a,b,c)
+//ways that need to avoid
+ORDER BY a Asc, B Desc, C Desc
+WHERE g = onst ORDER BY b, c //a is missing
+WHERE a = const ORDER BY c, //b is missing
+WHERE a= const ORDER BY a, d //d is undefined
+WHWRE a in(...) ORDER BY b, c //invalid in range
+~~~
+### Slow Query Logs
+~~~
+set global slow_query_log=1;
+
+SHOW VARIABLES LIKE 'long_query_time%'
+set global long_query_time=3;
+
+set global log_bin_trust_funciton_creators=1;
+
+show global status like '%Slow_queries%'
+
+mysqldumpslow
+
+mysqldumpslow -s r -t 10 /var/lib/mysql/slogan.log
+mysqldumpslow -s c -t 10 /var/lib/mysql/slogan.log | more
+
+show variables like 'profiling'
+set profiling=on
+
+show profiles;
+show profiles cpu, block for query (number);
+//four bad results
+1.coverting HEAP to MyISAM
+2.Creating tmp table
+3.Copying to temp table on disk
+4.locked
+
+//global logs
+set global genneral_log=1;
+set global log_output='table'
+
+select * from mysql.general_log;
+~~~
+### Lock
+~~~
+lock table tb_name1 read, tb_name2 write;
+show open tables;
+unlock tables;
+
+show status like 'table%'
+show status like 'innodb_row_lock%'
+
+//rows lock
+if one session assign the wrong type value to origin type, the other session will be locked as table lock
+example// table has index a-b, the b column's type is string, if assign a number to string, it will cause
+the other session be locked until the fist session commit
+
+when session A uses range condition to modify the table, the session B modify the table in session A range.
+that could be cuasing Gap lock until session A commit.
+
+//the solution
+
+BEGIN
+SELECT * FROM test_innodb_lock WHERE a=8 FOR UPDATE;
+COMMIT;
+~~~
+### Object&Subject Duplication
+~~~
+//change the my.conf file of Object machine
+server-id=1
+log-bin=/my_directory/data/mysqlbin
+basedir=/my_directory/
+tempdir=/my_directory/
+datadir=/my_directory/data/
+binlog-ignore-db=mysql
+
+//change the my.conf file of Subject machine
+Server-id=2
+
+authrize the rights to subject machine
+GRANT REPLICATION SLAVE ON *.* TO 'zhangsn'@'192.168.12.134' IDENTIFIED BY '12345'
+flush priviliges;
+show master status;
+
+CHANGE MASTER TO  MASTER_HOST='192.168.22.11',
+MASTER_USER='zhangsn',MASTER_PASSWORD='12345',MASTER_LOG_FILE='mysqlbin.xxxxx',MASTER_LOG_POS='xxx'
+start slave;
+show slave status;
+stop slave;
+~~~
