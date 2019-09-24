@@ -269,6 +269,8 @@ yy && nyy (n represents how many rows)
 dd && ndd
 p && P
 
+CTRL+U to remove one command
+
 //search string
 /string_you_want_to_find
 
@@ -361,7 +363,106 @@ vi /etc/fstab
 /dev/sdb1 /disk1 ext4 default 1 2
 mount -a
 ~~~
-## Shell
+## Shell Basic
+### history 
 ~~~
+*-c , clear the hitory commands
+*-w, write all the cached history commands into .bash_history
+vi /root/.bash_history
 ~~~
+### alias
+~~~
+alias vi='vim'
+alias
+unlias
 
+//modify system 
+vi /root/.bashrc
+~~~
+### input && output
+~~~
+0|1|2(keyboard|screen|error)
+
+//save the output to abc.log
+ls >> abc.log
+data > abc.log
+//save the error to abc.log
+lst 2>> abc.log
+//concat the two commands into one
+lst &>> abc.log
+ls >> abc.log 2>> err.log
+
+~~~
+### multiple commands
+~~~
+;(sequence)|(and)&&|(or)||
+
+//copy the dist
+dd if='input_file_name' of='out_file_name' bs='byte_number' count='number_block'
+
+./configure && make && make install
+~~~
+### pipe
+~~~
+output of command a is the input of command b
+ll -a /etc | grep list
+netstat -a | grep -i "established"
+~~~
+### wildcard
+~~~
+? any one
+* any one or more
+[] one of any word
+[-]any one in the range
+[^]not anyone
+
+ls ?ld | grep -i
+~~~
+### customized variables
+~~~
+data=$(Date)
+echo "$data"456
+echo ${data}456
+
+set | grep -i Date
+unset data
+~~~
+### system variables
+~~~
+export variable_name
+
+export $PATH
+
+${10}
+$* print all the arguments of commands as one
+$@ all the arguments of commands
+$# the number of all parameters
+
+$? the return value of last command, 0 is right value
+$$ the current process id
+$! the last process id
+
+//read
+read
+*-t save to file
+*-s save to varibale
+*-n recieve the number of options
+read -t 30 -p "please input your name:" name.log
+read -t 30 -s "please input your age:" age
+echo -e "\n"
+echo Age is $age
+
+read -n -t 30 -p "please select your gender[M?/F]:" gender
+echo -e "\n"
+echo "sex is $gender"
+~~~
+### operators
+~~~
+aa=11
+bb=22
+echo $(expr $aa + $bb)
+echo $(($aa+$bb))
+declare -i cc=$aa+$bb
+
+declare cc
+~~~
