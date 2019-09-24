@@ -49,10 +49,42 @@ firewall-cmd -reload
 ## Load Balancing
 ~~~
 Using mutiple servers to return the data request to Proxy, then proxy sends all of them to client
+**strategy(epoch|weight|ip_hash|fair)
+http {
+    upstream myserver {
+        server 192.168.17.129:8080 weight 5;
+        server 192.168.17.129:8081 weight 10;
+    }
+
+    server {
+        listen 80;
+        server_name 192.168.17.129;
+
+        location / {
+            proxy_pass http://myserver;
+            root html;
+            index index.html index.htm;
+        }
+    } 
+}
 ~~~
 ## Static && Dynamic Separation
 ~~~
 Using specific servers to return Static resouces or Dynamic resources, static resources include Js,Css,Html
+**visit the static resouces in root directory /data/
+server {
+        listen 80;
+        server_name 192.168.17.129;
+
+        location /www/ {
+            root /data/;
+            index index.html index.htm;
+        }
+        location /image/ {
+            root /data/;
+            autoindex on;
+        }
+    } 
 ~~~
 ## Installation
 ~~~
@@ -89,5 +121,54 @@ worker_connections 1024;
 
 3.http block
 http server and global block
+
+~~~
+## Static Resources
+~~~
+** sendfile
+** tcp_nopush
+** tcp_nodelay
+** gzip
+** gzip_comp_level
+
+** expires
+** add_header
+** http_refer
+
+server {
+    listen 80;
+    server_name 192.168.17.129;
+    sendfile on;
+    access_log /var/log/nginx/static_access.log main;
+
+    location ~ .*\.(jpg|gif|png)$ {
+        expires 30d;
+        gzip on;
+        gzip_comp_level 2;
+        root /soft/code/images;
+        gzip_types text/plain application/json application/x-javascript image/gif image/jpeg;
+    }
+}
+
+server {
+    listen 80;
+    server_name 192.168.17.129;
+    sendfile on;
+    access_log /var/log/nginx/static_access.log main;
+
+    location ~ .*\.(txt|xml)$ {
+        add_header Access-Control-Allow-Origin http://www.otherWebsiteName.com;
+        add_header Access-Control-Allow-Methods GET,POST,PUT,DELET,OPTIONS;
+        //only 192.168.69.112 can use this resource
+        valid_refers none blocked 192.168.69.112;
+        if ($valid_refers) {
+            return 403;
+        }
+        gzip on;
+        gzip_comp_level 2;
+        root /soft/code/doc;
+        gzip_types text/plain application/json application/x-javascript image/gif image/jpeg;
+    }
+}
 
 ~~~
