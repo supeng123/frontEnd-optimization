@@ -172,3 +172,54 @@ server {
 }
 
 ~~~
+## Nginx Crash Solution
+~~~
+//using backups in case some nginx servers crash
+1.install multiple nginx in each server.
+2.install keepalived
+3.modify keepalive configuration
+vi keepalived.conf
+
+global_defs {
+    smtp_server 192.168.17.129
+    smtp_connect_timeout 30
+
+    router_id LVS_DEVELBACK
+}
+
+vrrp_script chk_http_port {
+    script "/usr/local/src/nginx_check.sh"
+    interval 2
+    weight 2
+}
+
+vrrp_instance VI_l {
+    state BACKUP //MASTER if it's the main serve
+    interface ens33
+    virtual_router_id 51
+    priority 90
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    virtual_ipaddress {
+        192.168.17.50
+    }
+}
+
+vi nginx_check.sh
+#!/bin/bash
+A=`ps -C nginx -no-header |wc -l`
+if [$A -eq 0];then
+    /usr/local/nginx/sbin/nginx
+    sleep 2
+    if[`ps -C nginx --no-header |wc -l` -eq 0]; then
+        killall keepalived
+    fi
+fi
+
+4. start nginx and keepalived
+
+visit 192.168.17.50
+~~~
