@@ -223,3 +223,34 @@ fi
 
 visit 192.168.17.50
 ~~~
+## Nginx Cache
+~~~
+proxy_cache_path /soft/cache levels=1:2 keys_zone=code_cache:10m max_size=10g inactive=60m use_tmp_path=off;
+upstream cache {
+    server 192.168.69.113:8081;
+    server 192.168.69.113:8081;
+    server 192.168.69.113:8081;
+}
+
+server {
+    listen 8081;
+    server_name 192.168.69.112;
+    root /soft/code1;
+    index index.html;
+
+    if ($request_uri ~ ^/(url_name|login|register|password)) {
+        set $cookie_nocache 1;
+    }
+
+    location / {
+        proxy_pass httpp://cache;
+        proxy_cache code_cache;
+        proxy_cache_valid 200 304 12h;
+        proxy_cache_valid any 10m;
+        proxy_no_cache $cookie_nocache $arg_nocache $arg_comment;
+        add_header Nginx-Cache "$upstream_cache_status";
+        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+        include proxy_params;
+    }
+}
+~~~
