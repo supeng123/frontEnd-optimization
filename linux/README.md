@@ -609,3 +609,24 @@ service s_name start|stop|restart|status
 vi /etc/xinetd.d/telnet
 //resource package
 ~~~
+## Process Management
+~~~
+ps -le
+ps aux
+top
+jobs -l
+
+pstree -p | grep httpd
+killall -9 httpd
+pkill -9 -t tty1
+
+vmstat 1 3
+dmesg | grep CPU
+cat /proc/cupinfo
+uname -a
+lsb_release -a (Linux standard base release)
+lsof -p pid_id
+
+crontab -e
+0 5 *** ./name.sh
+~~~
