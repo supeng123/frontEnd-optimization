@@ -225,6 +225,7 @@ visit 192.168.17.50
 ~~~
 ## Nginx Cache
 ~~~
+** via proxy 192.168.69.112 to visit resources in 192.168.69.113
 proxy_cache_path /soft/cache levels=1:2 keys_zone=code_cache:10m max_size=10g inactive=60m use_tmp_path=off;
 upstream cache {
     server 192.168.69.113:8081;
@@ -252,5 +253,26 @@ server {
         proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
         include proxy_params;
     }
+}
+~~~
+## Nginx Rewrite
+~~~
+//for seo and maintainace psudo static pages
+//last will redirect to /test/, but break can not
+location ~ ^/break {
+    rewrite ^/break /test/ break;
+}
+location ~ ^/last{
+    rewrite ^/last /test/ last;
+}
+
+location ~ ^/bgx{
+    rewrite ^/bgx http://kt.gergerg.com redirect;//temparary
+    rewrite ^/bgx http://kt.gergerg.com permanent;
+}
+
+//via /course/11-22-33.html to get the real /course/11/22/33.html
+location / {
+    rewrite ^/course-(\d+)-(\d+)-(\d+)\.html /course/$1/$2course_$3.hmtl
 }
 ~~~
