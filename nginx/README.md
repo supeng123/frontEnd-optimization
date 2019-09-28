@@ -276,3 +276,35 @@ location / {
     rewrite ^/course-(\d+)-(\d+)-(\d+)\.html /course/$1/$2course_$3.hmtl
 }
 ~~~
+## Nginx HTTPS
+~~~
+1.generate private key
+openssl genrsa -idea -out server.key 2048
+2.generate signiture request certificate and private key self-signiture certificate
+openssl req -days 36500 -x509 -sha256 -nodes -newkey rsa:2048 -keyout server.key -out server.crt
+
+server {
+    listen 443;
+    server_name localhost;
+    ssl on;
+    index index.html index.htm;
+    ssl_session_timeout 10m;
+    ssl_certificate ssl_key/server.crt;
+    ssl_certificate_key ssl_key/server.key;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!ADH:!RC4;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2
+    ssl_prefer_server_ciphers on;
+
+    location / {
+        root /soft/code;
+        access_log var/logs/nginx/ssl.log main;
+    }
+}
+
+//http jump to https
+server {
+    listen 80;
+    server_name www.bsgege.com;
+    rewrite ^(.*) https://$server_name$1 redirect;
+}
+~~~
