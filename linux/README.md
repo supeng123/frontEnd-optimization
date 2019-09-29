@@ -630,3 +630,27 @@ lsof -p pid_id
 crontab -e
 0 5 *** ./name.sh
 ~~~
+## Logs Management(rsyslogd)
+~~~
+//check the logs status
+/var/log/btmp  /var/log/lastlog can not be opened by vi
+using lastb lastlog to check the content
+
+//log level
+* all
+.
+.=
+.!
+
+//add log rotation
+vi /etc/logrotate.conf
+/usr/local/apache2/logs/access_log {
+    dialy
+    create
+    rotate 30
+}
+
+dump -level(0-9)uj -f back_up_name target_files_name
+
+restore -r -f /root/boot.bak.bz2
+~~~
