@@ -11,6 +11,7 @@ redis-cli -p 6379
 ping
 
 ps -ef | grep redis
+lsof 6379
 ~~~
 ## Use Database
 ~~~
@@ -202,4 +203,54 @@ ZRANGEBYSCORE zset01 60 (90 limit 2 2//v2 v3
 //remove
 ZREM zset01 v5 //remove v5 value
 ZRANGE zset01 0 -1 withscores
+
+ZCOUNT zset01 60 80 //3
+ZRANK zset01 v4 //3
+ZSCORE zset01 v4 //90
+~~~
+## Redis Configuration
+~~~
+vi redis.conf
+
+**GENERAL
+daemonize yes
+logfile stdout
+Tcp-keepalive 60
+syslog-ident redis
+syslog-enbled yes
+databases 16
+dir ./
+maxclients 128
+appendonly no
+
+//get passport of redis
+config get requirepass
+auth password_name
+
+//LIMITS
+Maxmemory-policy (Volatile-lru|Allkeys-lru|random|volatile-ttl|noeviction)
+~~~
+### Redis RDB(Redis DataBase)
+~~~
+fork child process to deal with IO, dump.rbd is the file, need to configure the 
+snapshot position in redis.conf file.
+save 120 10
+Stop-writes-on-bgsave-error yes
+rdbcompression yes
+rbdchecksum yes
+dir
+
+**disadvantages : may lost the last version of data
+**advantages save large quantity data
+~~~
+### Redis AOF(Append Only File)
+~~~
+save all the write IO, the priority of AOF is higher than RDB,
+appendonly yes
+auto-aof-rewrite-min-size 5G
+
+execute redis-check-aof --fix appendonly.aof to restore the data
+~~~
+## Transaction
+~~~
 ~~~
