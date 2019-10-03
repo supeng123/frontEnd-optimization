@@ -253,4 +253,15 @@ execute redis-check-aof --fix appendonly.aof to restore the data
 ~~~
 ## Transaction
 ~~~
+MULTI
+    all the operations
+EXEC
+
+WATCH balance
+MULTI
+DECRBY balance 20
+INCRBY debt 20
+EXEC
+
+UNWATCH if data has been changed
 ~~~
