@@ -265,3 +265,36 @@ EXEC
 
 UNWATCH if data has been changed
 ~~~
+## Master && Slaver
+~~~
+//first type one master two slavers
+** when master disconnected, slaver still be slaver, when master reconnected again, the data of master will be synconized to slaver,
+** when slaver disconnected, and reconnected again. the slaver will be changed to master if itself not be written in conf file.
+//example
+master: port 6379
+slaver_one: port 6380
+slaver_two: port 6381
+
+//change one master server to slaver: 
+SLAVEOF 127.0.0.1:6397
+INFO REPLICATION
+SHUTDOWN
+
+//second type one master, when the master shutdown, the successor will be next slaver,
+** need to change the third slaver's master to second slavers SLAVEOF 127.0.0.1:6380
+
+//transfer slaver to master
+**when master shutdown, change the first slaver to master, and second slaver will synconize data from first
+**when master reconnected, it will be a dependent master, pervious slavers will be gone
+**slaver_one: port 6380  
+SLAVEOF no one
+
+//under redis directory , create sentinel.conf, use this to automatically change slaver to master,
+//when master shutdown, the slavers will vote new master, after the previous master reconnected, it will be become a slaver
+touch sentinel.conf
+vi sentinel.conf
+//write configuration
+sentinel monitor host6379 127.0.0.1 6379 1
+//start sentinel
+redis-sentinel /myredis/sentinel.conf
+~~~
