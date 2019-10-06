@@ -35,3 +35,36 @@ kubeadmin init --config-kubeadmin-config.yaml --experimental-upload-certs | tee 
 kubectl get pot -n kube-system
 got node
 ~~~
+## Kubernetes Resource
+~~~
+namespace: kubeadm k8s pot, replicaSet, deployment, statefulSet, daemonSet, cronJob
+cluser: Node,Role, ClusterRole
+metadata: HPA, PodTemplate,limitRange
+~~~
+ ### yaml
+ ~~~
+ apiVersion: v1
+ kind: Pod  //Pod ,service, deployment
+ metadata
+ metadata.name //podname
+ metadata.namespace //
+ Spec
+ spec.containers[]
+ spec.containers[].name //container name
+ spec.containers[].image //container image
+ ~~~
+ #### check pot log
+ ~~~
+ kuberctl get pod
+ kuberctl create -f pod.yaml //start a yaml resource
+ get pod -o wide //check pod info
+ kubectl log myapp-pod(port) -c test(name)
+ ~~~
+ ### port life cycle
+ ~~~
+init c
+main c
+
+readness // check the container's service (apache)of pod is ready for open to the client to visit
+liveness // check the container's service (nginx) process is dead in pod
+ ~~~
