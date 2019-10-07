@@ -59,6 +59,8 @@ metadata: HPA, PodTemplate,limitRange
  kuberctl create -f pod.yaml //start a yaml resource
  get pod -o wide //check pod info
  kubectl log myapp-pod(port) -c test(name)
+
+ kuberctl exec port_name -it -- /bin/sh
  ~~~
  ### port life cycle
  ~~~
@@ -67,4 +69,13 @@ main c
 
 readness // check the container's service (apache)of pod is ready for open to the client to visit
 liveness // check the container's service (nginx) process is dead in pod
+probe
+ ~~~
+ ## Resource Controller
+ ~~~
+ ReplicatsSet, ensure the specific numbers of the copy of the container
+ Deployment, declare ReplicatsSet, to create Pod ,support rollback,extension of Pod
+ DaemonSet, ensure only one Pod copy execting on all Node
+ CronJob, execute the scripts during the time interval
+ StatefulSet, provide identification for Pod, ensure the sequence of deployment and scale
  ~~~

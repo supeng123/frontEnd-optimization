@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox
+    command: ['sh', '-c', 'echo The app is runing ! && sleep 3600']
+  initContainers:
+  - name: init-myservice
+    image: busybox
+    command: ['sh', '-c', 'until nslookup myservicek do echo waiting for myservice; sleep 20; done;']
+  - name: init-mydb
+    image: busybox
+    command: ['sh', '-c', 'until nslookup mydb do echo waiting for mydb; sleep 20; done;']
+    readinessProbe:
+      httpGet:
+        port: 80
+        path: /index1.html
+        initialDelaySeconds: 1
+        periodSeconds: 3
+    livenessProbe:
+      exec:
+        command: ["test", "-e", "/tmp/live"]
+      initialDelaySeconds: 1
+      periodSeconds: 
+  - name: lifecycle-demo-container
+    image: nginx
+    lifecycle:
+      postStart:
+        exec:
+          command: ["/bin/sh", "-c", "echo Hello from the postStart handle > /usr/share/message"]
+      preStop:
+        exec:
+          commamd: ["/usr/sbin/nginx", "-s", "quit"]
+
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   name: myservice
+# spec:
+#   ports:
+#    - protocol: TCP
+#      port: 80 //could be 80 for all init services because current procress will terminated then the next process can go on
+#      targetPort: 9376
+
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   name: mydb
+# spec:
+#   ports:
+#    - protocol: TCP
+#      port: 80
+#      targetPort: 9377
