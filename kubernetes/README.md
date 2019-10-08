@@ -79,3 +79,26 @@ probe
  CronJob, execute the scripts during the time interval
  StatefulSet, provide identification for Pod, ensure the sequence of deployment and scale
  ~~~
+ ### ReplicateSet && Deployment && DaemonSet
+ ~~~
+ kubectl get deployment
+ kubectl get rs
+ kubectl get pod
+ kubectl get pod -o wide
+
+ //scale by deployment
+ kubectl scal deployment nginx-deployment --replicas 10
+ //modify the image in container
+ kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1
+ //rollback
+ kubectl rollout undo deployment/nginx-deployment
+ ~~~
+ ### Service
+ ~~~
+ ensure the proxy for Pods be consistent even some pods destoryed unexpectly
+
+ ClusterIP, setup in cluster
+ NodePort, setup in physical machine
+ LoadBalancer, setup in cloud providers
+ ExternalName
+ ~~~
