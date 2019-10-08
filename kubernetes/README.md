@@ -101,4 +101,6 @@ probe
  NodePort, setup in physical machine
  LoadBalancer, setup in cloud providers
  ExternalName
+
+ kubeApiserver--->kube-proxy--->ServiceIP(iptables|ipvs)
  ~~~
