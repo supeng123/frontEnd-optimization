@@ -155,4 +155,7 @@ spec:
     volumes:
         - name: cache-volume
           emptyDir: {}
+
+hostPath
+** put the master machine's file system's directories or files to clusters
 ~~~
