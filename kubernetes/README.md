@@ -102,3 +102,56 @@ probe
  LoadBalancer, setup in cloud providers
  ExternalName
  ~~~
+ ### ingress
+ ~~~
+ implement 7 level proxy
+ ~~~
+ ## Storage
+ ### configMap
+ ~~~
+ create cofigure map to configure environment variables
+ vi game.properties
+ enemies-aliens
+ lives-3
+ enemies.cheat-true
+ enemies.cheat.level=noGoodRotten
+ secret.code.passphrase-UUDDLRLRBABAS
+ secret.code.allowed=true
+ secret.code.lives=30
+
+ vi ui.properties
+ color.good=purple
+ color.bad=yellow
+ allow.textmode=true
+ how.nice.to.look=fairlyNice
+
+ kubectl create configmap game-config --from-file= game.properties
+ ~~~
+ ### Secret 
+ ~~~
+ keep the secrecy info
+ //service account
+ //Opaque Secret
+ ~~~
+
+### Volume
+~~~
+//emptyDir 
+** saved space for temporary use, check the point when long time computering crashed
+example
+
+apiVersion: v1
+kind: Pod
+metadata:
+    name: test-pd
+spec:
+    containers:
+        - image: /test-webserver
+          name: test-server
+          volumnMounts:
+            - mountPath: /cache
+              name: cache-volume
+    volumes:
+        - name: cache-volume
+          emptyDir: {}
+~~~
