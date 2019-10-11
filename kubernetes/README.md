@@ -207,3 +207,21 @@ spec:
                       - k8s-node02
 
 ~~~
+### taint && tolerantions
+~~~
+//set taint
+kubectl taint nodes node1 key1=value1:NoSchedule
+
+//check taint
+kubectl describe pod pod-name
+
+//remove taint
+kubectl taint nodes node1 key1:NoSchedule-
+
+tolerations:
+- key: "check"
+  operator: "Equal"
+  value: "wangyang"
+  effect: "NoSchedule"
+  tolerationSeconds: 3600
+~~~
