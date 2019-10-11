@@ -159,3 +159,51 @@ spec:
 hostPath
 ** put the master machine's file system's directories or files to clusters
 ~~~
+### persisitent volume claim(PVV)
+~~~
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: pv0003
+spec:
+    capacity:
+        storage: 5Gi
+    volumeMode: Filesystem
+    accessModes:
+        - ReadWriteOnce
+    persistentVolumeReclaimPolicy: Recycle
+    storageClassName: slow
+    mountOptions:
+        - hard
+        - nfsvers-4.1
+    nfs:
+        path: /tmp
+        server: 172.17.0,1
+
+stateful-->PVC-->pV-->Port-->nfs
+~~~
+## Kubernetes Cluster Scheduler
+~~~
+Pod affinity
+
+apiVersion: 1
+kind: Pod
+metadata: 
+    name: affinity
+    labels:
+        app: node-affinity-pod
+spec:
+    containers:
+        - name: with-node-affinity
+          image: wagerg/myapp:v1
+    affinity:
+        nodeAffinity:
+            requireDuringSchedulingIgnoreDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernantes.io/hostnama
+                      operator: In
+                      values:
+                      - k8s-node02
+
+~~~
