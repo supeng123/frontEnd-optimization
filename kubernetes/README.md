@@ -225,3 +225,12 @@ tolerations:
   effect: "NoSchedule"
   tolerationSeconds: 3600
 ~~~
+### fixed nodes
+~~~
+kubectl label node k8s-node2 disk=ssd
+spec:
+    nodeName: k8s-node1
+    nodeSelector:
+        type: backEndNode1
+        disk: ssd
+~~~
