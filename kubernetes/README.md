@@ -234,3 +234,30 @@ spec:
         type: backEndNode1
         disk: ssd
 ~~~
+## Kubernetes Security
+~~~
+kubectl kubelet kube-proxy needs https duplex authentification
+kubconfig includes cluster config parameters
+
+authorization-mode
+** alwaysDeny
+** alwaysAllow
+** ABAC(Attribute-based Acess Control)
+** Role-based Access Control
+
+//apiserver configuration
+CN username
+O organization
+~~~
+### role
+~~~
+kind: Role
+apiVersion: v1
+metadata:
+    namespace: default
+    name: pod-reader
+rules:
+- apiGroup: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+~~~
