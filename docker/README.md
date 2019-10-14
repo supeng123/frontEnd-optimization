@@ -1,4 +1,8 @@
-docker
+Docker
+~~~
+keep the consistence between different environment
+container is the instance of image
+~~~
 
 ## Basic Commands
 ~~~
@@ -85,4 +89,12 @@ docker pull [OPTIONS] IMAGE_NAME:[TAG]
 
 //push images from local 
 docker push dormacypress/nginx
+
+//create new image from container
+docker commit [OPTION] CONTAINER_NAME [REPOSITORY[TAG]]
+-a --author
+-m --message
+-p --pause=true
+
+docker commit -a 'supeng' -m 'nginx' commit_test supeng/nginx-test
 ~~~
