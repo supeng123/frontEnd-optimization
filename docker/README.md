@@ -142,3 +142,37 @@ docker info
 *example ONBUILD COPY index.html /usr/share/nginx/html
 
 ~~~
+## Docker Bridge
+~~~
+sudo apt-get install bridge-utils
+//check bridge device
+sudo brctl show
+//modify the new ip address for container
+sudo ifconfig docker0 192.168.200.1 netmask 255.255.255.0
+
+//diy a virtual bridge
+sudo brctl addbr bridge0
+sudo ifconfig bridge0 192.168.100.1 netmask 255.255.255.0
+sudo vim /etc/default
+    DOCKER_OPTS="bridge0"
+sudo service docker restart
+~~~
+### communication between containers
+~~~
+-icc=true
+--iptables=true
+
+1.docker run -it --name cct1 dormacypress/cct
+2.systctl nginx start
+3.CTRL+P
+//check the cct1's ip address is 192.168.0.9 by using ifconfig
+4.docker run -it --name cct2 dormacypress/cct
+5.ping 192.168.0.9
+
+//use link so container's port can be automatically switched if container is down and up again
+--link
+$docker run --link=[CONTAINER_NAME]:[ALIAS] [IMAGE][COMMAND]
+
+docker run --name cct3 --link=cct1:webtest dormacypress/cct
+ping webtest
+~~~
