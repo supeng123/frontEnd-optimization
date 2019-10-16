@@ -98,3 +98,47 @@ docker commit [OPTION] CONTAINER_NAME [REPOSITORY[TAG]]
 
 docker commit -a 'supeng' -m 'nginx' commit_test supeng/nginx-test
 ~~~
+### docker process
+~~~
+vi etc/default/docker
+DOCKER_OPTS="label name=docker_server_1"
+
+sudo service docker restart
+docker status
+docker info
+~~~
+### docker remote visit
+~~~
+//create other server with docker and named DOCKER_OPTS="label name=docker_server_2"
+//for docker_server_1,  create"DOCKER_OPTS="label name=docker_server_2 -H tcp"//0.0.0.0:2375""
+//or export DOCKER_HOST="tcp://server1_hostname:2375"
+//sever2 now can be connectted to server1 by useing "docker -H tcp://server1_hostname:2375"
+~~~
+## Docker file
+~~~
+** FROM <image>:<tag>   FROM ubuntu:14.04
+** MAINTAINER<name>     MAINTAINER supeng "supeng@QQ.COM"
+** RUN<command>         RUN apt-get update && apt-get install -y nginx
+** EXPOSE<port>         EXPOSE 80
+
+//RUN (shell mode)  /bin/sh -c command  
+*example    RUN echo hello
+//RUN (exec mode)  RUN["executable", "param1", "param2"]
+*example    RUN ["/bin/bash", "-c", "echo hello"]
+
+//can be overwrite by the commands from command line
+**CMD ["executable", "param1", "param2"]
+**CMD command param1 param2
+
+//won't be overwrite by the commands from command line
+**ENTRYPOINT 
+*example    ENTRYPOINT["/etc/default/nginx", '-g', "deamo off"]
+
+**WORKDIR 
+**ENV
+**USER daemon
+**ONBUILD [INSTRUCTION] , execute commands when one image be used as other image's base
+
+*example ONBUILD COPY index.html /usr/share/nginx/html
+
+~~~
