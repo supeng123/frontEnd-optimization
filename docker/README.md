@@ -202,4 +202,7 @@ docker run -it -v ~/datavolume:/data:ro ubuntu /bin/bash
 docker run --volumes-from [CONTAINER_NAME]
 
 docker run -it --name dvt5 --volumes-from dvt4 ubuntu /bin/bash
+
+//backup
+docker run --volumes-from dvt5 -v ~/host/backup:/containerBackup --name dvt6 tar cvf /backup/dvt5.tar /datavolume1
 ~~~
