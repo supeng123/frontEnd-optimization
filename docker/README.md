@@ -176,3 +176,30 @@ $docker run --link=[CONTAINER_NAME]:[ALIAS] [IMAGE][COMMAND]
 docker run --name cct3 --link=cct1:webtest dormacypress/cct
 ping webtest
 ~~~
+### container connect to external network
+~~~
+//check if the traffic can be forwaring
+ip-forward=true
+sysctl net.ipv4.conf.all.forwarding
+
+iptables -L -n
+**"docker port cct5" can get the reflective port of container
+
+//prevent one ip to connect to other container ip(-s is the ip should be prevented)
+sudo iptables -I DOCKER -s 10.211.55.3 -d 172.17.0.7 -p TCP --dport 80 -j DROP
+~~~
+## Volume
+~~~
+//add volume for container
+sudo docker run -v ~/host_volume_data:/container_data -t ubuntu /bin/bash
+
+docker run -it -v ~/datavolume:/data ubuntu /bin/bash
+
+//add read only for container volume
+docker run -it -v ~/datavolume:/data:ro ubuntu /bin/bash
+
+//mount data volume container so all the data can be stored regardless what happened on containers
+docker run --volumes-from [CONTAINER_NAME]
+
+docker run -it --name dvt5 --volumes-from dvt4 ubuntu /bin/bash
+~~~
