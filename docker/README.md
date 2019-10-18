@@ -206,3 +206,39 @@ docker run -it --name dvt5 --volumes-from dvt4 ubuntu /bin/bash
 //backup
 docker run --volumes-from dvt5 -v ~/host/backup:/containerBackup --name dvt6 tar cvf /backup/dvt5.tar /datavolume1
 ~~~
+## Cross Host Communication
+~~~
+apt-get install openvswitch-switch
+apt-get install bridge-utils
+//1.create ovs bridge obr0
+sudo ovs-vsctl add-br obr0
+//2.add port for obr0
+sudo ovs-vsctl add-port obr0 gre0
+//3.set interface
+sudo ovs-vsctl set interface gre0 type=gre options:remote_ip=192.168.59.104
+
+//4.local machine bridge
+sudo brctl addbr br0
+sudo ifconfig br0 192.168.1.1 netmask 255.255.255.0
+sudo brctl addif br0 obr0
+sudo brctl show
+
+//5.modify docker file
+sudo vim /etc/default/docker
+
+//in host one
+sudo wget -O /usr/bin/weav https://raw.githubusercontent.com
+sudo chmod a+x /usr/bin/weave
+weave launch
+weave run 192.168.1.10/24 -it --name wc1 ubuntu /bin/bash
+docker attach wc1
+ping 192.168.1.2
+
+
+//in host two use weave
+sudo wget -O /usr/bin/weav https://raw.githubusercontent.com
+sudo chmod a+x /usr/bin/weave
+weave launch host_one_ip
+c2=$(weave run 192.168.1.2/24 -it ubuntu /bin/bash) 
+docker attach $c2
+~~~
