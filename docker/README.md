@@ -130,7 +130,8 @@ docker info
 **CMD ["executable", "param1", "param2"]
 **CMD command param1 param2
 
-//won't be overwrite by the commands from command line
+//won't be overwrite by the commands from command line，only one Entrypoint in one docker file
+//only with --entrypoint in "docker run -it --entrypoint='/bin/bash'"
 **ENTRYPOINT 
 *example    ENTRYPOINT["/etc/default/nginx", '-g', "deamo off"]
 
