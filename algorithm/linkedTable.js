@@ -14,3 +14,25 @@ function reverseLinkedTable(table) {
     }
     return previous;
 }
+
+//check the table is linked from tail to head
+function checkLoop(table) {
+    let first = table;
+    let second = table;
+    while (first !=null && first.next !=null && first.next.next != null) {
+        first = frist.next;
+        second = second.next.next;
+        if (first.value === second.value) return true;
+    }
+    return false;
+}
+
+//remove the second last node
+function removeSecondLastNode(table) {
+
+}
+
+//merge two sorted linked table
+function mergeTable(table1, table2) {
+
+}
