@@ -22,7 +22,7 @@ function checkLoop(table) {
     while (first !=null && first.next !=null && first.next.next != null) {
         first = frist.next;
         second = second.next.next;
-        if (first.value === second.value) return true;
+        if (first.value === second.value ) return true;
     }
     return false;
 }
