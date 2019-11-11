@@ -28,8 +28,20 @@ function checkLoop(table) {
 }
 
 //remove the second last node
-function removeSecondLastNode(table) {
-
+function removeSecondLastNode(table, n) {
+    let dummyNode = new ListNode(0);
+    dummyNode.next = table;
+    let fast = dummyNode;
+    let slow = dummyNode;
+    for (var i = 0; i <= n ; i++) {
+        fast = table.next;
+    }
+    while (fast != null) {
+        fast = fast.next;
+        slow = slow.next;
+    }
+    slow.next = slow.next.next;
+    return dummyNode.next;
 }
 
 //merge two sorted linked table
