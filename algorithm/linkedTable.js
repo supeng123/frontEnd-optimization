@@ -46,5 +46,25 @@ function removeSecondLastNode(table, n) {
 
 //merge two sorted linked table
 function mergeTable(table1, table2) {
-
+    let dummyNode = new ListNode(0);
+    // dummyNode.next = table;
+    let current = dummyNode;
+    while(table1 != null && table2 != null) {
+        if (table1.value < table2.value) {
+            current.next = table1;
+            table1 = table1.next;
+            current = current.next;
+        } else {
+            current.next = table2;
+            table2 = table2.next;
+            current = current.next;
+        }
+    }
+    if (table1 == null) {
+        current.next = table2;
+    }
+    if (table2 == null) {
+        current.next = table1;
+    }
+    return dummyNode.next;
 }
