@@ -52,3 +52,22 @@ function binarySearchInside(data, start, end, value) {
 const binaryArray = [1,2,3,6,7,9,99];
 console.log(binarySearch(binaryArray, 3));
 
+//insert sort
+function insertSort(data) {
+    for (var i = 1; i < data.length; i++) {
+        var value = data[i]
+        var b = i - 1;
+        for (; b >= 0; --b) {
+            if (value < data[b]) {
+                data[b+1] = data[b];
+            } else {
+                break;
+            }
+        }
+        data[b+1] = value;
+    }
+}
+const insertSortData = [5,3,7,9,1,4]
+insertSort(insertSortData);
+console.log(insertSortData)
+
