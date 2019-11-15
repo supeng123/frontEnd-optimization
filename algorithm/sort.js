@@ -71,3 +71,22 @@ const insertSortData = [5,3,7,9,1,4]
 insertSort(insertSortData);
 console.log(insertSortData)
 
+//bubble sort
+function bubbleSort(data) {
+    for (var i = 0; i < data.length; i ++ ) {
+        for (var j = 0; j < data.length - 1; j ++ ) {
+            if (data[j] > data[j + 1]) {
+                let temp = data[j];
+                data[j] = data[j + 1];
+                data[j + 1] = temp;
+            } 
+        }
+    }
+    return data;
+}
+const bubbleSortData = [5,3,7,9,1,4]
+bubbleSort(bubbleSortData);
+console.log(bubbleSortData)
+
+
+
