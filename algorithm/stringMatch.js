@@ -21,5 +21,5 @@ function findAllPlaces(char, pattern) {
 }
 
 const charactors = 'supengsupneg';
-const result = findAllPlaces(charactors, 'su');
+const result = findAllPlaces(charactors, 'n');
 console.log(result)

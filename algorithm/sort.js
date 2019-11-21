@@ -5,7 +5,7 @@ function findKLargestNumber(array, k) {
     let pivot = array[0];
     leftSide = [];
     rightSide = [];
-    for (var i = 1 ; i < array.length; i++) {
+    for (var i = 0 ; i < array.length; i++) {
         if (!filterDic[array[i]] && array[i]!= pivot) {
             filterDic[array[i]] = array[i];
             if (array[i] > pivot) {
@@ -16,13 +16,13 @@ function findKLargestNumber(array, k) {
         }
     };
 
-    if ( k - 1 == leftSide.length) {
+    if ( k == leftSide.length + 1) {
         return pivot;
     }
-    if ( k - 1 < leftSide.length) {
+    if ( k < leftSide.length + 1) {
         return findKLargestNumber(leftSide, k);
     } else {
-        return findKLargestNumber(rightSide,  k - leftSide.length);
+        return findKLargestNumber(rightSide,  k - leftSide.length - 1);
     }
 }
 
