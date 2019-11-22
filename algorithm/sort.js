@@ -109,5 +109,33 @@ const quickSortData = [5,3,7,9,1,4]
 const result = quickSort(quickSortData);
 console.log(result)
 
+//bucket sort
+function bucketSort(arr) {
+    const newArr = [];
+    let maxValue = 0;
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i]>maxValue) {
+            maxValue = arr[i];
+        }
+    }
+    for (var j = 0 ;j < maxValue - 1; j++) {
+        newArr[j] = 0;
+    }
+    for (var f = 0; f < arr.length; f++) {
+        newArr[arr[f]]++
+    }
+    const result = [];
+    for (var s = 0; s < newArr.length; s++) {
+        while(newArr[s] > 0) {
+            result.push(s)
+            newArr[s]--;
+        }
+    }
+    return result;
+}
+
+const bucketSortData=[6,3,7,1,2,5,3]
+const bucketSortResult = bucketSort(bucketSortData);
+console.log(bucketSortResult)
 
 
