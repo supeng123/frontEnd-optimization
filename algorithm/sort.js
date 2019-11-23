@@ -109,8 +109,8 @@ const quickSortData = [5,3,7,9,1,4]
 const result = quickSort(quickSortData);
 console.log(result)
 
-//bucket sort
-function bucketSort(arr) {
+//count sort
+function countSort(arr) {
     const newArr = [];
     let maxValue = 0;
     for (var i = 0; i < arr.length; i++) {
@@ -134,7 +134,44 @@ function bucketSort(arr) {
     return result;
 }
 
-const bucketSortData=[6,3,7,1,2,5,3]
+const countSortData=[6,3,7,1,2,5,3]
+const countSortResult = countSort(countSortData);
+console.log(countSortResult)
+
+//bucket sort
+function bucketSort(arr, bucketSize) {
+    var minValue=arr[0];
+    var maxValue=arr[0];
+    for(var i = 1; i < arr.length; i++){
+        if(arr[i] > maxValue) {
+            maxValue = arr[i];
+        } else if (arr[i] < minValue) {
+            minValue = arr[i];
+        }
+    }
+    console.log(maxValue, minValue)
+    var default_bucket_size = bucketSize ? bucketSize : 5;
+    var bucketCount = Math.floor((maxValue-minValue)/default_bucket_size) + 1;
+    var buckets = new Array(bucketCount);
+    for (var j = 0; j < buckets.length; j++) {
+        buckets[j] = [];
+    }
+    console.log("position:",bucketCount);
+    for (var z = 0; z < arr.length; z++) {
+        console.log("position:" + (Math.floor(arr[z] - minValue))%bucketCount);
+        buckets[Math.floor((arr[z] - minValue))%bucketCount].push(arr[z]);
+    }
+    arr.length = 0;
+    for (var d = 0; d < buckets.length; d++) {
+        insertSort(buckets[d]);
+        for (var w = 0; w < buckets[d].length; w++) {
+            arr.push(buckets[d][w]);
+        }
+    }
+    return arr;
+}
+
+const bucketSortData=[6,3,7,1,2,5,3,9]
 const bucketSortResult = bucketSort(bucketSortData);
 console.log(bucketSortResult)
 
