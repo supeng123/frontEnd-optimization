@@ -149,30 +149,53 @@ function bucketSort(arr, bucketSize) {
             minValue = arr[i];
         }
     }
-    console.log(maxValue, minValue)
+
     var default_bucket_size = bucketSize ? bucketSize : 5;
-    var bucketCount = Math.floor((maxValue-minValue)/default_bucket_size) + 1;
-    var buckets = new Array(bucketCount);
+    var bucketCount = ~~((maxValue - minValue)/default_bucket_size);
+    var buckets = new Array(maxValue - minValue + 1);
     for (var j = 0; j < buckets.length; j++) {
         buckets[j] = [];
     }
-    console.log("position:",bucketCount);
     for (var z = 0; z < arr.length; z++) {
-        console.log("position:" + (Math.floor(arr[z] - minValue))%bucketCount);
-        buckets[Math.floor((arr[z] - minValue))%bucketCount].push(arr[z]);
+        buckets[(arr[z] - minValue)/bucketCount].push(arr[z]);
     }
-    arr.length = 0;
+  
     for (var d = 0; d < buckets.length; d++) {
         insertSort(buckets[d]);
-        for (var w = 0; w < buckets[d].length; w++) {
-            arr.push(buckets[d][w]);
-        }
     }
-    return arr;
+    return [].concat(...buckets);
 }
 
 const bucketSortData=[6,3,7,1,2,5,3,9]
 const bucketSortResult = bucketSort(bucketSortData);
 console.log(bucketSortResult)
 
+function radixSort(arr, maxDigit) {
+    let counter = [];
+    let dev = 1;
+    let mod = 10;
+    for (var i = 0; i < maxDigit; i++, dev *= 10, mod *= 10) {
+        for (var j = 0; j < arr.length; j++) {
+            let bucket = ~~((arr[j]%mod)/dev);
+            if (counter[bucket] ==  null) {
+                counter[bucket] = [];
+            }
+            counter[bucket].push(arr[j]);
+        }
 
+        let pos = 0;
+        for(var j = 0; j < counter.length; j++) {
+            let value = null;
+            if (counter[j] != null) {
+                while ((value = counter[j].shift()) != null) {
+                    arr[pos++] = value;
+                }
+            }
+        }
+    }
+    return arr;
+}
+
+const radixSortData=[6,3,7,1,2,5,3,9,20]
+const radixSortResult = radixSort(radixSortData, 2);
+console.log(radixSortResult)
