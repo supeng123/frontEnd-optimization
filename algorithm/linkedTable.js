@@ -67,3 +67,30 @@ function mergeTable(table1, table2) {
     }
     return dummyNode.next;
 }
+
+//merge two sorted array
+function mergeTwoSortedArray(arr1, arr2) {
+    var i = 0;
+    var result = [];
+    while (arr1[i] != null && arr2[i] != null) {
+        if (arr1[i] <= arr2[i]) {
+            result.push(arr1[i]);
+            arr1.shift()
+        } else {
+            result.push(arr2[i]);
+            arr2.shift()
+        }
+    }
+    if (arr1.length > 0) {
+        return result.concat(arr1);
+    }
+    if (arr2.length > 0) {
+        return result.concat(arr2);
+    }
+}
+
+const oneArray = [1,3,5,7,9,10]
+const twoArray = [2,3,4,6,8]
+
+const mergeTwoArrayResult = mergeTwoSortedArray(oneArray, twoArray);
+console.log(mergeTwoArrayResult);
