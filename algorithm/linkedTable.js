@@ -94,3 +94,33 @@ const twoArray = [2,3,4,6,8]
 
 const mergeTwoArrayResult = mergeTwoSortedArray(oneArray, twoArray);
 console.log(mergeTwoArrayResult);
+
+//find the smalllest positive
+
+function smallestPositiveNumber(arr) {
+    let max = 0;
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] > 0 && arr[i] > max) {
+            max = arr[i]
+        }
+    }
+    const buckets = new Array(max + 1);
+    for (var j = 0; j < buckets.length; j++) {
+        buckets[j] = [];
+    }
+
+    for (var j = 0; j < arr.length; j++) {
+        if (arr[j] > 0) {
+            buckets[arr[j]].push(arr[j])
+        }
+        
+    }
+    
+    let current = 1;
+    while(!!buckets[current] && buckets[current].length > 0 ) {
+        current ++;
+    }
+    return current;
+}
+
+console.log(smallestPositiveNumber([1,2,0]))
