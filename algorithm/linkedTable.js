@@ -124,3 +124,39 @@ function smallestPositiveNumber(arr) {
 }
 
 console.log(smallestPositiveNumber([1,2,0]))
+
+// three number sum
+function threeNumSum(numbers, n) {
+    const result = [];
+    numbers.sort((a, b) => a - b);
+    console.log('threeSumResult')
+    for (var i = 0; i < numbers.length - 2; i ++) {
+        if (i > 0 && numbers[i] === numbers[i + 1]) continue;
+        j = i + 1;
+        l = numbers.length - 1;
+        while (j < l) {
+            let sums = numbers[i] + numbers[j] + numbers[l];
+            if (sums < n) {
+                j ++;
+            } else if (sums > n) {
+                l --;
+            } else {
+                result.push([numbers[i], numbers[j], numbers[l]])
+                while (numbers[j] === numbers[j + 1]) {
+                    j ++;
+                }
+                while (numbers[l] === numbers[l - 1]) {
+                    l --;
+                }
+                j ++;
+                l --;
+            }
+        }
+    }
+    return result;
+}
+
+const threeSumDataList = [9,6,-6,-5,-4,1,0,-1,-3]
+const threeSumResult = threeNumSum(threeSumDataList, 0);
+console.log(threeSumResult)
+
