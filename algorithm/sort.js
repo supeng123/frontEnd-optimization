@@ -199,3 +199,31 @@ function radixSort(arr, maxDigit) {
 const radixSortData=[6,3,7,1,2,5,3,9,20]
 const radixSortResult = radixSort(radixSortData, 2);
 console.log(radixSortResult)
+
+//merge sort
+function mergeSort(arr) {
+    if (arr.length <= 1) return arr;
+    const mid = ~~(arr.length/2);
+    const left = arr.slice(0, mid);
+    const right = arr.slice(mid);
+    return merge(mergeSort(left), mergeSort(right))
+}
+
+function merge(leftList, rightList) {
+    const result = [];
+    let leftIndex = 0;
+    let rightIndex = 0;
+    while (leftIndex < leftList.length && rightIndex < rightList.length) {
+        if (leftList[leftIndex] <= rightList[rightIndex]) {
+            result.push(leftList[leftIndex]);
+            leftIndex ++ ;
+        } else {
+            result.push(rightList[rightIndex]);
+            rightIndex ++ ;
+        }
+    }
+    return result.concat(leftList.slice(leftIndex)).concat(rightList.slice(rightIndex));
+}
+const mergeSortlist = [3, 4, 40, 23, 12, 4, 12, 4, 32, 1234, 23];
+const r = mergeSort(mergeSortlist);
+console.log(r);
