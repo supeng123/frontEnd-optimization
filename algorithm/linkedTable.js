@@ -159,4 +159,3 @@ function threeNumSum(numbers, n) {
 const threeSumDataList = [9,6,-6,-5,-4,1,0,-1,-3]
 const threeSumResult = threeNumSum(threeSumDataList, 0);
 console.log(threeSumResult)
-
