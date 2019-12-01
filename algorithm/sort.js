@@ -227,3 +227,20 @@ function merge(leftList, rightList) {
 const mergeSortlist = [3, 4, 40, 23, 12, 4, 12, 4, 32, 1234, 23];
 const r = mergeSort(mergeSortlist);
 console.log(r);
+
+const arr = []
+function dfsTraversal(root, callback) {
+    if (!root) return;
+    var stack = [];
+    var node = root;
+    while (node != null) {
+        callback();
+        arr.push(node);
+        if(node.children.length > 0) {
+            for (var i = 0; i < node.children.length; i++) {
+                stack.push(node.children[i]);
+            }
+        }
+        node = stack.unshift();
+    }
+}
