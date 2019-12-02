@@ -234,13 +234,26 @@ function dfsTraversal(root, callback) {
     var stack = [];
     var node = root;
     while (node != null) {
-        callback();
+        callback(node);
         arr.push(node);
         if(node.children.length > 0) {
             for (var i = 0; i < node.children.length; i++) {
                 stack.push(node.children[i]);
             }
         }
-        node = stack.unshift();
+        node = stack.shift();
+    }
+}
+
+const stack = [rootNode]
+
+function bfsTraversal(number) {
+    number = number || 0;
+    if (stack[index]) {
+        const current = stack[index];
+        for (var i = 0 ; i < current.children.length; i ++) {
+            stack.push(current[i])
+        }
+        dfsTraversal(++index);
     }
 }
