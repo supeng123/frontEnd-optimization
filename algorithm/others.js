@@ -76,3 +76,42 @@ function parseVnode(vnode) {
         return _node;
     }
 }
+
+//function curry
+let tags = 'html,div,a,img,ul,li,span'.split(',')
+function makeUp(keys) {
+    let set = {};
+    tags.forEach(key => set[key] = true);
+    return function (tagName) {
+        return !! set[tagName.toLowerCase()];
+    }
+}
+
+let isHtmlTag = makeUp(tags);
+console.log(isHtmlTag('span'))
+
+const rbracket = /\{\{().+?)\}\}/g;
+function render(vnode, data) {
+    let _type = vnode.type;
+    let _data = vnode.data;
+    let _value = vnode.value;
+    let _tag = vnode.tag;
+    let _children = vnode.children;
+
+    let _vnode = null;
+    if (_type === 3) {
+        _value = _value.replace(rbracket, function(_, g) {
+            return getValueByPath(data, g.trim())
+        });
+    } else if (_type = 1) {
+        _vnode = new VNode(_tag, _data, _value, _type);
+        _children.forEach(_subVnode => _subVnode.appendChild(render(_subVnode, data)));
+    }
+    return _vnode;
+}
+//data = {
+    // supeng: {
+    //     li: 2
+    // }
+// }
+// const renderVnodeWithValue = render(generateVnode(vnode), data)
