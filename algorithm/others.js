@@ -115,3 +115,43 @@ function render(vnode, data) {
     // }
 // }
 // const renderVnodeWithValue = render(generateVnode(vnode), data)
+
+
+let oo = {
+    name: 'slogan',
+    age: 19,
+    gender: male,
+};
+
+function defineReactive(target, key, value, enumerable) {
+    Object.defineProperty(target, key, {
+        configurable: true,
+        enumerable: !!enumerable,
+        get () {
+            console.log(`the key of the attribut ${key}`);
+            return value;
+        },
+        set (newVal) {
+            console.log(`the value of the attribut ${newVal}`);
+            value = newVal;
+        }
+    })
+}
+
+let keys = Object.keys(oo);
+for (let i = 0; i < keys.length; i++) {
+    defineReactive(oo, keys[i], oo[keys[i]], true);
+}
+
+//proxy original array so the new array can be reactive
+let array_methods =  Object.create(Array.prototype);
+['push','pop','splice','slice','shift','unshift'].forEach((method) => {
+    array_methods[method] = function (){
+        console.log('invoke the original method' + method);
+        let res = Array.prototype[method].apply(this, arguments);
+        return res;
+    }
+})
+
+let arr = [];
+arr._proto_ = array_methods;
