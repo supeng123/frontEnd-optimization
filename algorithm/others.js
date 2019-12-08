@@ -155,3 +155,17 @@ let array_methods =  Object.create(Array.prototype);
 
 let arr = [];
 arr._proto_ = array_methods;
+
+//proxy private variables
+function proxy(app, prop, key) {
+    Object.defineProperty(app, key, {
+        get () {
+            return app[prop][key];
+        },
+        set (newVal) {
+            app [prop][key] = newVal
+        }
+    })
+}
+
+proxy(arr, '_properties', propertyName)
