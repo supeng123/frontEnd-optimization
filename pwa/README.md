@@ -21,6 +21,49 @@ Configurations for manifest
 }
 ~~~
 ## Service Worker
+### web worker description
+~~~
+web worker is an independent thread, it can't manipulate the DOM and BOM, following steps show how to use web worker
+1. create web worker  var worker = new Worker('work.ks')
+2. process all the computation in web work
+3. after computating, via self.postMessage(msg) to send message to main thread
+4. the main thread uses worker.onmessage = function(msg) monitoring messages
+5. mian thread can communicate to the web work using the same method.
+~~~
+### web worker example
+~~~
+create work.js, in this file
+let total = 0;
+for (var i = 0; i < 1000; i++) {
+    total += i;
+}
+self.postMessage({total})
+
+create index.html. in script
+<script>
+    console.log('start')
+    const worker = new Worker('work.js')
+    worker.addEventListener('message', e => {
+        console.log(e.data)
+    })
+    console.log('stop')
+<script>
+~~~
+### service worker example
+~~~
+window.onLoad = () => {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+        .then(registration => {
+            console.log(registration)
+        })
+        .catch((e) => console.log(e));
+    }
+}
+~~~
+### service worker lifecycle hook
+~~~
+~~~
 ## Promise/Async/Await
 ## Fetch API
 ## Caches API
