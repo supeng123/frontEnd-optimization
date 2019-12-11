@@ -63,6 +63,28 @@ window.onLoad = () => {
 ~~~
 ### service worker lifecycle hook
 ~~~
+Install, invoke this event when service worker register successfully, using caching resources
+Activate, invoke this event when service worker activated, using deleting old resources
+Fetch, invoke this event when send the request, using manipulating resources and retrieve network resources
+~~~
+### service worker example
+~~~
+
+self.addEventListener(‘install’, (e) => {
+//let service worker jump out of waiting period, go into activate period
+	event.waitUntil(self.skipWaiting())	
+})
+
+self.addEventListener(‘activate’, (e) => {
+//automatically get the controller power
+	event.waitUntil(self.clients.claim())
+})
+
+self.addEventListener(‘fetch’, (e) => {
+	fetch(‘data.json’).then((res)=> {
+		return res.json()
+}).then(data => console.log(data))
+})
 ~~~
 ## Promise/Async/Await
 ## Fetch API
