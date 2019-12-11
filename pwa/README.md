@@ -69,7 +69,6 @@ Fetch, invoke this event when send the request, using manipulating resources and
 ~~~
 ### service worker example
 ~~~
-
 self.addEventListener(‘install’, (e) => {
 //let service worker jump out of waiting period, go into activate period
 	event.waitUntil(self.skipWaiting())	
@@ -83,10 +82,51 @@ self.addEventListener(‘activate’, (e) => {
 self.addEventListener(‘fetch’, (e) => {
 	fetch(‘data.json’).then((res)=> {
 		return res.json()
-}).then(data => console.log(data))
+}).catch(data => console.log(data))
 })
 ~~~
-## Promise/Async/Await
-## Fetch API
 ## Caches API
+~~~
+const CACHE_NAME = 'cache_v1'
+self.addEventListener(‘install’, (e) => {
+    const cache = await caches.open(CACHE_NAME)
+    await cache.addAll([
+        '/',
+        '/images/logo.png',
+        '/manifest.json',
+        '/index.css'
+    ])
+	await event.waitUntil(self.skipWaiting())	
+})
+
+self.addEventListener(‘activate’, async (e) => {
+    const keys = await caches.keys()
+    keys.forEach(key => {
+        if (key !== CACHE_NAME) {
+            caches.delete(key)
+        }
+    })
+	event.waitUntil(self.clients.claim())
+})
+
+self.addEventListener(‘fetch’, (e) => {
+    const req = e.request
+    e.respondeWith(netWorkFirst(req))
+})
+
+async function netWorkFirst(req) {
+    try {
+        const fresh = await fetch(req)
+        return fresh
+    } catch (e) {
+        const cache = await caches.open(CACHE_NAME)
+        const cached = await cache.match(req)
+        return cached
+    }
+}
+
+async function cacheFirst() {
+
+}
+~~~
 ## Notification
