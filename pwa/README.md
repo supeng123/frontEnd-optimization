@@ -130,3 +130,33 @@ async function cacheFirst() {
 }
 ~~~
 ## Notification
+~~~
+window.addEventListener('load', async () => {
+    if ('serviceWorker' in navigator) {
+        try {
+            const registration = await navigator.serviceWorker.register(
+                './sw.js'
+            )
+            
+        } catch (e) {
+            console.log('login failed')
+        }
+    }
+})
+
+if (Notification.permission === 'default') {
+    Notification.requestPermission()
+}
+
+if (!navigator.onLine) {
+    new Notification('hint', {
+        body: 'you are disconnected'
+    })
+}
+
+window.addEventListener('online', () => {
+    new Notification('hint', {
+        body: 'you are connected, please refresh the page to load the latest information'
+    })
+})
+~~~
