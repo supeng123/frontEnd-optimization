@@ -160,3 +160,37 @@ window.addEventListener('online', () => {
     })
 })
 ~~~
+
+## Final Example
+~~~
+self.addEventListener('fetch', e => {
+    const req = e.request
+    const url = new URL(req.url)
+    if (url.origin !== self.origin) return
+    if (req.url.includes('/api')) {
+        e.respondWith(networkFirst(req))
+    } else {
+        e.respondWith(cachedFirst(req))
+    }
+})
+
+async function networkFirst(req) {
+    const cache = await caches.open(CACHE_NAMW)
+    try {
+        const fresh = await fetch(req)
+        const cache.put(req, fresh.clone())
+        return fresh
+    } catch (e) {
+        const cached =await cache.match(req)
+        return cached
+    }
+}
+
+async function cachedFirst(req) {
+    const cache = await caches.open(CACHE_NAMW)
+    const cached =await cache.match(req)
+    if (cached) return cached
+    const fresh = await fetch(req)
+    return fresh
+}
+~~~
