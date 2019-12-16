@@ -170,4 +170,63 @@ module.exports = {
   ]
 }
 ~~~
-### 9.run ./node_modules/.bin/eslint ./src/*/**.js ./src/*/**.js to check if the new rule works.
+#### 9.run ./node_modules/.bin/eslint ./src/*/**.js ./src/*/**.js to check if the new rule works.
+
+### how to write the customize tslint rule
+#### 1.write the rule file under directory slogan_ts_plugin named tsxNoAbsolutePathRule.ts
+~~~
+import * as ts from "typescript";  
+import * as Lint from "tslint";
+
+export class Rule extends Lint.Rules.AbstractRule {  
+    // tslint:disable object-literal-sort-keys
+    public static metadata: Lint.IRuleMetadata = {
+        ruleName: "tsx-no-absolute-path",
+        description: "Forbidden the usage of absolute path in typescript-react component",
+        optionsDescription: "Not configurable.",
+        options: null,
+        optionExamples: ["true"],
+        type: "functionality",
+        typescriptOnly: true
+    };
+    // tslint:enable object-literal-sort-keys
+
+    public static FAILURE_STRING = "Do not import modules using an absolute path";
+
+    public apply(sourceFile): Lint.RuleFailure[] {
+        return this.applyWithWalker(new NoAbsolutePathWalker(sourceFile, this.getOptions()));
+    }
+}
+
+class NoAbsolutePathWalker extends Lint.RuleWalker {  
+    public visitStringLiteral(node: ts.StringLiteral) {
+        // create a failure at the current position
+        // console.log(node.moduleSpecifier['text'])
+        console.log(node)
+        this.addFailure(this.createFailure(node.getStart(), node.getWidth(), Rule.FAILURE_STRING));
+
+        // call the base version of this visitor to actually parse this node
+        // super.visitImportDeclaration(node);
+        super.visitStringLiteral(node);
+    }
+}
+~~~
+#### 2.config the tsconfig.json
+~~~
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "Node"
+    }
+}
+~~~
+#### 3.config the tslint.json
+~~~
+{
+	"rulesDirectory": "./slogan_ts_plugin/",
+	"rules": {
+		"tsx-no-absolute-path": true
+	}
+}
+~~~
+#### 4.run the rules ts-node node_modules/.bin/tslint ./src/*/**.ts
