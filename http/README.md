@@ -38,3 +38,31 @@ SYN=1 Seq=0
 SYN=1, ACK=1, Seq=0
 ACK=1, Seq=1
 ~~~
+## URI && URL && URN
+~~~
+Uniform Resource Identifier
+Uniform Resource Locator
+~~~
+## HTTP content
+~~~
+request content
+GET /test/hi-there.txt HTTP/1.0
+Accept: text/*
+Accept-Language: en, fr
+
+responde content
+HTTP/1.0 200 OK
+Content-type: text/plain
+Content-length: 19
+body : 'I'm a message'
+~~~
+## Create HTTP Server
+~~~
+const http = require('http')
+http.createServer(function(req, res){
+
+    response.end('123')
+}).listen(8888)
+
+curl www.network.com -v
+~~~
