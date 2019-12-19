@@ -66,3 +66,17 @@ http.createServer(function(req, res){
 
 curl www.network.com -v
 ~~~
+## Cross origin site request
+~~~
+http.createServer(function(req, res){
+    response.writeHead(
+        200, {
+            'Access-Control-Allow-Origin': 'http://127.0.0.12;8887',
+            'Access-Control-Allow-Headers': 'X-Test-Cors-diy-header',
+            'Access-Control-Allow-Methods': 'POST, PUT, DELETE',
+            'Access-Control-Max-Age': '1000'
+        }
+    )
+    response.end('123')
+}).listen(8888)
+~~~
