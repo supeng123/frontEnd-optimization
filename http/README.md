@@ -80,3 +80,70 @@ http.createServer(function(req, res){
     response.end('123')
 }).listen(8888)
 ~~~
+## Cache Control
+~~~
+Cache-control
+public the cdn and other third party proxies can cache the resource
+private only the browser can cache the resource
+no-cache can cache the resource but need to be approved by server each time
+no-store local and proxies can not cache anything
+
+s-maxage also the cache period of max time for proxies
+max-age max time for the cache period
+
+must-revalidate need to be revalidate when resource expired for local
+proxy-revalidate
+
+no-transform tell the poxies don't change the format of resource
+
+http.createServer(function(req, res){
+    if (req.url === '/script.js') { //if the url is the same after refreshing the page, the brower will get local cache
+        res.writeHead(
+        200, {
+            'Content-Type': 'text/javascript',
+            'Cache-Control': 'max-age=200, no-cache'
+        }
+    )
+    res.end('123')
+    }
+    
+}).listen(8888)
+~~~
+## Last Modified && Etag
+~~~
+http.createServer(function(req, res){
+    if (req.url === '/script.js') { //if the url is the same after refreshing the page, the brower will get local cache
+        res.writeHead(
+        200, {
+            'Content-Type': 'text/javascript',
+            'Cache-Control': 'max-age=20000, no-cache',
+            'Last-Modified': '123',
+            'Etag': '777'
+        })
+        const etag = req.headers['if-none-match']
+        if (etag === '777') {
+            res.writeHead(
+                200, {
+                    'Content-Type': 'text/javascript',
+                    'Cache-Control': 'max-age=20000, no-cache',
+                    'Last-Modified': '123',
+                    'Etag': '777'
+                })
+            res.end('')
+        } else {
+            res.writeHead(
+                200, {
+                    'Content-Type': 'text/javascript',
+                    'Cache-Control': 'max-age=20000, no-cache',
+                    'Last-Modified': '123',
+                    'Etag': 'newTage'
+                })
+            res.end('')
+        }
+        res.end('123')
+    }
+    
+}).listen(8888)
+
+the browser will send If-Modified-Since and If-None-Match next time to retrieve the resource from server
+~~~
