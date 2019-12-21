@@ -147,3 +147,16 @@ http.createServer(function(req, res){
 
 the browser will send If-Modified-Since and If-None-Match next time to retrieve the resource from server
 ~~~
+## Cookie
+~~~
+client will send the cookie every time visiting server. set the domain so the secondary level domain can share
+the cookie.
+if (requst.url === '/') {
+    response.writeHead(200, {
+        'Content-Type': 'text/html',
+        'Set-Cookie': ['id=123; max-age=2', 'abc=456; domain=test.com']
+    })
+}
+
+Connection: 'keep-alive', the connection between client and server will not be disconntected, which allow six resources be loaded at the same time in browser
+~~~
