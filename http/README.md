@@ -160,3 +160,22 @@ if (requst.url === '/') {
 
 Connection: 'keep-alive', the connection between client and server will not be disconntected, which allow six resources be loaded at the same time in browser
 ~~~
+## Accept && Content
+~~~
+Accept-Encoding
+Accept-Language
+Accept
+User-Agent
+
+Content-Type
+Content-Language
+X-Content-Type-Options: 'nosniff'
+Content-Encoding: 'gzip'
+
+response.end(zlib.gizpSync(html))
+
+ response.writeHead(302, {
+        'Location': '/newpage'
+    })
+//should be careful when use code 301, it will only remove when user clear the cache.
+~~~
