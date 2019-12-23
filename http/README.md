@@ -179,3 +179,33 @@ response.end(zlib.gizpSync(html))
     })
 //should be careful when use code 301, it will only remove when user clear the cache.
 ~~~
+## Content-Security-Policy
+~~~
+if (request.url === '/') {
+    responde.writeHead(200, {
+        'Content-Type': 'text/html',
+        'Content-Security-Policy': 'default-src \'self\'; form-action \'self\''
+    })
+}
+//allow one domain to visit the resouce
+'Content-Security-Policy': 'default-src \'self\' https://cdn.bootstrap.com/'
+//only script need to be main domain
+'Content-Security-Policy': 'script-src \'self\''
+
+//set the policy in html
+<meta http-equiv="Content-Security-Policy" content="script-src 'self'; form-action 'self'">
+~~~
+## Nginx
+### proxy hostname
+~~~
+//in nginx.conf
+server {
+    listen 80;
+    server_name: a.slogan.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8888;
+        proxy_set_header Host $host;
+    }
+}
+~~~
