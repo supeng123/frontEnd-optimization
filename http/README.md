@@ -209,3 +209,32 @@ server {
     }
 }
 ~~~
+### proxy cache
+~~~
+if (request.url == '/data') {
+    response.writeHead(200, {
+        'Cache-Control': 'max-age=2, s-maxage=20',
+        // only cache resouce when the request header are the same value of previous one
+        'Vary': 'X-Test-Cache'
+    })
+    return new Promise((resolve, reject) => {
+        setTimeout(()=> {
+            resolve()
+        }, 2000)
+    }).then(() => response.end('success'))
+}
+
+//in nginx nginx.conf file
+proxy_cache_path cache_fold_name levels=1:2 keys_zone=my_cache:10m;
+
+server {
+    listen 80;
+    server_name: a.slogan.com;
+
+    location / {
+        proxy_cache my_cache;
+        proxy_pass http://127.0.0.1:8888;
+        proxy_set_header Host $host;
+    }
+}
+~~~
