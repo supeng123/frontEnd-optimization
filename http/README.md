@@ -238,3 +238,55 @@ server {
     }
 }
 ~~~
+### https nginx configuration
+~~~
+1. generate the public and private key
+openssl req -x509 -newkey rsa:2048 -nodes -sha256 -keyout localhost-privkey.pem -out localhost-cert.pem
+2.configure the https in nginx.conf
+server {
+    //automatically jump to https
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name test.com;
+    return 302 https://$server_name$request_uri;
+}
+server {
+    listen 443;
+    server_name test.com;
+
+    ssl on;
+    ssl_certificate_key ../certs/localhost-privkey.pem;
+    ssl_certificate ../certs/localhost-cert.pem;
+
+    location / {
+        proxy_cache my_cache;
+        proxy_pass http://10.11.124.2.:8888;
+        proxy_set_header Host $host;
+    }
+}
+~~~
+### http2 nginx configuration
+~~~
+//server push
+response.writeHead(200, {
+    'Content-Type': 'text/html',
+    'Connection': 'close',
+    'Link': '</test.jpg>; as=image; rel=preload'
+})
+//nginx configuration
+server {
+    listen 443 http2;
+    server_name test.com;
+    http2_push_preload on;
+
+    ssl on;
+    ssl_certificate_key ../certs/localhost-privkey.pem;
+    ssl_certificate ../certs/localhost-cert.pem;
+
+    location / {
+        proxy_cache my_cache;
+        proxy_pass http://10.11.124.2.:8888;
+        proxy_set_header Host $host;
+    }
+}
+~~~
