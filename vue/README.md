@@ -111,7 +111,7 @@ import Vue from 'vue'
 
 new Vue({
     el: 'root',
-    template: `<div :id="aaa" @click="handleClick">
+    template: `<div v-bind:id="aaa" @click="handleClick">
                 {{text}}
                 <div v-html="html"><div>
 
@@ -124,6 +124,47 @@ new Vue({
     methods: {
         handleClick() {
             alert('clicked')
+        }
+    }
+})
+~~~
+### v-cloak && v-text
+~~~
+//solve the problem of insert value expression being shown
+<style>
+[v-cloak] {
+    display: none;
+}
+
+<p v-cloak>++++{{msg}}----</p>
+<p v-text="msg"></p>
+</style>
+~~~
+### v-bind
+~~~
+//solve the problem of dynamic attribute
+new Vue({
+    el: '#root',
+    template: `<div v-bind:title="myTitle"
+                </div>`
+    data: {
+        myTitle: 'this is a diy title'
+    }
+})
+~~~
+### stop && prevent && capture && self && once
+~~~
+new Vue({
+    el: '#root',
+    template: `<div v-bind:title="myTitle">
+                <a href="123.com" v-on:click.stop.prevent= onclickEvent>
+                </div>`
+    data: {
+        myTitle: 'this is a diy title'
+    },
+    methods: {
+        onclickEvent() {
+
         }
     }
 })
@@ -199,7 +240,7 @@ new Vue({
 <div v-if="text === 0">v-if</div>
 <div v-else-if="text === 1">v-else-if</div>
 <div v-else>v-else</div>
-
+// two way binds
 <input text="text" v-model="text">
 ~~~
 
