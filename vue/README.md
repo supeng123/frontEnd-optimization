@@ -168,6 +168,30 @@ new Vue({
         }
     }
 })
+
+~~~
+
+### v-for
+~~~
+//iterate object and array
+new Vue({
+    el: '#root',
+    template: `<div>
+                <p v-for="(user, i) in list" key="user.id">Id:{{user.id}}----{{user.name}}</p>
+                </div>`
+    data: {
+        list: [
+            {id:1, name: 'zs1'},
+            {id:2, name: 'zs2'},
+            {id:3, name: 'zs3'}
+        ]
+    },
+    methods: {
+        onclickEvent() {
+
+        }
+    }
+}
 ~~~
 ### class & style
 ~~~
@@ -197,8 +221,8 @@ new Vue({
 
 new Vue({
     el: 'root',
-    template: `<div :class="[{acitve: isActive}]"
-                :style="styles" //:style="[styleOne, styleTwo]"
+    template: `<div :class="[{'acitve': isActive}]"
+                :style="styles" //:style="[styles, styleTwo]"
     
                 >
                 <p>{{getJoinedArr(list)}}</p>
@@ -230,6 +254,15 @@ new Vue({
             deep: true
         }
     }
+})
+~~~
+
+### vue filter
+~~~
+<div >{{text | msgFormat}}</div>
+
+Vue.filter('msgFormat', function(msg, arg) {
+    return msg.replace(/simole/g, arg)
 })
 ~~~
 
