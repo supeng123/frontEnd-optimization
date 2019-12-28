@@ -157,7 +157,8 @@ new Vue({
 new Vue({
     el: '#root',
     template: `<div v-bind:title="myTitle">
-                <a href="123.com" v-on:click.stop.prevent= onclickEvent>
+                <a href="123.com" v-on:click.stop.prevent="onclickEvent">
+                <input type='text' class="form-control" @keyup.enter="onclickEvent">
                 </div>`
     data: {
         myTitle: 'this is a diy title'
@@ -275,6 +276,69 @@ Vue.filter('msgFormat', function(msg, arg) {
 <div v-else>v-else</div>
 // two way binds
 <input text="text" v-model="text">
+
+Vue.directive('focus', {
+    bind: function(el) {
+
+    },
+    inserted: function(el) {
+        el.focus()
+    },
+    updated: function(el) {
+
+    }
+})
+~~~
+
+### vue animation
+~~~
+<style>
+.slogan-enter,
+.slogan-leave-to {
+    opacity: 0,
+    transform: translateX(90px);
+}
+
+.slogan-enter-active,
+.slogan-leave-active {
+    transition: all 0.8s ease;
+}
+</style>
+
+<transition name="slogan">
+    <h3 v-if="flag">this is an animation example<h3>
+</transition>
+
+//another example
+<transition 
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="afterEnter"
+    >
+    <h3 v-if="flag">this is an animation example<h3>
+</transition>
+<transition-group appear tag="ul">
+    <li v-for="item in list" :key="item.id">{{item.name}}</li>
+</transition-group>
+
+var vm = new Vue({
+    el: '#app',
+    methods: {
+        beforeEnter(el) {
+            el.style.transform = "translate(0,0)"
+        },
+        enter(el, done) {
+            el.offsetWidth
+            el.style.transform = "translate(150px, 450px)"
+            el.style.transition = "all 1s ease"
+
+            done()
+        },
+        afterEnter(el) {
+
+        }
+    }
+})
 ~~~
 
 ## Vue Component
