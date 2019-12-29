@@ -362,6 +362,7 @@ new Vue({
 
 ### define local component
 ~~~
+// component's data needs to be a function returns an object, but instance'data should be an object.
 import Vue from 'vue'
 
 const component = {
@@ -401,6 +402,30 @@ new Vue({
         handleChange() {
             this.first = 'sunminjuan'
         }
+    }
+})
+~~~
+
+### switch component is example
+~~~
+<div id="app">
+    <a href="" @click.prevent="comName='login'">login</a>
+    <a href="" @click.prevent="comName='rigister'">rigister</a>
+    <component :is="comName"></component>
+</div>
+
+Vue.component('login', {
+    template: '<h2>login component</h2>'
+})
+
+Vue.component('register', {
+    template: '<h2>login component</h2>'
+})
+
+var vm = new Vue({
+    el: '#app',
+    data: {
+        comName: ''
     }
 })
 ~~~
