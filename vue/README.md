@@ -813,6 +813,23 @@ export default () => {
 
 //get route parameters this.$route or use props:['id'] in component
 ~~~
+### named view
+~~~
+<router-view></router-view>
+<div class="container">
+    <router-view name="left"></router-view>
+    <router-view name="main"></router-view>
+</div>
+
+{
+    path: '/',
+    components:{
+        'defualt': headerComponent,
+        'left': leftBoxComponent,
+        'main':mainboxComponent,
+    }
+}
+~~~
 ### router guard
 ~~~
 import createRouter from './config/router'
