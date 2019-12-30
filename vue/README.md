@@ -243,6 +243,9 @@ new Vue({
         },
         getJoinedArr (arr) {
             return arr.join('-')
+        },
+        'fullName': function() {
+            return this.firstName + this.middleName
         }
     },
     watch: {
@@ -253,6 +256,9 @@ new Vue({
             //invoke when the element first mounted
             immediate: true,
             deep: true
+        },
+        'list': function(newVal, oldVal) {
+            console.log(newVal + oldVal)
         }
     }
 })
