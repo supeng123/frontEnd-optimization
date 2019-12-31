@@ -1206,3 +1206,16 @@ const notify = (options) => {
 
 export default notify
 ~~~
+
+let p = new Promise((resolve, reject) => {
+  console.log('A new promise was created1')
+  console.log('A new promise was created2')
+  console.log('A new promise was created3')
+  setTimeout(() => {
+    console.log('log setTimeout')
+  }, 0)
+  resolve('success')
+})
+
+console.log('log outside')
+p.then((response) => {console.log(response)})
