@@ -19,7 +19,13 @@ module.exports = {
             {test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader']},
             {test: /\.(jpg|png|gif|bmp|jpeg)$/, use: 'url-loader?limit=7631&name=[hash:8].[ext]'},
             {test: /\.(ttf|eot|svg|woff|woff2)$/, use: 'url-loader'},
-            {test: /\.js$/, use: 'babel-loader', exclude: /node_modules/}
+            {test: /\.js$/, use: 'babel-loader', exclude: /node_modules/},
+            {test: /\.vue$/, use: 'vue-loader'}
         ]
+    },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        }
     }
 }
