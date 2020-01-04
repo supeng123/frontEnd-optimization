@@ -1,3 +1,4 @@
+<!-- TOC -->autoauto- [Vue Instance](#vue-instance)auto    - [instance without and with el](#instance-without-and-with-el)auto    - [properties of vue instance](#properties-of-vue-instance)auto- [Vue Life Circle](#vue-life-circle)auto    - [vue hooks](#vue-hooks)auto- [Vue Data Binding](#vue-data-binding)auto    - [event & html & attribute](#event--html--attribute)auto    - [v-cloak && v-text](#v-cloak--v-text)auto    - [v-bind](#v-bind)auto    - [stop && prevent && capture && self && once](#stop--prevent--capture--self--once)auto    - [v-for](#v-for)auto    - [class & style](#class--style)auto    - [vue filter](#vue-filter)auto    - [vue directives](#vue-directives)auto    - [vue animation](#vue-animation)auto- [Vue Component](#vue-component)auto    - [define global component](#define-global-component)auto    - [define local component](#define-local-component)auto    - [switch component is example](#switch-component-is-example)auto    - [emit data from child to parent](#emit-data-from-child-to-parent)auto    - [extend componemt](#extend-componemt)auto    - [v-model in component](#v-model-in-component)auto    - [slots](#slots)auto    - [provider](#provider)auto    - [component render](#component-render)auto- [Vue Route](#vue-route)auto    - [define Routers](#define-routers)auto    - [named view](#named-view)auto    - [router guard](#router-guard)auto- [Vuex](#vuex)auto    - [define vuex](#define-vuex)auto    - [vuex getter and setter](#vuex-getter-and-setter)auto    - [mutation and action](#mutation-and-action)auto    - [vuex modules](#vuex-modules)auto    - [hot update](#hot-update)auto    - [vuex other api](#vuex-other-api)auto- [DIY Component](#diy-component)autoauto<!-- /TOC -->
 ## Vue Instance
 ### instance without and with el
 ~~~
@@ -673,7 +674,6 @@ const childComponent = {
             </div>
         `
 }
-
 const component = {
     components: {
         childComponent
