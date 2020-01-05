@@ -1,12 +1,43 @@
-export default () => <span>A</span>
+import Link from 'next/link'
+import Router from 'next/router'
+import { Button } from 'antd'
 
+export default () => {
+    function gotoTest() {
+        Router.push({
+            pathname: '/a',
+            query: {
+                id: 2
+            }
+        }, 'test/b/1')
+    }
 
-// function bbb () {
-//     const sxl= 9600, sxl_price = 23; 417;457
-//     const yw= 36800, yw_price = 77.7; 473
-//     const rv= 20000, rv_price = 123
-//     const nuga=19200, ngua_price = 112
-//     const ybp=44800, ybp_price= 108; 414;434
-//     const lra=21600, lra_price=123.12
-//     const tc=15000, tc_price=99
-// }
+    return (
+    <div>
+        <Link href="/a?id=1" title="AAA" as="/a/1">
+        <div>
+            <Button>Index</Button>
+        </div>
+        </Link>
+        <Button onClick={gotoTest}>Index</Button>
+    </div>)   
+}
+
+const events = [
+    'routeChangeStart',
+    'routeChangeComplete',
+    'routeChangeError',
+    'beforeHistoryChange',
+    'hashChangeStart',
+    'hashChangeComplete'
+]
+
+function makeEvent(type) {
+    return (...args) => {
+        console.log(type, ...args)
+    }
+}
+
+events.forEach(event => {
+    Router.events.on(event, makeEvent(event))
+})
