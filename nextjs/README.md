@@ -115,3 +115,95 @@ events.forEach(event => {
     Router.events.on(event, makeEvent(event))
 })
 ~~~
+### GetInitialProps
+~~~
+import App from 'next/app'
+
+class MyApp extends App {
+    static async getInitialProps({Component}) {
+        let pageProps
+        if (Component.getInitialProps) {
+            pageProps = await Component.getInitialProps()
+        }
+        return {
+            pageProps
+        }
+    }
+
+    render() {
+        const {Component, pageProps} = this.props
+
+        return (
+            <Container>
+                <Component {...pageProps}></Component>
+            </Container>
+        )
+    }
+}
+
+export default myApp
+~~~
+### Document
+~~~
+import Document, {Html, Head, Main, NextScript} from 'next/document'
+
+class MyDocument extends Document {
+    static async getInitialProps(ctx) {
+        const props = await Document.getInitialProps(ctx)
+
+        return {
+            ...props
+        }
+    }
+
+    render () {
+        return <Html>
+            <Head>
+            <style>{`.test {color: red}`}</style>
+            </Head>
+            <Main />
+            <NextScript />
+        </Html> 
+    }
+}
+
+export default MyDocument
+~~~
+### Css in js (styled-compoent)
+~~~
+//npm intall -D styled-component babel-plugin-styled-component
+import Document, {Html, Head, Main, NextScript} from 'next/document'
+import { ServerStyleSheet } from 'styled-component'
+
+class MyDocument extends Document {
+    static async getInitialProps(ctx) {
+        const originalRenderPage = ctx.renderPage()
+        const sheet = new ServerStyleSheet()
+
+        try {
+            ctx.renderPage = () => originalRenderPage({
+                enhanceApp: App => (props) => sheet.collectStyles(<App {...props} />),
+            });
+            const props = await Document.getInitialProps(ctx)
+            return {
+                ...props,
+                styles: <>{props.styles}{sheet.getStyleElement()}</>
+            }
+        } finally {
+            sheet.seal()
+        }
+    }
+
+    render () {
+        return <Html>
+            <Head>
+            <style>{`.test {color: red}`}</style>
+            </Head>
+            <Main />
+            <NextScript />
+        </Html> 
+    }
+}
+
+export default MyDocument
+~~~
