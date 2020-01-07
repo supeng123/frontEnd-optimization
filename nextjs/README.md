@@ -207,3 +207,58 @@ class MyDocument extends Document {
 
 export default MyDocument
 ~~~
+### Lazy load
+~~~
+A.getInitialProps = async ctx => {
+    const moment = await import('moment')
+    const time = moment.default(Date.now() - 60 * 60).fromNow()
+}
+
+//load component asyncronously
+import dynamic from 'next/dynamic'
+const Comp = dynamic(import('../components/comp'))
+~~~
+### Configurations of next.config.js
+~~~
+const withCss = require('@zeit/next-css')
+
+const configs = {
+    //directory of output of compiled files
+    distDir: 'dest',
+    //add etag, can set to false when using nginx
+    generateEtags: true,
+    //cache configuration
+    onDemandEntries: {
+        maxInactiveAge: 25 * 1000,
+        pagesBufferLength: 2,
+    },
+    pageExtensions: ['js', 'jxs'],
+    generateBuildId: async () => {
+        if (process.env.YOUR_BUILD_ID) {
+            return process.env.YOUR_BUILD_ID
+        }
+
+        return null
+    },
+    webpack(config, options) {
+        return config
+    },
+    webpackDevMiddleware: config => {
+        return config,
+    },
+    //like process.env
+    env: {
+        customKey: 'value'
+    },
+    //configuration only exist during server rendering
+    serverRuntimeConfig: {
+        mySecret: 'secret',
+        secondSecret: process.env.SECOND_SECRET,
+    },
+    publicRuntimeConfig: {
+        staticFolder: '/static'
+    }
+}
+
+module.exports = withCss({})
+~~~
