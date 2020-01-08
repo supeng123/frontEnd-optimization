@@ -82,7 +82,7 @@ handleInputChange() {
 }
 ~~~
 
-### hooks
+### hooks period
 ~~~
 component will be invoking automatically during a certain period of time
 
@@ -100,6 +100,75 @@ shouldComponentUpdate(nextProps, nextState) {
         return true
     }
     return false
+}
+~~~
+
+### React hooks
+~~~
+import React, {useState, useEffect, useReducer, useRef} from 'react'
+
+function counterReducer(state, action) {
+    switch(action.type) {
+        case 'add':
+            return state + 1
+        case 'minus':
+            return state - 1
+        default:
+            return state
+    }
+}
+
+function MyCountFunc() {
+    const [count, setCount] = useState(0);
+
+    const [countReduce, dispatchCount] = useReducer(counterReducer, 0)
+
+    const inputRef = useRef()
+
+    useEffect(() => {
+        console.log('using effect')
+        console.log(inputRef)
+        const interval = setInterval(()=> {
+            setCount(c => c+1)
+            dispatchCount({type: 'add'})
+        },1000)
+        return () => clearInterval(interval)
+    },[])
+
+    return (<div ref>
+        <span>{count}{countReduce}</span>
+        <input ref={inputRef} value={name}/>
+        </div>)
+}
+
+export default MyCountFunc
+
+
+//second example about memo
+import React, {useMemo, memo, useCallback} from 'react'
+funciton MyCountFuncTwo() {
+    const [count, dispatchCount] = useReducer(counterReducer, 0)
+    const [name, setName] = useState('jok')
+
+    const config = useMemo(() => ({
+        text: `count is ${count}`,
+        color: count > 3 ? 'red' : 'green'
+    }),[count])
+
+    const handleButtonClick = useCallback(() => dispatchCount(type: 'add'), [])
+
+    return (
+        <div>
+            <input value = {name} onChange={e => setName(e.target.value)}  />
+            <Child config={config} onButtonClick={handleButtonClick}>
+        </div>
+    )
+
+    const Child = memo(function Child({onButtonClick, config}) {
+        return(
+            <button onClick={onButtonClick} style={{color: config.color}}>{config.text}</button>
+        )
+    })
 }
 ~~~
 
