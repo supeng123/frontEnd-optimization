@@ -7,6 +7,8 @@
     - [compound type](#compound-type)
     - [void type](#void-type)
     - [never type](#never-type)
+    - [temporary death zone](#temporary-death-zone)
+    - [object destructure](#object-destructure)
   - [2.Typescript Function](#2typescript-function)
     - [option arguments, should be at the end of arguments](#option-arguments-should-be-at-the-end-of-arguments)
     - [default arguments](#default-arguments)
@@ -26,6 +28,7 @@
     - [indexed interface, mostly used in array](#indexed-interface-mostly-used-in-array)
     - [constrains for object](#constrains-for-object)
     - [constrains for class](#constrains-for-class)
+    - [interface for class instance](#interface-for-class-instance)
   - [5.Generic Paradigm](#5generic-paradigm)
     - [generic interface](#generic-interface)
     - [export inport](#export-inport)
@@ -38,19 +41,20 @@
 ### string number type declaration
 ~~~
 let stringone:string
-let numberone:number
+let numberone:number | null = 3;
 ~~~
 ### array type declaration
 ~~~
 let arrayone:number[];
 let arraytwo:Array<number>;
 let arraythree:any[];
+let arrayfour: ReadonlyArray<number> = [1, 2, 3]
 ~~~
 ### enum type declaration
 ~~~
 enum Flag {success=0, error=1};
 const statusOne:Flag = Flag.error;
-console.log(status)
+console.log(statusOne)
 ~~~
 ### any type
 ~~~
@@ -76,6 +80,27 @@ let ccc:never;
 
 aaa = undefined;
 bbb = null;
+~~~
+
+### temporary death zone
+~~~
+// can not to manipulate variable let aaa before it has been declared
+aaa +++
+
+let aaa = 1
+~~~
+### object destructure
+~~~
+let o = {
+    a: 'foo',
+    b: 12,
+    c: 'bar'
+}
+
+let {a, b} : {a:string, b:number} = o
+let {a:slogan, b:sunminjuan} = o
+console.log(slogan) // foo,
+console.log(sunminjuan) //12
 ~~~
 
 ## 2.Typescript Function
@@ -179,7 +204,7 @@ printLabel({labelName: 'slogan'})
 ### define interface
 ~~~
 interface FullName {
-    firstName: string;
+    readonly firstName: string;
     lastName: string;
 }
 
@@ -246,6 +271,28 @@ class Dog implements Animal {
     }
 }
 ~~~
+### interface for class instance
+~~~
+interface ClockInterface {
+    tick()
+}
+interface ClockConstructor {
+    new (hour: number, munite: number): ClockInterface
+}
+function createClock(c:ClockConstructor, hour:number, munite: number):ClockInterface {
+    return new c(hour, minute)
+}
+
+class DigitalClock implements ClockInterface {
+    contructor(h:number, m: number) {}
+    tick () {
+
+    }
+}
+
+let digital = createClock(DigitalClock, 12, 7)
+~~~
+
 ## 5.Generic Paradigm
 ~~~
 //input and output are the same type,
