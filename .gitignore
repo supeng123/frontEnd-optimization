@@ -3,3 +3,4 @@ webpack/**/*/dist/*
 vue/node_modules
 nextjs/node_modules
 nextjs/.next
+axiots/node_modules

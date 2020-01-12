@@ -29,9 +29,13 @@
     - [constrains for object](#constrains-for-object)
     - [constrains for class](#constrains-for-class)
     - [interface for class instance](#interface-for-class-instance)
-  - [5.Generic Paradigm](#5generic-paradigm)
+  - [5. Function](#5-function)
+    - [original function definition](#original-function-definition)
+  - [6.Generic Paradigm](#6generic-paradigm)
     - [generic interface](#generic-interface)
-    - [export inport](#export-inport)
+    - [generic inheritance](#generic-inheritance)
+    - [generic class example](#generic-class-example)
+    - [export import](#export-import)
     - [Class Decoration](#class-decoration)
     - [Method Decoration](#method-decoration)
 # typescript-practice
@@ -80,6 +84,16 @@ let ccc:never;
 
 aaa = undefined;
 bbb = null;
+
+//use ! to avoid null value
+function broken(name: string | null):string {
+    function postFix(epiter: string) {
+        return name!.charAt(0) + '.the' + epiter
+    }
+    name = name || 'Bob'
+    return postFix(name)
+}
+broken(null)
 ~~~
 
 ### temporary death zone
@@ -234,6 +248,31 @@ interface encrypt {
 const md5:encrypt = function(key:string, value:string):string{
     return key + value;
 } 
+
+interface Deck {
+    suits: Array<string>,
+    createCardPicker(this: Deck): () => Card
+}
+
+//example
+interface UIElement {
+    addClickListener(onclick:(this: void, e: Event) => void):void
+}
+
+class Handler {
+    type: string
+    onClickBad = (e: Event) => {
+        this.type = e.type
+    }
+}
+
+let h = new Handler()
+let uiElement: UIElement = {
+    addClickListner() {
+
+    }
+}
+uiElement.addClickListner(h.onClickBad)
 ~~~
 ### indexed interface, mostly used in array
 ~~~
@@ -292,8 +331,15 @@ class DigitalClock implements ClockInterface {
 
 let digital = createClock(DigitalClock, 12, 7)
 ~~~
+## 5. Function
+### original function definition
+~~~
+let myAdd:(baseValue:number, increment:number) => number = function(x:number, y:number):number {
+    return x + y;
+}
+~~~
 
-## 5.Generic Paradigm
+## 6.Generic Paradigm
 ~~~
 //input and output are the same type,
 in the following example, T could be replace by other letter, only if
@@ -331,6 +377,7 @@ interface ConfigFn{
     <T>(value:T, value2:T):T;
 }
 
+
 const getData:ConfigFn = function<T>(value: T, value2: T):T{
     return value + value2;
 }
@@ -350,7 +397,32 @@ const myGetData:ConfigFn<string> = getData;
 
 myGetData('s', 's')
 ~~~
+### generic inheritance
+~~~
+function getProperty<T, K extends keyof T>(object: T, key:K) {
+    return object[key]
+}
+let x = {a:1, b:2, c:3}
+getProperty(x, d) //error d is not exist in x
+getProperty(x, c) //3
 
+//second example
+class LionKeeper {
+    nametag: string
+}
+class Animal {
+    numlen: number
+}
+class Lion extends Animal{
+    keep: LionKeeper
+}
+
+function createInstance<T extends Animal>(c: new() => T): T {
+    return new c()
+}
+createInstance(Lion).keeper.nametag
+~~~
+### generic class example
 ~~~
 class MySqlDb<T>{
     add(info:T):boolean{
@@ -398,7 +470,7 @@ const oMysql = new MysqlDb<User>();
 oMysql.add(u)
 
 ~~~
-### export inport 
+### export import 
 ~~~
 //only one was exported
 export default function aaa ():void{
