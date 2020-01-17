@@ -14,6 +14,7 @@ export interface AxiosRequestConfig {
     headers?: any
     responseType?: XMLHttpRequestResponseType
     timeout?: number
+    cancelToken?: CancelToken
 
     [propName:string]:any
 }
@@ -65,4 +66,17 @@ export interface AxiosInstance extends Axios {
     <T=any>(config: AxiosRequestConfig): AxiosPromise<T>
 
     <T=any>(url: string, config?:AxiosRequestConfig): AxiosPromise<T>
+}
+
+export interface CancelToken {
+    promise: Promise<string>
+    reason?: string
+}
+
+export interface Canceler {
+    (message?: string): void
+}
+
+export interface CancelExecutor {
+    (cancel: Canceler): void
 }
