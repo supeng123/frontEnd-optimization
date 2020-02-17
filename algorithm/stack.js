@@ -34,7 +34,9 @@ console.log(result);
 // D.2 3 4 1 5 6
 
 class Stack {
-    items = [];
+    constructor() {
+        this.items = [];
+    }
 
     push(element) {
         this.items.push(element)
@@ -65,4 +67,117 @@ class Stack {
     }
 }
 
-let newStack = new Stack()
+function decimalToBinary(randomNumber) {
+    var stack = new Stack()
+    while (randomNumber > 0) {
+        stack.push(randomNumber%2)
+        randomNumber = Math.floor(randomNumber/2)
+    }
+    var binaryString = ''
+    while (!stack.isEmpty()) {
+        binaryString += stack.pop()
+    }
+    return binaryString
+}
+console.log(decimalToBinary(4888))
+
+class Queue {
+    constructor() {
+        this.items = [];
+    }
+
+    enqueue(element) {
+        this.items.push(element)
+    }
+
+    dequeue() {
+        return this.items.shift()
+    }
+
+    peek() {
+        return this.items[0]
+    }
+
+    isEmpty() {
+        return this.items.length === 0
+    }
+
+    size() {
+        return this.items.length
+    }
+
+    toString() {
+        var resultString = '';
+        for (let i = 0; i < this.items.length; i++) {
+            resultString += this.items[i] + ' '
+        }
+        return resultString
+    }
+}
+
+//hit drum to pass the flowers
+function passGame(nameList, num) {
+    let queue = new Queue()
+    for (let i = 0; i < nameList.length; i++) {
+        queue.enqueue(nameList[i])
+    }
+    //when is not the number,add to the tail and dequeue the num
+    while ( queue.size > 1) {
+        for (let j = 0; j < number - 1; j++) {
+            queue.enqueue(queue.dequeue())
+        }
+        queue.dequeue()
+    }
+    return nameList.indexOf(queue.peek())
+}
+
+class PrioritizedQueue {
+    constructor() {
+        this.items = []
+    }
+
+    enqueue({element, priority}) {
+        if (this.items.length === 0) {
+            this.items.push({element, priority})
+        }
+        let added = false
+        for (let i = 0; i < this.items.length - 1; i++) {
+            if (priority > this.items[i].priority) {
+                this.items.splice(i,0,{element, priority})
+                added = true
+                break
+            }
+        }
+        if (!added) [
+            this.items.push({element, priority})
+        ]
+    }
+
+    dequeue() {
+        return this.items.shift()
+    }
+
+    peek() {
+        return this.items[0]
+    }
+
+    isEmpty() {
+        return this.items.length === 0
+    }
+
+    size() {
+        return this.items.length
+    }
+
+    toString() {
+        var resultString = '';
+        for (let i = 0; i < this.items.length; i++) {
+            resultString += this.items[i] + ' '
+        }
+        return resultString
+    }
+
+}
+
+
+
