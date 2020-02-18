@@ -4,13 +4,13 @@ function node (value, next) {
     this.next = next;
 }
 
-function reverseLinkedTable(table) {
+function reverseLinkedTable(head) {
     let previous = null;
-    while (table != null) {
-        let next = table.next;
-        let current = previous;
-        previous = current;
-        current = next;
+    while (head!= null) {
+        let next = head.next;
+        head.next = previous;
+        previous = head;
+        head = next;
     }
     return previous;
 }
@@ -159,3 +159,138 @@ function threeNumSum(numbers, n) {
 const threeSumDataList = [9,6,-6,-5,-4,1,0,-1,-3]
 const threeSumResult = threeNumSum(threeSumDataList, 0);
 console.log(threeSumResult)
+
+class LinkedList {
+    constructor() {
+        this.head = null;
+        this.length = 0;
+    }
+
+    append(element) {
+        const node = new VNode(element)
+        if (this.length === 0) this.head = node;
+        else {
+            let current = this.head
+            while (current.next) {
+                current = current.next
+            }
+            current.next = node;
+        }
+        this.length += 1;
+    }
+
+    insert(position, element) {
+        if (position > this.length && position < 0) return false;
+        const newNode = new VNode(element)
+        if (position === 0) {
+            newNode = this.head
+            this.head = newNode
+        } else {
+            let index = 0
+            let current = this.head
+            let previous = null;
+            while (index++ < position) {
+                previous = current
+                current = current.next
+            }
+            newNode.next = current
+            previous.next = newNode
+        }
+        this.length += 1
+        return true
+    }
+
+    get(position) {
+        if (position < 0 || position >= this.length) return null
+        let index = 0;
+        let current = this.head
+        while (index++ < position) {
+            current = current.next
+        }
+        current.data
+    }
+
+    indexOf(element) {
+        let index = 0;
+        let current = this.head
+        while (current) {
+            if (current.data = element) return index
+            current = current.next
+            index++;
+        }
+        return -1;
+    }
+
+    update(position, element) {
+        if (position < 0 || position >= this.length) return null
+        let index = 0;
+        let current = this.head
+        while (index++ < position) {
+            current = current.next
+        }
+        current.data = element;
+        return true
+    }
+
+    remove(element) {
+        const index = this.indexOf(element)
+        if (index !== -1) {
+            this.removeAt(index)
+        }
+    }
+
+    removeAt(position) {
+        if (position < 0 || position >= this.length) return false
+        let current = this.head
+        if (position === 0) this.head = this.head.next
+        else {
+            let index = 0
+            let previous = null
+            while(index++ < position) {
+                previous = current
+                current = current.next
+            }
+            previous.next = current.next
+            this.length -= 1
+        }
+        return current.data
+    }
+
+    isEmpty() {
+        return this.length === 0 ? true : false
+    }
+
+    size() {
+        return this.length
+    }
+
+    toString() {
+        current = this.head
+        var listString = ''
+        while (current) {
+            listString += current.data + " "
+            current = current.next
+        }
+        return listString
+    }
+
+    reverseList() {
+        let current = this.head
+        let previous = null
+        while (current) {
+            let next = current.next
+            current.next = previous
+            previous = current
+            current = next
+        }
+        return previous
+    }
+}
+
+class VNode {
+    constructor(data) {
+        this.data = data;
+        this.next = '';
+    }
+}
+
