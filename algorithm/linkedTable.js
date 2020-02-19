@@ -162,25 +162,25 @@ console.log(threeSumResult)
 
 class LinkedList {
     constructor() {
-        this.head = null;
-        this.length = 0;
+        this.head = null
+        this.length = 0
     }
 
     append(element) {
         const node = new VNode(element)
-        if (this.length === 0) this.head = node;
+        if (this.length === 0) this.head = node
         else {
             let current = this.head
             while (current.next) {
                 current = current.next
             }
-            current.next = node;
+            current.next = node
         }
-        this.length += 1;
+        this.length += 1
     }
 
     insert(position, element) {
-        if (position > this.length && position < 0) return false;
+        if (position > this.length && position < 0) return false
         const newNode = new VNode(element)
         if (position === 0) {
             newNode = this.head
@@ -188,7 +188,7 @@ class LinkedList {
         } else {
             let index = 0
             let current = this.head
-            let previous = null;
+            let previous = null
             while (index++ < position) {
                 previous = current
                 current = current.next
@@ -202,7 +202,7 @@ class LinkedList {
 
     get(position) {
         if (position < 0 || position >= this.length) return null
-        let index = 0;
+        let index = 0
         let current = this.head
         while (index++ < position) {
             current = current.next
@@ -211,24 +211,24 @@ class LinkedList {
     }
 
     indexOf(element) {
-        let index = 0;
+        let index = 0
         let current = this.head
         while (current) {
             if (current.data = element) return index
             current = current.next
-            index++;
+            index++
         }
-        return -1;
+        return -1
     }
 
     update(position, element) {
         if (position < 0 || position >= this.length) return null
-        let index = 0;
+        let index = 0
         let current = this.head
         while (index++ < position) {
             current = current.next
         }
-        current.data = element;
+        current.data = element
         return true
     }
 
@@ -289,8 +289,106 @@ class LinkedList {
 
 class VNode {
     constructor(data) {
-        this.data = data;
-        this.next = '';
+        this.data = data
+        this.next = null
+        this.previous = null
+    }
+}
+
+class TwoWayLinkedList {
+    constructor() {
+        this.head = null
+        this.tail = null
+        this.length = 0
+    }
+
+    append(data) {
+        const newNode = new VNode(data)
+        if (this.length === 0) {
+            this.head = newNode
+            this.tail = newNode
+        } else {
+            newNode.previous = this.tail
+            this.tail.next = newNode
+            this.tail = newNode
+        }
+        this.length += 1
+    }
+
+    forwardingString() {
+        let current = this.head
+        let resultString = ''
+
+        while (current) {
+            resultString += current.data + ' '
+            current = current.previous
+        }
+        return resultString
+    }
+
+    insert(data, position) {
+        if (position < 0 || position > this.length) return false
+        const newNode = new VNode(data)
+        if (this.lenght === 0) {
+            this.head = newNode
+            this.tail = newNode
+        } else {
+            if (position === 0) {
+                this.head.previous = newNode
+                newNode.next = this.head
+                this.head = newNode
+            } else if (position === this.length) {
+                newNode.previous = this.tail
+                this.tail.next = newNode
+                this.tail = newNode
+            } else {
+                let current = this.head
+                let index = 0
+                while (index++ < position) {
+                    current = current.next
+                }
+                newNode.next = current
+                newNode.previous = current.previous
+                current.previous.next = newNode //前面两个
+                current.previous = newNode //前面一个
+            }
+        }
+        this.length += 1
+        return true
+    }
+
+    get(position) {
+        if (position < 0 || position >= this.length) return false
+        let index = 0
+        let current = this.head
+        while (index++ < position) {
+            current = current.next
+        }
+        return current.data
+    }
+
+    indexOf(data) {
+        let current = this.head
+        let index = 0
+        while (current){
+            if (current.data = data) return index
+            else {
+                current = current.next
+                index += 1
+            }
+        }
+        return -1
+    }
+
+    update(position, data) {
+        if (position < 0 || position >= this.length) return false
+        let index = 0
+        let current = this.head
+        while (index++ < position) {
+            current = current.next
+        }
+        current.data = data
+        return true
     }
 }
 
