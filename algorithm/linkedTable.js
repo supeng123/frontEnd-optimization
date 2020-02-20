@@ -390,5 +390,48 @@ class TwoWayLinkedList {
         current.data = data
         return true
     }
+
+    removeAt(position) {
+        if (position < 0 || position >= this.length) return null
+        let current = this.head
+        if (this.length === 1) {
+            this.head = null
+            this.tail = null
+        } else {
+            if (position === 0) {
+                this.head.next.previous = null
+                this.head = this.head.next
+            } else if (position === this.length - 1) {
+                current = this.tail
+                this.tail.previous.next = null
+                this.tail = this.tail.previous
+            } else {
+                var index = 0
+                
+                while (index++ < position) {
+                    current = current.next
+                }
+                current.previous.next = current.next
+                current.next.previous = current.previous
+            }
+        }
+        this.length -= 1
+        return current.data
+    }
+
+    remove(data) {
+        const index = this.indexOf(data)
+        if (index > 0) {
+            this.removeAt(index)
+        }
+    }
+
+    isEmpty() {
+        return this.length === 0
+    }
+
+    size() {
+        return this.length
+    }
 }
 
