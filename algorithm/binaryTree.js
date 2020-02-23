@@ -35,12 +35,12 @@ BinaryTree.prototype.inOrderTraverseNode= function (node, cb) {
     }
 }
 
-BinaryTree.prototype.find = function(targetData) {
-    if (this.root === null) return false;
-    if (targetData < this.root.data) {
-        return this.find(this.root.left, targetData);
-    } else if (targetData > this.root.data) {
-        return this.find(this.root.right, targetData);
+BinaryTree.prototype.find = function(node, targetData) {
+    if (node === null) return false;
+    if (targetData < node.data) {
+        return this.find(node.left, targetData);
+    } else if (targetData > node.data) {
+        return this.find(node.right, targetData);
     } else {
         return true;
     }
@@ -103,25 +103,25 @@ BinaryTree.prototype.delete = function(data) {
     return p;
 }
 
-let tree = new BinaryTree();
-tree.insert(20);
-tree.insert(21);
-tree.insert(22);
-tree.insert(23);
+// let tree = new BinaryTree();
+// tree.insert(20);
+// tree.insert(21);
+// tree.insert(22);
+// tree.insert(23);
 
 
-tree.inOrderTraverse(function (value){
-    console.log(value)
-})
+// tree.inOrderTraverse(function (value){
+//     console.log(value)
+// })
 
-let minValue = tree.min();
-let maxValue = tree.max();
-console.log('minValue is :' + minValue);
-console.log('maxValue is :' + maxValue);
+// let minValue = tree.min();
+// let maxValue = tree.max();
+// console.log('minValue is :' + minValue);
+// console.log('maxValue is :' + maxValue);
 
-let deleteNode = tree.delete(23);
-console.log('deleteNode :', deleteNode);
-console.log('maxValue is :' + maxValue);
+// let deleteNode = tree.delete(23);
+// console.log('deleteNode :', deleteNode);
+// console.log('maxValue is :' + maxValue);
 
 //create big heap
 function maxHeap(arr, index, heapSize) {
@@ -209,8 +209,8 @@ function heapSort(arr) {
 //     }
      
 
-const heapResult = heapSort([5,8,3,1,4])
-console.log(heapResult)
+// const heapResult = heapSort([5,8,3,1,4])
+// console.log(heapResult)
 
 function theSameTree(tree1, tree2) {
     if (tree1 === null && tree2 === null) return true;
@@ -223,12 +223,11 @@ function theSameTree(tree1, tree2) {
     
 }
 
-let tree2 = new BinaryTree();
-tree2.insert(20);
-tree2.insert(21);
-tree2.insert(22);
-tree2.insert(23);
+// let tree2 = new BinaryTree();
+// tree2.insert(20);
+// tree2.insert(21);
+// tree2.insert(22);
+// tree2.insert(23);
 
-const isSameTreeResult = isSameTree(tree, tree2)
-console.log(isSameTreeResult)
-
+// const isSameTreeResult = isSameTree(tree, tree2)
+// console.log(isSameTreeResult)
