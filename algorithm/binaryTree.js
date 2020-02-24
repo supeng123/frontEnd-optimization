@@ -74,33 +74,67 @@ BinaryTree.prototype.max = function() {
 
 BinaryTree.prototype.delete = function(data) {
     let p = this.root;
+    let parent = null
+    let isLeftChild = true
     while (p !== null, p.data !== data) {
-        parent = p;
+        let parent = p;
         if (data > p.data) {
             p = p.right;
+            isLeftChild = false
         } else {
             p = p.left;
+            isLeftChild = true
         }
     }
     if (p == null) return;
     //p has no children at all
     if (p.left === null && p.right === null) {
-        p = null;
-        return p;
+        if (p === this.root) this.root = null
+        else if (isLeftChild) parent.left = null
+        else parent.right = null
+        return parent;
     }
     //p has one child
     if(p.left === null) {
-        p = p.right;
-        return p;
+        if (isLeftChild) {
+            parent.left = p.right;
+        } else {
+            parent.right = p.right
+        }  
     } else if (p.right === null) {
-        p = p.left;
-        return p;
+        if (isLeftChild) {
+            parent.left = p.left;
+        } else {
+            parent.right = p.left
+        }
+        
     }
-    //p has two children, find the smallest in the right node
+    //p has two children, find the smallest in the right node or find the largest in the left tree
+    // let leastNode = this.maxNode(node.left);
+    // let leastNode = this.minNode(node.right);
+    let currentLeast = node.right
+    let leastNodeparent;
+    while (node != null) {
+        leastNodeparent = node
+        currentLeast = node.left
+    }
     let leastNode = this.minNode(node.right);
-    p.data = leastNode.data;
+    if (leastNode.right) leastNodeparent.left = leastNode.right
+    
+    if (p == this.root) {
+        this.root = leastNode
+    } else if (isLeftChild) {
+        leastNode.left = p.left
+        leastNode.right = p.right
+        parent.left = leastNode.data      
+    } else {
+        leastNode.left = p.left
+        leastNode.right = p.right
+        parent.right = leastNode.data;
+    }
+    
     leastNode = null;
-    return p;
+
 }
 
 // let tree = new BinaryTree();
