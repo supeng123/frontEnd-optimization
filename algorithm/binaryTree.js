@@ -265,3 +265,22 @@ function theSameTree(tree1, tree2) {
 
 // const isSameTreeResult = isSameTree(tree, tree2)
 // console.log(isSameTreeResult)
+
+//red black tree
+// all nodes are either red node or black node
+//the root and leaf should be black node
+//red node's children should be black nodes
+//any node to the other node should contain the same number of black nodes
+
+//new insert node should be red node
+//node can rotate from left or right direction
+
+//condition 1, when new insert node is root, change the color to black
+//condition 2, when new insert node's parent is black node, new insert node's children should be black nodes
+//condition 3, when new insert node's parent and uncle nodes are red, but the grandparent is black node,
+//              change parent and uncle nodes to black, change grandparent node to red
+//condition 4, when new insert node is left node and its parent is red node, uncle and grandparent are black nodes,
+//              change parent node to black, grandparent to red, then roate in right direction
+//condition 5, when new insert node is right node and its parent is red node, uncle and grandparent are black nodes,
+//              rotate new insert not in left direction, then the previous red parent node should be child of newInsert node
+//              take previous red parent node as condition 4 to rotate and change color respectively
