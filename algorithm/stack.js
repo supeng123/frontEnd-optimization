@@ -180,4 +180,6 @@ class PrioritizedQueue {
 }
 
 
+module.export = Queue
+
 
