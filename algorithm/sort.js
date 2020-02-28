@@ -71,16 +71,40 @@ const insertSortData = [5,3,7,9,1,4]
 insertSort(insertSortData);
 console.log(insertSortData)
 
+//selection sort
+function selectionSort(data) {
+    for (var j = 0; j < data.length; j ++ ) {
+        let min = j;
+        for (var i = 0; i < data.length; i ++ ) {
+            if(data[i] < data[min]) {
+                min = i
+            }
+        }
+        swap(data, j, min)
+    }
+}
+
+function swap(data, i, j) {
+    let temp;
+    temp = data[i]
+    data[i] = data[j]
+    data[j] = temp
+}
+
 //bubble sort
 function bubbleSort(data) {
     for (var i = 0; i < data.length; i ++ ) {
+        let count = 0
         for (var j = 0; j < data.length - 1; j ++ ) {
             if (data[j] > data[j + 1]) {
                 let temp = data[j];
                 data[j] = data[j + 1];
                 data[j + 1] = temp;
-            } 
+            } else {
+                count ++
+            }
         }
+        if (count === data.length) break;
     }
     return data;
 }
@@ -229,7 +253,7 @@ const r = mergeSort(mergeSortlist);
 console.log(r);
 
 const arr = []
-function dfsTraversal(root, callback) {
+function bfsTraversal(root, callback) {
     if (!root) return;
     var stack = [];
     var node = root;
@@ -247,7 +271,7 @@ function dfsTraversal(root, callback) {
 
 const stack = [rootNode]
 
-function bfsTraversal(number) {
+function dfsTraversal(number) {
     number = number || 0;
     if (stack[index]) {
         const current = stack[index];
