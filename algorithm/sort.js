@@ -56,20 +56,35 @@ console.log(binarySearch(binaryArray, 3));
 function insertSort(data) {
     for (var i = 1; i < data.length; i++) {
         var value = data[i]
-        var b = i - 1;
-        for (; b >= 0; --b) {
-            if (value < data[b]) {
-                data[b+1] = data[b];
-            } else {
-                break;
-            }
+        var b = i;
+        while (data[b-1] > temp && b > 0) {
+            data[b] = data[b-1];
+            b--;
         }
-        data[b+1] = value;
+        data[b] = value;
     }
 }
 const insertSortData = [5,3,7,9,1,4]
 insertSort(insertSortData);
 console.log(insertSortData)
+
+//shell sort
+function shellSort(data) {
+    let length = data.length
+    let gap = Math.floor(length/2)
+    while (gap >= 1) {
+        for (var i = gap; i < length; i++) {
+            let value = data[i]
+            let j = i
+            while (data[j-gap] > value && j > gap - 1 ) {
+                data[j] = data [j - gap]
+                j -= gap
+            }
+            data[j] = value
+        }
+        gap = Math.floor(gap/2)
+    }
+}
 
 //selection sort
 function selectionSort(data) {
