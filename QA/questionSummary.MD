@@ -68,3 +68,20 @@ second step【1，2，12，18，15，35，30，11】
 ~~~
 element.parentNode
 ~~~
+### 11.iterator 
+~~~
+function iterator(obj) {
+    const parsedObj = JSON.stringify(obj)
+    const result = []
+    if(parsedObj.next) {
+        if(parsedObj.next.length>1) {
+            result.push(parsedObj.node)
+            for(let i = 0; i < parsedObj.next.length; i++) {
+                interator(parsedObj.next[i])
+            }
+        }else {
+            interator(parsedObj.next[0])
+        }
+    }
+}
+~~~
