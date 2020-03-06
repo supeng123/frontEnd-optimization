@@ -85,3 +85,64 @@ function iterator(obj) {
     }
 }
 ~~~
+### 12.DOMContentLoaded和load事件
+~~~
+DOMContentLoaded事件比load事件更早执行
+~~~
+### 13.box-sizing的属性
+~~~
+border-box
+content-box
+inherit
+~~~
+### 14.伪类选择器
+~~~
+:checked
+:required
+:read-only
+:empty
+:dir
+:lang
+:fullscreen
+:link
+:visited
+:hover
+:active
+:focus
+:not
+:first-child
+:nth-child
+:nth-of-type
+:only-child
+:target
+~~~
+### 15.伪元素选择器
+~~~
+::before
+::after
+::first-letter
+::last-line
+~~~
+### 16. -1 >>> 32
+~~~
+-1的二进制是 
+求一的而二级制 0000 0000 0000 0000 0000 0000 0000 0001
+反转 1111 1111 1111 1111 1111 1111 1111 1110
+加上一 1111 1111 1111 1111 1111 1111 1111 1111
+
+向右移 32位相当于 32%32 =0 向右移了0位
+向右移 34位相当于 34%32 =2 向右移了2位
+所以最后结果为 2^32-1
+~~~
+### 17.[1<2<3,3<2<1]
+~~~
+1<2为true true隐式转换为1<3， 结果为true
+3<2为false, false隐式转换为0<1， 结果为true
+~~~
+### 18.[1,2,3].map(parseInt)
+~~~
+parseInt函数只接受两个值，一个是值，一个是几进制转化
+parseInt(‘1’, 0) 1
+parseInt(‘2’, 1) 没有一进制 NaN
+parseInt(‘3’, 2) 没有二进制 NaN
+~~~
