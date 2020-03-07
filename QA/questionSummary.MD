@@ -146,3 +146,28 @@ parseInt(‘1’, 0) 1
 parseInt(‘2’, 1) 没有一进制 NaN
 parseInt(‘3’, 2) 没有二进制 NaN
 ~~~
+### 19.a.__proto_printName(), a.printName()
+~~~
+function setname(name) {
+    this.name = name
+}
+setname.prototype.printName = function() {
+    console.log(this.name)
+}
+
+let a = new setname('cc')
+a.name = 'dd'
+a.__proto__.name='ee'
+
+//ee, dd
+~~~
+### 20.输出结果
+~~~
+console.log(1)
+setTimeout(()=>{console.log(2)},0)
+console.log(3)
+Promise.resolve(4).then(b=>console.log(b))
+console.log(5)
+
+13542
+~~~
