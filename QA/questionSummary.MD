@@ -171,3 +171,89 @@ console.log(5)
 
 13542
 ~~~
+### 21.canvas和svg的说法正确的是
+~~~
+canvas 支持事件处理
+canvas 不依赖分辨率，缩放不失真
+svg 不依赖分辨率，缩放不失真
+svg 适合图像密集型的游戏
+
+3
+~~~
+### 22.onlick和href谁先触发
+~~~
+click如果调用触发event.preventDefault(),
+href就不支持跳转
+所以onclick先触发
+~~~
+### 23.关于跨域的说法正确的是
+~~~
+Cookie, LocalStorage, indexDB都有同源策略限制
+postMessage, JSONP, websocket是常见的跨域解决方案
+跨域资源共享规范除了GET之外的http请求，或者代培MINE的POST请求，浏览器都需要先发一个OPTIONS请求
+~~~
+### 24.prefetch和preload的区别
+~~~
+在link标签使用，preload比prefetch的优先级更高，
+preload会优先加载本页面所有的资源
+prefetch会加载本利资源加载完成之后优先加载其他页面资源
+~~~
+### 25.css中不支持继承的元素
+~~~
+font-size
+color
+margin
+cursor
+
+margin
+~~~
+### 26.样式优先级的排序
+~~~
+!important 行内样式 id class tag
+~~~
+### 27.算一下代码中box区域的高度
+~~~
+transition:一个元素不同状态之间的切换时候定义不同的过渡效果，，如果之前没有高度会瞬间增加
+
+<style type="text/css">
+    .area{height: 100px}
+    .box{transition: height 1s; background: #000}
+</style>
+<div class="area">
+    <div class="box">
+    
+    </div>
+</div>
+<script>
+    document.querySelector('.area').addEventListener('click', () => {
+        document.querySelector('.box').style.height = '100px'
+    })
+</script>
+
+高度瞬间从0达到100px
+~~~
+### 28.哪个方法会影响原数组
+~~~
+splice
+concat
+join
+slice
+
+splice
+~~~
+### 29.哪个方法会影响原数组
+~~~
+splice
+concat
+join
+slice
+
+splice
+~~~
+### 30.节流防抖的说法正确的是
+~~~
+节流 throtte, 单位时间内多次执行函数，函数只执行一次操作
+防抖 debounce， 单位时间内操作多次操作函数， 会重新设置单位时间，直至到了单位时间草能执行函数
+
+在图片按需懒加载场景，用防抖的方式优化加载图片
+~~~
