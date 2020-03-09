@@ -145,6 +145,13 @@ parseInt函数只接受两个值，一个是值，一个是几进制转化
 parseInt(‘1’, 0) 1
 parseInt(‘2’, 1) 没有一进制 NaN
 parseInt(‘3’, 2) 没有二进制 NaN
+
+
+parseInt(‘10’, 0) 10
+parseInt(‘10’, 1) 没有一进制 NaN
+parseInt(‘10’, 2) 没有二进制 2^0+2^1
+parseInt(‘10’, 3) 没有二进制 3^0+3^1
+parseInt(‘10’, 4) 没有二进制 4^0+4^1
 ~~~
 ### 19.a.__proto_printName(), a.printName()
 ~~~
@@ -256,4 +263,53 @@ splice
 防抖 debounce， 单位时间内操作多次操作函数， 会重新设置单位时间，直至到了单位时间草能执行函数
 
 在图片按需懒加载场景，用防抖的方式优化加载图片
+~~~
+### 31.输出结果为
+~~~
+var a = {}, b = {key: 'b'}, c = {key: 'c'}
+a[b] = 'b'
+a[c] = 'c'
+
+console.log(a[b]) //c
+
+a[b] ===> b.toString() ===> a['object Object'] = 'b'
+a[c] ===> c.toString() ===> a['object Object'] = 'c'
+~~~
+### 32.null和undefinied的描述
+~~~
++null  0
++undefined NaN
+JSON.stringify({a: undefined}) {}
+JSON.stringify({a: null}) {"a": null}
+~~~
+### 33.encodeURI && encodeURIComponent
+~~~
+var url = 'https://www.slogan.com/text.html'
+encodeURIComponent(url) //"https%3A%2F%2Fwww.slogan.com%2Ftext.html"
+encodeURI(url) //'https://www.slogan.com/text.html'
+~~~
+### 34.event loop
+~~~
+const first = () => (
+    new Promise((resolve, reject) => {
+        console.log(1)
+        let p = new Promise((resolve, reject) => {
+            console.log(2)
+            setTimeout(() => {
+                console.log(3)
+                resolve(4)
+            },0)
+            resolve(5)
+        })
+        resolve(6)
+        p.then((arg) => console.log(arg))
+    })
+)
+
+first().then((arg)=> {
+    console.log(arg)
+})
+console.log(7)
+
+1,2,7,5,6,3
 ~~~
