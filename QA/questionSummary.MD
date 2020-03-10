@@ -313,3 +313,18 @@ console.log(7)
 
 1,2,7,5,6,3
 ~~~
+### 35.哪些请求会发出http请求
+~~~
+<textarea><img src="pic.jpg" style="display:none"></textarea>
+<textarea style="display:none"><img src="pic.jpg" style="visibility:hidden"></textarea>
+<div><img background-image:url(pic.jpg) style="display:none"></div> 
+<div><span background-image:url(pic.jpg) style="display:none"></span></div>
+
+span is not block level element so the backgrount-image won't be activated
+answer is 3
+~~~
+### 36."113"+25-"50"
+~~~
+11325-50
+answer is 11275
+~~~
