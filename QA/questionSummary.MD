@@ -328,3 +328,46 @@ answer is 3
 11325-50
 answer is 11275
 ~~~
+### 37. var a = "fenqile" 取得n
+~~~
+a[3] q
+a.charAt(2) n
+a.substr(2, 2) nq
+a.substring(2, 3) n
+~~~
+### 38.水平垂直居中，左右边距10px, 宽度是高度2倍
+~~~
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.out {
+    background-color: #blue;
+    margin: 0 10px;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.in {
+    height: 0;
+    // PADDING 相对于高度计算
+    padding: 25% 0;
+}
+
+<body>
+    <div class="out">
+        <div class="in">A</div>
+    </div>
+</body>
+~~~
+### 39.类数组转换为数组
+~~~
+Array.from(arguments)
+Array.prototype.slice.call(arguments, 0)
+[...arguments]
+~~~
