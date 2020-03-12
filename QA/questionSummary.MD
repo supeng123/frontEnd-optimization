@@ -371,3 +371,47 @@ Array.from(arguments)
 Array.prototype.slice.call(arguments, 0)
 [...arguments]
 ~~~
+### 40.空对象数组转换
+~~~
+if([]==false) {console.log(1)} true [].tostring()===> ''===> false
+if({}==false) {console.log(2)} false []].tostring()===> '[object Object]'===> NaN
+if([]) {console.log(3)} true
+if([1]==[1]) {console.log(3)} false
+~~~
+### 41.async event loop
+~~~
+async function async1() {
+    console.log('async1 start')
+    await async2();
+    console.log('async1 stop')
+}
+
+async function async2() {
+    console.log('async2')
+}
+
+console.log('script start')
+
+setTimeOut(function() {
+    console.log('setTimeout')
+},0)
+
+async1()
+
+new Promise(function(resolve) {
+    console.log('promise1')
+    resolve()
+}).then(function() {
+    console.log('promise2')
+})
+console.log('script end')
+
+script start
+async1 start
+async2
+promise1
+script end
+async1 stop
+promise2
+setTimeout
+~~~
