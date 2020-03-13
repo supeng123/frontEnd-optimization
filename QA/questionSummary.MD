@@ -415,3 +415,42 @@ async1 stop
 promise2
 setTimeout
 ~~~
+### 42.设计一个bind函数
+~~~
+function Animal(name, color) {
+    this.name = name;
+    this.color = color;
+}
+Animal.prototype.say = function() {
+    return `I'm a ${this.color} ${this.name}`
+}
+const Cat = Animal.myBind(null, 'cat')
+const cat = new Cat('white')
+if (cat.say() === `I'm a white cat` && cat instancof Cat && cat instanceOf Animal) {
+    consoe.log('succeeded')
+}
+
+Function.prototype.myBind = function() {
+    let thatFunc = this; //this is Animal
+    let bindTo = arguments[0]
+    let thatArgs = Array.prototype.slice.call(arguments, 1)
+
+    function Fn() {
+        let isNewCall = this instanceof Fn; //是否是new 调用的实例也就是cat
+        let thisArgs = Array.prototype.slice.call(arguments)
+        return thatFunc.apply(isNewCall ? this : bindTo, thatArgs.concat(thisArgs))
+    }
+    Fn.prototype = Object.create(thatFunc.prototype)
+    return Fn
+}
+~~~
+### Object.create原理
+~~~
+funtion create(obj) {
+    let Fn = function () {}
+    Fn.prototype = obj
+    return new Fn()
+}
+
+child.prototype = create(parent.prototype)
+~~~
