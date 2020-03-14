@@ -436,7 +436,7 @@ Function.prototype.myBind = function() {
     let thatArgs = Array.prototype.slice.call(arguments, 1)
 
     function Fn() {
-        let isNewCall = this instanceof Fn; //是否是new 调用的实例也就是cat
+        let isNewCall = this instanceof Fn; //是否是new 调用的实例也就是cat,确保调到say方法
         let thisArgs = Array.prototype.slice.call(arguments)
         return thatFunc.apply(isNewCall ? this : bindTo, thatArgs.concat(thisArgs))
     }
@@ -453,4 +453,41 @@ funtion create(obj) {
 }
 
 child.prototype = create(parent.prototype)
+~~~
+### 继承
+~~~
+funciton Parent() {
+
+}
+
+function Child() {
+    Parent.call(this)
+}
+Child.prototype = create(Parent.prototype)
+~~~
+### this指向
+~~~
+var a = function() {this.b = 3}
+var c = new a()
+var b = 7
+a()
+
+b = 3
+c.b = 3
+~~~
+
+### 高阶函数
+~~~
+const repeatFunc = repeat(alert, 4, 3000)
+repeatFunc('hello world')
+
+funtion repeat(func, times, wait) {
+    return (...rest) => {
+        for (let i = 0; i < times; i ++) {
+            setTimeout(() => {
+                func(...rest)
+            }, wait * i)
+        }
+    }
+}
 ~~~
