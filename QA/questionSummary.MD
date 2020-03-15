@@ -444,7 +444,7 @@ Function.prototype.myBind = function() {
     return Fn
 }
 ~~~
-### Object.create原理
+### 43.Object.create原理
 ~~~
 funtion create(obj) {
     let Fn = function () {}
@@ -454,7 +454,7 @@ funtion create(obj) {
 
 child.prototype = create(parent.prototype)
 ~~~
-### 继承
+### 44.继承
 ~~~
 funciton Parent() {
 
@@ -465,7 +465,7 @@ function Child() {
 }
 Child.prototype = create(Parent.prototype)
 ~~~
-### this指向
+### 45.this指向
 ~~~
 var a = function() {this.b = 3}
 var c = new a()
@@ -476,7 +476,7 @@ b = 3
 c.b = 3
 ~~~
 
-### 高阶函数
+### 46.高阶函数
 ~~~
 const repeatFunc = repeat(alert, 4, 3000)
 repeatFunc('hello world')
@@ -490,4 +490,14 @@ funtion repeat(func, times, wait) {
         }
     }
 }
+~~~
+
+### 47.正则表达式匹配1234567890成1,234,567,890
+~~~
+\B非单词边界
+?!l //匹配前面不等于l
+?=l //匹配前面等于l
+const text= '1234567890'
+text.replace(/\B(?=((\d{3})+(?!\d)))/g)
+'1234567890'.replace(/\B(?=((\d{3})+(?!\d)))/g, ',')
 ~~~
