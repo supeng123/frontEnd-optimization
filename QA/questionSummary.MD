@@ -501,3 +501,56 @@ const text= '1234567890'
 text.replace(/\B(?=((\d{3})+(?!\d)))/g)
 '1234567890'.replace(/\B(?=((\d{3})+(?!\d)))/g, ',')
 ~~~
+### 48.tree shaking原理
+~~~
+commonjs只有在代码运行时才能确定模块调用
+es-module代码静态分析确定模块引入，所以webpack的打包能tree shaking永远不会执行的代码
+~~~
+### 49.promise all
+~~~
+function promiseAll(promises) {
+    return new Promise((resolve, reject) {
+        const container = []
+        promises.forEach((promise) => {
+            promise.then((result) => {
+                container.push(result)
+                if (container.length === promises.length) {
+                    resolve(container)
+                }
+            })
+            .catch((error) => {
+                reject(error)
+            })
+        })
+    })
+}
+~~~
+### 50.两个链表相加
+~~~
+funtion ListNode(val) {
+    this.value = val;
+    this.next = null
+}
+
+function addTwoNumbers (l1, l2) {
+    const dummyHead = new ListNode(0)
+    let current = dummyHead
+    const carry = 0
+    let pCurrent = l1, qCurrent = l2
+    while (pCurrent != null || pCurrent != null) {
+        const sum = pCurrent.value + pCurrent.Value + carry
+        carray = parseInt(sum/10)
+
+        let node = new ListNode(sum%10)
+        current.next = node
+        current = current.next
+
+        if(pCurrent != null) pCurrent = pCurrent.next;
+        if(qCurrent != null) qCurrent = qCurrent.next;
+    }
+    if (carry > 0) {
+        current.next = new ListNode(carry)
+    }
+    return dummyHead.next
+}
+~~~
