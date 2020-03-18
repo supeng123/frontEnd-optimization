@@ -554,16 +554,30 @@ function addTwoNumbers (l1, l2) {
     return dummyHead.next
 }
 ~~~
-<managedObject class="ETHLK_R" distName="/MRBTS-1/RAT-1/RUNTIME_VIEW-2/MRBTS_R-2/TNLSVC_CONF_M-1/TNL_CONF_M-1/ETHSVC_CONF_M-1/ETHLK_CONF_M-1/ETHLK_R-1" operation="create">
-	<p name="eapPortStatus">Passed</p>
-</managedObject>
-
-<enumeration name="EapPortStatus">
-            <enum name="Deactivated" value="0" />
-            <enum name="Pending" value="1" />
-            <enum name="Passed" value="2" />
-            <enum name="Failed" value="3" />
-        </enumeration>
-        <p name="eapPortStatus" recurrence="optional" type="EapPortStatus" id="6">
-            <proto index="6" repeated="false" type="enum" />
-        </p>
+### 51.移除s1所有包含s2的字符
+~~~
+function remove(s1, s2) {
+    for (let i = 0; i < s2.length; i++) {
+        s1 = s1.replace(s[2], '')
+    }
+    return s1
+}
+~~~
+### 53.最大连续子序列
+~~~
+function maxSubArray(numbers) {
+    let max = - Number.MAX_VALUE
+    let sum = 0;
+    for (let i = 0; i < numbers.length; i++) {
+        if (sum < 0) {
+            sum = numbers[i]
+        } else {
+            sum += numbers[i]
+        }
+        if (sum > max) {
+            max = sum
+        }
+    }
+    return max
+}
+~~~
