@@ -581,3 +581,8 @@ function maxSubArray(numbers) {
     return max
 }
 ~~~
+### 54.js浮点数 0.1+0.2 === 0.3 ？
+~~~
+No，根据IEEE754标准，两个浮点数相加会将每个浮点数转化为二进制，而二进制是没有这么精确
+Math.abs(0.1+0.2-0.3) <= Number.EPSILON
+~~~
