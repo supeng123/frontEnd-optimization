@@ -586,3 +586,49 @@ function maxSubArray(numbers) {
 No，根据IEEE754标准，两个浮点数相加会将每个浮点数转化为二进制，而二进制是没有这么精确
 Math.abs(0.1+0.2-0.3) <= Number.EPSILON
 ~~~
+### 55.js数据类型
+~~~
+undefine, null, number,string, boolean, symbol, object
+
+Object.prototype.toString.call()
+typeOf can’t check null and function
+~~~
+### 56.css写梯形
+~~~
+.box {
+    width: 50px;
+    height: 50px;
+    border-top: 50px solid transparent;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid red;
+}
+~~~
+### 57.满足条件的所有路径
+~~~
+function getAllPaths(root, sum) {
+    let paths = []
+    function traveral(node, path) {
+        if (!node) return;
+        let rootVal = node.value
+        path.push(rootVal)
+        if (node.left === null && node.right === null) {
+            if (path.reduce((a,b) => a + b) === sum) {
+                paths.push(path)
+            }
+            return
+        }
+        traversal(node.left, path.slice(0))
+        traversal(node.right, path.slice(0))
+    }
+
+    traversal(root, [])
+    return paths
+}
+~~~
+### js中 new发生了什么
+~~~
+const Obj = {}
+Obj.__proto__ == ClassA.prototype
+ClassA.call(Obj)
+~~~
