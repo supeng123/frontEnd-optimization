@@ -712,3 +712,35 @@ class Queue {
     }
 }
 ~~~
+### 61.求不重复的最大长度字符串
+~~~
+function longestSubString(s) {
+    let hash = {}
+    let max = 0
+    let left = 0
+    for (var i = 0; i < s.length; i++) {
+        let v = s[i]
+
+        if (hash[v] >= left) {
+            left = hash[v] + 1
+        }
+
+        hash[v] = i
+        let len = i - left + 1
+        if (max < len) max = len
+    }
+    return max
+}
+~~~
+### 61.找到重复字符并分组
+~~~
+function groupSubString(s) {
+    let hash = {}
+    for (let str of s) {
+        let key = [...str].sort().join('')
+        if (hash[str] ===  undefinied) hash[key]=[]
+        hash[key].push(str)
+    }
+    return Object.keys(hash).map(key => hash[key])
+}
+~~~
