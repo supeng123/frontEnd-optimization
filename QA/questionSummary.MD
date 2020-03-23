@@ -744,3 +744,44 @@ function groupSubString(s) {
     return Object.keys(hash).map(key => hash[key])
 }
 ~~~
+### 62.区间合并
+~~~
+function mergeBlock(arrayList) {
+    if (!arrayList.length) return []
+    arrayList.sort((a,b) => a[0] - b[0])
+    const mergedList = [arrayList[0]]
+    for (let i = 1 ; i < arrayList.length; i ++) {
+        let currentBlock = arrayList[i];
+        let position = mergeList.length - 1
+        if (currentBlock[0] <= mergedList[position][1]) {
+            if (currentBlock[1] > mergedList[position][1]) {
+                mergedList[position][1] = currentBlock[1]
+            }
+        } else {
+            mergedList.push(currentBlock)
+        }
+    }
+    return mergeList
+}
+~~~
+### 63.验证平衡二叉树是否是按顺序排列
+~~~
+function isValidOrderTree(root) {
+    cont inOrderList = []
+    function inOrder(node) {
+        if (!node) return;
+        inOrder(node.left)
+        inOrderList.push(node.value)
+        inOrder(node.right)
+    }
+
+    inOrder(root)
+
+    for (let i = 0; i < inOrderList.length; i++) {
+        if (inOrderList[i] > inOrderList[i + 1]) {
+            return false
+        }
+    }
+    return true
+}
+~~~
