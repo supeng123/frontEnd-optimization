@@ -537,7 +537,7 @@ function addTwoNumbers (l1, l2) {
     let current = dummyHead
     const carry = 0
     let pCurrent = l1, qCurrent = l2
-    while (pCurrent != null || pCurrent != null) {
+    while (pCurrent != null || qCurrent != null) {
         const sum = pCurrent.value + pCurrent.Value + carry
         carray = parseInt(sum/10)
 
@@ -783,5 +783,34 @@ function isValidOrderTree(root) {
         }
     }
     return true
+}
+~~~
+### 64.二叉树交换
+~~~
+function swapBinaryTree(root) {
+    function walk(node) {
+        if (!node) return
+        [node.left, node.right] = [node.right, node.left]
+        walk(node.left)
+        walk(node.right)
+    }
+    return walk(root)
+}
+~~~
+### 65.二叉树最大最小深度
+~~~
+function maxDepth(root) {
+    if (!root) return 0
+    let lDepth = maxDepth(root.left)
+    let rDepth = maxDepth(root.right)
+    return Math.max(lDepth, rDepth) + 1
+}
+
+function minDepth(root) {
+    if (!root) return 0
+    let lDepth = minDepth(root.left)
+    let rDepth = minDepth(root.right)
+    if (!root.left || !root.right) return Math.max(lDepth, rDepth) + 1
+    return Math.min(lDepth, rDepth) + 1
 }
 ~~~
