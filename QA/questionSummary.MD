@@ -814,3 +814,44 @@ function minDepth(root) {
     return Math.min(lDepth, rDepth) + 1
 }
 ~~~
+### 66.从前序遍历和中序遍历的节点集合中构造一个binaryTree
+~~~
+//preOrder root left right(root/left/right)
+    3
+   / \
+  9   20
+    /   \
+   15    7
+//preorder = [3,9,20,15,7]
+//inorder = [9,3,15,20,7]
+function createTree(preOrder, inOrder) {
+    if(!preOrder.length || !post.length) return null
+    let rootValue = preOrder[0]
+    let root = new TreeNode(rootValue)
+
+    let index = inOrder.findIndex(item => item === rootValue)
+
+    root.left = createTree(preOrder.slice(1, index + 1), inOrder.slice(0, index))
+    root.right = createTree(preOrder.slice(index + 1), inOrder.slice(index + 1))
+    return root
+}
+
+      1
+     /  \
+    2    3
+   / \  / \
+  4   5 6  7
+//preorder = [1,2,4,5,3,6,7]
+//postOrder = [4,5,2,6,7,3,1]
+function createTree(preOrder, postOrder) {
+    if(!preOrder.length || !post.length) return null
+    let rootValue = preOrder[0]
+    let root = new TreeNode(rootValue)
+
+    let index = postOrder.findIndex(item => item === preOrder[1])
+
+    root.left = createTree(preOrder.slice(1, index + 2), postOrder.slice(0, index+1))
+    root.right = createTree(preOrder.slice(index + 2), postOrder.slice(index + 1, postOrder.length - 1))
+    return root
+}
+~~~
