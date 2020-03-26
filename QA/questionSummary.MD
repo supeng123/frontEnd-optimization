@@ -855,3 +855,22 @@ function createTree(preOrder, postOrder) {
     return root
 }
 ~~~
+### 67.有效括号
+~~~
+function areBracketsClosed(randomString) {
+    let sum = 0
+    const splittedCharactors = randomString.split('');
+    for (let i = 0; i < splittedCharactors.length; i++) {
+        const charactor = splittedCharactors[i];
+        if (charactor === '(') {
+            sum ++;
+        } else {
+            if (sum === 0) {
+                return false
+            }
+            sum --
+        }
+    }
+    return sum === 0;
+}
+~~~
