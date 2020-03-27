@@ -874,3 +874,69 @@ function areBracketsClosed(randomString) {
     return sum === 0;
 }
 ~~~
+### 68.最长有效括号
+~~~
+function longestValidBrackets(randomString) {
+    let max = 0
+    let stack = []
+    const splittedCharactors = randomString.split('');
+    for (let i = 0; i < splittedCharactors.length; i++) {
+        let tmpmax = 0
+        for (let i = 0; i < splittedCharactors.length; i++) {
+            const charactor = splittedCharactors[j];
+            if (charactor === '(') {
+                stack.push('(')
+                tmpmax ++;
+            } else {
+                if (stack.length < 1) {
+                    max = tmpMax > max ? tmpMax : max
+                    break
+                } else {
+                    stack.pop()
+                    tmpmax ++
+                } 
+            }
+        }
+        if (stack.length === 0) {
+            max = tmpMax > max ? tmpMax : max
+        }
+        stack = []
+    }
+    return max;
+}
+~~~
+### 69.大文件断点续传
+~~~
+document.getElementById('file').addEventListener('change', (event) => {
+    const file = event.target.file[0]
+    let cur = 0, size = 1024*1024;
+
+    const fileChunkList = []
+    while(cur < file.size) {
+        fileChunkList.push({
+            file: file.slice(cur, cur + size)
+        })
+        cur += size
+    }
+    //前端预览图片
+    const URL = window.URL;
+    const objectUrl =  URL.createObjectURL(file)
+    const pic = document.getElementById('pic')
+    pic.src = objectUrl
+    pic.onload = function() {
+        URL.revokeObjectURL(objectUrl)
+    }
+})
+
+
+
+//服务端
+const path = require('path')
+const fse = require('fs-extra')
+
+const filePath = path.resolve()
+const mergeFileChunk = async (filePath, filename, size) => {
+
+}
+mergeFileChunk(filePath, filename, 0.5*1024*1024)
+~~~
