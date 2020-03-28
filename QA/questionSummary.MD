@@ -934,9 +934,37 @@ document.getElementById('file').addEventListener('change', (event) => {
 const path = require('path')
 const fse = require('fs-extra')
 
-const filePath = path.resolve()
+const UPLOAD_DIR = path.resolve(__dirname, ".", "target")
+const filename = 'yb'
+const filePath = path.resolve(UPLOAD_DIR, "..", `${filename}`)
 const mergeFileChunk = async (filePath, filename, size) => {
+    const chunkDir = path.resolve(UPLOAD_DIR, filename)
+    const chunkPaths = await fse.readdir(chunkDir)
 
+    chunkPaths.sort((a, b) => a.split("-")[1]-b.split("-")[1])
+    await Promise.all(
+        chunkPaths.map((chunkPath,index) => {
+            pipeStream(
+                path.resolve(chunkDir, chunkPath)
+                fse.createWriteStream(filePath, {
+                    start: index * size,
+                    end: (index + 1) * size
+                })
+            )
+        })
+    )
+    fse.rmdirSync(chunkDir)
 }
 mergeFileChunk(filePath, filename, 0.5*1024*1024)
+
+const pipeStream = (path, writeStream) => {
+    new Promise((resolve, reject) => {
+        const readStream = fse.createReadStream(path);
+        readStream.on("end", () => {
+            fse.unlinksync(path)
+            resolve()
+        })
+        readStream.pipe(writeStream)
+    })
+}
 ~~~
