@@ -907,9 +907,10 @@ function longestValidBrackets(randomString) {
 ~~~
 ### 69.大文件断点续传
 ~~~
-document.getElementById('file').addEventListener('change', (event) => {
+document.getElementById('file').addEventListener('change',  async (event) => {
     const file = event.target.file[0]
-    let cur = 0, size = 1024*1024;
+    const file_name = file.name.split('.')[0]
+    let cur = 0, size = 0.5*1024*1024;
 
     const fileChunkList = []
     while(cur < file.size) {
@@ -925,6 +926,31 @@ document.getElementById('file').addEventListener('change', (event) => {
     pic.src = objectUrl
     pic.onload = function() {
         URL.revokeObjectURL(objectUrl)
+    }
+
+    const requestList = fileChunkList.map(({file}, index) =>{
+        const formData = new FormData()
+        formData.append("chunk", file)
+        formData.append("filename", `${filename}-${index}`)
+        return {formData}
+    })
+    .map(async ({formData}) => {
+        return request({
+            url: 'http://localhost:3000',
+            data: formData
+        })
+
+    })
+
+    await Promise.all(requestList)
+
+    const mergeRequest = async () => {
+        await request({
+            url: 'http://localhost:3001/merge',
+            headers: {
+                'content-type': "application/json"
+            }
+        })
     }
 })
 
@@ -967,4 +993,66 @@ const pipeStream = (path, writeStream) => {
         readStream.pipe(writeStream)
     })
 }
+
+
+function request({
+    url,
+    method='POST',
+    data,
+    headers={}
+    requestList
+}){
+    return new Promise((resolve, reject) => {
+        con xhr = new XMLHTTPRequest()
+        xhr.open(method, url)
+        Object.keys(headers).forEach(key => {
+            xhr.setRequestHeader(key, headers[key])
+        })
+        xhr.send(data)
+        xhr.onload = e => {
+            resolve({
+                e.target.response
+            })
+        }
+    })
+}
+
+//服务端
+const path = require('path')
+const http = require('http')
+const fse = require('fs-extra')
+const multiparty = require('multiparty')
+const server = http.createServer()
+
+const UPLOAD_DIR = path.resolve(__dirname, ".", "target")
+
+server.on("request", async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader("Access-Control-Allow-Headers", "*")
+    res.end("hello")
+
+    if (req.url == '/') {
+        const multipart = new multiparty.Form()
+        multipart.parse(req, async(err, fields, files) => {
+            if (err) {
+                return
+            }
+
+            const [chunk] = files.chunk
+            const [filename] = fields.filename
+
+            const dir_name = filename.split('-')[0]
+            const chunkDir = path.resolve(UPLOAD_DIR, dir_name)
+
+            if (!fse.existSync(chunkDir)) {
+                await fse.mkdirs(chunkDir)
+            }
+            await fse.move(chunk.path, `${chunkDir}/${filename}`)
+        })
+    }
+})
+
+server.listen(3000, () => {
+    console.log('3000 port is on')
+})
 ~~~
