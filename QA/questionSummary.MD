@@ -926,6 +926,11 @@ document.getElementById('file').addEventListener('change',  async (event) => {
             woker.postMessage({fileChunkList})
             woker.onmessage = e => {
                 console.log(e.data)
+                const {percentage, hash} = e.data
+                
+                if (hash) {
+                    resolve(hash)
+                }
             }
         })
     }
@@ -960,6 +965,7 @@ document.getElementById('file').addEventListener('change',  async (event) => {
         }
         loadNext(0)
     }
+    //文件上传的进度可以用progressEvent.loaded，断点上传是将所有切片的xmlHttpRequest请求保存下来，失败的重传
     //前端预览图片
     const URL = window.URL;
     const objectUrl =  URL.createObjectURL(file)
