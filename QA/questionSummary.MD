@@ -1107,4 +1107,30 @@ server.listen(3000, () => {
 ~~~
 javascript是单线程，事件循环是在主线程之上，每个任务通过事件循环在不同事件被主线程执行，
 nodejs是js运行在服务的容器本身是支持多进程和多线程的
+
+require('child-process').fork新的进程解决线程阻塞
+const cluster = require('cluster')
+const numCpus = require('os').cups().length;
+if (cluster.isMaster){// main process
+    for(let i = 0; i < numCpus; i++) {
+        cluster.fork()
+    }
+} else {
+    http.createServer((req, res) => {
+        res.writeHead(200)
+        res.end(`hello world ${process.pid}`)
+    }).listen(8000)
+}
+~~~
+### 71.TCP&UDP
+~~~
+TCP&&UDP都是传输层连接协议，Transmission Control Protocol(保证完整)，User Datagram Protocol
+ip网络层
+数据链路层
+物理层
+
+seq = x
+seq = y ack = x + 1
+seq = x + 1 ack = y + 1
+第三次可以携带数据
 ~~~
