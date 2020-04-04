@@ -1134,3 +1134,23 @@ seq = y ack = x + 1
 seq = x + 1 ack = y + 1
 第三次可以携带数据
 ~~~
+### 72.数组去重（空间复杂度为O(1)）
+~~~
+function removeRepeatedItems(arr) {
+    let sortedArray = arr.sort((a,b) => a - b);
+    let  pre = 0
+    let current = 1
+    for (var i = 0 ; i < sortedArray.length; i++) {
+        if (pre < sortedArray.length && current < sortedArray.length) {
+            if (sortedArray[current]== sortedArray[pre]) {
+                current +=  1
+            } else {
+                pre +=1
+                sortedArray[pre] = sortedArray[current]
+                current += 1
+            }
+        }
+    }
+    return sortedArray.slice(0, pre+1);
+}
+~~~
