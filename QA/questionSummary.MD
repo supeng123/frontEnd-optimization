@@ -1154,3 +1154,34 @@ function removeRepeatedItems(arr) {
     return sortedArray.slice(0, pre+1);
 }
 ~~~
+### 73.反转链表
+~~~
+function reverseLinkList(head) {
+    if(!head || !head.next) return head
+    let cur = head
+    let pre = null
+    while(cur) {
+        const next = cur.next
+        cur.next = pre
+        pre = cur//前驱节点变成当前节点
+        cur = next
+    }
+}
+~~~
+### 74.去除链表一个元素
+~~~
+function removeItemInLinkedList(head, item) {
+    //哨兵节点
+    const dummy = {
+        next: head
+    }
+    let current = dummy
+    while(current && current.next) {
+        if(current.next.value === item) {
+            current.next= current.next.next
+        }
+        current = current.next
+    }
+    return dummy.next
+}
+~~~
