@@ -1185,3 +1185,69 @@ function removeItemInLinkedList(head, item) {
     return dummy.next
 }
 ~~~
+### 75.单双链表重组
+~~~
+origin 1-2-3-4-5-null
+after 1-3-5-2-4-null
+
+function reorganizeLinkedList(head) {
+    if(!head && !head.next) return head;
+    const dummySingle = {
+        next: head
+    }
+    const dummyEven = {
+        next: head.next
+    }
+    let flag = true
+    let singleNode = dummySingle.next
+    let evenNode = dummyEven.next
+    while(singleNode && singleNode.next && evenNode && evenNode.next) {
+        singleNode.next = singleNode.next.next
+        evenNode.next = evenNode.next.next
+
+        singleNode = singleNode.next.next
+        evenNode = evenNode.next.next
+    }
+    singleNode.next = dummyEven.next
+    return dummySingle.next
+}
+~~~
+### 76.按k进行链表翻转
+~~~
+function reverseKLinkedList(head, k) {
+    const dummyHead = {
+        next: head
+    }
+    let index = 0
+    let start = dummyHead
+    let end = dummyHead.next
+    while(end) {
+        index ++
+        if (index%k ===0) {
+            start = reverseLinkList(start, end.next)
+            end = start.next
+        } else {
+            end = end.next
+        }
+    }
+}
+
+
+function reverseLinkList(start, end) {
+    let current = start.next
+    let first = current
+    let pre = start
+    while (current != end) {
+        let next = current.next;
+        current.next = pre
+        pre = current
+        current = next
+    }
+
+    //pre变成小组的头结点
+    start.next = pre
+    //原来的头结点变成小组尾节点和下次小组的头结点
+    first.next = current
+    return first
+}
+~~~
