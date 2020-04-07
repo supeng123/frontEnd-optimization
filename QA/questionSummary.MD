@@ -1251,3 +1251,17 @@ function reverseLinkList(start, end) {
     return first
 }
 ~~~
+### 77.两数相加
+~~~
+function twoNumberSum(arr, target) {
+    const map = new Map()
+    const result = []
+    arr.forEach((value, index)=> map.set(value, index))
+    for (let i = 0; i < arr.length; i++) {
+        const left = map.get(target - arr[i])
+        if (left && left !== arr[i]) {
+            return [i, left]
+        }
+    }
+}
+~~~
