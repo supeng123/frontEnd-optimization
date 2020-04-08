@@ -1265,3 +1265,18 @@ function twoNumberSum(arr, target) {
     }
 }
 ~~~
+### 78.正负数排序复数在前正数在后
+~~~
+function sort(arr) {
+    let j = 0
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] < 0){
+            if (i !== j) {
+                [arr[i], arr[j]] = [arr[j], arr[i]]
+            }
+            j++
+        }   
+    }
+    return arr
+}
+~~~
