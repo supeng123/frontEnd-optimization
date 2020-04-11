@@ -1256,11 +1256,12 @@ function reverseLinkList(start, end) {
 function twoNumberSum(arr, target) {
     const map = new Map()
     const result = []
-    arr.forEach((value, index)=> map.set(value, index))
     for (let i = 0; i < arr.length; i++) {
         const left = map.get(target - arr[i])
         if (left && left !== arr[i]) {
             return [i, left]
+        } else {
+            map.set(arr[i], index)
         }
     }
 }
@@ -1294,5 +1295,49 @@ function predictStockPrice(prices) {
         } 
     }
     return maxPrice
+}
+~~~
+### 80.压缩字符串
+~~~
+aaabbbcc
+a3b3c2
+function compressString(str) {
+    let index = 1
+    let result = ''
+    for (let i = 0; i < str.length - 1; i ++) {
+        if (str[i]===str[i + 1]) {
+            index = index + 1
+        } else {
+            result = result + str[i] + index
+            index = 1
+        }
+    }
+    result = result + str[str.length - 1] + index;
+    return result.length < str.length ? result : str
+}
+~~~
+### 81.判断两组字符串是否单词个数相等
+~~~
+function isTwoGroupStringEqual(str1, str2) {
+    if (str1.length !== str2.length) return false
+    const map = new Map()
+    for (let i = 0 ; i < str1.length ; i++) {
+        if (map.get(str1[i])) {
+            map.set(str1[i], map.get(str1[i]) + 1)
+        } else if (!map.get(str1)) {
+            map.set(str1[i],1)
+        }
+
+        if (map.get(str2[i])) {
+            map.set(str2[i], map.get(str2[i]) - 1)
+        } else if (!map.get(str2[i])) {
+            map.set(str2[i],-1)
+        }
+    }
+    for (let letter of map) {
+        if (letter[1] > 0) return false
+    }
+
+    return true
 }
 ~~~
