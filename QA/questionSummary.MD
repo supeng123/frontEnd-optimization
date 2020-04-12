@@ -731,6 +731,25 @@ function longestSubString(s) {
     }
     return max
 }
+
+function longestSubString(s) {
+    let set = new Set()
+    let max = 0
+    let j = 0
+    for (var i = 0; i < s.length; i++) {
+        if (!set.has(s[i])) {
+            set.add(s[i])
+            max = Math.max(set.size, max)
+        } else {
+            while (set.has(s[i]) {
+                set.delete(s[j])
+                j ++
+            }
+            set.add(s[i])
+        }
+    }
+    return max
+}
 ~~~
 ### 61.找到重复字符并分组
 ~~~
@@ -1341,3 +1360,28 @@ function isTwoGroupStringEqual(str1, str2) {
     return true
 }
 ~~~
+### 81.判断回文字符串
+~~~
+function isReversedEqualOringin(str) {
+    const formattedStr = str.toLowerCase().replace(/[\W_]/g, "")
+    let left = 0
+    let right = formattedStr.length - 1
+    while(left < right) {
+        if (formattedStr[left] !== formattedStr[right]) return false
+        left ++
+        right --
+    }
+    return true
+}
+
+function isReversedEqualOringin(str) {
+    let result = true;
+    const formattedStr = str.toLowerCase().replace(/[\W_]/g, "")
+    const reversedStr = formattedStr.split(',').reverse().join(',')
+    for (let i = 0; i < formattedStr.length; i++) {
+        if (formattedStr[i] !== reversedStr[i]) result = false
+    }
+    return result
+}
+~~~
+
