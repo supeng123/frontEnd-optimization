@@ -782,6 +782,26 @@ function mergeBlock(arrayList) {
     }
     return mergeList
 }
+
+function mergeBlock(arrayList) {
+    if (!arrayList.length) return []
+    arrayList.sort((a,b) => a[0] - b[0])
+    const mergedList = []
+    const current = arrayList[0]
+    for (let list of arrayList) {
+        if (current[1] >= list[0]) {
+            current[1] = Math.max(current[1], list[1])
+        } else {
+            mergedList.push(list)
+            current = list
+        }
+    }
+    if (current.length !== 0) {
+        mergeList.push(current)
+    }
+   
+    return mergeList
+}
 ~~~
 ### 63.验证平衡二叉树是否是按顺序排列
 ~~~
@@ -891,6 +911,24 @@ function areBracketsClosed(randomString) {
         }
     }
     return sum === 0;
+}
+
+function areBracketsClosed(randomString) {
+    let result = true
+    const stack = []
+    const map = new Map()
+    map.set('(', ')')
+    map.set('{', '}')
+    map.set('[', ']')
+
+    for(let i = 0; i < randomString.length; i++) {
+        if (map.has(randomString[i])) {
+            stack.push(map.get(randomString[i]))
+        } else {
+            if (stack.pop() !== randomString[i]) result = false
+        } 
+    }
+    return stack.length === 0 && result
 }
 ~~~
 ### 68.最长有效括号
