@@ -1307,6 +1307,33 @@ function reverseLinkList(start, end) {
     first.next = current
     return first
 }
+
+function reverseKLinkedList(head, k) {
+    if (!head.next) return head
+    let a = head;
+    let b = head;
+    let index = 0
+    while (index < k) {
+        index++
+        if (!b) return head;
+        b = b.next
+    }
+    let headNode = reverse(a, b)
+    a.next = reverseKLinkedList(b, k)
+    return headNode;
+
+    function reverse(a, b) {
+        let current = a
+        let pre = null
+        while (current != b) {
+            let next = current.next
+            current.next = pre
+            pre = current 
+            current = next
+        }
+        return pre
+    }
+}
 ~~~
 ### 77.两数相加
 ~~~
@@ -1398,7 +1425,7 @@ function isTwoGroupStringEqual(str1, str2) {
     return true
 }
 ~~~
-### 81.判断回文字符串
+### 82.判断回文字符串
 ~~~
 function isReversedEqualOringin(str) {
     const formattedStr = str.toLowerCase().replace(/[\W_]/g, "")
@@ -1422,4 +1449,55 @@ function isReversedEqualOringin(str) {
     return result
 }
 ~~~
+### 83.最长的回文字符串
+~~~
+function longestReversedString(s) {
+    if (s.length < 2) return s
+    let start = 0
+    let maxLength = 1
+    for ( let i = 0; i < s.length; i++) {
+        expandAroundCenter(i-1, i+1)
+        expandAroundCenter(i, i+1)
+    }
+
+    function expandAroundCenter(left, right) {
+        while (s[left] === s[right] && left >= 0 && right < s.length) {
+            if (right - left + 1 > maxLength) {
+                maxLength = right - left + 1
+                start = left
+            }
+            left --
+            right ++
+        }
+    }
+
+    return s.substring(start, start + maxLength)
+}
+
+~~~
+
+### 84.字符串内容相等分组
+~~~
+function groupString(s) {
+    if (s.length < 1) return []
+    const map = new Map()
+    const result = []
+    for (let item of s) {
+        const arrayCode = new Array(26).fill(0)
+        for (let i = 0 ; i < item.length; i++) {
+            const assic = item[i].charAtCode() - 97
+            arrayCode[assic] + 1
+        }
+        const formattedCode = arrayCode.join('')
+        if (map.has(formattedCode)) {
+            map.set(formattedCode, map.get(formattedCode).push(item))
+        } else {
+            map.set(formattedCode, [item])
+        }
+    }
+    for (let item of map) {
+        result.push(item[1])
+    }
+    return result
+}
 
