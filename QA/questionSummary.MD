@@ -1483,10 +1483,10 @@ function groupString(s) {
     const map = new Map()
     const result = []
     for (let item of s) {
-        const arrayCode = new Array(26).fill(0)
+        const arrayCode = Array(26).fill(0)
         for (let i = 0 ; i < item.length; i++) {
-            const assic = item[i].charAtCode() - 97
-            arrayCode[assic] + 1
+            const assic = item.charCodeAt(i) - 97
+            arrayCode[assic] ++
         }
         const formattedCode = arrayCode.join('')
         if (map.has(formattedCode)) {
@@ -1500,4 +1500,90 @@ function groupString(s) {
     }
     return result
 }
+~~~
+### 85.螺旋矩阵
+~~~
+function spiralMatrix(arr) {
+    if (arr.length < 1) return []
+    const result = []
+    let direction = 'right'
+    let top = 0
+    let left = 0
+    let right = arr[0].length - 1
+    let bottom = arr.length - 1
+
+    while (left <= right && top <= bottom) {
+        if (direction == 'right') {
+            for (let i = left; i <= right; i++) {
+                result.push(arr[top][i])
+            }
+            top ++;
+            direction = 'down'
+        } else if (direction == 'down') {
+            for (let i = top; i <= bottom; i++) {
+                result.push(arr[i][right])
+            }
+            right --;
+            direction = 'left'
+        } else if (direction == 'left') {
+            for (let i = right; i >= left; i--) {
+                result.push(arr[bottom][i])
+            }
+            bottom --;
+            direction = 'top'
+        } else if (direction == 'top') {
+            for (let i = bottom; i >= top; i--) {
+                result.push(arr[i][left])
+            }
+            left ++;
+            direction = 'right'
+        }
+    }
+}
+~~~
+### 86.矩阵置零
+~~~
+function setZeroToMatrix(arr) {
+    //找出第一行是否有零
+    let row = false
+    let column = false
+    for(let i = 0; i < arr[0].length; i++) {
+        if (arr[0][i] === 0) row = true
+    }
+    //找出第一列是否有零
+    for(let i = 0; i < arr.length; i++) {
+        if (arr[i][0] === 0) column = true
+    }
+    //把出现零的行和列的头转化为零
+    for(let i = 1; i < arr.length; i++) {
+        for(let j = 1; j < arr[0].length; j++) {
+            if (arr[i][j] === 0) {
+                arr[i][0] = 0
+                arr[0][j] = 0
+            } 
+        }
+    }
+    //利用第一行和第一列标零的情况把对应行列标零
+    for(let i = 1; i < arr.length; i++) {
+        for(let j = 1; j < arr[0].length; j++) {
+            if (arr[i][0] === 0 || arr[0][j] === 0) {
+                arr[i][j] = 0
+            } 
+        }
+    }
+    //判断第一行和列的零
+    if(row) {
+        for(let j = 0; j < arr[0].length; j++) {
+            arr[0][j] = 0
+        }
+    }
+    if(column) {
+        for(let j = 0; j < arr.length; j++) {
+            arr[j][0] = 0
+        }
+    }
+
+    return arr;
+}
+~~~
 
