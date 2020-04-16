@@ -1586,4 +1586,75 @@ function setZeroToMatrix(arr) {
     return arr;
 }
 ~~~
+### 87.斐波那契数列
+~~~
+function fib(n) {
+    if (n < 1) return n
+    const cache = []
+    cache[0] = 0
+    cache[1] =1
+    for (var i = 2; i <= n; i++) {
+        cache[i] = cache[i-1] + cache[i-2]
+    }
+    return cache[n];
+}
 
+function fib(n) {
+    if (n < 1) return n
+    let result = 0
+    let pre = 0
+    let next = 1
+    for (var i = 2; i <= n; i++) {
+        result = next + pre
+        pre = next
+        next = result
+    }
+    return result;
+}
+
+function fib(n) {
+    const cache = []
+    cache[0] = 0
+    cache[1] =1
+    
+    function memoize(number) {
+        if (cache[number] !== undefined) {
+            return cache[number]
+        }
+        cache[number] = memoize(number - 1) + memoize(number - 2)
+        return cache[number]
+    }
+    return memoize(n)
+}
+~~~
+### 88.三数之和
+~~~
+var threeSum = function(nums) {
+    const arr = nums.sort((a,b) => a-b)
+    const result = []
+    for (let i = 0; i < arr.length-2; i++) {
+        if (i === 0 || arr[i] != arr[i-1]) {
+            let start = i + 1
+            let end = arr.length - 1
+            while (start < end) {
+                if (arr[i] + arr[start] + arr[end] === 0) {
+                    result.push([arr[i],arr[start], arr[end]])
+                    start++
+                    end --
+                    while (arr[start] == arr[start-1]) {
+                        start ++
+                    }
+                    while (arr[end] == arr[end+1]) {
+                        end --
+                    }
+                } else if (arr[i] + arr[start] + arr[end] < 0) {
+                    start ++
+                } else {
+                    end --
+                }   
+            }
+        } 
+    }
+    return result
+};
+~~~
