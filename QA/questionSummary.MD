@@ -1658,3 +1658,100 @@ var threeSum = function(nums) {
     return result
 };
 ~~~
+### 89.二分搜索
+~~~
+function binarySearch(array,target) {
+    const arr = array.sort((a,b) => a -b)
+    let left = 0;
+    let right = arr.length -1
+    while (left <= right) {
+        let middle = Math.floor((right+left)/2)
+        if(arr[middle] > target) {
+            left = middle + 1
+        } else if (arr[middle] < target) {
+            right = middle - 1
+        } else {
+            return middle;
+        }
+    }
+}
+~~~
+### 90.旋转排序数组中最小值
+~~~
+//4560123
+//456和0123都是排过序的
+function binarySearchMin(arr) {
+    let left = 0;
+    let right = arr.length -1
+
+    if (arr[right] > arr[left]) return arr[0]
+    
+    while (left < right) {
+        let middle = Math.floor((right+left)/2)
+        if(arr[middle] > arr[middle+1]) {
+            return arr[middle + 1]
+        } else if (arr[middle-1] > arr[middle]) {
+            return arr[middle]
+        }
+
+        if (arr[middle]> arr[left]){
+            left = middle+1
+        }
+        else if (arr[middle]< arr[right]){
+            right = middle -1
+        }
+    }
+}
+~~~
+### 91.所有数组中交叉的部分
+~~~
+function intersectionFind(arrays) {
+    return [...new Set(
+        arrays.reduce((result, array) => {
+            result.filter(item => array.includes(item))
+        })
+    )]
+}
+~~~
+### 92.存在重复的数据
+~~~
+function isContainedRepeatData(array) {
+    const set = new Set()
+    for (let i = 0 ; i < array.length; i++) {
+        if (set.has(array[i])) return true
+        else {
+            set.add(array[i])
+        }
+    }
+    return false
+}
+~~~
+### 93.LRU
+~~~
+function LRU() {
+    constructor(capacity) {
+        this.contanier = new Map()
+        this.capacity = capacity
+    }
+
+    get(key){
+        if(this.container.has(key)) {
+            const item = this.container.get(key)
+            this.container.delete(key)
+            this.container.set(key, item)
+            return item
+        }
+        return -1
+    }
+
+    put(key, value){
+        if (this.container.has(key)) {
+            this.container.delete(key)
+        }
+        if (this.container.size >= capacity) {
+            this.container.delete(this.container.keys().next().value)
+        }
+        this.container.set(key,value)
+    }
+}
+~~~
