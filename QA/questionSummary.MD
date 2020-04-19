@@ -1763,8 +1763,8 @@ function hostage(nums){
     const memo = []
     memo[0] = nums[0]
     memo[1] = Math.max(nums[0], nums[1])
-    for (let i = 0;i < nums.lenght; i++){
-        memo[i] = Math.max(num[i] + memo[i-2], memo[i-1])
+    for (let i = 2;i < nums.length; i++){
+        memo[i] = Math.max(nums[i] + memo[i-2], memo[i-1])
     }
     return memo[nums.length - 1]
 }
@@ -1811,5 +1811,48 @@ function jump(nums) {
         }
     }
     return memo[0] === 1
+}
+~~~
+###.最大子序列
+~~~
+//和打家劫舍的题目比较像
+function maxSubSerial(nums){
+    if (nums.length === 0) return 0
+    if (nums.length === 1) return nums[0]
+    const memo = []
+    memo[0] = nums[0]
+    let max = nums[0]
+    for (let i = i;i < nums.length; i++){
+        memo[i] = Math.max(nums[i] + memo[i-1], nums[i])
+        max = Math.max(max, memo[i])
+    }
+    return max
+}
+~~~
+###.最长路径
+~~~
+//已知第一行和第一列都为1，那么每个单独的节点的最长路径等于上面的路径加上左边的路径
+//m为7，n为3
+function maxSubSerial(m, n){
+    const arr = []
+    for (let i = 0; i < n; i++) {
+        arr.push([])
+    }
+
+    for (let i = 0; i < n; i++) {
+        arr[i][0] = 1 
+    }
+
+    for (let i = 0; i < m; i++) {
+        arr[0][i] = 1 
+    }
+
+    for (let i = 1; i < n; i++) {
+        for (let j = 1; j < m; i++) {
+            arr[i][j] = arr[i-1][j] + arr[i][j-1]
+        }
+    }
+
+    return arr[n-1][m-1]
 }
 ~~~
