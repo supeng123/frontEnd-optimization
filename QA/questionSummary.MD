@@ -1813,7 +1813,7 @@ function jump(nums) {
     return memo[0] === 1
 }
 ~~~
-###.最大子序列
+### 96.最大子序列
 ~~~
 //和打家劫舍的题目比较像
 function maxSubSerial(nums){
@@ -1829,7 +1829,7 @@ function maxSubSerial(nums){
     return max
 }
 ~~~
-###.最长路径
+### 97.最长路径
 ~~~
 //已知第一行和第一列都为1，那么每个单独的节点的最长路径等于上面的路径加上左边的路径
 //m为7，n为3
@@ -1854,5 +1854,22 @@ function maxSubSerial(m, n){
     }
 
     return arr[n-1][m-1]
+}
+~~~
+### 98.最大乘积
+~~~
+function maxProduct(array) {
+    const maxmemo = []
+    const minmemo = []
+    maxmemo[0] = array[0]
+    minmemo[0] = array[0]
+    let max = array[0]
+    
+    for (let i = 1; i < array.length; i++) {
+        maxmemo[i] = Math.max(array[i]*maxmemo[i - 1], array[i], array[i]*minmemo[i-1])
+        minmemo[i] = Math.min(array[i]*maxmemo[i - 1], array[i], array[i]*minmemo[i-1])
+        max = Math.max(max, maxmemo[i])
+    }
+    return max
 }
 ~~~
