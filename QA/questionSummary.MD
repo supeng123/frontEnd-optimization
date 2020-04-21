@@ -1873,3 +1873,73 @@ function maxProduct(array) {
     return max
 }
 ~~~
+### 99.各自的乘积
+~~~
+function eachProducts(arrs) {
+    let product = 1
+    const result = new Array(arrs.length).fill(1)
+    for (let i = 0; i < arrs.length; i++) {
+        result[i] = product * result[i]
+        product = product * arrs[i]
+    }
+    product = 1
+    for (let i = arr.length - 1; i >= 0; i--) {
+        result[i] = product * result[i]
+        product = product * arrs[i]
+    }
+    return result
+}
+~~~
+### 100.潜艇数量
+~~~
+function marineNumbers(arrs) {
+    let count = 0
+    for (let i = 0; i <= arrs.length; i++) {
+       for (let j = 0; j <= arrs[0].length; j++) {
+           if (arrs[i][j] === 'X') {
+               count ++
+               dfs(i, j)
+           }
+        } 
+    }
+
+    return count
+    
+    function dfs(row, column) {
+        if (row < 0 || row >= arrs.length || column < 0 || column > arrs[0].length || arrs[row][column] != 'X' ) return
+        arrs[row][column] = 0
+        dfs(row + 1, column)
+        dfs(row - 1, column)
+        dfs(row, column + 1)
+        dfs(row, column - 1)
+    }
+}
+~~~
+### 101.n结楼梯最大可能爬法
+~~~
+function staircases(n) {
+    const result = []
+    result[1] = 1
+    result[2] = 2
+    for (let i = 3; i <= n; i++) {
+        result[i] = result[i-2] + result[i-1]
+    }
+    return result[n]
+}
+~~~
+### 102.移动零到数组的后面
+~~~
+function moveZeros(arr) {
+    let j = 0
+    for (let i = 0; i <= arr.length; i++) { 
+        if (arr[i] != 0) {
+            arr[j] = arr[i]
+            j++
+        }
+    }
+    for (let i = j; i <= arr.length; i++) { 
+        arr[i] = arr[0]
+    }
+    return arr
+}
+~~~
