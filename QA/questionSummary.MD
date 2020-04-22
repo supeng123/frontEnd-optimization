@@ -1943,3 +1943,26 @@ function moveZeros(arr) {
     return arr
 }
 ~~~
+### 103.两个篮子装连续最多的果树
+~~~
+function mostTrees(arr) {
+    const map = new Map()
+    let min = arr.length - 1
+    let j = 0
+    let max = 1
+    for (let i = 0; i <= arr.length; i++) { 
+        map.set(arr[i], i)
+        if (map.size > 2) {
+            for (let [item, index] of map) {
+                if (index < min) {
+                    min = index
+                }
+            }
+            map.delete(arr[min])
+            j = min + 1
+        }
+        max = Math.max(max, i-j+1)
+    }
+    return max
+}
+~~~
