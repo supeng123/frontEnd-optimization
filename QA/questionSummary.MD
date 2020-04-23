@@ -1966,3 +1966,43 @@ function mostTrees(arr) {
     return max
 }
 ~~~
+### 104.间隔排序最小第一最大第二
+~~~
+function sort(arr) {
+    arr.sort((a,b)=> a-b)
+    let start = 0
+    let end = arr.length - 1
+    let result = []
+    while (start <= end) {
+        result.push(arr[start])
+        result.push(arr[end])
+        start++
+        end--
+    }
+    return arr.length%2==1 ? result.slice(0, result.length-1) : result
+}
+~~~
+### 105.加油站问题
+~~~
+function gaslineStation(gasline, cost) {
+    let current = 0
+    let start = 0
+    let totalGasline = 0
+    let totalCost = 0
+    for (let i = 0; i < gasline.length; i++) {
+        totalGasline += gasline[i]
+        totalCost += cost[i]
+    }
+    if (totalGasline < totalCost) return -1
+
+    for (let i = 0; i < gasline.length; i++) {
+        current = current + gasline[i] - cost[i]
+        if (current < 0) {
+            current = 0
+            start = i + 1
+        }
+    }
+
+    return start
+}
+~~~
