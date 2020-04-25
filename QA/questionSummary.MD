@@ -2006,3 +2006,74 @@ function gaslineStation(gasline, cost) {
     return start
 }
 ~~~
+### 106.合并两个有序链表
+~~~
+function mergeTwoLinkedList(l1,l2) {
+    let cur = new ListNode()
+    const dummyNode = cur
+
+    while (l1 !== null && l2 !== null) {
+        if (l1.value > l2.value) {
+            cur.next = l2
+            l2 = l2.next
+        } else {
+            cur.next = l1
+            l1 = l1.next
+        }
+        cur = cur.next
+    }
+    if (l1 !== null) {
+        cur.next = l1
+    }
+    if (l2 !== null) {
+        cur.next = l2
+    }
+    return dummy.next
+}
+~~~
+### 107.四数之和
+~~~
+/**
+var fourSum = function(nums, target) {
+    const result = []
+    const len = nums.length
+    nums.sort((a,b) => a-b)
+    let left
+    let right
+    let sum
+    for (let i = 0; i < len - 3; i++) {
+        if (i > 0 && nums[i] ===  nums[i-1]) continue;
+
+        for (let j = i+1; j < len - 2; j++) {
+            if (j > i+1 && nums[j] ===  nums[j-1]) continue;
+                left = j + 1
+                right = len - 1
+                while (left < right) {
+                    sum = nums[i] + nums[j] + nums[left] + nums[right]
+                    if (sum === target) {
+                        result.push([nums[i], nums[j], nums[left], nums[right]])
+                        left ++
+                        while (nums[left] == nums[left - 1]) {
+                            left ++
+                        } 
+                        right --
+                        while (nums[right] == nums[right + 1]) {
+                            right --
+                        }
+                    } else if (sum < target) {
+                        left ++
+                        while (nums[left] == nums[left - 1]) {
+                            left ++
+                        } 
+                    } else if (sum > target) {
+                        right --
+                        while (nums[right] == nums[right + 1]) {
+                            right --
+                        }
+                    }
+                }
+        }
+    }
+    return result
+};
+~~~
