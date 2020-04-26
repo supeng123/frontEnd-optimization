@@ -2077,3 +2077,16 @@ var fourSum = function(nums, target) {
     return result
 };
 ~~~
+### 108.删掉数组重复项
+~~~
+funciton removeDuplicates(nums) {
+    let slow = 0
+    for (let fast = 2; fast < nums.length; i++) {
+        if (nums[slow] !== nums[fast]) {
+            nums[slow + 2] = nums[fast]
+            slow ++
+        }
+    }
+    return slow + 2
+}
+~~~
