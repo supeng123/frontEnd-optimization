@@ -2090,3 +2090,18 @@ funciton removeDuplicates(nums) {
     return slow + 2
 }
 ~~~
+### 109.用循环实现前序遍历
+~~~
+function traversal(root) {
+    const result = []
+    const stack = []
+    stack.push(root)
+    while (stack.length !== null){
+        let currentNode = stack.pop()
+        result.push(currentNode.val)
+        currentNode.right && stack.push(currentNode.right)
+        currentNode.left && stack.push(currentNode.left)
+    }
+    return result
+}
+~~~
