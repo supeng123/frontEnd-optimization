@@ -2105,3 +2105,32 @@ function traversal(root) {
     return result
 }
 ~~~
+### 110.竖直打印文字
+~~~
+//how are you
+//hay oro weu
+function veticalPrint(str) {
+    const arr = str.join(' ')
+    let maxLength = arr[0].length
+    let ss = ''
+    for (let item of arr) {
+        if (item.length > maxLength) maxLength = item.length
+    }
+
+    for (let i = 0; i < maxLength; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            let s = arr[j][i]
+            if (s === '') {
+                ss += ' '
+            } else {
+                ss += s
+            }
+        }
+        ss.replace(/\s*$/g, '')
+        if (i != maxLength) {
+            ss += '-'
+        }
+    }
+    return ss.split('-')
+}
+~~~
