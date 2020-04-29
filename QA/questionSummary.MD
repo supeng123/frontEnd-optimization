@@ -2134,3 +2134,40 @@ function veticalPrint(str) {
     return ss.split('-')
 }
 ~~~
+### 111.比较退格字符串
+~~~
+function backspaceCompare(S, T) {
+    let i = S.length - 1
+    let j = T.length - 1
+    let backSpaceS = 0
+    let backSpaceT = 0
+    while (i >=0 || j>=0) {
+        while (i >=0) {
+            if (S[i] === "#") {
+                backSpaceS++
+                i--
+            } else if (backSpacS > 0) {
+                backSpaceS--
+                i--
+            } else {
+                break
+            }
+        }
+        while (j >=0) {
+            if (T[i] === "#") {
+                backSpaceT++
+                j--
+            } else if (backSpacT > 0) {
+                backSpacT--
+                j--
+            } else {
+                break
+            }
+        }
+        if (S[i] !== T[j]) return false
+        i --
+        j --
+    }
+    return true
+}
+~~~
