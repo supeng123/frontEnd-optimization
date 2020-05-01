@@ -2182,3 +2182,50 @@ function removeAllLeaves(root, target) {
     return root
 }
 ~~~
+### 113.反转链表的第m到n位
+~~~
+function reverseLinkedList(head, m, n) {
+    const dummyNode = {next: head}
+    
+    let listNode = dummyNode
+    for (let i = 0; i < m - 1; i++) {
+        listNode = listNode.next
+    }
+    let cur = listNode.next
+    let pre = null
+    for (let i = 0; i < n- m + 1; i++) {
+        let next = cur.next
+        cur.next = pre
+        pre = cur
+        cur = next
+    }
+    listNode.next.next = cur
+    listNode.next = pre
+    return dummyNode.next
+}
+~~~
+### 113.是否为回文链表
+~~~
+function reverseLinkedList(head) {
+    if (head === null && head.next === null) return true
+    let reversed = null
+    let pre = null
+    let mid = head
+    while (head !== null && head.next !== null) {
+
+        pre = mid
+        mid = mid.next
+        head = head.next.next
+
+        pre.next = reversed
+        reversed = pre
+    }
+    if (head) mid = mid.next
+    while (mid) {
+        if (mid.val !== reversed.val) return false
+        mid = mid.next
+        reversed = reversed.next
+    }
+    return true
+}
+~~~
