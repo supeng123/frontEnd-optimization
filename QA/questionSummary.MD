@@ -2229,3 +2229,27 @@ function reverseLinkedList(head) {
     return true
 }
 ~~~
+### 114.删除链表里面一个元素
+~~~
+function removeNode(head, val) {
+    const dummyNode = {
+        next: head
+    }
+    let pre = dummyNode
+    while (pre.next) {
+        if (pre.next.val === val) {
+            pre.next = pre.next.next
+        } else {
+            pre = pre.next
+        }
+    }
+    return dummyNode.head
+}
+
+function removeNode(node) {
+    let deleteNode = node.next
+    node.val = deleteNode
+    node.next = deleteNode.next
+    deleteNode.next = null
+}
+~~~
