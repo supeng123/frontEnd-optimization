@@ -2253,3 +2253,18 @@ function removeNode(node) {
     deleteNode.next = null
 }
 ~~~
+### 115.删除重复的链表元素
+~~~
+function removeRepeatElement(head) {
+    let cur = head
+    while (cur!== null) {
+        let nextNode = cur.next
+        while(nextNode !== null && cur.val === nextNode.val) {
+            nextNode = nextNode.next
+        }
+        cur.next = nextNode
+        cur = nextNode
+    }
+    return head
+}
+~~~

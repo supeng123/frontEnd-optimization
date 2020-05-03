@@ -57,7 +57,7 @@ function insertSort(data) {
     for (var i = 1; i < data.length; i++) {
         var value = data[i]
         var b = i;
-        while (data[b-1] > temp && b > 0) {
+        while (data[b-1] > data[b] && b > 0) {
             data[b] = data[b-1];
             b--;
         }
@@ -147,6 +147,36 @@ function quickSort(data) {
 const quickSortData = [5,3,7,9,1,4]
 const result = quickSort(quickSortData);
 console.log(result)
+function quickSort(seq){
+    return sort(seq, 0, seq.length - 1);
+ 
+    function swap(seq, i, k){
+        var tempVal = seq[i];
+        seq[i] = seq[k];
+        seq[k] = tempVal;
+    }
+ 
+    function sort(seq, start, end){
+        if(start >= end) return;
+ 
+        var pivot = seq[start],
+            i = start + 1,
+            k = end;
+ 
+        while(true){
+            while(i <= end && seq[i] < pivot) i++;
+            while(k > start && seq[k] >= pivot) k--;
+ 
+            if(i >= k) break;
+            swap(seq, i, k);
+        }
+ 
+        swap(seq, start, k);
+        sort(seq, start, Math.max(0, k - 1));
+        sort(seq, Math.min(end, k + 1), end);
+    }
+}
+
 
 //count sort
 function countSort(arr) {
