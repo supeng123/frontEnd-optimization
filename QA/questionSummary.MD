@@ -2267,4 +2267,25 @@ function removeRepeatElement(head) {
     }
     return head
 }
+
+function removeRepeatElement(head) {
+    const dummyNode = {next: head}
+    let pre = dummyNode
+    let cur = pre.next
+    while (cur!=null && cur.next !=null) {
+        let isRepeated = false
+        while(cur.next && cur.val === cur.next.val) {
+            cur.next = cur.next.next
+            isRepeated = true
+        }
+        if (isRepeated) {
+            pre.next = cur.next
+            cur = cur.next
+        } else {
+            pre = pre.next
+            cur = cur.next
+        }
+    }
+    return dummyNode.next
+}
 ~~~
