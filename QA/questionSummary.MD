@@ -1439,6 +1439,24 @@ function isReversedEqualOringin(str) {
     return true
 }
 
+function ispanliTrim(str) {
+    for (let i = 0, j = str.length - 1; i < j; i++,j--) {
+        if (str.charAt(i) !== str.charAt(j)) {
+            return isReverse(str, i, j-1) || isReverse(str, i+1, j)
+        }
+    }
+    return true
+}
+
+isReverse(str, i, j) {
+    while (i < j) {
+        if (str.charAt(i) !== str.charAt(j)) return false
+        i ++
+        j --
+    }
+    return true
+}
+
 function isReversedEqualOringin(str) {
     let result = true;
     const formattedStr = str.toLowerCase().replace(/[\W_]/g, "")
@@ -2272,8 +2290,9 @@ function removeRepeatElement(head) {
     const dummyNode = {next: head}
     let pre = dummyNode
     let cur = pre.next
+    
     while (cur!=null && cur.next !=null) {
-        let isRepeated = false
+        
         while(cur.next && cur.val === cur.next.val) {
             cur.next = cur.next.next
             isRepeated = true
