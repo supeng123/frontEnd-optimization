@@ -2308,3 +2308,32 @@ function removeRepeatElement(head) {
     return dummyNode.next
 }
 ~~~
+### 116.小岛面积
+~~~
+var maxAreaOfIsland = function(grid) {
+    let result = 0
+    for (let row = 0 ; row < grid.length; row++) {
+        for (let column = 0; column < grid[0].length; column++) {
+            if (grid[row][column] === 1) {
+                const counts = dfs(row, column)
+                result = Math.max(result, counts)
+            }
+        }
+    }
+
+    return result
+
+    function dfs(r, c) {
+        if (r < 0 || c < 0 || r >= grid.length || c >= grid[0].length || grid[r][c] === 0) {
+            return 0
+        }
+        grid[r][c] = 0
+        let count  = 1
+        count += dfs(r+1, c)
+        count += dfs(r-1, c)
+        count += dfs(r, c+1)
+        count += dfs(r, c-1)
+        return count
+    }
+};
+~~~
