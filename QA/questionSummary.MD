@@ -2337,3 +2337,26 @@ var maxAreaOfIsland = function(grid) {
     }
 };
 ~~~
+### 117.奇数偶数排序
+~~~
+function sort(nums) {
+    let start = 0
+    let end = num.length - 1
+    while (start < end) {
+        const isStartEven = nums[start]%2 === 0
+        const isEndEven = nums[end]%2 === 0
+
+        if (isStartEven && isEndEven) {
+            start++
+        } else if (isStartEven && !isEndEven) {
+            start++
+            end--
+        } else if (!isStartEven && !isEndEven) {
+            end--
+        } else {
+            [nums[start], nums[end]] = [nums[end], nums[start]]
+        }
+    }
+    return nums
+}
+~~~
