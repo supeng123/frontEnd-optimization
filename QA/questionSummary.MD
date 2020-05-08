@@ -2360,3 +2360,18 @@ function sort(nums) {
     return nums
 }
 ~~~
+### 118.n个节点组成二叉树有多少种
+~~~
+function permutationBinaryTree(n) {
+    const result = []
+    result[0] = 1
+    result[1] = 1
+    for (let i = 2; i <= n; i++) {
+        result[i] = 0
+        for (let j = 1; j <= i; j++) {
+            result[i] += result[j - 1] * result[i - j]
+        }
+    }
+    return result[n]
+}
+~~~
