@@ -2359,6 +2359,19 @@ function sort(nums) {
     }
     return nums
 }
+
+function sort(nums) {
+    let j = 1
+    for (let i = 0; i < nums.length; i+=2) {
+        if (nums[i]%2 == 1) {
+            while(nums[j]%2 == 1 && j < nums.length) {
+                j +=2
+            }
+            [nums[i], nums[j]] = [nums[j], nums[i]]
+        }
+    }
+    return nums
+}
 ~~~
 ### 118.n个节点组成二叉树有多少种
 ~~~
@@ -2373,5 +2386,91 @@ function permutationBinaryTree(n) {
         }
     }
     return result[n]
+}
+
+~~~
+### 119.二维矩阵，三角矩阵最小路径（动态规划）
+~~~
+function twoDemensionMatrix(arrs) {
+    let row = arrs.length;
+    let colomn = arrs[0].length;
+    const result = []
+    for (let i = 0; i < row; i++) {
+        result.push([])
+        for (let j = 0; j < column; j++) {
+            result[i][j] = Number.MAX_VALUE
+        }
+    }
+    result[i][j] = arrs[0][0]
+
+    for (let i = 0; i < row; i++) {
+        for (let j = 0; j < column; j++) {
+            if (i > 0) {
+                result[i][j] = Math.min(result[i][j], result[i-1][j] + nums[i][j])
+            }
+            if (j > 0) {
+                result[i][j] = Math.min(result[i][j], result[i][j-1] + nums[i][j] )
+            }
+        }
+    }
+    return nums[row-1][column-1]
+}
+
+function triangleMatrix(arrs) {
+    let row = arrs.length;
+    for (let i = 1; i < row; i++) {
+        for (let j = 0; j <= i; j++) {
+            let a = arrs[i-1][j] !== undefined ? arrs[i-1][j] : Number.MAX_VALUE
+            let b = arrs[i-1][j-1] !== undefined ? arrs[i-1][j-1] : Number.MAX_VALUE
+            arrs[i][j] += Math.min(a, b)
+        }
+    }
+    return Math.min(...arrs[row-1])
+}
+
+function triangleMatrix(arrs) {
+    let row = arrs.length;
+    const result = []
+    for (let i = 1; i < row; i++) {
+        for (let j = 0; j <= i; j++) {
+            result[i][j] = Number.MAX_VALUE
+        }
+    }
+
+    for (let i = 1; i < row; i++) {
+        for (let j = 0; j <= i; j++) {
+            result[i][j] = Math.min(result[i][j], result[i-1][j] + nums[i][j])
+            if (j > 0) {
+                result[i][j] = Math.min(result[i-1][j-1], result[i-1][j-1] + nums[i][j])
+            }
+        }
+    }
+    return Math.min(...result[row-1])
+}
+
+function triangleSecond(arrs) {
+     let row = arrs.length;
+    const result = []
+    for (let i = 0; i < row; i++) {
+        result.push([])
+        for (let j = 0; j <= i; j++) {
+            result[i][j] = Number.MAX_VALUE
+        }
+    }
+
+    result[0][0] = arrs[0][0]
+    for (let i = 1; i < row; i++) {
+        for (let j = 0; j <= i; j++) {
+            if (i > 0 && j < i) {
+                result[i][j] = Math.min(result[i][j], result[i-1][j] + arrs[i][j])
+            }
+            
+            if (j > 0) {
+                result[i][j] = Math.min(result[i][j], result[i-1][j-1] + arrs[i][j])
+            }
+            console.log(result[i][j])
+        }
+    }
+    return Math.min(...result[row-1])
 }
 ~~~
