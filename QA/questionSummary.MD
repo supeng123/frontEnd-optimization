@@ -2474,3 +2474,38 @@ function triangleSecond(arrs) {
     return Math.min(...result[row-1])
 }
 ~~~
+### 120.最大的装水面积
+~~~
+function area(arr) {
+    let result = 0
+    let left = 0
+    let right = arr.length - 1
+    while (left < right) {
+        const area = (right - left) * Math.min(arr[left], arr[right])
+        result = Math.max(area, result)
+        if (arr[left] <= arr[right]) left ++
+        right --
+    }
+    return result
+}
+~~~
+### 121.二叉树右视图
+~~~
+function rightSideView(root) {
+    const result = []
+    if (!root) return result
+    const queue = []
+    queue.push(root)
+    while (queue.length !== 0) {
+        let len = queue.length
+        while (len > 0) {
+            let node = queue.shift()
+            if (len == 1) result.push(node.val)
+            node.left && queue.push(node.left)
+            node.right && queue.push(node.right)
+            len--
+        }
+    }
+    return result
+}
+~~~
