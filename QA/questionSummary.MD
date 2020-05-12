@@ -2509,3 +2509,30 @@ function rightSideView(root) {
     return result
 }
 ~~~
+### 122.一条直线上最多的点
+~~~
+function mostDots(nums) {
+    if (nums.length <=2) return 2
+    let result = 2
+    for (let i = 0; i < nums.length; i++) {
+        let repeated = 1
+        let hash = {}
+        for (let j = i+1; j < nums.length; j++) {
+            let [[x1, y1], [x2, y2]] = [nums[i], nums[j]]
+            if (x1 == x2 && y1  == y2) {
+                repeated++;
+                continue;
+            } 
+            let k = (x1-x2)/(y1-y2)
+            if (k === -infinite) k = infinite
+            if (hash[k]) {
+                hash[k] + 1
+            } else {
+                hash[k] = 1
+            }
+        }
+        result = Math.max(result, Math.max(...Object.values(hash))+ repeated) 
+    }
+    return result
+}
+~~~
