@@ -2563,3 +2563,38 @@ function wordSearch(matrix, word) {
     }
 }
 ~~~
+### 124.排序链表
+~~~
+function linkListPermutation(head) {
+    if (!head || !head.next) return head
+    function mergeList(left, right) {
+        let leftNode = left
+        let rightNode = right
+        const dummyNode = new listNode(0)
+        let nNode = dummyNode
+        while(leftNode && rightNode) {
+            if (leftNode.val <= rightNode.val){
+                nNode.next = leftNode
+                leftNode = leftNode.next
+            } else {
+                nNode.next = rightNode
+                rightNode = rightNode.next
+            }
+            nNode = nNode.next
+        }
+        nNode.next = leftNode ? leftNode : rightNode
+        return dummyNode.next
+    }
+
+    let mid = head
+    let fast = head
+    while(fast.next && fast.next.next) {
+        mid = mid.next
+        fast = fast.next.next
+    }
+    let rightNode = mid.next
+    mid.next = null
+    let leftNode = head
+    return mergeList(linkListPermutation(leftNode), linkListPermutation(rightNode))
+}
+~~~
