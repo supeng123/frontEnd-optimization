@@ -2598,3 +2598,29 @@ function linkListPermutation(head) {
     return mergeList(linkListPermutation(leftNode), linkListPermutation(rightNode))
 }
 ~~~
+### 125.DNA重复查找
+~~~
+function groupDNA(s){
+    const result = []
+    const map = new Map()
+    let len = s.length
+    let start = 0
+    let end = 10
+    while (end <= len) {
+        const str = s.substring(start, end)
+        if (map.has(str)) {
+            map.set(str, map.get(str) + 1)
+        } else {
+            map.set(str, 1)
+        }
+        start++
+        end++
+    }
+    for (let[key, value] of map) {
+        if(value > 1) {
+            result.push(key)
+        }
+    }
+    return result
+}
+~~~
