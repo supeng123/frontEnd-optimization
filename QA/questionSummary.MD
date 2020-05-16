@@ -2624,3 +2624,24 @@ function groupDNA(s){
     return result
 }
 ~~~
+### 126.环形链表
+~~~
+function roundLinkedList(head) {
+    if (!head || !head.next) return null
+    let slow = head
+    let fast = head
+    let start = head
+    while (fast.next && fast.next.next) {
+        slow = slow.next
+        fast = fast.next.next
+        if (slow == fast) {
+            while(slow !== start) {
+                start = start.next
+                slow = slow.next
+            }
+            return slow
+        }
+    }
+    return null
+}
+~~~
