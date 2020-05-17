@@ -2644,4 +2644,32 @@ function roundLinkedList(head) {
     }
     return null
 }
+//what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
+//If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
+//unsavory remnants of many hotel rooms I still wake up screamnng over
+~~~
+
+### 127.三数最近
+~~~
+function threeSum(arr, target) {
+    arr.sort((a, b) => a - b)
+    let result = arr[0] + arr[1] + arr[2]
+    for (let i = 0; i < arr.length - 2; i++) {
+        let start = i + 1
+        let end = arr.length - 1
+        while (start < end) {
+            const sum = arr[i] + arr[start] + arr[end]
+            if (Math.abs(target-sum) < Math.abs(target - result)) {
+                result = sum
+            }
+            if (sum < target) start++
+            if (sum > target) end--
+            if （sum = taregt) {
+                result = sum
+                break
+            }
+        }
+    }
+    return result
+}
 ~~~
