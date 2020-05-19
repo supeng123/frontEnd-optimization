@@ -2310,6 +2310,7 @@ function removeRepeatElement(head) {
 ~~~
 ### 116.小岛面积
 ~~~
+//dfs
 var maxAreaOfIsland = function(grid) {
     let result = 0
     for (let row = 0 ; row < grid.length; row++) {
@@ -2339,6 +2340,7 @@ var maxAreaOfIsland = function(grid) {
 ~~~
 ### 117.奇数偶数排序
 ~~~
+//双指针
 function sort(nums) {
     let start = 0
     let end = num.length - 1
@@ -2375,6 +2377,7 @@ function sort(nums) {
 ~~~
 ### 118.n个节点组成二叉树有多少种
 ~~~
+//129题
 function permutationBinaryTree(n) {
     const result = []
     result[0] = 1
@@ -2476,6 +2479,7 @@ function triangleSecond(arrs) {
 ~~~
 ### 120.最大的装水面积
 ~~~
+//双指针
 function area(arr) {
     let result = 0
     let left = 0
@@ -2491,6 +2495,7 @@ function area(arr) {
 ~~~
 ### 121.二叉树右视图
 ~~~
+//队列
 function rightSideView(root) {
     const result = []
     if (!root) return result
@@ -2511,6 +2516,7 @@ function rightSideView(root) {
 ~~~
 ### 122.一条直线上最多的点
 ~~~
+//哈希表
 function mostDots(nums) {
     if (nums.length <=2) return 2
     let result = 2
@@ -2538,6 +2544,7 @@ function mostDots(nums) {
 ~~~
 ### 123.单词搜索
 ~~~
+//dfs
 function wordSearch(matrix, word) {
     matrix[-1] = []
     matrix.push([])
@@ -2565,6 +2572,7 @@ function wordSearch(matrix, word) {
 ~~~
 ### 124.排序链表
 ~~~
+//归并排序
 function linkListPermutation(head) {
     if (!head || !head.next) return head
     function mergeList(left, right) {
@@ -2600,6 +2608,7 @@ function linkListPermutation(head) {
 ~~~
 ### 125.DNA重复查找
 ~~~
+//固定窗口
 function groupDNA(s){
     const result = []
     const map = new Map()
@@ -2626,6 +2635,7 @@ function groupDNA(s){
 ~~~
 ### 126.环形链表
 ~~~
+//快慢指针
 function roundLinkedList(head) {
     if (!head || !head.next) return null
     let slow = head
@@ -2675,6 +2685,7 @@ function threeSum(arr, target) {
 ~~~
 ### 128.搜索插入位置
 ~~~
+//二分搜索
 function insertionIndex(arr, target) {
     let left = 0
     let right = arr.length
@@ -2688,6 +2699,34 @@ function insertionIndex(arr, target) {
     }
     return left
 }
+~~~
+### 129.不同二叉搜索树
+~~~
+//递归
+function differentTrees(n) {
+    if (n === 0) return []
+    return generateTree(1, n)
+
+    function generateTree(start, end) {
+        const res = []
+        if (start > end) return [null]
+        for(let i = start; i <= end; i++) {
+            let leftTree = generateTree(start, i-1)
+            let rightTree = generateTree(i+1, end)
+
+            for (let lNode of leftTree) {
+                for (let rNode of rightTree) {
+                    const cur = new TreeNode(i)
+                    cur.left = lNode
+                    cur.right = rNode
+                    res.push(cur)
+                }
+            }
+        }
+        return res
+    }
+}
+~~~
 少年鸭的奇幻漂流
     去年年末，我叔准备年货将自己去年在江北喂养的鸭和鸡带回老家，当时大家觉得直接杀掉放在冰箱吃起来不新鲜，而院子门经常打开加上天气也比较冷所以最后决定圈养
 在他家空置的楼顶，等合适的时候再处置。
