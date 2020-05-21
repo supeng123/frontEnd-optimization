@@ -2742,6 +2742,31 @@ function symmetryTree(root) {
     return isSymmetry(root.left, root.right)
 }
 ~~~
+### 131.下一个排列
+~~~
+//递归
+function symmetryTree(nums) {
+    if (nums.length < 2) return nums
+    let pre = nums.length - 2
+    let end = nums.length - 1
+    let next = nums.length - 
+
+    while (nums[pre] >= nums[next]) {
+        pre--
+        next--
+    }
+    if (pre < 0) return nums.reverse()
+    while (pre < end && num[pre] > nums[end]) {
+        end--
+    }
+    [nums[pre], nums[end]] = [nums[end], nums[pre]]
+
+    for (let l = nums.length -1 ; next < l; ++next , --l) {
+        [nums[next], nums[l]] = [nums[l], nums[next]]
+    }
+    return nums
+}
+~~~
 
 少年鸭的奇幻漂流
     去年年末，我叔准备年货将自己去年在江北喂养的鸭和鸡带回老家，当时大家觉得直接杀掉放在冰箱吃起来不新鲜，而院子门经常打开加上天气也比较冷所以最后决定圈养
