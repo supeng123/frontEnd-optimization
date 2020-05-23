@@ -2769,6 +2769,7 @@ function symmetryTree(nums) {
 ~~~
 ### 132.旋转链表
 ~~~
+//递归
 function rotateLinkedList(head, k) {
     if(!head || !head.next) return head
     let size = 1
@@ -2789,6 +2790,53 @@ function rotateLinkedList(head, k) {
     let start = cur.next
     cur.next = null
     return start
+}
+~~~
+### 133.链表交换节点
+~~~
+//递归
+function exchangeNode(head) {
+    if(!head || !head.next) return head
+    let dummyNode = {
+        next: head
+    }
+    let cur = dummyNode
+    while (cur.next && cur.next.next) {
+        let startNode = cur.next
+        let endNode = cur.next.next
+
+        dummyNode.next = endNode
+        startNode.next = endNode.next
+        endNode.next = startNode
+
+        cur = startNode
+    }
+    return dummyNode.next
+}
+~~~
+### 134.查找数组里面最后和第一个位置
+~~~
+//二分查找
+function findPosition(arr, target) {
+    let start = 0
+    let end = arr.length - 1
+    let mid
+    while (left <= right) {
+        mid = (left+right) >> 1
+        if (arr[mid] === target) break
+        if (arr[mid] > target) {
+            right = mid - 1
+        } else {
+            left = mid + 1
+        }
+    }
+    if (left > right) return [-1,-1]
+    let i = mid
+    let j = mid
+    while (arr[i] == arr[i-1]) i--
+    while (arr[j] == arr[j+1]) j++
+
+    return [i, j]
 }
 ~~~
 
