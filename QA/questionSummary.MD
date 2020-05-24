@@ -2839,6 +2839,43 @@ function findPosition(arr, target) {
     return [i, j]
 }
 ~~~
+### 135.生成括号
+~~~
+//动态规划
+function generateBracket(n) {
+    const dp = []
+    dp[0] = ['']
+    dp[1] = ['()']
+    for (let i = 2; i <= n i++) {
+        const res = []
+        for (let j = 0; j < i; j++) {
+            let inner = dp[j] 
+            let outer = dp[i-j-1]
+            for (let i of inner) {
+                for (let j of outer) {
+                    res.push(`(${i})${j}`)
+                }
+            }
+        }
+        dp[i] = res
+    }
+
+    return dp[n]
+}
+~~~
+### 136.合并数组
+~~~
+//双指针
+function mergeTwoList(nums1, m, nums2, n) {
+    const count = m + n
+    while (m > 0 && n > 0) {
+        nums1[--count] = nums1[m-1] > nums2[n-1] ? nums1[--m] : nums2[--n]
+    }
+    if (n > 0) {
+        nums1.splice(0, n, ...nums2.slice(0, n))
+    }
+}
+~~~
 
 少年鸭的奇幻漂流
     去年年末，我叔准备年货将自己去年在江北喂养的鸭和鸡带回老家，当时大家觉得直接杀掉放在冰箱吃起来不新鲜，而院子门经常打开加上天气也比较冷所以最后决定圈养
@@ -2864,3 +2901,14 @@ function findPosition(arr, target) {
     今天和堂妹聊到她因为疫情还在家不能返回学校，我们聊到年初种的几颗果树，那颗橘子树已经开始开花，另外两颗水土不服没能活下来，那只鸭子后来因为怕无人照管被带到我堂妹的舅妈家，但第二天
 只在菜园看到过它。
 ~~~
+dp[0] = [""]
+dp[1] = [()]
+inner = dp[0] dp[1]
+outer = dp[1] dp(0)
+dp[2]= [()() (())]
+dp[3]
+dp[0]dp[2] dp[1]dp[1] dp[2]dp[0]
+
+()()(),()(()),
+(())()
+(()()) ((()))
