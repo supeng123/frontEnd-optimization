@@ -2876,6 +2876,52 @@ function mergeTwoList(nums1, m, nums2, n) {
     }
 }
 ~~~
+### 137.全排列
+~~~
+//回溯
+function allPermutations(nums) {
+    const result = []
+    backTrack(result, [], nums)
+    return result
+
+    function backTrack(result, tempList, nums) {
+        if (tempList.length === nums) {
+            result.push([...tempList])
+            return
+        }
+        for (let i = 0; i < nums.length; i++) {
+            if (tempList.includes(num[i])) continue
+            tempList.push(num[i])
+            backTrack(result, tempList, nums)
+            tempList.pop(num[i])
+        }
+    }
+}
+~~~
+### 138.复原ip地址
+~~~
+//回溯
+function ipAddress(s) {
+    const result = []
+    backTrack(result, [], s)
+    return result
+
+    function isValid(str) {
+        if (str.length > 3) return false
+        return str.startswith("0") ? str.length === 1 : parseInt(str) < 255
+    }
+
+    function backTrack(result, tempList, remain) {
+        if (tempList.length === 3) {
+            isValid(tempList) && result.push([..temp, remain])
+            return
+        }
+        for (let i = 0; i < 4; i++) {
+            isValid(tempList) && backTrack(result,[...temp, remain.substr(0, i)], remain.substr(i))
+        }
+    }
+}
+~~~
 
 少年鸭的奇幻漂流
     去年年末，我叔准备年货将自己去年在江北喂养的鸭和鸡带回老家，当时大家觉得直接杀掉放在冰箱吃起来不新鲜，而院子门经常打开加上天气也比较冷所以最后决定圈养
