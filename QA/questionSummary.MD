@@ -2922,6 +2922,40 @@ function ipAddress(s) {
     }
 }
 ~~~
+### 140.最长上升子序列
+~~~
+//动态规划
+function lengthzOfLIS(nums) {
+    let len = nums.length
+    if (len === 0) return 0
+    let max = 0
+    const dp = new Array(len).fill(1)
+    for (let i = 1; i < len; i++) {
+        for (let j = 0; j < i; j++) {
+            if (nums[j] < nums[i]) {
+                dp[i] = Math.max(dp[i], dp[j]+1)
+            }
+        }
+        max = Math.max(max, dp[i])
+    }
+    return max
+}
+~~~
+### 141.零钱兑换
+~~~
+//动态规划
+function lengthzOfLIS(coins, num) {
+    const dp = new Array(len+1).fill(Infinity)
+    dp[0] = 0
+    for (let i = 1; i < num; i++) {
+        for (let coin of coins) {
+            if (i - coin < 0) continue
+            dp[i] = Math.min(dp[i], dp[i-coin]+1)
+        }
+    }
+    return dp[num] === Infinity ? -1 : dp[num]
+}
+~~~
 
 少年鸭的奇幻漂流
     去年年末，我叔准备年货将自己去年在江北喂养的鸭和鸡带回老家，当时大家觉得直接杀掉放在冰箱吃起来不新鲜，而院子门经常打开加上天气也比较冷所以最后决定圈养
@@ -2947,14 +2981,3 @@ function ipAddress(s) {
     今天和堂妹聊到她因为疫情还在家不能返回学校，我们聊到年初种的几颗果树，那颗橘子树已经开始开花，另外两颗水土不服没能活下来，那只鸭子后来因为怕无人照管被带到我堂妹的舅妈家，但第二天
 只在菜园看到过它。
 ~~~
-dp[0] = [""]
-dp[1] = [()]
-inner = dp[0] dp[1]
-outer = dp[1] dp(0)
-dp[2]= [()() (())]
-dp[3]
-dp[0]dp[2] dp[1]dp[1] dp[2]dp[0]
-
-()()(),()(()),
-(())()
-(()()) ((()))
