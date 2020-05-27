@@ -2956,6 +2956,38 @@ function lengthzOfLIS(coins, num) {
     return dp[num] === Infinity ? -1 : dp[num]
 }
 ~~~
+### 142.单词拆分
+~~~
+//动态规划
+function lengthzOfLIS(s, arrList) {
+    const len = s.length
+    const dp = new Array(len+1).fill(false)
+    dp[0] = true
+    for (let i = 1; i <= num; i++) {
+        for (let j = 0; j < i; j++) {
+            if (dp[j] && arrList.includes(s.substring(j, i))) {
+                dp[i] = true
+                break
+            }
+        }
+    }
+    return dp[len]
+}
+~~~
+### 142.整数拆分
+~~~
+//动态规划
+function lengthzOfLIS(n) {
+    const dp = new Array(n+1).fill(1)
+    for (let i = 1; i <= num; i++) {
+        for (let j = 0; j < i; j++) {
+            dp[i] = Math.max(dp[i], j*(i-j), j*dp[i-j])
+            }
+        }
+    }
+    return dp[n]
+}
+~~~
 
 少年鸭的奇幻漂流
     去年年末，我叔准备年货将自己去年在江北喂养的鸭和鸡带回老家，当时大家觉得直接杀掉放在冰箱吃起来不新鲜，而院子门经常打开加上天气也比较冷所以最后决定圈养
