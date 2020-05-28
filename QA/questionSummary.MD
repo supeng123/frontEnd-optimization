@@ -2988,6 +2988,47 @@ function lengthzOfLIS(n) {
     return dp[n]
 }
 ~~~
+### 143.最大正方形
+~~~
+//动态规划
+function maxSquare(matrix) {
+    if (!matrix || !matrix[0]) return 0
+    let row = matrix.length
+    let column = matrix[0].length
+    let max = 0
+    const dp = new Array(n+1).fill('').map(()=> new Array(n+1).fill(0))
+    for (let i = 1; i < row; i++) {
+        for (let j = 0; j < column; j++) {
+            if (i == 0 || j == 0) {
+                dp[i][j] = 1
+            } else {
+                dp[i][j] = Math.min(dp[i-1][j-1], dp[i][j-1], dp[i-1][j]) + 1
+            }
+            max = Math.max(max, dp[i][j])
+            }
+        }
+    }
+    return Math.pow(max,2)
+}
+~~~
+### 144.回文子串
+~~~
+//动态规划
+function countSubstrings(s) {
+    const dp = new Array(s.length).fill('').map(() => new Array(s.length))
+    let num = 0
+    dp[0] = true
+    for (let i = 0; i < s.length; i++) {
+        for (let j = 0; j <= i; j++) {
+            if (s[i] == s[j] && ( i- j < 2 || dp[i-1][j+1])) {
+                dp[i][j] = true
+                num++
+            }
+        }
+    }
+    return num
+}
+~~~
 
 少年鸭的奇幻漂流
     去年年末，我叔准备年货将自己去年在江北喂养的鸭和鸡带回老家，当时大家觉得直接杀掉放在冰箱吃起来不新鲜，而院子门经常打开加上天气也比较冷所以最后决定圈养
