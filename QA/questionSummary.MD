@@ -3029,6 +3029,20 @@ function countSubstrings(s) {
     return num
 }
 ~~~
+### 145.平衡二叉树
+~~~
+//动态规划
+function balanceTree(root) {
+    if (!root) return true
+
+    function height(node) {
+        if (!node) return 0
+        return Math.max(node.left, node.right) + 1
+
+    }
+    return Math.abs(height(root.left) - height(root.right)) < 2 && balance(root.left) && balance(root.right)
+}
+~~~
 
 少年鸭的奇幻漂流
     去年年末，我叔准备年货将自己去年在江北喂养的鸭和鸡带回老家，当时大家觉得直接杀掉放在冰箱吃起来不新鲜，而院子门经常打开加上天气也比较冷所以最后决定圈养
