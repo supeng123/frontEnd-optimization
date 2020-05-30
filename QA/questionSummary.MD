@@ -3031,16 +3031,37 @@ function countSubstrings(s) {
 ~~~
 ### 145.平衡二叉树
 ~~~
-//动态规划
+//递归
 function balanceTree(root) {
     if (!root) return true
 
     function height(node) {
         if (!node) return 0
-        return Math.max(node.left, node.right) + 1
+        return Math.max(height(node.left), height(node.right)) + 1
 
     }
     return Math.abs(height(root.left) - height(root.right)) < 2 && balance(root.left) && balance(root.right)
+}
+~~~
+
+### 147.旋转数组最小值
+~~~
+//二分查找
+function leastValue(arr) {
+    let left = 0
+    let right = arr.length - 1
+    let mid
+
+    while(left < right) {
+        if (arr[mid] > right) {
+            left = mid + 1
+        } else if (arr[mid] === right) {
+            right--
+        } else {
+            right = mid
+        }
+    }
+    return nums[left]
 }
 ~~~
 
