@@ -3064,7 +3064,44 @@ function leastValue(arr) {
     return nums[left]
 }
 ~~~
+### 148.机器人的活动范围
+~~~
+function movingCount(m, n, k) {
+//dfs
+    const set = new Set()
+    let r = 0
+    let c = 0
+    let count = 0
 
+    dfs(0, 0)
+    return count;
+    function dfs(row, column) {
+        if (row < 0 || 
+            column < 0 || 
+            row >= m || 
+            column >= n || 
+            sum(row) + sum(column) > k ||
+            set.has(`${row} + ${column}`)
+            ) return
+        set.add(`${row} + ${column}`)
+        count++
+        dfs(row - 1, column)
+        dfs(row + 1, column)
+        dfs(row, column - 1)
+        dfs(row, column + 1)
+    }
+
+    function sum(number) {
+        return number.toString().split('').reduce((total, a) => {
+            return total += Number(a)
+        },0)
+    }
+};
+~~~
+you get a most head start on most kids 
+you know the shitty thing about all of this  is that the strange behind the counter gave
+me the free chenno that small act of kindness showed more compassion than my
+mother gave me her entire goddamn life
 少年鸭的奇幻漂流
     去年年末，我叔准备年货将自己去年在江北喂养的鸭和鸡带回老家，当时大家觉得直接杀掉放在冰箱吃起来不新鲜，而院子门经常打开加上天气也比较冷所以最后决定圈养
 在他家空置的楼顶，等合适的时候再处置。
