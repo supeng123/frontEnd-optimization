@@ -3043,7 +3043,30 @@ function balanceTree(root) {
     return Math.abs(height(root.left) - height(root.right)) < 2 && balance(root.left) && balance(root.right)
 }
 ~~~
+### 146.接水
+~~~
+//
+function catchWater(height) {
+    if (height.length === 0) return 0
+    let count = 0
+    let max = 0
+    const leftMax = []
+    const rightMax = []
 
+    for (let i = 0; i < height.length; i++) {
+        leftMax[i] = max = Math.max(height[i], max)
+    }
+    max = 0
+    for (let j = height.length - 1; j >=0 ; j--) {
+        rightMax[j] = max = Math.max(height[j], max)
+    }
+
+    for (let i = 0; i < height.length; i++) {
+        count = count + Math.min(leftMax[i], rightMax[i]) - height[i]
+    }
+    return count
+}
+~~~
 ### 147.旋转数组最小值
 ~~~
 //二分查找
@@ -3098,6 +3121,7 @@ function movingCount(m, n, k) {
     }
 };
 ~~~
+
 you get a most head start on most kids 
 you know the shitty thing about all of this  is that the strange behind the counter gave
 me the free chenno that small act of kindness showed more compassion than my
