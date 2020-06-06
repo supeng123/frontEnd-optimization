@@ -3121,6 +3121,232 @@ function movingCount(m, n, k) {
     }
 };
 ~~~
+### 149.二叉树最大路径和
+~~~
+function maxPath(root) {
+    let max = -Infinite
+
+    function help(node) {
+        if (node == null) return 0
+        let leftVal = Math.max(help(node.left), 0)
+        let rightVal = Math.max(help(node.right), 0)
+        let newPath = node.val + leftVal + rightVal
+        max = Math.max(newPath, max)
+        return node.val + Math.max(leftVal, rightVal)
+    }
+    help(root)
+    return max
+}
+~~~
+### 150.最长同值路径
+~~~
+后序遍历
+function maxPath(root) {
+    function inorder(node) {
+        if (node === null) return ;
+        inorder(node.left);
+        ans = Math.max(
+            ans, 
+            findRoad(node.left, node.val) + findRoad(node.right, node.val)
+        );
+        inorder(node.right);
+    }
+    
+    // 返回当前节点的最大同值子树的路径数
+    function findRoad(node, val) {
+        if (node === null || node.val !== val) return 0;
+        let left = findRoad(node.left, val);
+        let  right = findRoad(node.right, val);
+        return Math.max(left, right) + 1;
+    }
+    
+    let ans = 0;
+    inorder( root );
+    return ans;
+}
+~~~
+### 151.最长的单词
+~~~
+function longestWord(words) {
+    words.sort()
+    const map = new Map()
+    map.set('', true)
+    let maxWords = ''
+    for (let item of words) {
+        if (map.has(item.substr(0, item.length - 1))){
+            map.set(item, true)
+            maxWords = item.length > maxWords.length ? item: maxWords
+        }
+    }
+    return maxWords
+}
+~~~
+### 152.滑动窗口最大值
+~~~
+//单调队列
+var maxSlidingWindow = function(nums, k) {
+    const res = []
+    let window = new Window()
+    for (let i = 0 ; i < nums.length; i++) {
+        if (i < k - 1) {
+            window.push(nums[i])
+        } else {
+            window.push(nums[i])
+            res.push(window.max())
+            window.pop(nums[i-k+1])
+        }
+    }
+    return res
+};
+
+class Window {
+    constructor() {
+        this.data = []
+    }
+
+    push(val) {
+        while(this.data.length > 0 && this.data[this.data.length - 1] < val) {
+            this.data.pop()
+        }
+        this.data.push(val)
+    }
+
+    pop(val) {
+        if (this.data.length > 0 && this.data[0] == val) {
+            this.data.shift()
+        }
+    }
+
+    max() {
+        return this.data[0]
+    }
+
+}
+~~~
+### 153.删除二叉树节点
+~~~
+function deleteNode(root, key) {
+    if (!root) return null
+    if (key < root.val) {
+        root.left = deleteNode(root.left, key) 
+    } else if (key > root.val){
+        root.right = deleteNode(root.right, key)
+    } else {
+        if (root.left == null && root.right == null) {
+            root = null
+        } else if (root.right){
+            root.val = successor(root)
+            root.right = deleteNode(root.right, root.val)
+        } else {
+            root.val = predecessor(root)
+            root.left = deleteNode(root.left, root.val)
+        }
+    }
+    return root
+    
+
+    function predecessor(node) {
+        if (!node) return null
+        node = node.left
+        while (node.right) {
+            node = node.right
+        }
+        return node.val
+    }
+
+    function successor(node) {
+        if (!node) return null
+        node = node.right
+        while (node.left) {
+            node = node.left
+        }
+        return node.val
+    }
+}
+~~~
+### 154.所有叶子左叶子节点
+~~~
+//dfs
+function allLeftLeaves(root) {
+    let res = [0]
+    recursion(root, false, res)
+    return res[0]
+
+    function recursion(node, isLeft, res) {
+        if (root.left == null && root.right == null && isLeft) {
+            res[0] += node.val
+        }
+        if (node.left) recursion(node.left, true, res)
+        if (node.right) recursion(node.right, false, res)
+    }
+}
+~~~
+### 154.所有叶子左叶子节点
+~~~
+//dfs
+function allLeftLeaves(root) {
+    let res = [0]
+    recursion(root, false, res)
+    return res[0]
+
+    function recursion(node, isLeft, res) {
+        if (root.left == null && root.right == null && isLeft) {
+            res[0] += node.val
+        }
+        if (node.left) recursion(node.left, true, res)
+        if (node.right) recursion(node.right, false, res)
+    }
+}
+~~~
+### 155.字母大小全排列
+~~~
+//回溯
+function alphabetsPermutation(S) {
+    const set = new Set()
+    backTrack('', 0)
+    function backTrack(str, index) {
+        if (index >= S.length) {
+            set.add(str)
+            return
+        }
+        const cur = S[index]
+        const upper = str + cur.toUpperCase()
+        const lower = str + cur.toUpperCase()
+        backTrack(upper, index + 1) 
+        backTrack(lower, index + 1) 
+    }
+    return Array.from(set)
+}
+~~~
+### 156.括号的分数
+~~~
+//栈
+function scores(S) {
+    const stack = []
+    if (S.length < 1 ) return stack
+    for (let item of S) {
+        if (item === '(') {
+            stack.push
+        } else {
+            if(stack[stack.length - 1] === '(') {
+                stack.pop()
+                stack.push(1)
+            } else if (Number(stack[stack.length - 1])) {
+                let num = 0
+                while (stack[stack.length - 1] === '(') {
+                    let cur = stack.pop()
+                    num+= cur
+                }
+                stack.pop()
+                stack.push(num*2)
+            }
+
+        }
+    }
+    return stack.reduce((sum, a) => sum+a)
+}
+~~~
+###
 
 you get a most head start on most kids 
 you know the shitty thing about all of this  is that the strange behind the counter gave
