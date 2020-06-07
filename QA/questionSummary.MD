@@ -3346,7 +3346,51 @@ function scores(S) {
     return stack.reduce((sum, a) => sum+a)
 }
 ~~~
-###
+### 157.子集
+~~~
+let output = []
+    
+    function backtrack(i, tmpPath) {
+        
+        output.push(tmpPath)
+
+        if(i > nums.length) return
+        for(let j = i; j < nums.length; j++){
+            backtrack(j + 1, tmpPath.concat([nums[j]]))
+        }
+    }
+    backtrack(0, [])
+    return output
+~~~
+### 158.解码
+~~~
+//动态规划
+function numDecoding(s) {
+    if (s[0] == '0') return 0
+    const len = s.length
+    const dp = new Array(len+1)
+    dp[0] = 1
+    dp[1] = 1
+    for (let i = 1; i < len; i++) {
+        const pre = s[i -1] 
+        const cur = s[i]
+        if (cur == '0') {
+            if (pre === '1' || pre === '2') {
+                dp[i+1] = dp[i-1]
+            } else {
+                return 0
+            }
+        } else {
+            if (pre === '1' || pre === '2' && cur <= 6) {
+                dp[i+1] = dp[i] + dp[i-1]
+            } else {
+                dp[i+1] = dp[i]
+            }
+        }
+    }
+    return dp[len]
+}
+~~~
 
 you get a most head start on most kids 
 you know the shitty thing about all of this  is that the strange behind the counter gave
