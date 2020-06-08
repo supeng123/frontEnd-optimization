@@ -525,34 +525,8 @@ function promiseAll(promises) {
     })
 }
 ~~~
-### 50.两个链表相加
+### 50.
 ~~~
-funtion ListNode(val) {
-    this.value = val;
-    this.next = null
-}
-
-function addTwoNumbers (l1, l2) {
-    const dummyHead = new ListNode(0)
-    let current = dummyHead
-    const carry = 0
-    let pCurrent = l1, qCurrent = l2
-    while (pCurrent != null || qCurrent != null) {
-        const sum = pCurrent.value + pCurrent.Value + carry
-        carray = parseInt(sum/10)
-
-        let node = new ListNode(sum%10)
-        current.next = node
-        current = current.next
-
-        if(pCurrent != null) pCurrent = pCurrent.next;
-        if(qCurrent != null) qCurrent = qCurrent.next;
-    }
-    if (carry > 0) {
-        current.next = new ListNode(carry)
-    }
-    return dummyHead.next
-}
 ~~~
 ### 51.移除s1所有包含s2的字符
 ~~~
@@ -562,6 +536,9 @@ function remove(s1, s2) {
     }
     return s1
 }
+~~~
+### 52.
+~~~
 ~~~
 ### 53.最大连续子序列
 ~~~
@@ -604,27 +581,8 @@ typeOf can’t check null and function
     border-bottom: 50px solid red;
 }
 ~~~
-### 57.满足条件的所有路径
+### 57.
 ~~~
-function getAllPaths(root, sum) {
-    let paths = []
-    function traveral(node, path) {
-        if (!node) return;
-        let rootVal = node.value
-        path.push(rootVal)
-        if (node.left === null && node.right === null) {
-            if (path.reduce((a,b) => a + b) === sum) {
-                paths.push(path)
-            }
-            return
-        }
-        traversal(node.left, path.slice(0))
-        traversal(node.right, path.slice(0))
-    }
-
-    traversal(root, [])
-    return paths
-}
 ~~~
 ### 59.js中 new发生了什么
 ~~~
@@ -712,44 +670,8 @@ class Queue {
     }
 }
 ~~~
-### 61.求不重复的最大长度字符串
+### 61.
 ~~~
-function longestSubString(s) {
-    let hash = {}
-    let max = 0
-    let left = 0
-    for (var i = 0; i < s.length; i++) {
-        let v = s[i]
-
-        if (hash[v] >= left) {
-            left = hash[v] + 1
-        }
-
-        hash[v] = i
-        let len = i - left + 1
-        if (max < len) max = len
-    }
-    return max
-}
-
-function longestSubString(s) {
-    let set = new Set()
-    let max = 0
-    let j = 0
-    for (var i = 0; i < s.length; i++) {
-        if (!set.has(s[i])) {
-            set.add(s[i])
-            max = Math.max(set.size, max)
-        } else {
-            while (set.has(s[i]) {
-                set.delete(s[j])
-                j ++
-            }
-            set.add(s[i])
-        }
-    }
-    return max
-}
 ~~~
 ### 61.找到重复字符并分组
 ~~~
