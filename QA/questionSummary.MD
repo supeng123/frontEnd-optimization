@@ -816,73 +816,11 @@ function createTree(preOrder, postOrder) {
     return root
 }
 ~~~
-### 67.有效括号
+### 67
 ~~~
-function areBracketsClosed(randomString) {
-    let sum = 0
-    const splittedCharactors = randomString.split('');
-    for (let i = 0; i < splittedCharactors.length; i++) {
-        const charactor = splittedCharactors[i];
-        if (charactor === '(') {
-            sum ++;
-        } else {
-            if (sum === 0) {
-                return false
-            }
-            sum --
-        }
-    }
-    return sum === 0;
-}
-
-function areBracketsClosed(randomString) {
-    let result = true
-    const stack = []
-    const map = new Map()
-    map.set('(', ')')
-    map.set('{', '}')
-    map.set('[', ']')
-
-    for(let i = 0; i < randomString.length; i++) {
-        if (map.has(randomString[i])) {
-            stack.push(map.get(randomString[i]))
-        } else {
-            if (stack.pop() !== randomString[i]) result = false
-        } 
-    }
-    return stack.length === 0 && result
-}
 ~~~
-### 68.最长有效括号
+### 68
 ~~~
-function longestValidBrackets(randomString) {
-    let max = 0
-    let stack = []
-    const splittedCharactors = randomString.split('');
-    for (let i = 0; i < splittedCharactors.length; i++) {
-        let tmpmax = 0
-        for (let i = 0; i < splittedCharactors.length; i++) {
-            const charactor = splittedCharactors[j];
-            if (charactor === '(') {
-                stack.push('(')
-                tmpmax ++;
-            } else {
-                if (stack.length < 1) {
-                    max = tmpMax > max ? tmpMax : max
-                    break
-                } else {
-                    stack.pop()
-                    tmpmax ++
-                } 
-            }
-        }
-        if (stack.length === 0) {
-            max = tmpMax > max ? tmpMax : max
-        }
-        stack = []
-    }
-    return max;
-}
 ~~~
 ### 69.大文件断点续传
 ~~~
