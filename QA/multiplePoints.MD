@@ -21,3 +21,33 @@ function lengthOfLongestSubstring (s) {
     return max
 }
 ~~~
+### 2.数组去重
+~~~
+leecode 3
+双指针， 排序
+function removeRepeat (arr) {
+    arr.sort((a,b) => a - b)
+    let pre = 0
+    let cur = 1
+    for (let i = 0; i < arr.length; i++) {
+        if (pre < arr.length && cur < arr.length) {
+            if (arr[pre] === arr[cur]) {
+                cur++
+            } else {
+                pre++
+                arr[pre] = arr[cur]
+                cur++
+            }
+        }
+    }
+    arr.slice(0, pre + 1)
+}
+~~~
+### 3.加一
+~~~
+leecode 66
+从后往前遍历
+function addOne (arr) {
+    
+}
+~~~

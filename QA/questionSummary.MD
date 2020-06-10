@@ -1051,123 +1051,20 @@ seq = y ack = x + 1
 seq = x + 1 ack = y + 1
 第三次可以携带数据
 ~~~
-### 72.数组去重（空间复杂度为O(1)）
+### 72
 ~~~
-function removeRepeatedItems(arr) {
-    let sortedArray = arr.sort((a,b) => a - b);
-    let  pre = 0
-    let current = 1
-    for (var i = 0 ; i < sortedArray.length; i++) {
-        if (pre < sortedArray.length && current < sortedArray.length) {
-            if (sortedArray[current]== sortedArray[pre]) {
-                current +=  1
-            } else {
-                pre +=1
-                sortedArray[pre] = sortedArray[current]
-                current += 1
-            }
-        }
-    }
-    return sortedArray.slice(0, pre+1);
-}
 ~~~
-### 73.反转链表
+### 73
 ~~~
-function reverseLinkList(head) {
-    if(!head || !head.next) return head
-    let cur = head
-    let pre = null
-    while(cur) {
-        const next = cur.next
-        cur.next = pre
-        pre = cur//前驱节点变成当前节点
-        cur = next
-    }
-}
 ~~~
-### 74.去除链表一个元素
+### 74
 ~~~
-function removeItemInLinkedList(head, item) {
-    //哨兵节点
-    const dummy = {
-        next: head
-    }
-    let current = dummy
-    while(current && current.next) {
-        if(current.next.value === item) {
-            current.next= current.next.next
-        }
-        current = current.next
-    }
-    return dummy.next
-}
 ~~~
-### 75.单双链表重组
+### 75
 ~~~
-origin 1-2-3-4-5-null
-after 1-3-5-2-4-null
-
-function reorganizeLinkedList(head) {
-    if(!head && !head.next) return head;
-    const dummySingle = {
-        next: head
-    }
-    const dummyEven = {
-        next: head.next
-    }
-    let flag = true
-    let singleNode = dummySingle.next
-    let evenNode = dummyEven.next
-    while(singleNode && singleNode.next && evenNode && evenNode.next) {
-        singleNode.next = singleNode.next.next
-        evenNode.next = evenNode.next.next
-
-        singleNode = singleNode.next.next
-        evenNode = evenNode.next.next
-    }
-    singleNode.next = dummyEven.next
-    return dummySingle.next
-}
 ~~~
 ### 76.按k进行链表翻转
 ~~~
-function reverseKLinkedList(head, k) {
-    const dummyHead = {
-        next: head
-    }
-    let index = 0
-    let start = dummyHead
-    let end = dummyHead.next
-    while(end) {
-        index ++
-        if (index%k ===0) {
-            start = reverseLinkList(start, end.next)
-            end = start.next
-        } else {
-            end = end.next
-        }
-    }
-}
-
-
-function reverseLinkList(start, end) {
-    let current = start.next
-    let first = current
-    let pre = start
-    while (current != end) {
-        let next = current.next;
-        current.next = pre
-        pre = current
-        current = next
-    }
-
-    //pre变成小组的头结点
-    start.next = pre
-    //原来的头结点变成小组尾节点和下次小组的头结点
-    first.next = current
-    return first
-}
-
 function reverseKLinkedList(head, k) {
     if (!head.next) return head
     let a = head;
@@ -2701,27 +2598,6 @@ function findPosition(arr, target) {
 ~~~
 ### 135.生成括号
 ~~~
-//动态规划
-function generateBracket(n) {
-    const dp = []
-    dp[0] = ['']
-    dp[1] = ['()']
-    for (let i = 2; i <= n i++) {
-        const res = []
-        for (let j = 0; j < i; j++) {
-            let inner = dp[j] 
-            let outer = dp[i-j-1]
-            for (let i of inner) {
-                for (let j of outer) {
-                    res.push(`(${i})${j}`)
-                }
-            }
-        }
-        dp[i] = res
-    }
-
-    return dp[n]
-}
 ~~~
 ### 136.合并数组
 ~~~
@@ -3211,9 +3087,7 @@ function scores(S) {
 let output = []
     
     function backtrack(i, tmpPath) {
-        
         output.push(tmpPath)
-
         if(i > nums.length) return
         for(let j = i; j < nums.length; j++){
             backtrack(j + 1, tmpPath.concat([nums[j]]))
