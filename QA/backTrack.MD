@@ -27,15 +27,36 @@ function generateBracket(candidates) {
     backTrack(tempPath, target, 0)
     return result
 
-    function backTrack(tempPath, target , index) {
+    function backTrack(tempPath, target , start) {
         if (target === 0) {
             result.push(tempPath)
             return
         }
-        for (let i = 0 ;i < candidates.length; i++) {
+        for (let i = start ;i < candidates.length; i++) {
             if (target < candidates[i]) break;
             tempPath.push(candidates[i])
-            backTrack(tempPath.slice(), target - candidates[i], index)
+            backTrack(tempPath.slice(), target - candidates[i], i)
+            tempPath.pop(candidates[i])
+        }
+    }
+}
+~~~
+### 3.全排列
+~~~
+function wholePermutation(candidates) {
+    const result = []
+    backTrack([])
+    return result
+
+    function backTrack(tempPath) {
+        if (tempPath.length == candidates.length) {
+            result.push([...tempPath])
+            return
+        }
+        for (let i = 0 ;i < candidates.length; i++) {
+            if (tempPath.includes(candidates[i])) continue
+            tempPath.push(candidates[i])
+            backTrack(tempPath.slice())
             tempPath.pop(candidates[i])
         }
     }

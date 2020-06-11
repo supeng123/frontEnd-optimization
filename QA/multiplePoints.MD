@@ -51,3 +51,54 @@ function addOne (arr) {
     
 }
 ~~~
+### 4.按奇偶or(正负)数排序
+~~~
+leecode 905
+单向指针
+function sort (arr) {
+    let j = 0
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] % 2 == 0) {
+            if (i !== j) {
+                [arr[i], arr[j]] = [arr[j], arr[i]] 
+            }
+            j++
+        }
+    }
+    return arr
+}
+~~~
+### 5.两数相加
+~~~
+leecode 1
+set
+function twoSum (arr, target) {
+    const map = new Map()
+    for (let i = 0; i < arr.length; i++) {
+        if (map.has(target - arr[i])) {
+            return [i, map.get(target - arr[i])]
+        } else {
+            map.set(arr[i], i)
+        }
+    }
+    return arr
+}
+~~~
+### 6.买卖股票最佳时机
+~~~
+leecode 121
+从前往后一次遍历
+function maxProfit (prices) {
+    if (prices.length < 2) return 0
+    let max = 0
+    let min = prices[0]
+    for (let i = 0 ;i < prices.length; i++) {
+        if (prices[i] < min) {
+            min = prices[i]
+        } else {
+            max = Math.max(prices[i] - min, maxPrice)
+        }
+    }
+    return max
+}
+~~~

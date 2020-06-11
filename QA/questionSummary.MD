@@ -1092,51 +1092,14 @@ function reverseKLinkedList(head, k) {
     }
 }
 ~~~
-### 77.两数相加
+### 77
 ~~~
-function twoNumberSum(arr, target) {
-    const map = new Map()
-    const result = []
-    for (let i = 0; i < arr.length; i++) {
-        const left = map.get(target - arr[i])
-        if (left && left !== arr[i]) {
-            return [i, left]
-        } else {
-            map.set(arr[i], index)
-        }
-    }
-}
 ~~~
-### 78.正负数排序复数在前正数在后
+###
 ~~~
-function sort(arr) {
-    let j = 0
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] < 0){
-            if (i !== j) {
-                [arr[i], arr[j]] = [arr[j], arr[i]]
-            }
-            j++
-        }   
-    }
-    return arr
-}
 ~~~
 ### 79.预测股票价格
 ~~~
-function predictStockPrice(prices) {
-    if (prices.length < 1) return 0
-    let minPrice = prices[0]
-    let maxPrice = 0
-    for (let i = 0; i < prices.length; i++) {
-        if (prices[i] < minPrice){
-            minPrice = prices[i]
-        } else {
-            maxPrice = price[i] - minPrice
-        } 
-    }
-    return maxPrice
-}
 ~~~
 ### 80.压缩字符串
 ~~~
