@@ -1098,27 +1098,11 @@ function reverseKLinkedList(head, k) {
 ###
 ~~~
 ~~~
-### 79.预测股票价格
+### 79
 ~~~
 ~~~
-### 80.压缩字符串
+### 80
 ~~~
-aaabbbcc
-a3b3c2
-function compressString(str) {
-    let index = 1
-    let result = ''
-    for (let i = 0; i < str.length - 1; i ++) {
-        if (str[i]===str[i + 1]) {
-            index = index + 1
-        } else {
-            result = result + str[i] + index
-            index = 1
-        }
-    }
-    result = result + str[str.length - 1] + index;
-    return result.length < str.length ? result : str
-}
 ~~~
 ### 81.判断两组字符串是否单词个数相等
 ~~~
@@ -1145,47 +1129,8 @@ function isTwoGroupStringEqual(str1, str2) {
     return true
 }
 ~~~
-### 82.判断回文字符串
-~~~
-function isReversedEqualOringin(str) {
-    const formattedStr = str.toLowerCase().replace(/[\W_]/g, "")
-    let left = 0
-    let right = formattedStr.length - 1
-    while(left < right) {
-        if (formattedStr[left] !== formattedStr[right]) return false
-        left ++
-        right --
-    }
-    return true
-}
-
-function ispanliTrim(str) {
-    for (let i = 0, j = str.length - 1; i < j; i++,j--) {
-        if (str.charAt(i) !== str.charAt(j)) {
-            return isReverse(str, i, j-1) || isReverse(str, i+1, j)
-        }
-    }
-    return true
-}
-
-isReverse(str, i, j) {
-    while (i < j) {
-        if (str.charAt(i) !== str.charAt(j)) return false
-        i ++
-        j --
-    }
-    return true
-}
-
-function isReversedEqualOringin(str) {
-    let result = true;
-    const formattedStr = str.toLowerCase().replace(/[\W_]/g, "")
-    const reversedStr = formattedStr.split(',').reverse().join(',')
-    for (let i = 0; i < formattedStr.length; i++) {
-        if (formattedStr[i] !== reversedStr[i]) result = false
-    }
-    return result
-}
+### 82.
+~~~           
 ~~~
 ### 83.最长的回文字符串
 ~~~

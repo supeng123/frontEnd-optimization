@@ -62,3 +62,33 @@ function wholePermutation(candidates) {
     }
 }
 ~~~
+### 4.分割回文
+~~~
+function wholePermutation(candidates) {
+    const result = []
+    backTrack([], index)
+    return result
+
+    function backTrack(tempPath, index) {
+        if (index == candidates.length) {
+            result.push([...tempPath])
+            return
+        }
+        for (let i = index ;i < candidates.length; i++) {
+            if(!isPalindrome(index, i)) continue
+            tempPath.push(candidates.slice(index, i+1))
+            backTrack(tempPath, i+1）
+            tempPath.pop()
+        }
+    }
+
+    isPalindrome = (start, end) {
+        let l = start
+        let r = end
+        while (l < r) {
+            if (s[l++] !== r[r--]) return false
+        }
+        return true
+    }
+}
+~~~

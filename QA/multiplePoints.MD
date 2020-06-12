@@ -102,3 +102,34 @@ function maxProfit (prices) {
     return max
 }
 ~~~
+### 7.压缩字符串
+~~~
+leetcode 
+function compressString(str) {
+    let index = 1
+    let result = ''
+    for (let i = 0; i < str.length - 1; i ++) {
+        if (str[i]===str[i + 1]) {
+            index = index + 1
+        } else {
+            result = result + str[i] + index
+            index = 1
+        }
+    }
+    result = result + str[str.length - 1] + index;
+    return result.length < str.length ? result : str
+}
+~~~
+### 8.回文串判断
+~~~
+双指针
+isPalindrome = (start, end) {
+        let l = start
+        let r = end
+        while (l < r) {
+            if (s[l++] !== r[r--]) return false
+        }
+        return true
+    }
+}
+~~~
