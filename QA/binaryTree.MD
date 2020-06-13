@@ -20,4 +20,17 @@ function pathSum (root, sum) {
     }
 }
 ~~~
-### 2
+### 2.相同的树 && 另一个数的子树
+~~~
+leetcode 572
+function isSubTree(p, q) {
+    if (p == null) return false
+    if (sameTree(p, q)) return true
+    return sameTree(p.left, q) || sameTree(p.right, q)
+}
+function sameTree(s, t) {
+    if (s == null && t == null) return true
+    if (s == null || t == null) return false
+    return s.val == t.val && sameTree(s.left, t.left) && sameTree(s.right, t.right)
+}
+~~~

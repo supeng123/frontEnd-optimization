@@ -83,3 +83,25 @@ function oddEvenList(head) {
     return dummyNodeOdd.next
 }
 ~~~
+### 4.分割链表
+~~~
+function teardownList(head, x) {
+    let cur = head
+    const dummySmall = small = new ListLink(-1)
+    const dummyGreat = great = new ListLink(-1)
+
+    while (cur) {
+        if (cur.val < x) {
+            small.next = cur
+            small = small.next
+        } else {
+            great.next = cur
+            great = great.next
+        }
+        cur = cur.next
+    }
+    great.next = null
+    small.next = great
+    return dummySmall.next
+}
+~~~
