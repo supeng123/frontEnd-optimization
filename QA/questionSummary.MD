@@ -527,6 +527,7 @@ function promiseAll(promises) {
 ~~~
 ### 50.
 ~~~
+
 ~~~
 ### 51.移除s1所有包含s2的字符
 ~~~
@@ -537,8 +538,24 @@ function remove(s1, s2) {
     return s1
 }
 ~~~
-### 52.
+### 52.验证ip地址
 ~~~
+function validIp(address) {
+    let v4 = address.split('.')
+    let v6 = address.split(':')
+    const regIP4 = /^0$|^([1-9]\d{0,2})$/;
+    const regIP6 = /^[0-9a-fA-F]{1,4}$/;
+    if(arrIp4.length === 4) {
+        if(arrIp4.every((item) => regIP4.test(item) && item < 256)) {
+            return "IPv4";
+        }
+    } else if(arrIp6.length === 8) {
+        if(arrIp6.every((item) => regIP6.test(item))) {
+            return "IPv6";
+        }
+    } 
+    return "Neither";
+}
 ~~~
 ### 53.最大连续子序列
 ~~~

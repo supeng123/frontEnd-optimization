@@ -34,3 +34,17 @@ function sameTree(s, t) {
     return s.val == t.val && sameTree(s.left, t.left) && sameTree(s.right, t.right)
 }
 ~~~
+### 3.有序数组转化为二叉树
+~~~
+leetcode 108
+function buildTree(arr) {
+    return build(arr)
+    function build(list) {
+        let mid = arr.length >> 1
+        let root = new ListNode(list[mid])
+        root.left = mid < 0 ? null : build(0, mid)
+        root.right = mid >= arr.length - 1 ? null : build(list.slice(mid + 1))
+        return root
+    }
+}
+~~~

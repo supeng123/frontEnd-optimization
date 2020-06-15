@@ -133,3 +133,31 @@ isPalindrome = (start, end) {
     }
 }
 ~~~
+### 9.较大分组的位置
+~~~
+leetcode 830
+双指针
+isPalindrome = (start, end) {
+        let l = start
+        let r = end
+        while (l < r) {
+            if (s[l++] !== r[r--]) return false
+        }
+        return true
+    }
+}
+~~~
+### 10.链表相交
+~~~
+leetcode 160
+双指针交换
+intersection = (s, t) {
+    let list1 = s
+    let list2 = t
+    while (list1 != list2) {
+        list1 = list1 ? list1.next : t
+        list2 = list2 ? list2.next : s
+    }
+    return list1
+}
+~~~
