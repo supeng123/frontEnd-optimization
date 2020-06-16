@@ -1123,28 +1123,6 @@ function reverseKLinkedList(head, k) {
 ~~~
 ### 81.判断两组字符串是否单词个数相等
 ~~~
-function isTwoGroupStringEqual(str1, str2) {
-    if (str1.length !== str2.length) return false
-    const map = new Map()
-    for (let i = 0 ; i < str1.length ; i++) {
-        if (map.get(str1[i])) {
-            map.set(str1[i], map.get(str1[i]) + 1)
-        } else if (!map.get(str1)) {
-            map.set(str1[i],1)
-        }
-
-        if (map.get(str2[i])) {
-            map.set(str2[i], map.get(str2[i]) - 1)
-        } else if (!map.get(str2[i])) {
-            map.set(str2[i],-1)
-        }
-    }
-    for (let letter of map) {
-        if (letter[1] > 0) return false
-    }
-
-    return true
-}
 ~~~
 ### 82.
 ~~~           
@@ -1178,28 +1156,6 @@ function longestReversedString(s) {
 
 ### 84.字符串内容相等分组
 ~~~
-function groupString(s) {
-    if (s.length < 1) return []
-    const map = new Map()
-    const result = []
-    for (let item of s) {
-        const arrayCode = Array(26).fill(0)
-        for (let i = 0 ; i < item.length; i++) {
-            const assic = item.charCodeAt(i) - 97
-            arrayCode[assic] ++
-        }
-        const formattedCode = arrayCode.join('')
-        if (map.has(formattedCode)) {
-            map.set(formattedCode, map.get(formattedCode).push(item))
-        } else {
-            map.set(formattedCode, [item])
-        }
-    }
-    for (let item of map) {
-        result.push(item[1])
-    }
-    return result
-}
 ~~~
 ### 85.螺旋矩阵
 ~~~
