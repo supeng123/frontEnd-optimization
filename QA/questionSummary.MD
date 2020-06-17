@@ -1154,183 +1154,23 @@ function longestReversedString(s) {
 
 ~~~
 
-### 84.字符串内容相等分组
+### 84
 ~~~
 ~~~
-### 85.螺旋矩阵
+### 85
 ~~~
-function spiralMatrix(arr) {
-    if (arr.length < 1) return []
-    const result = []
-    let direction = 'right'
-    let top = 0
-    let left = 0
-    let right = arr[0].length - 1
-    let bottom = arr.length - 1
-
-    while (left <= right && top <= bottom) {
-        if (direction == 'right') {
-            for (let i = left; i <= right; i++) {
-                result.push(arr[top][i])
-            }
-            top ++;
-            direction = 'down'
-        } else if (direction == 'down') {
-            for (let i = top; i <= bottom; i++) {
-                result.push(arr[i][right])
-            }
-            right --;
-            direction = 'left'
-        } else if (direction == 'left') {
-            for (let i = right; i >= left; i--) {
-                result.push(arr[bottom][i])
-            }
-            bottom --;
-            direction = 'top'
-        } else if (direction == 'top') {
-            for (let i = bottom; i >= top; i--) {
-                result.push(arr[i][left])
-            }
-            left ++;
-            direction = 'right'
-        }
-    }
-}
 ~~~
-### 86.矩阵置零
+### 86
 ~~~
-function setZeroToMatrix(arr) {
-    //找出第一行是否有零
-    let row = false
-    let column = false
-    for(let i = 0; i < arr[0].length; i++) {
-        if (arr[0][i] === 0) row = true
-    }
-    //找出第一列是否有零
-    for(let i = 0; i < arr.length; i++) {
-        if (arr[i][0] === 0) column = true
-    }
-    //把出现零的行和列的头转化为零
-    for(let i = 1; i < arr.length; i++) {
-        for(let j = 1; j < arr[0].length; j++) {
-            if (arr[i][j] === 0) {
-                arr[i][0] = 0
-                arr[0][j] = 0
-            } 
-        }
-    }
-    //利用第一行和第一列标零的情况把对应行列标零
-    for(let i = 1; i < arr.length; i++) {
-        for(let j = 1; j < arr[0].length; j++) {
-            if (arr[i][0] === 0 || arr[0][j] === 0) {
-                arr[i][j] = 0
-            } 
-        }
-    }
-    //判断第一行和列的零
-    if(row) {
-        for(let j = 0; j < arr[0].length; j++) {
-            arr[0][j] = 0
-        }
-    }
-    if(column) {
-        for(let j = 0; j < arr.length; j++) {
-            arr[j][0] = 0
-        }
-    }
-
-    return arr;
-}
 ~~~
-### 87.斐波那契数列
+### 87
 ~~~
-function fib(n) {
-    if (n < 1) return n
-    const cache = []
-    cache[0] = 0
-    cache[1] =1
-    for (var i = 2; i <= n; i++) {
-        cache[i] = cache[i-1] + cache[i-2]
-    }
-    return cache[n];
-}
-
-function fib(n) {
-    if (n < 1) return n
-    let result = 0
-    let pre = 0
-    let next = 1
-    for (var i = 2; i <= n; i++) {
-        result = next + pre
-        pre = next
-        next = result
-    }
-    return result;
-}
-
-function fib(n) {
-    const cache = []
-    cache[0] = 0
-    cache[1] =1
-    
-    function memoize(number) {
-        if (cache[number] !== undefined) {
-            return cache[number]
-        }
-        cache[number] = memoize(number - 1) + memoize(number - 2)
-        return cache[number]
-    }
-    return memoize(n)
-}
 ~~~
-### 88.三数之和
+### 88
 ~~~
-var threeSum = function(nums) {
-    const arr = nums.sort((a,b) => a-b)
-    const result = []
-    for (let i = 0; i < arr.length-2; i++) {
-        if (i === 0 || arr[i] != arr[i-1]) {
-            let start = i + 1
-            let end = arr.length - 1
-            while (start < end) {
-                if (arr[i] + arr[start] + arr[end] === 0) {
-                    result.push([arr[i],arr[start], arr[end]])
-                    start++
-                    end --
-                    while (arr[start] == arr[start-1]) {
-                        start ++
-                    }
-                    while (arr[end] == arr[end+1]) {
-                        end --
-                    }
-                } else if (arr[i] + arr[start] + arr[end] < 0) {
-                    start ++
-                } else {
-                    end --
-                }   
-            }
-        } 
-    }
-    return result
-};
 ~~~
-### 89.二分搜索
+### 89.
 ~~~
-function binarySearch(array,target) {
-    const arr = array.sort((a,b) => a -b)
-    let left = 0;
-    let right = arr.length -1
-    while (left <= right) {
-        let middle = Math.floor((right+left)/2)
-        if(arr[middle] > target) {
-            left = middle + 1
-        } else if (arr[middle] < target) {
-            right = middle - 1
-        } else {
-            return middle;
-        }
-    }
-}
 ~~~
 ### 90.旋转排序数组中最小值
 ~~~
@@ -1369,18 +1209,8 @@ function intersectionFind(arrays) {
     )]
 }
 ~~~
-### 92.存在重复的数据
+### 92
 ~~~
-function isContainedRepeatData(array) {
-    const set = new Set()
-    for (let i = 0 ; i < array.length; i++) {
-        if (set.has(array[i])) return true
-        else {
-            set.add(array[i])
-        }
-    }
-    return false
-}
 ~~~
 ### 93.LRU
 ~~~

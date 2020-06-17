@@ -161,3 +161,74 @@ intersection = (s, t) {
     return list1
 }
 ~~~
+### 11.三数之和
+~~~
+leetcode 15
+左右指针
+threeSum = (arr) {
+    const reuslt = []
+    arr.sort((a,b) => a - b)
+    for (let i = 0 ; i < arr.length - 2; i++) {
+        let start = i + 1
+        let end = arr.length - 1
+        while (start < end) {
+            const sum = arr[i] + arr[start] + arr[end]
+            if (sum == 0) {
+                result.push([arr[i],arr[start], arr[end]])
+                start++
+                end--
+                while (arr[start] == arr[start-1]) start++
+                while (arr[end] === arr[end+1]) end--
+            } else if (sum > 0) {
+                end--
+            } else {
+                start++
+            }
+        }
+    }
+    return result
+}
+~~~
+### 12.螺旋矩阵
+~~~
+leetcode 54
+方向指针
+function spiralMatrix(matrix) {
+    if (matrix.length <1) return []
+    const result = []
+    let direction = 'right'
+    let left = 0
+    let right = matrix[0].length - 1
+    let top = 0
+    let bottom = matrix.length -1
+    while (left <= right && top <= bottom) {
+        if (direction === 'right') {
+            for (let i = left; i <= right; i++) {
+                result.push(matrix[top][i])
+            }
+            top++
+            direction = 'down'
+        } else if (direction === 'down') {
+            for (let i = top; i <= bottom; i++) {
+                result.push(matrix[i][right])
+            }
+            right--
+            direction = 'left'
+        } else if (direction === 'left') {
+            for (let i = right; i >= left; i--) {
+                result.push(matrix[bottom][i])
+            }
+            bottom--
+            direction = 'up'
+        } else if (direction === 'up') {
+            for (let i = bottom; i >= top; i--) {
+                result.push(matrix[i][left])
+            }
+            left++
+            direction = 'right'
+        } 
+    }
+    
+    return result
+}
+~~~

@@ -60,3 +60,28 @@ function groupAnagrams = function(s) {
     return result
 }
 ~~~
+### 4.矩阵置零
+~~~
+leetcode 73
+//obj
+function setZeros = function(matrix) {
+    const columns = {}
+    const rows = {}
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[0].length; j++) {
+            if (matrix[i][j] == 0) {
+                rows[i] = false
+                columns[j] = false
+            }
+        }
+    }
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[0].length; j++) {
+            if (rows[i] === false || columns[j] === false) {
+                matrix[i][j] = 0
+            }
+        }
+    }
+    return matrix
+}
+~~~
