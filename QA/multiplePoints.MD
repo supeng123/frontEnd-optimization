@@ -232,3 +232,37 @@ function spiralMatrix(matrix) {
     return result
 }
 ~~~
+### 13.旋转排序数组中最小值
+~~~
+leetcode 154
+//二分搜索 向右比较
+function minValue(arr) {
+    let left = 0
+    let right = arr.length - 1
+    while (left < right) {
+        let mid = (left + right) >> 1
+        if (arr[mid] > arr[right]) {
+            left = mid + 1
+        } else if (arr[mid] == arr[right]) {
+            right--
+        } else {
+            right = mid
+        }
+    }
+    return arr[left]
+}
+~~~
+### 14.跳跃游戏
+~~~
+leetcode 55
+//从右向左比较，当前索引和值的和是否大于后面一位的索引
+function jump(nums) {
+    let maxJump = nums.length - 1
+    for (let i = nums.length - 2; i >= 0; i--) {
+        if (nums[i] + i >= maxJump) {
+            maxJump = i
+        }
+    }
+    return maxJump === 0
+}
+~~~

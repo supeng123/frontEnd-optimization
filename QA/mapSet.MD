@@ -85,3 +85,14 @@ function setZeros = function(matrix) {
     return matrix
 }
 ~~~
+### 数组交叉
+~~~
+//set, reduce
+function intersection(nums) {
+    return [... new Set(
+        nums.reduce((result, num) => {
+            result.filter((item) => num.includes(item))
+        }, [])
+    )]
+}
+~~~

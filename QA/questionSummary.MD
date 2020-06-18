@@ -1174,40 +1174,9 @@ function longestReversedString(s) {
 ~~~
 ### 90.旋转排序数组中最小值
 ~~~
-//4560123
-//456和0123都是排过序的
-function binarySearchMin(arr) {
-    let left = 0;
-    let right = arr.length -1
-
-    if (arr[right] > arr[left]) return arr[0]
-    
-    while (left < right) {
-        let middle = Math.floor((right+left)/2)
-        if(arr[middle] > arr[middle+1]) {
-            return arr[middle + 1]
-        } else if (arr[middle-1] > arr[middle]) {
-            return arr[middle]
-        }
-
-        if (arr[middle]> arr[left]){
-            left = middle+1
-        }
-        else if (arr[middle]< arr[right]){
-            right = middle -1
-        }
-    }
-}
 ~~~
 ### 91.所有数组中交叉的部分
 ~~~
-function intersectionFind(arrays) {
-    return [...new Set(
-        arrays.reduce((result, array) => {
-            result.filter(item => array.includes(item))
-        })
-    )]
-}
 ~~~
 ### 92
 ~~~
@@ -1243,61 +1212,9 @@ function LRU() {
 ~~~
 ### 94.打家劫舍
 ~~~
-function hostage(nums){
-    if (nums.length === 0) return 0
-    if (nums.length === 1) return nums[0]
-    const memo = []
-    memo[0] = nums[0]
-    memo[1] = Math.max(nums[0], nums[1])
-    for (let i = 2;i < nums.length; i++){
-        memo[i] = Math.max(nums[i] + memo[i-2], memo[i-1])
-    }
-    return memo[nums.length - 1]
-}
-
-function hostage(nums){
-    if (nums.length === 0) return 0
-    if (nums.length === 1) return nums[0]
-
-    let pre2 = nums[0]
-    let pre1 = Math.max(nums[0], nums[1])
-    for (let i=2; i < nums.length; i++){
-        const temp = Math.max(nums[i] + pre2, pre1)
-        pre2 = pre1
-        pre1 = temp
-    }
-    return pre1
-}
 ~~~
 ### 95.跳跃游戏
 ~~~
-//[3,1,0,2,4]
-//从当前的节点的树跳跃，能否跳跃到终点，3可以跳跃3步，0不跳跃
-function jump(nums) {
-    let maxJump = nums.lenght -1
-    for (let i = nums.length -2; i>=0; i--) {
-        if (nums[i]+i >= maxJump) {
-            maxJump = i
-        }
-    }
-    return maxJump === 0
-}
-
-function jump(nums) {
-    const totallength = nums.length
-    const memo = Array(totallength).fill(0)
-    memo[totallength-1] = 1
-    for (let i = totallength -2; i>=0; i--) {
-        const maxJump = Math.min(i+nums[i], totalLength - 1)
-        for (let j = i+1; j <= maxJump; j++) {
-            if(memo[j] == 1) {
-                memo[i] = 1
-                break
-            }
-        }
-    }
-    return memo[0] === 1
-}
 ~~~
 ### 96.最大子序列
 ~~~
