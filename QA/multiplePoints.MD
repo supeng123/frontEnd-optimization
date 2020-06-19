@@ -137,14 +137,8 @@ isPalindrome = (start, end) {
 ~~~
 leetcode 830
 双指针
-isPalindrome = (start, end) {
-        let l = start
-        let r = end
-        while (l < r) {
-            if (s[l++] !== r[r--]) return false
-        }
-        return true
-    }
+largeGroupPositions = (s) {
+       
 }
 ~~~
 ### 10.链表相交
@@ -264,5 +258,24 @@ function jump(nums) {
         }
     }
     return maxJump === 0
+}
+~~~
+### 15.除自身以外数组的乘积
+~~~
+//leetcode 238
+左右遍历
+funtion productExceptSelf(nums) {
+    const result = new Array(nums.length).fill(1)
+    let product = 1
+    for (let i = 0; i < nums.length; i++) {
+        result[i] = result[i] * product
+        product = product * nums[i]
+    }
+    product = 1
+    for (let i = nums.length - 1; i >= 0 ; i--) {
+        result[i] = result[i] * product
+        product = product * nums[i]
+    }
+    return result
 }
 ~~~

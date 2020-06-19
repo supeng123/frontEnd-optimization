@@ -85,7 +85,7 @@ function setZeros = function(matrix) {
     return matrix
 }
 ~~~
-### 数组交叉
+### 5.数组交叉
 ~~~
 //set, reduce
 function intersection(nums) {

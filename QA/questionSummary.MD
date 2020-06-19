@@ -1218,19 +1218,6 @@ function LRU() {
 ~~~
 ### 96.最大子序列
 ~~~
-//和打家劫舍的题目比较像
-function maxSubSerial(nums){
-    if (nums.length === 0) return 0
-    if (nums.length === 1) return nums[0]
-    const memo = []
-    memo[0] = nums[0]
-    let max = nums[0]
-    for (let i = i;i < nums.length; i++){
-        memo[i] = Math.max(nums[i] + memo[i-1], nums[i])
-        max = Math.max(max, memo[i])
-    }
-    return max
-}
 ~~~
 ### 97.最长路径
 ~~~
@@ -1259,22 +1246,8 @@ function maxSubSerial(m, n){
     return arr[n-1][m-1]
 }
 ~~~
-### 98.最大乘积
+### 98.
 ~~~
-function maxProduct(array) {
-    const maxmemo = []
-    const minmemo = []
-    maxmemo[0] = array[0]
-    minmemo[0] = array[0]
-    let max = array[0]
-    
-    for (let i = 1; i < array.length; i++) {
-        maxmemo[i] = Math.max(array[i]*maxmemo[i - 1], array[i], array[i]*minmemo[i-1])
-        minmemo[i] = Math.min(array[i]*maxmemo[i - 1], array[i], array[i]*minmemo[i-1])
-        max = Math.max(max, maxmemo[i])
-    }
-    return max
-}
 ~~~
 ### 99.各自的乘积
 ~~~
@@ -1284,6 +1257,8 @@ function eachProducts(arrs) {
     for (let i = 0; i < arrs.length; i++) {
         result[i] = product * result[i]
         product = product * arrs[i]
+        console.log(result)
+        console.log(product)
     }
     product = 1
     for (let i = arr.length - 1; i >= 0; i--) {
@@ -2757,7 +2732,7 @@ function numDecoding(s) {
 you get a most head start on most kids 
 you know the shitty thing about all of this  is that the strange behind the counter gave
 me the free chenno that small act of kindness showed more compassion than my
-mother gave me her entire goddamn life
+mother gave me her entire goddamn lifeAKA031CAVI
 少年鸭的奇幻漂流
     去年年末，我叔准备年货将自己去年在江北喂养的鸭和鸡带回老家，当时大家觉得直接杀掉放在冰箱吃起来不新鲜，而院子门经常打开加上天气也比较冷所以最后决定圈养
 在他家空置的楼顶，等合适的时候再处置。
