@@ -66,17 +66,17 @@ function wholePermutation(candidates) {
 ~~~
 function wholePermutation(candidates) {
     const result = []
-    backTrack([], index)
+    backTrack([], 0)
     return result
 
-    function backTrack(tempPath, index) {
-        if (index == candidates.length) {
+    function backTrack(tempPath, start) {
+        if (start == candidates.length) {
             result.push([...tempPath])
             return
         }
-        for (let i = index ;i < candidates.length; i++) {
-            if(!isPalindrome(index, i)) continue
-            tempPath.push(candidates.slice(index, i+1))
+        for (let i = start ;i < candidates.length; i++) {
+            if(!isPalindrome(start, i)) continue
+            tempPath.push(candidates.slice(start, i+1))
             backTrack(tempPath, i+1）
             tempPath.pop()
         }

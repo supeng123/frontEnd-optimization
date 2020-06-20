@@ -1,7 +1,7 @@
 ### 1.无重复字符的最长子串
 ~~~
 leecode 3
-单向指针，Set
+单向指针，Set，滑动窗口
 function lengthOfLongestSubstring (s) {
     const set = new Set()
     let j = 0
@@ -277,5 +277,74 @@ funtion productExceptSelf(nums) {
         product = product * nums[i]
     }
     return result
+}
+~~~
+### 16.移动零
+~~~
+//leetcode 238
+左右遍历
+funtion movezero(nums) {
+    let j = 0
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] != 0) {
+            nums[j] = nums[i]
+            j++
+        }
+    }
+    for (let i = j; j < nums.length; j++) {
+        nums[i] = 0
+    }
+    return nums
+}
+~~~
+### 17.最长回文子串
+~~~
+//leetcode 5
+从中间扩散，记住左节点和最大长度
+funtion longestPanlindrome(s) {
+    if (s.length < 2) return s
+    let j = 0
+    let start = 0
+    let maxLength = 0
+    for (let i = 0; i < s.length; i++) {
+        expandAroundCenter(i, i + 1)
+        expandAroundCenter(i - 1, i + 1)
+    }
+    
+    function expandAroundCenter(left ,right) {
+        while (s[left] == s[right] && left != right && left >= 0 && right < s.length) {
+            if (right - left + 1 > maxLength ) {
+                start = left
+                maxLength = right - left + 1
+            }
+            left--
+            right++
+        }
+    }
+    return s.substring(start, start + maxLength)
+}
+~~~
+
+### 17.水果成篮
+~~~
+//leetcode 904
+滑动窗口， map设置种类和位置
+funtion longestPanlindrome(nums) {
+    let max = 1
+    let j = 0
+    const map = new Map() 
+    for (let i = 0; i < nums.length; i++) {
+        map.set(nums[i], i)
+        if (map.size > 2) {
+            let minIndex = tree.length - 1
+            for (let [fruit, index] of map) {
+                if (index < minIndex) minIndex = index
+            }
+            map.delete(nums[minIndex])
+            j = minIndex + 1
+        }
+        max = Math.max(max, i - j + 1)
+    }
+    return max
 }
 ~~~

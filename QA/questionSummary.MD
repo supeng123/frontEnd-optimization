@@ -1121,39 +1121,15 @@ function reverseKLinkedList(head, k) {
 ### 80
 ~~~
 ~~~
-### 81.判断两组字符串是否单词个数相等
+### 81
 ~~~
 ~~~
 ### 82.
 ~~~           
 ~~~
-### 83.最长的回文字符串
+### 83.
 ~~~
-function longestReversedString(s) {
-    if (s.length < 2) return s
-    let start = 0
-    let maxLength = 1
-    for ( let i = 0; i < s.length; i++) {
-        expandAroundCenter(i-1, i+1)
-        expandAroundCenter(i, i+1)
-    }
-
-    function expandAroundCenter(left, right) {
-        while (s[left] === s[right] && left >= 0 && right < s.length) {
-            if (right - left + 1 > maxLength) {
-                maxLength = right - left + 1
-                start = left
-            }
-            left --
-            right ++
-        }
-    }
-
-    return s.substring(start, start + maxLength)
-}
-
 ~~~
-
 ### 84
 ~~~
 ~~~
@@ -1216,110 +1192,26 @@ function LRU() {
 ### 95.跳跃游戏
 ~~~
 ~~~
-### 96.最大子序列
+### 96
 ~~~
 ~~~
-### 97.最长路径
+### 97
 ~~~
-//已知第一行和第一列都为1，那么每个单独的节点的最长路径等于上面的路径加上左边的路径
-//m为7，n为3
-function maxSubSerial(m, n){
-    const arr = []
-    for (let i = 0; i < n; i++) {
-        arr.push([])
-    }
-
-    for (let i = 0; i < n; i++) {
-        arr[i][0] = 1 
-    }
-
-    for (let i = 0; i < m; i++) {
-        arr[0][i] = 1 
-    }
-
-    for (let i = 1; i < n; i++) {
-        for (let j = 1; j < m; i++) {
-            arr[i][j] = arr[i-1][j] + arr[i][j-1]
-        }
-    }
-
-    return arr[n-1][m-1]
-}
 ~~~
 ### 98.
 ~~~
 ~~~
-### 99.各自的乘积
+### 99
 ~~~
-function eachProducts(arrs) {
-    let product = 1
-    const result = new Array(arrs.length).fill(1)
-    for (let i = 0; i < arrs.length; i++) {
-        result[i] = product * result[i]
-        product = product * arrs[i]
-        console.log(result)
-        console.log(product)
-    }
-    product = 1
-    for (let i = arr.length - 1; i >= 0; i--) {
-        result[i] = product * result[i]
-        product = product * arrs[i]
-    }
-    return result
-}
 ~~~
-### 100.潜艇数量
+### 100
 ~~~
-function marineNumbers(arrs) {
-    let count = 0
-    for (let i = 0; i <= arrs.length; i++) {
-       for (let j = 0; j <= arrs[0].length; j++) {
-           if (arrs[i][j] === 'X') {
-               count ++
-               dfs(i, j)
-           }
-        } 
-    }
-
-    return count
-    
-    function dfs(row, column) {
-        if (row < 0 || row >= arrs.length || column < 0 || column > arrs[0].length || arrs[row][column] != 'X' ) return
-        arrs[row][column] = 0
-        dfs(row + 1, column)
-        dfs(row - 1, column)
-        dfs(row, column + 1)
-        dfs(row, column - 1)
-    }
-}
 ~~~
-### 101.n结楼梯最大可能爬法
+### 101
 ~~~
-function staircases(n) {
-    const result = []
-    result[1] = 1
-    result[2] = 2
-    for (let i = 3; i <= n; i++) {
-        result[i] = result[i-2] + result[i-1]
-    }
-    return result[n]
-}
 ~~~
-### 102.移动零到数组的后面
+### 102
 ~~~
-function moveZeros(arr) {
-    let j = 0
-    for (let i = 0; i <= arr.length; i++) { 
-        if (arr[i] != 0) {
-            arr[j] = arr[i]
-            j++
-        }
-    }
-    for (let i = j; i <= arr.length; i++) { 
-        arr[i] = arr[0]
-    }
-    return arr
-}
 ~~~
 ### 103.两个篮子装连续最多的果树
 ~~~
@@ -1328,7 +1220,7 @@ function mostTrees(arr) {
     let min = arr.length - 1
     let j = 0
     let max = 1
-    for (let i = 0; i <= arr.length; i++) { 
+    for (let i = 0; i < arr.length; i++) { 
         map.set(arr[i], i)
         if (map.size > 2) {
             for (let [item, index] of map) {

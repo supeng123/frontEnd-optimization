@@ -77,3 +77,44 @@ funtion maxSubArray(nums) {
     return max
 }
 ~~~
+### 5.爬楼梯
+~~~
+//leetcode 70
+当前楼梯是前两个楼梯最大爬法之和
+function staircase(n) {
+    const counts = []
+    counts[0] = 1
+    counts[1] = 1
+    coutns[2] = 2
+    for (let i = 0 ; i <= n; i++) {
+        counts[i] = (counts[i-1] + counts[i-2])%1000000007
+    }
+    return counts[n]
+}
+~~~
+### 6.不同路径
+~~~
+//leetcode 62
+各个点的路径总数是左边加上上边的数目
+function differenetPath(r, c) {
+    const count = []
+    for (let i = 0 ; i < r; i++) {
+        count[i] = Array(c).fill(0)
+    }
+
+    for (let i = 0 ; i < r; i++) {
+        count[i][0] = 1
+    }
+
+    for (let i = 0 ; i < c; i++) {
+        count[0][i] = 1
+    }
+
+    for (let i = 1; i < r; i++) {
+        for (let j = 1; j < c; j++) {
+            count[i][j] = count[i-1][j] + count[i][j-1]
+        }
+    }
+    return arr[r - 1][c - 1]
+}
+~~~

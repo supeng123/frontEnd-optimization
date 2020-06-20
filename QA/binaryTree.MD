@@ -42,7 +42,7 @@ function buildTree(arr) {
     function build(list) {
         let mid = arr.length >> 1
         let root = new ListNode(list[mid])
-        root.left = mid < 0 ? null : build(0, mid)
+        root.left = mid < 0 ? null : build(list.slice(0, mid))
         root.right = mid >= arr.length - 1 ? null : build(list.slice(mid + 1))
         return root
     }
