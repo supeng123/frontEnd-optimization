@@ -59,3 +59,20 @@ function longestBrackets(s) {
     return max
 }
 ~~~
+### 3.前序遍历
+~~~
+function preOrder(root) {
+    const stack = []
+    const result = []
+    stack.push(root)
+    while (stack.length !== 0) {
+        for (let i = 0; i < stack.length; i++) {
+            const cur = stack.pop()
+            result.push(cur.val)
+            cur.right && stack.push(cur.right)
+            cur.left && stack.push(cur.left)
+        }
+    }
+    return result
+}
+~~~

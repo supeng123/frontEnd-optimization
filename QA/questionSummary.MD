@@ -1068,18 +1068,6 @@ seq = y ack = x + 1
 seq = x + 1 ack = y + 1
 第三次可以携带数据
 ~~~
-### 72
-~~~
-~~~
-### 73
-~~~
-~~~
-### 74
-~~~
-~~~
-### 75
-~~~
-~~~
 ### 76.按k进行链表翻转
 ~~~
 function reverseKLinkedList(head, k) {
@@ -1108,54 +1096,6 @@ function reverseKLinkedList(head, k) {
         return pre
     }
 }
-~~~
-### 77
-~~~
-~~~
-###
-~~~
-~~~
-### 79
-~~~
-~~~
-### 80
-~~~
-~~~
-### 81
-~~~
-~~~
-### 82.
-~~~           
-~~~
-### 83.
-~~~
-~~~
-### 84
-~~~
-~~~
-### 85
-~~~
-~~~
-### 86
-~~~
-~~~
-### 87
-~~~
-~~~
-### 88
-~~~
-~~~
-### 89.
-~~~
-~~~
-### 90.旋转排序数组中最小值
-~~~
-~~~
-### 91.所有数组中交叉的部分
-~~~
-~~~
-### 92
-~~~
 ~~~
 ### 93.LRU
 ~~~
@@ -1186,223 +1126,11 @@ function LRU() {
     }
 }
 ~~~
-### 94.打家劫舍
+###
 ~~~
 ~~~
-### 95.跳跃游戏
+### 110
 ~~~
-~~~
-### 96
-~~~
-~~~
-### 97
-~~~
-~~~
-### 98.
-~~~
-~~~
-### 99
-~~~
-~~~
-### 100
-~~~
-~~~
-### 101
-~~~
-~~~
-### 102
-~~~
-~~~
-### 103.两个篮子装连续最多的果树
-~~~
-function mostTrees(arr) {
-    const map = new Map()
-    let min = arr.length - 1
-    let j = 0
-    let max = 1
-    for (let i = 0; i < arr.length; i++) { 
-        map.set(arr[i], i)
-        if (map.size > 2) {
-            for (let [item, index] of map) {
-                if (index < min) {
-                    min = index
-                }
-            }
-            map.delete(arr[min])
-            j = min + 1
-        }
-        max = Math.max(max, i-j+1)
-    }
-    return max
-}
-~~~
-### 104.间隔排序最小第一最大第二
-~~~
-function sort(arr) {
-    arr.sort((a,b)=> a-b)
-    let start = 0
-    let end = arr.length - 1
-    let result = []
-    while (start <= end) {
-        result.push(arr[start])
-        result.push(arr[end])
-        start++
-        end--
-    }
-    return arr.length%2==1 ? result.slice(0, result.length-1) : result
-}
-~~~
-### 105.加油站问题
-~~~
-function gaslineStation(gasline, cost) {
-    let current = 0
-    let start = 0
-    let totalGasline = 0
-    let totalCost = 0
-    for (let i = 0; i < gasline.length; i++) {
-        totalGasline += gasline[i]
-        totalCost += cost[i]
-    }
-    if (totalGasline < totalCost) return -1
-
-    for (let i = 0; i < gasline.length; i++) {
-        current = current + gasline[i] - cost[i]
-        if (current < 0) {
-            current = 0
-            start = i + 1
-        }
-    }
-
-    return start
-}
-~~~
-### 106.合并两个有序链表
-~~~
-function mergeTwoLinkedList(l1,l2) {
-    let cur = new ListNode()
-    const dummyNode = cur
-
-    while (l1 !== null && l2 !== null) {
-        if (l1.value > l2.value) {
-            cur.next = l2
-            l2 = l2.next
-        } else {
-            cur.next = l1
-            l1 = l1.next
-        }
-        cur = cur.next
-    }
-    if (l1 !== null) {
-        cur.next = l1
-    }
-    if (l2 !== null) {
-        cur.next = l2
-    }
-    return dummy.next
-}
-~~~
-### 107.四数之和
-~~~
-/**
-var fourSum = function(nums, target) {
-    const result = []
-    const len = nums.length
-    nums.sort((a,b) => a-b)
-    let left
-    let right
-    let sum
-    for (let i = 0; i < len - 3; i++) {
-        if (i > 0 && nums[i] ===  nums[i-1]) continue;
-
-        for (let j = i+1; j < len - 2; j++) {
-            if (j > i+1 && nums[j] ===  nums[j-1]) continue;
-                left = j + 1
-                right = len - 1
-                while (left < right) {
-                    sum = nums[i] + nums[j] + nums[left] + nums[right]
-                    if (sum === target) {
-                        result.push([nums[i], nums[j], nums[left], nums[right]])
-                        left ++
-                        while (nums[left] == nums[left - 1]) {
-                            left ++
-                        } 
-                        right --
-                        while (nums[right] == nums[right + 1]) {
-                            right --
-                        }
-                    } else if (sum < target) {
-                        left ++
-                        while (nums[left] == nums[left - 1]) {
-                            left ++
-                        } 
-                    } else if (sum > target) {
-                        right --
-                        while (nums[right] == nums[right + 1]) {
-                            right --
-                        }
-                    }
-                }
-        }
-    }
-    return result
-};
-~~~
-### 108.删掉数组重复项
-~~~
-funciton removeDuplicates(nums) {
-    let slow = 0
-    for (let fast = 2; fast < nums.length; i++) {
-        if (nums[slow] !== nums[fast]) {
-            nums[slow + 2] = nums[fast]
-            slow ++
-        }
-    }
-    return slow + 2
-}
-~~~
-### 109.用循环实现前序遍历
-~~~
-function traversal(root) {
-    const result = []
-    const stack = []
-    stack.push(root)
-    while (stack.length !== null){
-        let currentNode = stack.pop()
-        result.push(currentNode.val)
-        currentNode.right && stack.push(currentNode.right)
-        currentNode.left && stack.push(currentNode.left)
-    }
-    return result
-}
-~~~
-### 110.竖直打印文字
-~~~
-//how are you
-//hay oro weu
-function veticalPrint(str) {
-    const arr = str.join(' ')
-    let maxLength = arr[0].length
-    let ss = ''
-    for (let item of arr) {
-        if (item.length > maxLength) maxLength = item.length
-    }
-
-    for (let i = 0; i < maxLength; i++) {
-        for (let j = 0; j < arr.length; j++) {
-            let s = arr[j][i]
-            if (s === '') {
-                ss += ' '
-            } else {
-                ss += s
-            }
-        }
-        ss.replace(/\s*$/g, '')
-        if (i != maxLength) {
-            ss += '-'
-        }
-    }
-    return ss.split('-')
-}
 ~~~
 ### 111.比较退格字符串
 ~~~
@@ -2298,25 +2026,8 @@ function catchWater(height) {
     return count
 }
 ~~~
-### 147.旋转数组最小值
+###
 ~~~
-//二分查找
-function leastValue(arr) {
-    let left = 0
-    let right = arr.length - 1
-    let mid
-
-    while(left < right) {
-        if (arr[mid] > right) {
-            left = mid + 1
-        } else if (arr[mid] === right) {
-            right--
-        } else {
-            right = mid
-        }
-    }
-    return nums[left]
-}
 ~~~
 ### 148.机器人的活动范围
 ~~~

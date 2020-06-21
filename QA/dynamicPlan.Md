@@ -30,14 +30,13 @@ function fib(n) {
 funtion rob(nums) {
     if (nums.length === 0) return 0
     if (nums.length === 1) return nums[0]
-    let pre = nums[0]
-    let next = Math.max(nums[0], nums[1])
+    const memo = []
+    memo[0] = num[0]
+    memo[1] = Math.max(nums[0], nums[1])
     for (let i = 2; i < nums.length; i++) {
-        let temp = Math.max(nums[i] + pre, next)
-        pre = next
-        next = temp
+        memo[i] = Math.max(nums[i] + memo[i - 2], memo[i - 1])
     }
-    return next
+    return memo[nums.length - 1]
 }
 ~~~
 ### 3.最大子序和

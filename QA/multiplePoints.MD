@@ -348,3 +348,107 @@ funtion longestPanlindrome(nums) {
     return max
 }
 ~~~
+### 18.隔排序最小第一最大第二
+~~~
+左右指针
+function meanderingArray(arr) {
+    arr.sort((a,b)=> a-b)
+    let start = 0
+    let end = arr.length - 1
+    let result = []
+    while (start < end) {
+        result.push(arr[start])
+        result.push(arr[end])
+        start++
+        end--
+    }
+    if (start == end) result.push(arr[start])
+    return result
+}
+~~~
+### 19.加油站问题
+~~~
+functio gasStation(gasline, cost) {
+    let totalCost, totalGasline, start, current = 0
+    for (let i = 0; i <  gasline.length; i++) {
+        totalCost += cost[i]
+        totalGasline += gasline[i]
+    }
+    if (totalCost > totalGasline) return -1
+    for (let i = 0 ; i < gasline.length; i++) {
+        current = current + gasline[i] - cost[i]
+        if (current < 0) {
+            current = 0
+            start = i + 1
+        }
+    }
+    return start
+}
+~~~
+### 20.四数之和
+~~~
+functio fourSum(nums, target) {
+    const result = []
+    nums.sort((a,b) => a - b)
+    for (let i = 0 ; i < nums.length - 3; i++) {
+        if (nums[i] == nums[i+1]) continue
+        for (let j = i + 1; j < nums.length - 2; j++) {
+            if (nums[j] == nums[j+1]) continue
+            let start = j+1
+            let end = nums.length - 1
+            while (start < end) {
+                const sum = nums[i] + nums[j] + nums[start] + nums[end]
+                if (sum === target) {
+                    result.push(nums[i], nums[j], nums[start], nums[end])
+                    start++
+                    end--
+                    while （nums[start] == nums[start - 1]) start ++
+                    while （nums[end] == nums[end + 1]) end--
+                } else if (sum < target) {
+                    start++
+                    while （nums[start] == nums[start - 1]) start ++
+                } else {
+                    end--
+                    while （nums[end] == nums[end + 1]) end--
+                }
+            }
+        }
+    }
+}
+~~~
+### 21.删除排序数组中的重复项
+~~~
+leetcode 26
+快慢指针
+function removeDulplicates(nums) {
+    let start = 0
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] != nums[start]) {
+            nums[start + 1] = nums[i]
+            start++
+        }
+    }
+    return start + 1
+}
+~~~
+### 22.竖直打印单词
+~~~
+function verticalprint(s) {
+    const arr = s.split(' ')
+    let maxLength = 0
+    for (let item of arr) {
+        if (item.length > maxLength) maxLength == item.length
+    }
+    const result = new Array(maxLength).fill('')
+    for(let i = 0; i < maxLength; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            result[i] += arr[j][i] || ''
+        }
+    }
+
+    result.map((item) => {
+        item.replace(/\s*$/g, '')
+    })
+    return result
+}
+~~~

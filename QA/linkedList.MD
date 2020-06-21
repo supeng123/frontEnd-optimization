@@ -105,3 +105,24 @@ function teardownList(head, x) {
     return dummySmall.next
 }
 ~~~
+### 5.合并两个有序链表
+~~~
+function mergeLists(l1, l2) {
+    const dummyHead = new ListNode(0)
+    let cur = dummyHead
+    while (l1 !== null && l2 !=== null) {
+        if (l1.val < l2.val) {
+            cur.next = l1.val
+            l1 = l1.next
+        } else {
+            cur.next = l2.val
+            l2 = l2.next
+        }
+        cur = cur.next
+    }
+    if (l1 !== null) cur.next = l1
+    if (l2 !== null) cur.next = l2
+
+    return dummyHead.next
+}
+~~~
