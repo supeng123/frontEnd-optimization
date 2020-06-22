@@ -76,3 +76,22 @@ function preOrder(root) {
     return result
 }
 ~~~
+### 4.比较含退格的字符串
+~~~
+function backSpaceCompare(S, T) {
+    if (S == T) return true
+    return format(S) === format(T)
+    function format(s) {
+        const arr = s.split('')
+        const stack = []
+        arr.forEach(item => {
+            if (item === '#') {
+                stack.pop()
+            } else {
+                stack.push(item)
+            }
+        })
+        return stack.join('')
+    }
+}
+~~~

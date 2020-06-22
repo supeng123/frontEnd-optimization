@@ -126,3 +126,54 @@ function mergeLists(l1, l2) {
     return dummyHead.next
 }
 ~~~
+### 6.删除指定删除链表的节点
+~~~
+function removeTargetNode(head, target) {
+    const dummyNode = {
+        next: head
+    }
+    let pre = dummyNode
+    let cur = dummyNode.next
+    if (cur.val == target) dummyNode.next = dummyNode.next.next
+
+    while (pre !== null && cur !== null) {
+        if (cur.val === target) break
+        pre = cur
+        cur = cur.next
+    }
+    pre.next = cur ? cur.next : null
+    return dummyNode.next
+}
+~~~
+### 7.删除排序链表中的重复元素
+~~~
+//leetcode 83
+判断下一个节点是不是等于当前节点
+function removeDuplicates(head) {
+    let cur = head
+    while (cur !== null) {
+        let nextNode = cur.next
+        while (nextNode && nextNode.val == cur.val) {
+            nextNode = nextNode.next
+        }
+        cur.next = nextNode
+        cur = nextNode
+    }
+    return head
+}
+~~~
+### 8.回文链表
+~~~
+leetcode 234
+function isPalidrom(head) {
+    const result = []
+    while (head) {
+        result.push(head.val)
+        head = head.next
+    }
+    while (result.length > 1) {
+        if (result.pop() !== result.shift()) return false
+    }
+    return true
+}
+~~~

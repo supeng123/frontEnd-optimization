@@ -48,3 +48,12 @@ function buildTree(arr) {
     }
 }
 ~~~
+### 4. 删除给定值的叶子节点
+~~~
+后序遍历
+function removeLeafNodes = (root, target) {
+    root.left && (root.left = removeLeafNodes(root.left, target))
+    root.right && (root.right = removeLeafNodes(root.right, target))
+    return root.left == null && root.right == null && root.val == target ? null : root
+}
+~~~
