@@ -117,3 +117,69 @@ function differenetPath(r, c) {
     return arr[r - 1][c - 1]
 }
 ~~~
+### 7.不同的二叉搜索树
+~~~
+leetcode 96
+function numTrees(n) {
+    const dp = []
+    dp[0] = 1
+    dp[1] = 1
+    for (let i = 2; i <= n; i++) {
+        dp[i] = 0
+        for (let j = 1; j <= i; j++) {
+            dp[i] += dp[j-1] + dp[i-j]
+        }
+    }
+    return dp[n]
+}
+~~~
+### 8.三角形的最小路径和
+~~~
+leetcode 96
+function minNumTotal(triangle) {
+    const dp = []
+    for (let i = 0; i < triangle.length; i++) {
+        dp.push([])
+        for (let j = 0; j <= i; j++) {
+            dp[i][j] = Number.MAX_VALUE
+        }
+    }
+    dp[0][0] = triangle[0][0]
+    for (let i = 0; i < triangle.length; i++) {
+        for (let j = 0; j <= i; j++) {
+            if (i > 0 && j < i) {
+                dp[i][j] = Math.min(dp[i][j], dp[i-1][j] + triangle[i][j])
+            }
+            if ( j > 0) {
+                dp[i][j] = Math.min(dp[i][j], dp[i-1][j-1] + triangle[i][j])
+            }
+        }
+    }
+    return Math.min(...dp[triangle.length - 1])
+}
+~~~
+### 9.矩阵的最小路径和
+~~~
+leetcode 96
+function minNumTotal(grid) {
+    const dp = []
+    for (let i = 0; i < grid.length; i++) {
+        dp.push([])
+        for (let j = 0; j < grid[0].length; j++) {
+            dp[i][j] = Number.MAX_VALUE
+        }
+    }
+    dp[0][0] = grid[0][0]
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j <= i; j++) {
+            if (i > 0) {
+                dp[i][j] = Math.min(dp[i][j], dp[i-1][j] + grid[i][j])
+            }
+            if ( j > 0) {
+                dp[i][j] = Math.min(dp[i][j], dp[i-1][j-1] + grid[i][j])
+            }
+        }
+    }
+    return dp[grid.length - 1][grid[0].length - 1]
+}
+~~~
