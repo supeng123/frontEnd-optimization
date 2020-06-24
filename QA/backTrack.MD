@@ -35,7 +35,7 @@ function generateBracket(candidates) {
         for (let i = start ;i < candidates.length; i++) {
             if (target < candidates[i]) break;
             tempPath.push(candidates[i])
-            backTrack(tempPath.slice(), target - candidates[i], i)
+            backTrack(tempPath.slice(), target - candidates[i], i + 1)
             tempPath.pop(candidates[i])
         }
     }
@@ -62,7 +62,24 @@ function wholePermutation(candidates) {
     }
 }
 ~~~
-### 4.分割回文
+### 4.子集
+~~~
+function subSet(nums) {
+    const result = []
+    backTrack([], start)
+    return result
+    
+    function backTrack(tempPath, start) {
+        result.push(temPath)
+        for (let i = start ;i < nums.length; i++) {
+            tempPath.push(nums[i])
+            backTrack(temPath.slice(), i+1)
+            tempPath.pop()
+        }
+    }
+}
+~~~
+### 5.分割回文
 ~~~
 function wholePermutation(candidates) {
     const result = []

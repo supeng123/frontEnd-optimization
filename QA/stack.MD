@@ -95,3 +95,33 @@ function backSpaceCompare(S, T) {
     }
 }
 ~~~
+### 23.直线上的点
+~~~
+//leetcode 149
+哈希表
+function mostDots(points) {
+    if (points.length <= 2) return points.length
+    let counts = 2 
+    
+    for (let i = 0; i < points.length - 1; i++) {
+        let repeat = 1
+        let hash = {'_', 0}
+        for （let j = i + 1; j < points.length; j++) {
+            const [[x1, y1], [x2, y2]] = [points[i], points[j]]
+            if (x1 == x2 && y1 == y2) {
+                repeat++
+                continue
+            }
+            let k = (x1-x2)/(y1-y2)
+            if (k == - Infinity) k = Infinity
+            if (hash[k]) {
+                hash[k] = hash[k] + 1
+            } else {
+                hash[k] = 1
+            }
+        }
+        counts = Math.max(Math.max(...Object.values(hash)+repeat), counts)
+    }
+    return counts
+}
+~~~

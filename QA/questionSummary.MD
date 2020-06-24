@@ -1126,55 +1126,6 @@ function LRU() {
     }
 }
 ~~~
-### 121.二叉树右视图
-~~~
-//队列
-function rightSideView(root) {
-    const result = []
-    if (!root) return result
-    const queue = []
-    queue.push(root)
-    while (queue.length !== 0) {
-        let len = queue.length
-        while (len > 0) {
-            let node = queue.shift()
-            if (len == 1) result.push(node.val)
-            node.left && queue.push(node.left)
-            node.right && queue.push(node.right)
-            len--
-        }
-    }
-    return result
-}
-~~~
-### 122.一条直线上最多的点
-~~~
-//哈希表
-function mostDots(nums) {
-    if (nums.length <=2) return 2
-    let result = 2
-    for (let i = 0; i < nums.length; i++) {
-        let repeated = 1
-        let hash = {}
-        for (let j = i+1; j < nums.length; j++) {
-            let [[x1, y1], [x2, y2]] = [nums[i], nums[j]]
-            if (x1 == x2 && y1  == y2) {
-                repeated++;
-                continue;
-            } 
-            let k = (x1-x2)/(y1-y2)
-            if (k === -infinite) k = infinite
-            if (hash[k]) {
-                hash[k] + 1
-            } else {
-                hash[k] = 1
-            }
-        }
-        result = Math.max(result, Math.max(...Object.values(hash))+ repeated) 
-    }
-    return result
-}
-~~~
 ### 123.单词搜索
 ~~~
 //dfs
@@ -1336,6 +1287,7 @@ function insertionIndex(arr, target) {
 ~~~
 ### 129.不同二叉搜索树
 ~~~
+//leetcode 95
 //递归
 function differentTrees(n) {
     if (n === 0) return []
@@ -1401,31 +1353,6 @@ function symmetryTree(nums) {
     return nums
 }
 ~~~
-### 132.旋转链表
-~~~
-//递归
-function rotateLinkedList(head, k) {
-    if(!head || !head.next) return head
-    let size = 1
-    let node = head
-    while(node.next) {
-        node = node.next
-        size++
-    }
-    let step= k % size
-    node.next = head
-
-    let cur = head
-    let z = 1
-    while (z < (size - step)) {
-        cur = cur.next
-        z++
-    }
-    let start = cur.next
-    cur.next = null
-    return start
-}
-~~~
 ### 133.链表交换节点
 ~~~
 //递归
@@ -1483,28 +1410,6 @@ function mergeTwoList(nums1, m, nums2, n) {
     }
     if (n > 0) {
         nums1.splice(0, n, ...nums2.slice(0, n))
-    }
-}
-~~~
-### 137.全排列
-~~~
-//回溯
-function allPermutations(nums) {
-    const result = []
-    backTrack(result, [], nums)
-    return result
-
-    function backTrack(result, tempList, nums) {
-        if (tempList.length === nums) {
-            result.push([...tempList])
-            return
-        }
-        for (let i = 0; i < nums.length; i++) {
-            if (tempList.includes(num[i])) continue
-            tempList.push(num[i])
-            backTrack(result, tempList, nums)
-            tempList.pop(num[i])
-        }
     }
 }
 ~~~
@@ -1676,9 +1581,6 @@ function catchWater(height) {
     }
     return count
 }
-~~~
-###
-~~~
 ~~~
 ### 148.机器人的活动范围
 ~~~
@@ -1938,20 +1840,6 @@ function scores(S) {
     }
     return stack.reduce((sum, a) => sum+a)
 }
-~~~
-### 157.子集
-~~~
-let output = []
-    
-    function backtrack(i, tmpPath) {
-        output.push(tmpPath)
-        if(i > nums.length) return
-        for(let j = i; j < nums.length; j++){
-            backtrack(j + 1, tmpPath.concat([nums[j]]))
-        }
-    }
-    backtrack(0, [])
-    return output
 ~~~
 ### 158.解码
 ~~~

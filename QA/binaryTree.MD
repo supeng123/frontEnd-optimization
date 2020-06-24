@@ -57,3 +57,25 @@ function removeLeafNodes = (root, target) {
     return root.left == null && root.right == null && root.val == target ? null : root
 }
 ~~~
+### 5.二叉树的右视图
+~~~
+leetcode 199
+队列 前序遍历
+function backSpaceCompare(root) {
+    const reuslt = []
+    if (root == null) return result
+    const queue = []
+    queue.push(root)
+    while (queue.length !== 0) {
+        let len = queue.length
+        while (len > 0) {
+            const node = queue.shift()
+            if (len == 1)result.push(node.val)
+            node.left && queue.push(node.left)
+            node.right && queue.push(node.right)
+            len--
+        }
+    }
+    return result
+}
+~~~
