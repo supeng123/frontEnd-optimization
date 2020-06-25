@@ -177,3 +177,60 @@ function isPalidrom(head) {
     return true
 }
 ~~~
+### 9.排序链表
+~~~
+归并排序
+function sortList(head) {
+    let slow = head
+    let fast = head
+    while (fast) {
+        slow = slow.next
+        fast = fast.next
+    }
+    let rightNode = slow.next
+    slow.next = null
+    let leftNode = head
+
+    return merge(sortList(leftNode), sortList(rightNode))
+    
+    function merge(left, right) {
+        let l = left
+        let r = right
+        const dummyNode = new ListNode()
+        let cur = dummyNode
+        while (l && r) {
+            if (l.val < r.val) {
+                cur.next = l
+                l = l.next
+            } else {
+                cur.next = r
+                r = r.next
+            }
+            cur = cur.next
+        }
+        cur.next = l ? l : r
+        return dummyNode.next
+    }
+}
+~~~
+### 10.环形链表
+~~~
+快慢指针
+function roundList(head) {
+    let fast = head
+    let slow = head
+    let start = head
+    while (fast) {
+        slow = slow.next
+        fast = fast.next.next
+        if (slow == false) {
+            while (slow != start) {
+                start = start.next
+                slow = slow.next
+            }
+            return slow
+        }
+    }
+    return null
+}
+~~~

@@ -176,7 +176,7 @@ function minNumTotal(grid) {
                 dp[i][j] = Math.min(dp[i][j], dp[i-1][j] + grid[i][j])
             }
             if ( j > 0) {
-                dp[i][j] = Math.min(dp[i][j], dp[i-1][j-1] + grid[i][j])
+                dp[i][j] = Math.min(dp[i][j], dp[i][j-1] + grid[i][j])
             }
         }
     }

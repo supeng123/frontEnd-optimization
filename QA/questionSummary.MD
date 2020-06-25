@@ -1126,70 +1126,6 @@ function LRU() {
     }
 }
 ~~~
-### 123.单词搜索
-~~~
-//dfs
-function wordSearch(matrix, word) {
-    matrix[-1] = []
-    matrix.push([])
-
-    for (let i = 0 ; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[0].length; j++) {
-            if (matrix[i][j] ===  word[i] && dfs(i,j,0)) return true
-        }
-    }
-    return false
-
-    function dfs(row, column, index) {
-        if index+1 == word.length return true
-        let temp = matrix[row][column]
-        matrix[row][column] = false
-
-        if (matrix[row][column + 1] == word[index+1] && dfs(row, column+1, index+1)) return true
-        if (matrix[row][column - 1] == word[index+1] && dfs(row, column-1, index+1)) return true
-        if (matrix[row+1][column] == word[index+1] && dfs(row+1, column, index+1)) return true
-        if (matrix[row-1][column] == word[index+1] && dfs(row-1, column, index+1)) return true
-
-        matrix[row][column] = temp
-    }
-}
-~~~
-### 124.排序链表
-~~~
-//归并排序
-function linkListPermutation(head) {
-    if (!head || !head.next) return head
-    function mergeList(left, right) {
-        let leftNode = left
-        let rightNode = right
-        const dummyNode = new listNode(0)
-        let nNode = dummyNode
-        while(leftNode && rightNode) {
-            if (leftNode.val <= rightNode.val){
-                nNode.next = leftNode
-                leftNode = leftNode.next
-            } else {
-                nNode.next = rightNode
-                rightNode = rightNode.next
-            }
-            nNode = nNode.next
-        }
-        nNode.next = leftNode ? leftNode : rightNode
-        return dummyNode.next
-    }
-
-    let mid = head
-    let fast = head
-    while(fast.next && fast.next.next) {
-        mid = mid.next
-        fast = fast.next.next
-    }
-    let rightNode = mid.next
-    mid.next = null
-    let leftNode = head
-    return mergeList(linkListPermutation(leftNode), linkListPermutation(rightNode))
-}
-~~~
 ### 125.DNA重复查找
 ~~~
 //固定窗口
@@ -1215,28 +1151,6 @@ function groupDNA(s){
         }
     }
     return result
-}
-~~~
-### 126.环形链表
-~~~
-//快慢指针
-function roundLinkedList(head) {
-    if (!head || !head.next) return null
-    let slow = head
-    let fast = head
-    let start = head
-    while (fast.next && fast.next.next) {
-        slow = slow.next
-        fast = fast.next.next
-        if (slow == fast) {
-            while(slow !== start) {
-                start = start.next
-                slow = slow.next
-            }
-            return slow
-        }
-    }
-    return null
 }
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
@@ -1410,30 +1324,6 @@ function mergeTwoList(nums1, m, nums2, n) {
     }
     if (n > 0) {
         nums1.splice(0, n, ...nums2.slice(0, n))
-    }
-}
-~~~
-### 138.复原ip地址
-~~~
-//回溯
-function ipAddress(s) {
-    const result = []
-    backTrack(result, [], s)
-    return result
-
-    function isValid(str) {
-        if (str.length > 3) return false
-        return str.startswith("0") ? str.length === 1 : parseInt(str) < 255
-    }
-
-    function backTrack(result, tempList, remain) {
-        if (tempList.length === 3) {
-            isValid(tempList) && result.push([..temp, remain])
-            return
-        }
-        for (let i = 0; i < 4; i++) {
-            isValid(tempList) && backTrack(result,[...temp, remain.substr(0, i)], remain.substr(i))
-        }
     }
 }
 ~~~
@@ -1899,3 +1789,6 @@ mother gave me her entire goddamn lifeAKA031CAVI
     今天和堂妹聊到她因为疫情还在家不能返回学校，我们聊到年初种的几颗果树，那颗橘子树已经开始开花，另外两颗水土不服没能活下来，那只鸭子后来因为怕无人照管被带到我堂妹的舅妈家，但第二天
 只在菜园看到过它。
 ~~~
+
+《隐秘的角落》里面的无论成年人和小孩，受害者和被受害人，每个角色都在说谎，每个人都试图用谎言去填补由于缺乏最亲近的人的关爱的空缺。里面的小孩和《何处为家》的Zain一样，都被抛弃到需要在拯救他人和杀人者同谋之间
+界限暧昧但做出自己抉择的道德困境。剧情灰色主调沉闷但结局没有《大象席地而坐》那般压抑，剧情中隐秘罪恶的推敲也没《阳光普照》警慎，张东升也没《老无所依》和《杀死伊芙》般变态的令人不寒而栗。整个剧情只是一群普通人沉溺自身幻想世界却不幸崩塌的偏执反抗，如同现在的我不懂为啥早上点的外卖现在还没送到，客服，外卖小哥不懂为啥我还不取消订单一样。
