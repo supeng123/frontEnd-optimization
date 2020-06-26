@@ -452,4 +452,74 @@ function verticalprint(s) {
     return result
 }
 ~~~
-
+### 23.重复的DNA序列
+~~~
+//滑动窗口
+leetcode 187
+function repeatDNAs(s) {
+    let start = 0
+    let end = 10
+    const map = new Map()
+    const result = []
+    for (let i = 0; i < s.length; i++) {
+        const str = s.substring(start, end)
+        if (map.has(str)) {
+            map.set(str, map.get(str) + 1)
+        } else {
+            map.set(str, 1)
+        }
+    }
+    for (let [key, val] of map) {
+        if (val > 1) {
+            result.push(key)
+        }
+    }
+    return result
+}
+~~~
+### 24.搜索插入位置
+~~~
+//leetcode 35
+二分搜索
+function positionSearch(nums, target) {
+    let start  = 0
+    let end = nums.length
+    while (start < end) {
+        const mid = (start + end) >> 1
+        if (nums[mid] < target) {
+            start = mid + 1 
+        }else {
+            end = mid
+        }
+    }
+    return start
+}
+~~~
+### 25.三数最近
+~~~
+function threeSum(nums, target) {
+    const len = nums.length
+    if (len < 3) return null
+    nums.sort((a,b) => a - b)
+    let result = nums[0] + nums[1] + nums[2]
+    for (let i = 0; i < len - 2; i++) {
+        let start = i + 1
+        let end = len - 1
+        while (start < end) {
+            const sum = nums[i] + nums[start] + nums[end]
+            if (Math.abs(target-sum) < Math.abs(target-result)) {
+                result = sum
+            }
+            if (sum < target) {
+                start++
+            } else if (sum > target) {
+                end--
+            } else {
+                result = sum
+                break;
+            }
+        }
+    }
+    return result
+}
+~~~

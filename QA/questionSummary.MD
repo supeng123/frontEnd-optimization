@@ -1126,79 +1126,10 @@ function LRU() {
     }
 }
 ~~~
-### 125.DNA重复查找
-~~~
-//固定窗口
-function groupDNA(s){
-    const result = []
-    const map = new Map()
-    let len = s.length
-    let start = 0
-    let end = 10
-    while (end <= len) {
-        const str = s.substring(start, end)
-        if (map.has(str)) {
-            map.set(str, map.get(str) + 1)
-        } else {
-            map.set(str, 1)
-        }
-        start++
-        end++
-    }
-    for (let[key, value] of map) {
-        if(value > 1) {
-            result.push(key)
-        }
-    }
-    return result
-}
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
 //unsavory remnants of many hotel rooms I still wake up screamnng over
 //and that's what losing a parent is like
-~~~
-
-### 127.三数最近
-~~~
-function threeSum(arr, target) {
-    arr.sort((a, b) => a - b)
-    let result = arr[0] + arr[1] + arr[2]
-    for (let i = 0; i < arr.length - 2; i++) {
-        let start = i + 1
-        let end = arr.length - 1
-        while (start < end) {
-            const sum = arr[i] + arr[start] + arr[end]
-            if (Math.abs(target-sum) < Math.abs(target - result)) {
-                result = sum
-            }
-            if (sum < target) start++
-            if (sum > target) end--
-            if （sum = taregt) {
-                result = sum
-                break
-            }
-        }
-    }
-    return result
-}
-~~~
-### 128.搜索插入位置
-~~~
-//二分搜索
-function insertionIndex(arr, target) {
-    let left = 0
-    let right = arr.length
-    let mid = (right + left) >>> 1
-    while (left < right) {
-        if (arr[mid] < target) {
-            left = mid + 1
-        } else {
-            right = mid
-        }
-    }
-    return left
-}
-~~~
 ### 129.不同二叉搜索树
 ~~~
 //leetcode 95
