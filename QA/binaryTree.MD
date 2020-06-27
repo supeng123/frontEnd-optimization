@@ -79,3 +79,18 @@ function backSpaceCompare(root) {
     return result
 }
 ~~~
+### 6.对称二叉树
+~~~
+leetcode 101
+function isSymmetric(root) {
+    if(!root) return false
+
+    function isValid(left, right) {
+        if(left == null && right == null) return true
+        if (left != null || right != null) return false
+        if (left.val != right.val) return false
+        return isValid(left.left, right.right) && isValid(left.right, right.left)
+    }
+    return isValid(root.left, root.right)
+}
+~~~

@@ -95,7 +95,7 @@ function backSpaceCompare(S, T) {
     }
 }
 ~~~
-### 23.直线上的点
+### 5.直线上的点
 ~~~
 //leetcode 149
 哈希表
@@ -123,5 +123,37 @@ function mostDots(points) {
         counts = Math.max(Math.max(...Object.values(hash)+repeat), counts)
     }
     return counts
+}
+~~~
+### 6.LRU
+~~~
+leetcode146
+map
+
+class LRU() {
+    constructor(capacity) {
+        this.contanier = new Map()
+        this.capacity = capacity
+    }
+
+    get(key){
+        if(this.container.has(key)) {
+            const item = this.container.get(key)
+            this.container.delete(key)
+            this.container.set(key, item)
+            return item
+        }
+        return -1
+    }
+
+    put(key, value){
+        if (this.container.has(key)) {
+            this.container.delete(key)
+        }
+        if (this.container.size >= capacity) {
+            this.container.delete(this.container.keys().next().value)
+        }
+        this.container.set(key,value)
+    }
 }
 ~~~

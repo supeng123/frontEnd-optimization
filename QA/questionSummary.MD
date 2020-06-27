@@ -1097,35 +1097,6 @@ function reverseKLinkedList(head, k) {
     }
 }
 ~~~
-### 93.LRU
-~~~
-function LRU() {
-    constructor(capacity) {
-        this.contanier = new Map()
-        this.capacity = capacity
-    }
-
-    get(key){
-        if(this.container.has(key)) {
-            const item = this.container.get(key)
-            this.container.delete(key)
-            this.container.set(key, item)
-            return item
-        }
-        return -1
-    }
-
-    put(key, value){
-        if (this.container.has(key)) {
-            this.container.delete(key)
-        }
-        if (this.container.size >= capacity) {
-            this.container.delete(this.container.keys().next().value)
-        }
-        this.container.set(key,value)
-    }
-}
-~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
 //unsavory remnants of many hotel rooms I still wake up screamnng over
@@ -1158,21 +1129,6 @@ function differentTrees(n) {
     }
 }
 ~~~
-### 130.对称二叉搜索树
-~~~
-//递归
-function symmetryTree(root) {
-    if (!root) return true
-    
-    function isSymmetry(left, right) {
-        if (left === null && right === null) return true
-        if (left === null || right === null) return false
-        if (left.val !== right.val) return false
-        return isSymmetry(left.left, right.right) && (left.right, right.left)
-    }
-    return isSymmetry(root.left, root.right)
-}
-~~~
 ### 131.下一个排列
 ~~~
 //递归
@@ -1196,28 +1152,6 @@ function symmetryTree(nums) {
         [nums[next], nums[l]] = [nums[l], nums[next]]
     }
     return nums
-}
-~~~
-### 133.链表交换节点
-~~~
-//递归
-function exchangeNode(head) {
-    if(!head || !head.next) return head
-    let dummyNode = {
-        next: head
-    }
-    let cur = dummyNode
-    while (cur.next && cur.next.next) {
-        let startNode = cur.next
-        let endNode = cur.next.next
-
-        dummyNode.next = endNode
-        startNode.next = endNode.next
-        endNode.next = startNode
-
-        cur = startNode
-    }
-    return dummyNode.next
 }
 ~~~
 ### 134.查找数组里面最后和第一个位置

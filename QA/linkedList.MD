@@ -234,3 +234,24 @@ function roundList(head) {
     return null
 }
 ~~~
+### 11.链表交换节点
+~~~
+leetcode 24
+function changeNode(head) {
+    if (!head || !head.next) return head
+    const dummyNode = {
+        next: head
+    }
+    let cur = dummyNode
+    while (cur.next && cur.next.next) {
+        let startNode = cur.next
+        let endNode = cur.next.next
+
+        cur.next = endNode
+        startNode.next = endNode.next
+        endNode.next = startNode
+        cur = startNode
+    }
+    return dummyNode.next
+}
+~~~
