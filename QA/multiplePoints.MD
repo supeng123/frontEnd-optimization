@@ -228,23 +228,6 @@ function spiralMatrix(matrix) {
 ~~~
 ### 13.旋转排序数组中最小值
 ~~~
-leetcode 154
-//二分搜索 向右比较
-function minValue(arr) {
-    let left = 0
-    let right = arr.length - 1
-    while (left < right) {
-        let mid = (left + right) >> 1
-        if (arr[mid] > arr[right]) {
-            left = mid + 1
-        } else if (arr[mid] == arr[right]) {
-            right--
-        } else {
-            right = mid
-        }
-    }
-    return arr[left]
-}
 ~~~
 ### 14.跳跃游戏
 ~~~
@@ -477,23 +460,8 @@ function repeatDNAs(s) {
     return result
 }
 ~~~
-### 24.搜索插入位置
+### 24.
 ~~~
-//leetcode 35
-二分搜索
-function positionSearch(nums, target) {
-    let start  = 0
-    let end = nums.length
-    while (start < end) {
-        const mid = (start + end) >> 1
-        if (nums[mid] < target) {
-            start = mid + 1 
-        }else {
-            end = mid
-        }
-    }
-    return start
-}
 ~~~
 ### 25.三数最近
 ~~~
@@ -521,5 +489,29 @@ function threeSum(nums, target) {
         }
     }
     return result
+}
+~~~
+### 26.下一个排列
+~~~
+leetcode 31
+三指针,或全排列回溯
+function nextPermutation(nums) {
+    if (nums.length < 2) return nums
+    let start = nums.length - 2
+    let next = nums.length - 1
+    let end = nums.length - 1
+    while (nums[start] >= nums[next]) {
+        start--
+        next--
+    }
+    if (start < 0) return nums.reverse()
+    while (start < end && nums[start] > nums[end]) {
+        end--
+    }
+    [nums[start], nums[end]] = [nums[end], nums[start]]
+    for (let i = nums.length - 1; i > next; next++, i--) {
+        [nums[i], nums[next]] = [nums[next], nums[i]]
+    }
+    return nums
 }
 ~~~

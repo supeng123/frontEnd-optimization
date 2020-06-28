@@ -1129,56 +1129,6 @@ function differentTrees(n) {
     }
 }
 ~~~
-### 131.下一个排列
-~~~
-//递归
-function symmetryTree(nums) {
-    if (nums.length < 2) return nums
-    let pre = nums.length - 2
-    let end = nums.length - 1
-    let next = nums.length - 
-
-    while (nums[pre] >= nums[next]) {
-        pre--
-        next--
-    }
-    if (pre < 0) return nums.reverse()
-    while (pre < end && num[pre] > nums[end]) {
-        end--
-    }
-    [nums[pre], nums[end]] = [nums[end], nums[pre]]
-
-    for (let l = nums.length -1 ; next < l; ++next , --l) {
-        [nums[next], nums[l]] = [nums[l], nums[next]]
-    }
-    return nums
-}
-~~~
-### 134.查找数组里面最后和第一个位置
-~~~
-//二分查找
-function findPosition(arr, target) {
-    let start = 0
-    let end = arr.length - 1
-    let mid
-    while (left <= right) {
-        mid = (left+right) >> 1
-        if (arr[mid] === target) break
-        if (arr[mid] > target) {
-            right = mid - 1
-        } else {
-            left = mid + 1
-        }
-    }
-    if (left > right) return [-1,-1]
-    let i = mid
-    let j = mid
-    while (arr[i] == arr[i-1]) i--
-    while (arr[j] == arr[j+1]) j++
-
-    return [i, j]
-}
-~~~
 ### 136.合并数组
 ~~~
 //双指针
@@ -1336,40 +1286,6 @@ function catchWater(height) {
     }
     return count
 }
-~~~
-### 148.机器人的活动范围
-~~~
-function movingCount(m, n, k) {
-//dfs
-    const set = new Set()
-    let r = 0
-    let c = 0
-    let count = 0
-
-    dfs(0, 0)
-    return count;
-    function dfs(row, column) {
-        if (row < 0 || 
-            column < 0 || 
-            row >= m || 
-            column >= n || 
-            sum(row) + sum(column) > k ||
-            set.has(`${row} + ${column}`)
-            ) return
-        set.add(`${row} + ${column}`)
-        count++
-        dfs(row - 1, column)
-        dfs(row + 1, column)
-        dfs(row, column - 1)
-        dfs(row, column + 1)
-    }
-
-    function sum(number) {
-        return number.toString().split('').reduce((total, a) => {
-            return total += Number(a)
-        },0)
-    }
-};
 ~~~
 ### 149.二叉树最大路径和
 ~~~
@@ -1546,26 +1462,6 @@ function allLeftLeaves(root) {
         if (node.left) recursion(node.left, true, res)
         if (node.right) recursion(node.right, false, res)
     }
-}
-~~~
-### 155.字母大小全排列
-~~~
-//回溯
-function alphabetsPermutation(S) {
-    const set = new Set()
-    backTrack('', 0)
-    function backTrack(str, index) {
-        if (index >= S.length) {
-            set.add(str)
-            return
-        }
-        const cur = S[index]
-        const upper = str + cur.toUpperCase()
-        const lower = str + cur.toUpperCase()
-        backTrack(upper, index + 1) 
-        backTrack(lower, index + 1) 
-    }
-    return Array.from(set)
 }
 ~~~
 ### 156.括号的分数

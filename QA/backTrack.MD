@@ -109,3 +109,24 @@ function wholePermutation(candidates) {
     }
 }
 ~~~
+### 6.字母大小写全排列
+~~~
+leetcode 784
+//回溯
+function allPermutations(S) {
+    const set = new Set()
+    backTrack(0, [])
+    return Array.from(set)
+    function backtrack(start, str) {
+        if (start === S.length) {
+            set.add(str)
+            return 
+        }
+        let cur = S[start]
+        let low = str + cur.toLowerCase()
+        let high = str + cur.toUpperCase()
+        backTrack(start+1, low)
+        backTrack(start+1, high)
+    }
+}
+~~~
