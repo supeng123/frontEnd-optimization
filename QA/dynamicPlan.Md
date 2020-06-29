@@ -183,3 +183,68 @@ function minNumTotal(grid) {
     return dp[grid.length - 1][grid[0].length - 1]
 }
 ~~~
+### 10.最长上升子序列
+~~~
+leetcode 300
+function lengthOfLIS (nums) {
+    if (nums.length < 2) return nums.length
+    let max = 1
+    const dp = new Array().fill(1)
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = 0; j < i; j++) {
+            if (nums[j] < nums[i]) {
+                dp[i] = Math.max(dp[i], dp[j]+1)
+            }
+        }
+        max = Math.max(max, dp[i])
+    }
+    return max
+}
+~~~
+### 11.零钱兑换
+~~~
+leetcode 322
+function changes (coins, num) {
+    const dp = new Array(num).fill(Inifinity)
+    dp[0] = 0
+    for (let i = 1; i < nums; i++) {
+        for (let coin of coins) {
+            if (i - coin > 0) {
+                dp[i] = Math.min(dp[i], dp[i-coin]+1)
+            }
+        }
+    }
+    dp[num] === Infinity ? -1 : dp[num]
+}
+~~~
+### 11.单词拆分
+~~~
+leetcode 139
+function wordsBreak (s, arrlist) {
+    const dp = new Array(s.length + 1).fill(false)
+    dp[0] = true
+    for (let i = 0; i < s.length; i++) {
+        for (let j = 0; j < i; j++) {
+            if (dp[j] && arrlist.includes(s.substring(j, i))) {
+                dp[i] = true
+                break;
+            }
+        }
+    }
+    return dp[s.length]
+}
+~~~
+### 12.整数拆分
+~~~
+leetcode 343
+function intergerBreak (n) {
+    const dp = new Array(s.length + 1).fill(1)
+    dp[0] = 0
+    for (let i = 0; i < s.length; i++) {
+        for (let j = 0; j < i; j++) {
+            dp[i] = Math.max(dp[i], j * [i - j], j * dp[i - j])
+        }
+    }
+    dp[n]
+}
+~~~
