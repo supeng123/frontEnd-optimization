@@ -1183,20 +1183,6 @@ function countSubstrings(s) {
     return num
 }
 ~~~
-### 145.平衡二叉树
-~~~
-//递归
-function balanceTree(root) {
-    if (!root) return true
-
-    function height(node) {
-        if (!node) return 0
-        return Math.max(height(node.left), height(node.right)) + 1
-
-    }
-    return Math.abs(height(root.left) - height(root.right)) < 2 && balance(root.left) && balance(root.right)
-}
-~~~
 ### 146.接水
 ~~~
 //
@@ -1219,23 +1205,6 @@ function catchWater(height) {
         count = count + Math.min(leftMax[i], rightMax[i]) - height[i]
     }
     return count
-}
-~~~
-### 149.二叉树最大路径和
-~~~
-function maxPath(root) {
-    let max = -Infinite
-
-    function help(node) {
-        if (node == null) return 0
-        let leftVal = Math.max(help(node.left), 0)
-        let rightVal = Math.max(help(node.right), 0)
-        let newPath = node.val + leftVal + rightVal
-        max = Math.max(newPath, max)
-        return node.val + Math.max(leftVal, rightVal)
-    }
-    help(root)
-    return max
 }
 ~~~
 ### 150.最长同值路径
@@ -1263,22 +1232,6 @@ function maxPath(root) {
     let ans = 0;
     inorder( root );
     return ans;
-}
-~~~
-### 151.最长的单词
-~~~
-function longestWord(words) {
-    words.sort()
-    const map = new Map()
-    map.set('', true)
-    let maxWords = ''
-    for (let item of words) {
-        if (map.has(item.substr(0, item.length - 1))){
-            map.set(item, true)
-            maxWords = item.length > maxWords.length ? item: maxWords
-        }
-    }
-    return maxWords
 }
 ~~~
 ### 152.滑动窗口最大值
@@ -1361,40 +1314,6 @@ function deleteNode(root, key) {
             node = node.left
         }
         return node.val
-    }
-}
-~~~
-### 154.所有叶子左叶子节点
-~~~
-//dfs
-function allLeftLeaves(root) {
-    let res = [0]
-    recursion(root, false, res)
-    return res[0]
-
-    function recursion(node, isLeft, res) {
-        if (root.left == null && root.right == null && isLeft) {
-            res[0] += node.val
-        }
-        if (node.left) recursion(node.left, true, res)
-        if (node.right) recursion(node.right, false, res)
-    }
-}
-~~~
-### 154.所有叶子左叶子节点
-~~~
-//dfs
-function allLeftLeaves(root) {
-    let res = [0]
-    recursion(root, false, res)
-    return res[0]
-
-    function recursion(node, isLeft, res) {
-        if (root.left == null && root.right == null && isLeft) {
-            res[0] += node.val
-        }
-        if (node.left) recursion(node.left, true, res)
-        if (node.right) recursion(node.right, false, res)
     }
 }
 ~~~

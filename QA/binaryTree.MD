@@ -94,3 +94,55 @@ function isSymmetric(root) {
     return isValid(root.left, root.right)
 }
 ~~~
+### 7.平衡二叉树
+~~~
+leetcode 110
+function balanceTree(root) {
+    if (root == null) return 0
+    
+    function height(node) {
+        if (node == null) return 0
+        return Math.max(height(node.left), height(node.right)) + 1
+    }
+
+    return Math.abs(height(node.left) - height(node.right)) < 2 && balaceTree(node.left) && balanceTree(node.right)
+}
+~~~
+### 8.二叉树中的最大路径和
+~~~
+leetcode 124
+function balanceTree(root) {
+    let maxSum = -Inifinty
+    
+    function helper(node) {
+        if (node == null) return 0
+        let leftVal = helper(node.left)
+        let rightVal = helper(node.right)
+        let newPath = node.val + leftVal + rightVal
+        maxSum = Math.max(newPath, maxSum)
+        return node.val + Math.max(leftVal, rightVal)
+    }
+
+    helper(root)
+    return maxSum
+}
+~~~
+### 9.左叶子之和
+~~~
+leetcode 124
+function sumOfleftNodes(root) {
+    const result = [0]
+    
+    function helper(node, isLeft, res) {
+        if (node == null) return
+        if (node.left == null && node.right == null && isleft) {
+            res[0] += node.val
+        }
+        node.left && helper(node.left, true, res)
+        node.right && helper(node.right, false, res)
+    }
+
+    helper(root, false, result)
+    return result[0]
+}
+~~~

@@ -157,3 +157,21 @@ class LRU() {
     }
 }
 ~~~
+### 7.字典中最长的单词
+~~~
+leetcode 720
+map
+function longestWord(words) {
+    words.sort()
+    let maxword = 0
+    const map = new Map()
+    map.set('', true)
+    for (let item of words) {
+        if (map.has(item.substr(0, item.length - 1))) {
+            map.set(item, true)
+            maxword = item.length > maxword.length ? item : maxword
+        }
+    }
+    return maxword
+}
+~~~
