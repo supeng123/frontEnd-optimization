@@ -1142,71 +1142,6 @@ function mergeTwoList(nums1, m, nums2, n) {
     }
 }
 ~~~
-### 143.最大正方形
-~~~
-//动态规划
-function maxSquare(matrix) {
-    if (!matrix || !matrix[0]) return 0
-    let row = matrix.length
-    let column = matrix[0].length
-    let max = 0
-    const dp = new Array(n+1).fill('').map(()=> new Array(n+1).fill(0))
-    for (let i = 1; i < row; i++) {
-        for (let j = 0; j < column; j++) {
-            if (i == 0 || j == 0) {
-                dp[i][j] = 1
-            } else {
-                dp[i][j] = Math.min(dp[i-1][j-1], dp[i][j-1], dp[i-1][j]) + 1
-            }
-            max = Math.max(max, dp[i][j])
-            }
-        }
-    }
-    return Math.pow(max,2)
-}
-~~~
-### 144.回文子串
-~~~
-//动态规划
-function countSubstrings(s) {
-    const dp = new Array(s.length).fill('').map(() => new Array(s.length))
-    let num = 0
-    dp[0] = true
-    for (let i = 0; i < s.length; i++) {
-        for (let j = 0; j <= i; j++) {
-            if (s[i] == s[j] && ( i- j < 2 || dp[i-1][j+1])) {
-                dp[i][j] = true
-                num++
-            }
-        }
-    }
-    return num
-}
-~~~
-### 146.接水
-~~~
-//
-function catchWater(height) {
-    if (height.length === 0) return 0
-    let count = 0
-    let max = 0
-    const leftMax = []
-    const rightMax = []
-
-    for (let i = 0; i < height.length; i++) {
-        leftMax[i] = max = Math.max(height[i], max)
-    }
-    max = 0
-    for (let j = height.length - 1; j >=0 ; j--) {
-        rightMax[j] = max = Math.max(height[j], max)
-    }
-
-    for (let i = 0; i < height.length; i++) {
-        count = count + Math.min(leftMax[i], rightMax[i]) - height[i]
-    }
-    return count
-}
-~~~
 ### 150.最长同值路径
 ~~~
 后序遍历
@@ -1274,47 +1209,6 @@ class Window {
         return this.data[0]
     }
 
-}
-~~~
-### 153.删除二叉树节点
-~~~
-function deleteNode(root, key) {
-    if (!root) return null
-    if (key < root.val) {
-        root.left = deleteNode(root.left, key) 
-    } else if (key > root.val){
-        root.right = deleteNode(root.right, key)
-    } else {
-        if (root.left == null && root.right == null) {
-            root = null
-        } else if (root.right){
-            root.val = successor(root)
-            root.right = deleteNode(root.right, root.val)
-        } else {
-            root.val = predecessor(root)
-            root.left = deleteNode(root.left, root.val)
-        }
-    }
-    return root
-    
-
-    function predecessor(node) {
-        if (!node) return null
-        node = node.left
-        while (node.right) {
-            node = node.right
-        }
-        return node.val
-    }
-
-    function successor(node) {
-        if (!node) return null
-        node = node.right
-        while (node.left) {
-            node = node.left
-        }
-        return node.val
-    }
 }
 ~~~
 ### 156.括号的分数

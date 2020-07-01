@@ -146,3 +146,44 @@ function sumOfleftNodes(root) {
     return result[0]
 }
 ~~~
+### 10.删除二叉树节点
+~~~
+leetcode 124
+function deleteNodes(root, key) {
+    if (root == null) return null
+    if (key > root.val) {
+        deleteNodes(root.right, key)
+    } else if (key < root.val) {
+        deleteNodes(root.left, key)
+    } else {
+        if (root.left == null && root.right == null) {
+            root = null
+        } else if (root.right) {
+            root.val = successor(root)
+            root.right = deleteNodes(root.right, succussor)
+        } else {
+            root.val = predecessor(root)
+            root.left = deleteNodes(root.left, succussor)
+        }
+    }
+    return root
+    
+    function successor(node) {
+        if (node == null) return null
+        node = node.right
+        while (node.left) {
+            node = node.left
+        }
+        return node.val
+    }
+
+    function predecessor(node) {
+        if (node == null) return null
+        node = node.left
+        while (node.right) {
+            node = node.right
+        }
+        return node.val
+    }
+}
+~~~

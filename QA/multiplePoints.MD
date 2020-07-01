@@ -226,8 +226,25 @@ function spiralMatrix(matrix) {
     return result
 }
 ~~~
-### 13.旋转排序数组中最小值
+### 13.接雨水
 ~~~
+function catchRain(heights) {
+    const leftMax = []
+    const rightMax = []
+    let max = 0
+    let counts = 0
+    for (let i = 0; i < heights.length; i++) {
+        leftMax[i] = max = Math.max(heights[i], max)
+    }
+    max = 0
+    for (let i = heights.length - 1; i >= 0; i--) {
+        rightMax[i] = max = Math.max(heights[i], max)
+    }
+    for (let i = 0; i < heights.length; i++) {
+        counts = counts + Math.min(leftMax[i], rightMax[i]) - height[i]
+    }
+    return counts
+}
 ~~~
 ### 14.跳跃游戏
 ~~~
@@ -278,33 +295,6 @@ funtion movezero(nums) {
         nums[i] = 0
     }
     return nums
-}
-~~~
-### 17.最长回文子串
-~~~
-//leetcode 5
-从中间扩散，记住左节点和最大长度
-funtion longestPanlindrome(s) {
-    if (s.length < 2) return s
-    let j = 0
-    let start = 0
-    let maxLength = 0
-    for (let i = 0; i < s.length; i++) {
-        expandAroundCenter(i, i + 1)
-        expandAroundCenter(i - 1, i + 1)
-    }
-    
-    function expandAroundCenter(left ,right) {
-        while (s[left] == s[right] && left != right && left >= 0 && right < s.length) {
-            if (right - left + 1 > maxLength ) {
-                start = left
-                maxLength = right - left + 1
-            }
-            left--
-            right++
-        }
-    }
-    return s.substring(start, start + maxLength)
 }
 ~~~
 
@@ -513,5 +503,51 @@ function nextPermutation(nums) {
         [nums[i], nums[next]] = [nums[next], nums[i]]
     }
     return nums
+}
+~~~
+
+### 27.最长回文子串
+~~~
+//leetcode 5
+从中间扩散，记住左节点和最大长度
+funtion longestPanlindrome(s) {
+    if (s.length < 2) return s
+    let j = 0
+    let start = 0
+    let maxLength = 0
+    for (let i = 0; i < s.length; i++) {
+        expandAroundCenter(i, i + 1)
+        expandAroundCenter(i - 1, i + 1)
+    }
+    
+    function expandAroundCenter(left ,right) {
+        while (s[left] == s[right] && left != right && left >= 0 && right < s.length) {
+            if (right - left + 1 > maxLength ) {
+                start = left
+                maxLength = right - left + 1
+            }
+            left--
+            right++
+        }
+    }
+    return s.substring(start, start + maxLength)
+}
+~~~
+### 28.回文子串
+~~~
+//leetcode 647
+dp
+funtion Panlindrome(s) {
+    const dp = new Array(s.length).fill('').map(() => new Array(s.length))
+    let count = 0
+    for (let i = 0 ; i < s.length; i++) {
+        for (let j = 0; j <= i; j++) {
+            if (s[i] == s[j] && (i - j < 2 || dp[i-1] = dp[j+1])) {
+                dp[i][j] = true
+                count++
+            }
+        }
+    }
+    return count
 }
 ~~~
