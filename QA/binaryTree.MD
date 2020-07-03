@@ -187,3 +187,54 @@ function deleteNodes(root, key) {
     }
 }
 ~~~
+### 11.二叉树交换
+~~~
+function swapNodes(root) {
+    walk(root)
+    return root
+    function walk(node) {
+        if (root === null) return 
+        [root.left, root.right] = [root.right, root.left]
+        walk(root.left)
+        walk(root.right)
+    }
+}
+~~~
+### 12.二叉树最大深度
+~~~
+function maxDepth(root) {
+    if (root == null) return 0
+    const leftDepth = maxDepth.left)
+    cosnt rightDepth = maxDepth(root.right)
+    return Math.max(leftDepth, rightDepth) + 1
+}
+~~~
+### 13.二叉树最小深度
+~~~
+function minDepth(root) {
+    if (root == null) return 0
+    const leftDepth = minDepth（root.left)
+    cosnt rightDepth = minDepth(root.right)
+    if (root.left == null || root.right == null) Math.max(leftDepth, rightDepth) + 1
+    return Math.min(leftDepth, rightDepth)
+}
+~~~
+### 14.从前序遍历和中序遍历的节点集合中构造一个binaryTree
+~~~
+    3
+   / \
+  9   20
+    /   \
+   15    7
+//preorder = [3,9,20,15,7]
+//inorder = [9,3,15,20,7]
+function buildTree(preOrder, inOrder) {
+    if (preOrder.length === 0 || inOrder.length === 0) return null
+    const root = new ListNode(preOrder[0])
+    const index = inOrder.findIndex(item => item === preOrder[0])
+
+    root.left = buildTree(preOrder.slice(1, index + 1), inOrder.slice(0, index))
+    root.right = buildTree(preOrder.slice(index + 1), inOrder.slice(index + 1))
+    return root
+}
+~~~

@@ -687,21 +687,6 @@ class Queue {
     }
 }
 ~~~
-### 61.
-~~~
-~~~
-### 61.找到重复字符并分组
-~~~
-function groupSubString(s) {
-    let hash = {}
-    for (let str of s) {
-        let key = [...str].sort().join('')
-        if (hash[str] ===  undefinied) hash[key]=[]
-        hash[key].push(str)
-    }
-    return Object.keys(hash).map(key => hash[key])
-}
-~~~
 ### 62.区间合并
 ~~~
 function mergeBlock(arrayList) {
@@ -721,99 +706,9 @@ function mergeBlock(arrayList) {
     }
     return mergeList
 }
-
-function mergeBlock(arrayList) {
-    if (!arrayList.length) return []
-    arrayList.sort((a,b) => a[0] - b[0])
-    const mergedList = []
-    const current = arrayList[0]
-    for (let list of arrayList) {
-        if (current[1] >= list[0]) {
-            current[1] = Math.max(current[1], list[1])
-        } else {
-            mergedList.push(list)
-            current = list
-        }
-    }
-    if (current.length !== 0) {
-        mergeList.push(current)
-    }
-   
-    return mergeList
-}
-~~~
-### 63.验证平衡二叉树是否是按顺序排列
-~~~
-function isValidOrderTree(root) {
-    cont inOrderList = []
-    function inOrder(node) {
-        if (!node) return;
-        inOrder(node.left)
-        inOrderList.push(node.value)
-        inOrder(node.right)
-    }
-
-    inOrder(root)
-
-    for (let i = 0; i < inOrderList.length; i++) {
-        if (inOrderList[i] > inOrderList[i + 1]) {
-            return false
-        }
-    }
-    return true
-}
-~~~
-### 64.二叉树交换
-~~~
-function swapBinaryTree(root) {
-    function walk(node) {
-        if (!node) return
-        [node.left, node.right] = [node.right, node.left]
-        walk(node.left)
-        walk(node.right)
-    }
-    return walk(root)
-}
-~~~
-### 65.二叉树最大最小深度
-~~~
-function maxDepth(root) {
-    if (!root) return 0
-    let lDepth = maxDepth(root.left)
-    let rDepth = maxDepth(root.right)
-    return Math.max(lDepth, rDepth) + 1
-}
-
-function minDepth(root) {
-    if (!root) return 0
-    let lDepth = minDepth(root.left)
-    let rDepth = minDepth(root.right)
-    if (!root.left || !root.right) return Math.max(lDepth, rDepth) + 1
-    return Math.min(lDepth, rDepth) + 1
-}
 ~~~
 ### 66.从前序遍历和中序遍历的节点集合中构造一个binaryTree
 ~~~
-//preOrder root left right(root/left/right)
-    3
-   / \
-  9   20
-    /   \
-   15    7
-//preorder = [3,9,20,15,7]
-//inorder = [9,3,15,20,7]
-function createTree(preOrder, inOrder) {
-    if(!preOrder.length || !post.length) return null
-    let rootValue = preOrder[0]
-    let root = new TreeNode(rootValue)
-
-    let index = inOrder.findIndex(item => item === rootValue)
-
-    root.left = createTree(preOrder.slice(1, index + 1), inOrder.slice(0, index))
-    root.right = createTree(preOrder.slice(index + 1), inOrder.slice(index + 1))
-    return root
-}
-
       1
      /  \
     2    3
@@ -832,12 +727,6 @@ function createTree(preOrder, postOrder) {
     root.right = createTree(preOrder.slice(index + 2), postOrder.slice(index + 1, postOrder.length - 1))
     return root
 }
-~~~
-### 67
-~~~
-~~~
-### 68
-~~~
 ~~~
 ### 69.大文件断点续传
 ~~~
@@ -1068,35 +957,6 @@ seq = y ack = x + 1
 seq = x + 1 ack = y + 1
 第三次可以携带数据
 ~~~
-### 76.按k进行链表翻转
-~~~
-function reverseKLinkedList(head, k) {
-    if (!head.next) return head
-    let a = head;
-    let b = head;
-    let index = 0
-    while (index < k) {
-        index++
-        if (!b) return head;
-        b = b.next
-    }
-    let headNode = reverse(a, b)
-    a.next = reverseKLinkedList(b, k)
-    return headNode;
-
-    function reverse(a, b) {
-        let current = a
-        let pre = null
-        while (current != b) {
-            let next = current.next
-            current.next = pre
-            pre = current 
-            current = next
-        }
-        return pre
-    }
-}
-~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
 //unsavory remnants of many hotel rooms I still wake up screamnng over
@@ -1167,105 +1027,6 @@ function maxPath(root) {
     let ans = 0;
     inorder( root );
     return ans;
-}
-~~~
-### 152.滑动窗口最大值
-~~~
-//单调队列
-var maxSlidingWindow = function(nums, k) {
-    const res = []
-    let window = new Window()
-    for (let i = 0 ; i < nums.length; i++) {
-        if (i < k - 1) {
-            window.push(nums[i])
-        } else {
-            window.push(nums[i])
-            res.push(window.max())
-            window.pop(nums[i-k+1])
-        }
-    }
-    return res
-};
-
-class Window {
-    constructor() {
-        this.data = []
-    }
-
-    push(val) {
-        while(this.data.length > 0 && this.data[this.data.length - 1] < val) {
-            this.data.pop()
-        }
-        this.data.push(val)
-    }
-
-    pop(val) {
-        if (this.data.length > 0 && this.data[0] == val) {
-            this.data.shift()
-        }
-    }
-
-    max() {
-        return this.data[0]
-    }
-
-}
-~~~
-### 156.括号的分数
-~~~
-//栈
-function scores(S) {
-    const stack = []
-    if (S.length < 1 ) return stack
-    for (let item of S) {
-        if (item === '(') {
-            stack.push
-        } else {
-            if(stack[stack.length - 1] === '(') {
-                stack.pop()
-                stack.push(1)
-            } else if (Number(stack[stack.length - 1])) {
-                let num = 0
-                while (stack[stack.length - 1] === '(') {
-                    let cur = stack.pop()
-                    num+= cur
-                }
-                stack.pop()
-                stack.push(num*2)
-            }
-
-        }
-    }
-    return stack.reduce((sum, a) => sum+a)
-}
-~~~
-### 158.解码
-~~~
-//动态规划
-function numDecoding(s) {
-    if (s[0] == '0') return 0
-    const len = s.length
-    const dp = new Array(len+1)
-    dp[0] = 1
-    dp[1] = 1
-    for (let i = 1; i < len; i++) {
-        const pre = s[i -1] 
-        const cur = s[i]
-        if (cur == '0') {
-            if (pre === '1' || pre === '2') {
-                dp[i+1] = dp[i-1]
-            } else {
-                return 0
-            }
-        } else {
-            if (pre === '1' || pre === '2' && cur <= 6) {
-                dp[i+1] = dp[i] + dp[i-1]
-            } else {
-                dp[i+1] = dp[i]
-            }
-        }
-    }
-    return dp[len]
 }
 ~~~
 

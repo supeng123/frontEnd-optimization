@@ -175,3 +175,82 @@ function longestWord(words) {
     return maxword
 }
 ~~~
+### 8.括号的分数
+~~~
+leetcode 856
+function scoreOfParentheses(S) {
+    const stack
+    if (S.length === 0) return 0
+    for (item of S) {
+        if (item === '(') {
+            stack.push(item)
+        } else {
+            if (stack[stack.length - 1] == '(') {
+                stack.pop()
+                stack.push(1)
+            } else if (Number(stack[stack.length - 1]) {
+                let sum  = 0
+                while (stack.length >= 0 && stack[stack.length - 1] !== '(') {
+                   const currentVal = stack.pop()
+                   sum = sum + currentVal
+                }
+                stack.pop()
+                stack.push(sum*2)
+            }
+        }
+    }
+    return stack.reduce((total, item) => total + item)
+}
+~~~
+### 10. 滑动窗口最大值
+~~~
+function MaxVal(nums) {
+    const result = []
+    const win = Window()
+    for (let i = 0; i < nums.length; i++) {
+        if (i < k - 1) {
+            win.push(nums[i])
+        } else {
+            win.push(nums[i])
+            result.push(win.max())
+            win.pop(nums[i-k+1])
+        }
+    }
+    return result
+}
+
+class Window {
+    constructor() {
+        this.data = []
+    }
+    push(val) {
+        while (this.data.length > 0 && this.data[this.data.length -1] < val) {
+            this.data.pop()
+        }
+        this.data.push(val)
+    }
+    pop(val) {
+        if (this.data.length > 0 && this.data[0] === val) {
+            this.data.shift()
+        }
+    }
+    max() {
+        return this.data[0]
+    }
+}
+~~~
+### 11.重复字符串分组
+~~~
+function (strs) {
+    const hash = {}
+    for (let item of strs) {
+        const key = item.split('').sort()
+        if (!hash[key]) {
+            hash[key] = []
+        } else {
+            hash[key].push(item)
+        }
+    }
+    return Object.keys(hash).map(key => hash[key])
+}
+~~~
