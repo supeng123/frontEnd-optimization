@@ -525,19 +525,6 @@ function promiseAll(promises) {
     })
 }
 ~~~
-### 50.
-~~~
-
-~~~
-### 51.移除s1所有包含s2的字符
-~~~
-function remove(s1, s2) {
-    for (let i = 0; i < s2.length; i++) {
-        s1 = s1.replace(s[2], '')
-    }
-    return s1
-}
-~~~
 ### 52.验证ip地址
 ~~~
 function validIp(address) {
@@ -555,24 +542,6 @@ function validIp(address) {
         }
     } 
     return "Neither";
-}
-~~~
-### 53.最大连续子序列
-~~~
-function maxSubArray(numbers) {
-    let max = - Number.MAX_VALUE
-    let sum = 0;
-    for (let i = 0; i < numbers.length; i++) {
-        if (sum < 0) {
-            sum = numbers[i]
-        } else {
-            sum += numbers[i]
-        }
-        if (sum > max) {
-            max = sum
-        }
-    }
-    return max
 }
 ~~~
 ### 54.js浮点数 0.1+0.2 === 0.3 ？
@@ -705,27 +674,6 @@ function mergeBlock(arrayList) {
         }
     }
     return mergeList
-}
-~~~
-### 66.从前序遍历和中序遍历的节点集合中构造一个binaryTree
-~~~
-      1
-     /  \
-    2    3
-   / \  / \
-  4   5 6  7
-//preorder = [1,2,4,5,3,6,7]
-//postOrder = [4,5,2,6,7,3,1]
-function createTree(preOrder, postOrder) {
-    if(!preOrder.length || !post.length) return null
-    let rootValue = preOrder[0]
-    let root = new TreeNode(rootValue)
-
-    let index = postOrder.findIndex(item => item === preOrder[1])
-
-    root.left = createTree(preOrder.slice(1, index + 2), postOrder.slice(0, index+1))
-    root.right = createTree(preOrder.slice(index + 2), postOrder.slice(index + 1, postOrder.length - 1))
-    return root
 }
 ~~~
 ### 69.大文件断点续传

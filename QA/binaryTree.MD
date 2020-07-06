@@ -238,3 +238,22 @@ function buildTree(preOrder, inOrder) {
     return root
 }
 ~~~
+### 16.从前序遍历和后序序遍历的节点集合中构造一个binaryTree
+~~~
+      1
+     /  \
+    2    3
+   / \  / \
+  4   5 6  7
+//preorder = [1,2,4,5,3,6,7]
+//postOrder = [4,5,2,6,7,3,1]
+function buildTree(preOrder, postOrder) {
+    if (preOrder.length === 0 || postOrder.length === 0) return null
+    const root = new ListNode(preOrder[0])
+    const index = postOrder.findIndex(item => item === preOrder[1])
+
+    root.left = buildTree(preOrder.slice(1, index + 2), postOrder.slice(0, index + 1))
+    root.right = buildTree(preOrder.slice(index + 2), postOrder.slice(index + 1， postOrder.length - 1))
+    return root
+}
+~~~
