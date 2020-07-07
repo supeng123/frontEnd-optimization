@@ -564,3 +564,22 @@ funtion Panlindrome(s) {
     return count
 }
 ~~~
+### 29.区间合并
+~~~
+function mergeBlock(lists) {
+    if (!lists.length) return []
+    lists.sort((a, b) => a[0] - b[0])
+    const mergedList = [lists[0]]
+    for (let i = 1; i < lists.length; i++) {
+        const position = mergelist.length - 1
+        if (lists[position][1] >= lists[i][0]) {
+            if (lists[position][1]< lists[i][1]) {
+                lists[position][1] = lists[i][1]
+            }
+        } else {
+            mergedList.push(lists[i])
+        }
+    }
+    return mergedList
+}
+~~~

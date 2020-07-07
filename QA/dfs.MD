@@ -62,15 +62,17 @@ function largestIsland(grid) {
 ### 4.单词搜索
 ~~~
 function wordSearch(board, word) {
+    board[-1] = []
+    board.push([])
     for (let i = 0; i < board.length; i++) {
-        for (let j = 0; j < borad[0].length; j++) {
-            if (board[i][j] == word[i] && dfs(i,j, 0)) return true
+        for (let j = 0; j < board[0].length; j++) {
+            if (board[i][j] == word[0] && dfs(i,j, 0)) return true
         }
     }
     return false
 
     function dfs(row, column, index) {
-        if index+1 == word.length return true
+        if (index+1 == word.length) return true
         let temp = board[row][column]
         board[row][column] = false
         if (board[row+1][column] == word[index+1] && dfs(row+1,column, index + 1)) return true
@@ -78,6 +80,7 @@ function wordSearch(board, word) {
         if (board[row][column+1] == word[index+1] && dfs(row,column+1, index + 1)) return true
         if (board[row][column-1] == word[index+1] && dfs(row,column-1, index + 1)) return true
         board[row][column] = temp
+        return
     }
 }
 ~~~

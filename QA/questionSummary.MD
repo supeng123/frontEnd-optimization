@@ -656,26 +656,6 @@ class Queue {
     }
 }
 ~~~
-### 62.区间合并
-~~~
-function mergeBlock(arrayList) {
-    if (!arrayList.length) return []
-    arrayList.sort((a,b) => a[0] - b[0])
-    const mergedList = [arrayList[0]]
-    for (let i = 1 ; i < arrayList.length; i ++) {
-        let currentBlock = arrayList[i];
-        let position = mergeList.length - 1
-        if (currentBlock[0] <= mergedList[position][1]) {
-            if (currentBlock[1] > mergedList[position][1]) {
-                mergedList[position][1] = currentBlock[1]
-            }
-        } else {
-            mergedList.push(currentBlock)
-        }
-    }
-    return mergeList
-}
-~~~
 ### 69.大文件断点续传
 ~~~
 document.getElementById('file').addEventListener('change',  async (event) => {
