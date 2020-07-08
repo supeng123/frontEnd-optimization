@@ -66,7 +66,7 @@ function wholePermutation(candidates) {
 ~~~
 function subSet(nums) {
     const result = []
-    backTrack([], start)
+    backTrack([], 0)
     return result
     
     function backTrack(tempPath, start) {
