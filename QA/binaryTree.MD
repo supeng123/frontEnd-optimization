@@ -20,18 +20,30 @@ function pathSum (root, sum) {
     }
 }
 ~~~
-### 2.相同的树 && 另一个数的子树
+### 2.相同的树 && 另一个数的子树 && 树的子结构
 ~~~
 leetcode 572
 function isSubTree(p, q) {
     if (p == null) return false
     if (sameTree(p, q)) return true
-    return sameTree(p.left, q) || sameTree(p.right, q)
+    return isSubTree(p.left, q) || isSubTree(p.right, q)
 }
 function sameTree(s, t) {
     if (s == null && t == null) return true
     if (s == null || t == null) return false
     return s.val == t.val && sameTree(s.left, t.left) && sameTree(s.right, t.right)
+}
+
+function isSubStructure(p, q) {
+    if (p == null || q == null) return false
+    if (isSameTree(p, q)) return true
+    return isSubStructure(p.left, q) || isSubStructure(p.right, q)
+
+    function isSameTree(p, q) {
+        if (q == null) return true
+        if (p == null) return false
+        return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+    }
 }
 ~~~
 ### 3.有序数组转化为二叉树
@@ -187,7 +199,7 @@ function deleteNodes(root, key) {
     }
 }
 ~~~
-### 11.二叉树交换
+### 11.二叉树翻转
 ~~~
 function swapNodes(root) {
     walk(root)
@@ -198,6 +210,12 @@ function swapNodes(root) {
         walk(root.left)
         walk(root.right)
     }
+}
+
+function swapNodes(root) {
+    if (root == null) return null;
+    [root.left, root.right] = [swapNodes(root.right), swapNodes(root.left)];
+    return root
 }
 ~~~
 ### 12.二叉树最大深度
