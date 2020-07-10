@@ -1,4 +1,4 @@
-###1.有效的括号
+### 1.有效的括号
 ~~~
 leecode 20 
 栈
@@ -252,5 +252,46 @@ function (strs) {
         }
     }
     return Object.keys(hash).map(key => hash[key])
+}
+~~~
+### 12.包含min函数的栈
+~~~
+leetcode 155
+function MinStack() {
+    this.stack = []
+    this.minStack = []
+}
+MinStack.prototype.push = function(x) {
+    this.stack.push(x)
+    this.minStack.push(Math.min(this.minStack[this.minStack.length - 1], x))
+}
+
+MinStack.prototype.pop = function() {
+    this.stack.pop()
+    this.minStack.pop()
+}
+
+MinStack.prototype.top = function() {
+    return this.stack[this.stack.length - 1]
+}
+
+MinStack.prototype.min = function() {
+    return this.minStack[this.minStack.length - 1]
+}
+~~~
+
+### 13.栈的压入、弹出序列
+~~~
+leetcode 946
+function MinStack(pushed, popped) {
+    const stack = []
+    for (let i = 0; i < pushed.length; i++) {
+        stack.push(pushed[i])
+        while (stack.length !== 0 && stack[stack.length - 1] == popped[0]) {
+            stack.pop()
+            popped.shift()
+        }
+    }
+    return popped.length == 0
 }
 ~~~
