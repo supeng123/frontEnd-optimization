@@ -16,7 +16,7 @@ function pathSum (root, sum) {
             return
         }
         preOrder(node.left, path.slice(0))
-        preOrder(node.left, path.slice(0))
+        preOrder(node.right, path.slice(0))
     }
 }
 ~~~
@@ -273,5 +273,32 @@ function buildTree(preOrder, postOrder) {
     root.left = buildTree(preOrder.slice(1, index + 2), postOrder.slice(0, index + 1))
     root.right = buildTree(preOrder.slice(index + 2), postOrder.slice(index + 1， postOrder.length - 1))
     return root
+}
+~~~
+### 17.二叉搜索树与双向链表
+~~~
+中序遍历
+function treeToBuildList(root) {
+    if (root == null) return
+    let pre = null
+    let head = null
+    inOrder(root)
+    
+    head.left = pre
+    pre.right = head
+    return head
+
+    function inOrder(node) {
+        if (node == null) return
+        inOrder(node.left)
+        if (head == null) {
+            head = node
+        } else {
+            pre.right = node
+        }
+        node.left = pre
+        pre = node
+        inOrder(node.right)
+    }
 }
 ~~~
