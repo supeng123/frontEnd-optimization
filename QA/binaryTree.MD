@@ -302,3 +302,32 @@ function treeToBuildList(root) {
     }
 }
 ~~~
+### 18.序列化二叉树
+~~~
+//前序遍历
+BinaryTree.prototype.serilized = function(root) {
+    const result = []
+    preOrder(root, result)
+    return JSON.stringify()
+
+    function preOrder(node, res) {
+        if (node == null) res.push('#')
+        result.push(node.val)
+        preOrder(node.left)
+        preOrder(node.right)
+    }
+}
+BinaryTree.prototype.deserilized = function(data) {
+    const d = JSON.parse(data)
+    return build(d)
+
+    function build(d) {
+        const val = d.shift()
+        if (val == '#') return null
+        const root = new TreeNode(val)
+        root.left = build(d)
+        root.right = build(d)
+        return root
+    }
+}
+~~~
