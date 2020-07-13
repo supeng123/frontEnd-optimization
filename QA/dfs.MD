@@ -106,3 +106,22 @@ function robots(m, n, k) {
     }
 }
 ~~~
+### 6.数字翻译成字符串
+~~~
+function translator(nums) {
+    cons s = nums.toString()
+
+    function dfs(index) {
+        if (index >= s.length - 1) {
+            return 1
+        }
+        const number = Number(s[index]+s[index+1])
+        if (number > 10 && number < 26) {
+            return dfs(index+1) + dfs(index+2)
+        } else {
+            return dfs(index+1)
+        }
+    }
+    return dfs(0)
+}
+~~~
