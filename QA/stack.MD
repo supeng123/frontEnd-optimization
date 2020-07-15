@@ -295,3 +295,35 @@ function MinStack(pushed, popped) {
     return popped.length == 0
 }
 ~~~
+### 14.包含max函数的队列
+~~~
+leetcode 155
+function MaxQueue() {
+    this.queue = []
+    this.maxQueue = []
+}
+MaxQueue.prototype.push_back = function(x) {
+    this.queue.push(x)
+    while (this.maxQueue.length && this.maxQueue[this.maxQueue.length - 1] < x) {
+        this.maxQueue.pop()
+    }
+    this.maxQueue.push(x)
+}
+
+MaxQueue.prototype.pop_front = function() {
+    if (!this.queue.length) return -1
+    const val = this.queue.shift()
+    if (val === this.maxQueue[0]) {
+        this.maxQueue.shift()
+    }
+    return val
+}
+
+MaxQueue.prototype.max_value = function() {
+    return this.maxQueue.length ? this.maxQueue[0] : -1
+}
+
+MinStack.prototype.min = function() {
+    return this.minStack[this.minStack.length - 1]
+}
+~~~
