@@ -322,8 +322,20 @@ MaxQueue.prototype.pop_front = function() {
 MaxQueue.prototype.max_value = function() {
     return this.maxQueue.length ? this.maxQueue[0] : -1
 }
-
-MinStack.prototype.min = function() {
-    return this.minStack[this.minStack.length - 1]
+~~~
+### 15.圆圈中最后剩下的数字
+~~~
+leetcode 
+function lastRemaining(n, m) {
+    for (let i = 0; i < n; i++) {
+        arr.push(i)
+    }
+    let head=0
+    while (arr.length > 1) {
+        const index = (head + m -1)%arr.length
+        arr.splice(index, 1)
+    }
+    return arr[0]
 }
 ~~~
+
