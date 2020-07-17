@@ -331,3 +331,11 @@ BinaryTree.prototype.deserilized = function(data) {
     }
 }
 ~~~
+### 19.二叉树最近公共祖先
+~~~
+function ancester(root, p, q) {
+    if ((root.val-p.val)*(root.val-q.val) <= 0) return root
+    if (p.val < root.val) return ancester(root.left, p, q)
+    return ancester(root.right, p, q)
+}
+~~~
