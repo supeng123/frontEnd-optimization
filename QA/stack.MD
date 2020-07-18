@@ -338,4 +338,27 @@ function lastRemaining(n, m) {
     return arr[0]
 }
 ~~~
+### 16.一次编辑
+~~~
+leetcode 
+function oneEditor(s1, s2) {
+    const diff = s1.length - s2.length
+    if (Math.abs(diff) > 1) return false
+    const first = Array.from(s1)
+    const second = Array.from(s2)
+    const len = first.length > second.length ? frist.length : second.length
+    for (let i = 0; i < len; i++) {
+        if (first[i] != second[i]) {
+            if (diff == 0) {
+                second.splice(i,1,first[i])
+            } else if (diff > 0) {
+                second.splice(i,0,first[i])
+            } else {
+                first.splice(i,0,second[i])
+            }
+        }
+    }
+    return first.join() == second.join()
+}
+~~~
 
