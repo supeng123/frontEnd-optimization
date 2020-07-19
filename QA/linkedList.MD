@@ -255,3 +255,26 @@ function changeNode(head) {
     return dummyNode.next
 }
 ~~~
+### 12.删除链表重复节点
+~~~
+function deleteRepeatedNodes(head) {
+    const map = {}
+    const dummyNode = {
+        next: head
+    }
+    let pre = dummyNode
+    let cur = dummyNode.next
+    while (cur) {
+        const currentValue = cur.val
+        if (map[currentValue] == undefined) {
+            map[currentValue] = true
+            pre = cur
+            cur = cur.next
+        } else {
+            cur = cur.next
+            pre.next = cur
+        }
+    }
+    return dummyNode.next
+}
+~~~
