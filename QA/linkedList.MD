@@ -87,8 +87,8 @@ function oddEvenList(head) {
 ~~~
 function teardownList(head, x) {
     let cur = head
-    const dummySmall = small = new ListLink(-1)
-    const dummyGreat = great = new ListLink(-1)
+    const dummySmall = small = new ListLink(0)
+    const dummyGreat = great = new ListLink(0)
 
     while (cur) {
         if (cur.val < x) {
@@ -101,7 +101,7 @@ function teardownList(head, x) {
         cur = cur.next
     }
     great.next = null
-    small.next = great
+    small.next = dummyGreat.next
     return dummySmall.next
 }
 ~~~
@@ -175,6 +175,16 @@ function isPalidrom(head) {
         if (result.pop() !== result.shift()) return false
     }
     return true
+}
+function isPalidrom(head) {
+    let left = ''
+    let right = ''
+    while (head) {
+        left = left+ head.val
+        right = head.val + right
+        head = head.next
+    }
+    return left === right
 }
 ~~~
 ### 9.排序链表
