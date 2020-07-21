@@ -288,3 +288,15 @@ function deleteRepeatedNodes(head) {
     return dummyNode.next
 }
 ~~~
+### 13.相交链表
+~~~
+function intersection(HeadA, HeadB) {
+    let a = HeadA
+    let b = HeadB
+    while (a != b) {
+        a = a ? a.next = HeadB
+        b = b ? b.next = HeadA
+    }
+    return a
+}
+~~~
