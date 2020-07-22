@@ -339,3 +339,25 @@ function ancester(root, p, q) {
     return ancester(root.right, p, q)
 }
 ~~~
+### 20.二叉树层序遍历
+~~~
+function levelOrder(root) {
+    const result = []
+    if (root == null)return result
+    const queue = []
+    queue.push(root)
+    let level = 0
+    while (queue.length != 0) {
+        result.push([])
+        let len = queue.length
+        for (let i = 0; i < len; i++) {
+            let current = queue.shift()
+            result[level].push(current.val)
+            current.left && queue.push(current.left)
+            current.right && queue.push(current.right)
+        }
+        level++
+    }
+    return result
+}
+~~~
