@@ -361,3 +361,24 @@ function levelOrder(root) {
     return result
 }
 ~~~
+### 21.后继者
+~~~
+var inorderSuccessor = function(root, p) {
+    let findCurr = false
+    let result = null
+
+    function inOrder(node) {
+        if (node == null) return
+        inOrder(node.left)
+        if (findCurr && result == null) {
+            result = node
+            return
+        }
+        if (node == p) {
+            findCurr = true
+        }
+        inOrder(node.right)
+    }
+    return result
+}
+~~~
