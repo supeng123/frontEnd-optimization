@@ -584,3 +584,14 @@ function mergeBlock(lists) {
     return mergedList
 }
 ~~~
+### 30.合并排序数组
+~~~
+function mergeBToA(A, m, B, n) {
+    let count = m + n
+    while (m > 0 && n > 0) {
+        A[--count] = A[m-1] > B[n-1] ? A[--m] : B[--n]
+    }
+    if (n > 0)
+    A.splice(0,n ...B.slice(0,n))
+}
+~~~
