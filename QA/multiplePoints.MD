@@ -595,3 +595,12 @@ function mergeBToA(A, m, B, n) {
     A.splice(0,n ...B.slice(0,n))
 }
 ~~~
+### 31.递归乘法
+~~~
+function multiply(A,B) {
+    let min = Math.min(A, B)
+    let max = Math.max(A, B)
+    if (min < 2) return B
+    return max + multiply(min-1, max)
+}
+~~~
