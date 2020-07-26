@@ -61,6 +61,30 @@ function wholePermutation(candidates) {
         }
     }
 }
+
+function wholePermutation(candidates) {
+    const result = []
+    const map = {}
+    backTrack([])
+    return Array.from(new Set(result))
+
+    function backTrack(tempPath) {
+        if (tempPath.length == candidates.length) {
+            result.push([...tempPath])
+            return
+        }
+        for (let i = 0 ;i < candidates.length; i++) {
+            if (!map[i]) {
+                map[i] = true
+                tempPath.push(candidates[i])
+                backTrack(tempPath.slice())
+                map[i] = false
+                tempPath.pop(candidates[i])
+            }
+            
+        }
+    }
+}
 ~~~
 ### 4.子集
 ~~~
