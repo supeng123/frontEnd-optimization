@@ -141,19 +141,9 @@ largeGroupPositions = (s) {
        
 }
 ~~~
-### 10.链表相交
+### 
 ~~~
-leetcode 160
-双指针交换
-intersection = (s, t) {
-    let list1 = s
-    let list2 = t
-    while (list1 != list2) {
-        list1 = list1 ? list1.next : t
-        list2 = list2 ? list2.next : s
-    }
-    return list1
-}
+
 ~~~
 ### 11.三数之和
 ~~~
@@ -602,5 +592,16 @@ function multiply(A,B) {
     let max = Math.max(A, B)
     if (min < 2) return B
     return max + multiply(min-1, max)
+}
+~~~
+### 32.阶乘尾数
+~~~
+function tailZero(n) {
+    let count = 0
+    for (n >=5) {
+        n = n/5
+        count +=n || 0
+    }
+    return count
 }
 ~~~
