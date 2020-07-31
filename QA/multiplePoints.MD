@@ -605,3 +605,22 @@ function tailZero(n) {
     return count
 }
 ~~~
+### 33.最小差
+~~~
+function smallestDifference(a, b) {
+    a.sort((x,y)=> x-y)
+    b.sort((x,y)=> x-y)
+    let L = 0
+    let R = 0
+    let result = Infinity
+    while (L < a.length && R < b.length) {
+        result = Math.min(res, Math.abs(a[L]-b[R]))
+        if (a[L] > b[R]) {
+            R++
+        } else {
+            L++
+        }
+    }
+    return result
+}
+~~~
