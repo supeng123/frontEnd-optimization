@@ -624,3 +624,24 @@ function smallestDifference(a, b) {
     return result
 }
 ~~~
+### 34.交换和
+~~~
+function findSwapValues (arr1, arr2) {
+    const total1 = arr1.reduce((t, c) => t+c)
+    const total2 = arr2.reduce((t, c) => t+c)
+    total1.sort()
+    total2.sort()
+
+    const dif = total1-total2
+    if (dif%2) return []
+
+    let dif2
+    for (let i = 0; i < arr1.length; i++) {
+        dif2 = arr1[i] - dif/2
+        if (arr2.includes(dif2)) {
+            return [arr1[i], dif2]
+        }
+    }
+    return []
+}
+~~~

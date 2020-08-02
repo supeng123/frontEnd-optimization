@@ -73,3 +73,25 @@ function minValue(arr) {
     }
     return left
 }
+~~~
+### 5.数对和
+~~~
+function pairSum(nums, target) {
+    const result = []
+    nums.sort((a,b) => a - b)
+    let start = 0
+    let end = nums.length - 1
+    while (start < end) {
+        if (nums[start] + nums[end] == target) {
+            result.push([nums[start], nums[end]])
+            start++
+            end--
+        } else if (nums[start] + nums[end] < target) {
+            start++
+        } else if (nums[start] + nums[end] > target) {
+            end--
+        }
+    }
+    return result
+}
+~~~
