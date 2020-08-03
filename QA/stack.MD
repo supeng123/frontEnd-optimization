@@ -361,4 +361,32 @@ function oneEditor(s1, s2) {
     return first.join() == second.join()
 }
 ~~~
+### 17.计算器
+~~~
+function computation(str) {
+    const stack = []
+    let cur = ''
+    let mark = '+'
+    let v = 0
+    for (let i = 0; i <= str.length; i++) {
+        cur = str.charAt(i)
+        if (str[i] == ' ') continue
+        if (Number(cur) > 0 && Number(cur) < 9) {
+            v = parseInt(cur)
+            continue
+        }
+        if (mark == '+') {
+            stack.push(v)
+        } else if (mark == '-') {
+            stack.push(-v)
+        } else if (mark == '*') {
+            stack.push(stack.pop()*v)
+        } else if (mark == '/') {
+            stack.push(Math.trunc(stack.pop()/v))
+        }
+        mark == cur
+    }
+    return stack.reduce((t,c) => t+c)
+}
+~~~
 
