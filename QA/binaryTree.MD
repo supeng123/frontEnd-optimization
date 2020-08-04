@@ -382,3 +382,35 @@ var inorderSuccessor = function(root, p) {
     return result
 }
 ~~~
+### 22.堆排序
+~~~
+function heapSort(nums) {
+    let length = nums.length
+    let index = Math.floor(nums.length/2)-1
+    for (let i = index; i <= len; i++) {
+        buildTree(length; i)
+    }
+
+    function buildTree(heapSize, index) {
+        let maxIndex = index
+        let leftIndex = index*2+1
+        let rightIndex = index*2+2
+        if (leftIndex <= heapSize && nums[i] < nums[leftIndex]) {
+            maxIndex = leftIndex
+        }
+        if (rightIndex <= heapSize && nums[i] < nums[rightIndex]) {
+            maxIndex = rightIndex
+        }
+        if (maxIndex != index) {
+            nums[nums[maxIndex], nums[index]] = nums[nums[index], nums[maxIndex]]
+            buildTree(heapSize, maxIndex)
+        }
+    }
+
+    for (let i = length-1; i > 0; i--) {
+        nums[nums[0], nums[i]] = nums[nums[i], nums[0]]
+        buildTree(i, 0)
+    }
+    return nums
+}
+~~~
