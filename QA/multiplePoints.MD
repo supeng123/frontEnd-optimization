@@ -645,3 +645,24 @@ function findSwapValues (arr1, arr2) {
     return []
 }
 ~~~
+### 35.单词距离
+~~~
+function wordsDistance (arr, word1, word2) {
+    let index1 = -1
+    let index2 = -1
+    let min = Infinity
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] == word1) {
+            if (index2 >= 0) {
+                min = Math.min(min, Math.abs(i - index2))
+            }
+        }
+        if (arr[i] == word2) {
+            if (index1 >= 0) {
+                min = Math.min(min, Math.abs(i - index1))
+            }
+        }
+    }
+    return min
+}
+~~~
