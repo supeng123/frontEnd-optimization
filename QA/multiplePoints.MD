@@ -141,9 +141,27 @@ largeGroupPositions = (s) {
        
 }
 ~~~
-### 
+### 10.接雨水
 ~~~
+function trap(height) {
+    if (height.length == 0) return 0
+    const leftMax = []
+    const rightMax = []
+    let max = 0
+    let count = 0
+    for (let i = 0; i < height.length; i++) {
+        leftMax[i] = max = Math.max(height[i], max)
+    }
+    max = 0
+    for (let i = height.length -1; i >=0; i--) {
+        rightMax[i]= max = Math.max(height[i], max)
+    }
 
+    for (let i = 0; i < height.length; i++) {
+        count = count + Math.min(leftMax[i], rightMax[i]) - height[i]
+    }
+    return count
+}
 ~~~
 ### 11.三数之和
 ~~~
