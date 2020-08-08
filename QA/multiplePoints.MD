@@ -684,3 +684,28 @@ function wordsDistance (arr, word1, word2) {
     return min
 }
 ~~~
+### 36.最短无序连续子数组
+~~~
+leetcode 581
+function findUnsortedSubarray(nums) {
+    let left = 0
+    let right = 0
+    let max = nums[0]
+    let min = nums[nums.length -1]
+    for (let i = 0; i < nums.length; i++) {
+        max = Math.max(nums[i], max)
+        if (nums[i] < max) {
+            right = i
+        }
+    }
+
+    for (let i = nums.length - 1; i >= 0; i--) {
+        min = Math.min(nums[i], min)
+        if (nums[i] > min) {
+            left = i
+        }
+    }
+    return right - left > 0 ? right - left + 1 : 0
+}
+~~~
+wood wins categroy,the very clear winner with the higest number of points ever awarded in this section at this festival
