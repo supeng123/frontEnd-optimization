@@ -722,4 +722,22 @@ funciton SumK(nums, k) {
     return count
 }
 ~~~
+autism characterized by difficulty in communicating
+we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
+
+her prognosis is terminal without immediate medical intervention
+Am I being punished for something, you just accept my answer at face value
+you are very arrogant and arrogant people don't think they need to lie so you must be doing this to teach me
+I look forward to learning from scut work
+I my experience doctors don't listen to nurses and they only talk to us to lecture us when they figure we screwed something up
+he has had to get pass people like you and their prejudices every step of the way
+do you have any idea how many patients he has  scared the crap out of today
+I can't discharge people if I think they might still be sick
+residency is a whole lot more demanding than medical
+you would not lie to convince a suicidal person to climb down off the ledge
+
+bloating 胀气
+constipation 便秘
+nausea 恶心
+malignant tumor 恶性肿瘤
 wood wins categroy,the very clear winner with the higest number of points ever awarded in this section at this festival

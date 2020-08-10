@@ -262,3 +262,69 @@ const configs = {
 
 module.exports = withCss({})
 ~~~
+
+### Nuxt
+#### 1.定义局部样式
+~~~
+<style scoped lang = "less">
+
+</style>
+~~~
+#### 2.定义store
+~~~
+store文件下的所有文件都是一个单独的store实例
+
+user.js
+export const state = () => ({
+    userInfo: {
+        token: ""
+        user: {
+
+        }
+    }
+})
+
+export const mutation = {
+    setUserInfo(state, data) {
+        state.userInfo = data
+    }
+}
+
+export const actions = {
+    login(store, data) {
+        await res = this.$axios({
+            url: "/accounts/login",
+            method: "POST",
+            data
+        })
+        return store.commit("setUserInfo", res.data)
+    }
+}
+
+
+在其他的vue模块中
+this.$store.commit("user/setUserInfo") user为命名空间必须带上
+this.$store.dispatch("user/login", this.form).then((res) =》 console.log(res)) user为命名空间必须带上
+~~~
+### 3.客户端持久化
+~~~
+yarn add vuex-persistedstate
+
+在根目录plugins下创建localStorage.js
+import createPersistedState from 'vuex-persistedstate'
+
+export default ({store}) => {
+    window.onNuxtReady(() => {
+        createPersistedState({
+            key: "store"
+        })(store)
+    })
+}
+
+在nuxt.config.js下添加plugins
+plugins: [
+    '@/plugins/element-ui',
+    src: '@/plugins/localStorage', ssr:false
+]
+
+~~~
