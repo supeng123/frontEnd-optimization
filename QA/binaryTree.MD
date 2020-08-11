@@ -395,10 +395,10 @@ function heapSort(nums) {
         let maxIndex = index
         let leftIndex = index*2+1
         let rightIndex = index*2+2
-        if (leftIndex <= heapSize && nums[i] < nums[leftIndex]) {
+        if (leftIndex <= heapSize && nums[index] < nums[leftIndex]) {
             maxIndex = leftIndex
         }
-        if (rightIndex <= heapSize && nums[i] < nums[rightIndex]) {
+        if (rightIndex <= heapSize && nums[index] < nums[rightIndex]) {
             maxIndex = rightIndex
         }
         if (maxIndex != index) {
@@ -412,5 +412,18 @@ function heapSort(nums) {
         buildTree(i, 0)
     }
     return nums
+}
+~~~
+### 23.二叉树直径
+~~~
+function diameter(root) {
+    if (root == null) return 0
+    const temp = height(root.left) + height(root.right)
+    return Math.max(temp, diameter(root.left), diameter(root.right))
+}
+
+function height(node) {
+    if (node == null) return 0
+    return Math.max(height(node.left), height(node.right)) + 1
 }
 ~~~

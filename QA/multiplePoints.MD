@@ -735,9 +735,11 @@ do you have any idea how many patients he has  scared the crap out of today
 I can't discharge people if I think they might still be sick
 residency is a whole lot more demanding than medical
 you would not lie to convince a suicidal person to climb down off the ledge
+all parents love all children more than anybody else
 
 bloating 胀气
 constipation 便秘
 nausea 恶心
 malignant tumor 恶性肿瘤
+amputation
 wood wins categroy,the very clear winner with the higest number of points ever awarded in this section at this festival
