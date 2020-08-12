@@ -328,3 +328,16 @@ plugins: [
 ]
 
 ~~~
+### 4.组件传值
+~~~
+用props对象
+export default {
+    props: {
+        data: {
+            type: Object,
+            default: {}
+        }
+    }
+}
+
+~~~
