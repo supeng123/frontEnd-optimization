@@ -184,3 +184,22 @@ function letterCombinations(digits) {
     return ans
 }
 ~~~
+### 8.目标和
+~~~
+leetcode 494
+function sum(nums, target) {
+    let count = 0
+    backTrack(0, 0)
+    backTrack(index, sum) {
+        if (index == nums.length) {
+            if (sum == target) {
+                count++
+            }
+        } else {
+            backTrack(index+1, sum+nums[index])
+            backTrack(index+1, sum-nums[index])
+        }
+    }
+    return count
+}
+~~~

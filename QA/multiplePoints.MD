@@ -736,7 +736,9 @@ I can't discharge people if I think they might still be sick
 residency is a whole lot more demanding than medical
 you would not lie to convince a suicidal person to climb down off the ledge
 all parents love all children more than anybody else
-
+You are right my mom had problems So I could not afford to just sit around expecting everything to be
+handed to me or whatever else it is that's holding you back, year I got some breaks, i have to work my ass off,
+two jobs, and that's what got me to the place where I could save your life
 bloating 胀气
 constipation 便秘
 nausea 恶心
