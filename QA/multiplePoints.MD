@@ -737,11 +737,17 @@ residency is a whole lot more demanding than medical
 you would not lie to convince a suicidal person to climb down off the ledge
 all parents love all children more than anybody else
 You are right my mom had problems So I could not afford to just sit around expecting everything to be
-handed to me or whatever else it is that's holding you back, year I got some breaks, i have to work my ass off,
+handed to me or whatever else it is that's holding you back, yeah I got some breaks, i have to work my ass off,
 two jobs, and that's what got me to the place where I could save your life
+don't let anyone ever tell you what you can and what you can't do
+you should treat me like a person who are capable of handing her own life
+you'd perfer her to be a lazy parasite living off a trust fund as oppose to contributing to the sociaty
+
+I was no better than her and that I would never do anything i never being anyone
 bloating 胀气
 constipation 便秘
 nausea 恶心
 malignant tumor 恶性肿瘤
+pharmaceutical
 amputation
 wood wins categroy,the very clear winner with the higest number of points ever awarded in this section at this festival

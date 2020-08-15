@@ -341,3 +341,25 @@ export default {
 }
 
 ~~~
+### 5.URL变化监听
+~~~
+components: {
+    FlightListHead,
+    FlightsItem,
+    FlightFilters,
+    FlightAside
+},
+watch: {
+    $route:() {
+        this.$route.query
+    }
+}
+
+~~~
+### 6.二维码生成
+~~~
+npm install --save qrcode
+
+import QRCode from 'qrcode'
+
+~~~
