@@ -744,6 +744,7 @@ you should treat me like a person who are capable of handing her own life
 you'd perfer her to be a lazy parasite living off a trust fund as oppose to contributing to the sociaty
 
 I was no better than her and that I would never do anything i never being anyone
+is there any chance if you son knows more than what you think he does
 bloating 胀气
 constipation 便秘
 nausea 恶心

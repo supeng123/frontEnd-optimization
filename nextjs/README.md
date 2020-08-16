@@ -363,3 +363,21 @@ npm install --save qrcode
 import QRCode from 'qrcode'
 
 ~~~
+### 7.组件递归
+~~~
+组件外部调用改组件，
+组件内部也可以调用本组件，但是要指定组件名字
+
+<template>
+    <div>
+        <div class="item" v-for = "(item, index)" in data :key="index">
+            {{item.type}}
+            <digui :data="item.children" v-if="item.children">
+    </div>
+</template>
+
+export default {
+    name: 'digui',
+    props: ["data"]
+}
+~~~
