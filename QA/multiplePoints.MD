@@ -722,6 +722,25 @@ funciton SumK(nums, k) {
     return count
 }
 ~~~
+### 38.根据身高重建队列
+~~~
+leetcode 406
+funciton reconstrcutQueue(heights) {
+    if (heights.length == 0) return []
+    let result = []
+    heights.sort((a,b) => {
+        if (a[0] != b[0]) {
+            return b[0] - a[0]
+        } else {
+            return a[1] - b[1]
+        }
+    })
+    heights.forEach(people => {
+        result.splice(people[1], 0, people)
+    })
+    return result
+}
+~~~
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
 
@@ -745,9 +764,12 @@ you'd perfer her to be a lazy parasite living off a trust fund as oppose to cont
 
 I was no better than her and that I would never do anything i never being anyone
 is there any chance if you son knows more than what you think he does
+he said people who matter judge people based on their talent
+he did not talk me out of it( don't do it)
 bloating 胀气
 constipation 便秘
 nausea 恶心
+agitated
 malignant tumor 恶性肿瘤
 pharmaceutical
 amputation
