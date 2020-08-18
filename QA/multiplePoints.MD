@@ -741,6 +741,23 @@ funciton reconstrcutQueue(heights) {
     return result
 }
 ~~~
+### 40.找到所有数组中消失的数字
+~~~
+leetcode 448
+funciton missingNumbers(nums) {
+    const result  = []
+    const array = new Array(nums.length+1)
+    for (let num of nums) {
+        array[num] = 1
+    }
+    for (let i = 1; i <= nums.length; i++) {
+        if (array[i] == null) {
+            result.push(i)
+        }
+    }
+    return result
+}
+~~~
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
 
