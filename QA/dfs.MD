@@ -125,3 +125,20 @@ function translator(nums) {
     return dfs(0)
 }
 ~~~
+### 7.打家劫舍
+~~~
+function robber(root) {
+    const rootStatus = dfs(root)
+    return Math.max(rootStatus[0], rootStatus[1])
+    
+    function dfs(node) {
+        if (node == null) return [0, 0]
+        let l = dfs(node.left)
+        let r = dfs(node.right)
+        let rob = node.val + l[1] + r[1]
+        let notRob = Math.max(l[0], l[1]) + Math.max(r[0], r[1])
+        return [rob, notRob]
+    }
+}
+
+~~~
