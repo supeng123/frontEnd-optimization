@@ -411,3 +411,12 @@ const notice = create(Notice, {
 })
 notice.methodName()
 ~~~
+### 9.面包屑导航
+~~~
+watch: {
+    $route: {
+        this.crumb = this.$route.matched(m => m.name || m.redirect)
+    },
+    immediate: true
+}
+~~~
