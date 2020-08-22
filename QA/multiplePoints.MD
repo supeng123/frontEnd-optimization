@@ -779,6 +779,9 @@ don't let anyone ever tell you what you can and what you can't do
 you should treat me like a person who are capable of handing her own life
 you'd perfer her to be a lazy parasite living off a trust fund as oppose to contributing to the sociaty
 
+everyone knows what looks like to overcome barraries, fighting to help peopel live out their own dreams
+
+
 I was no better than her and that I would never do anything i never being anyone
 is there any chance if you son knows more than what you think he does
 he said people who matter judge people based on their talent
@@ -787,6 +790,8 @@ bloating 胀气
 constipation 便秘
 nausea 恶心
 agitated
+creed 信条
+stake 拿什么做赌注
 malignant tumor 恶性肿瘤
 pharmaceutical
 amputation

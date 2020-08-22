@@ -420,3 +420,136 @@ watch: {
     immediate: true
 }
 ~~~
+### 10.Vue构造函数
+~~~
+class DVue {
+    constructor(options) {
+        this.options = options
+        this.$data = options.data
+        this.observe(this.$data)
+
+       // new Watcher(this, 'foo')
+       // this.foo // 读一次触发依赖收集
+        new Watcher(this, 'foo.bar')
+        this.foo.bar // 读一次触发依赖收集
+
+        new Compile(options.el, this)
+        if (options.created) {
+            options.created.call(this)
+        }
+    }
+
+    observe(value) {
+        if (!value || typeof value !== 'object') return
+
+        Object.keys(value).forEach(key => {
+            this.defineReactive(value, key, value[key])
+        })
+    }
+
+    defineReactive(obj, key, val) {
+        const dep = new Dep() //mapping the key
+        Object.defineProperty(obj, key, {
+            get() {
+                //依赖收集
+                Dep.target && dep.addDep(Dep.target)
+                return val
+            },
+            set (newValue) {
+                if (newValue != val) val = newValue
+                console.log(key + ’attrs changed‘)
+                dep.notify()
+            }
+        })
+    }
+}
+~~~
+### 11.管理所有Watcher
+~~~
+class Dep{
+    constructor() {
+        this.deps = []
+    }
+
+    addDep(dep) {
+        this.deps.push(dep)
+    }
+
+    notify() {
+        this.deps.forEach(dep => dep.update())
+    }
+}
+
+class Watcher {
+    constructor(vmInstance, key, cb) {
+        this.vm = vmInstance;
+        this.key = key
+        this.cb = cb
+
+        Dep.target = this;
+        this.vm[this.key]
+        Dep.target = null
+    }
+
+    update() {
+        this.cb.call(this.vm, this.vm[this.key])
+        console.log(this.key + 'updated')
+    }
+}
+~~~
+### 12.compile dom
+~~~
+class Comiple {
+    constructor(el, vm) {
+        this.$vm = vm
+        this.$el = document.querySelector(el)
+
+        this.$fragment = this.node2Fragment(this.$el)
+        this.compile(this.$fragment)
+        this.$el.append(this.$fragment)
+    }
+
+    node2Fragment(el) {
+        const fragment = document.createDocumentFragment()
+        let child
+        while (child = el.firstChild) {
+            fragment.appendChild(child)
+        }
+        return fragment
+    }
+
+    compile(el) {
+       const childNodes = el.childNodes;
+       Array.from(childNodes).forEach(node => {
+           if (node.nodeType == 1) {
+               //元素
+               console.log("编译元素" + node.nodeName)
+           }  else if (this.isInter(node)) {
+               console.log("编译插值文本" + node.nodeName)
+           }
+       })
+    }
+
+    isInter(node) {
+        return node.nodeType == 3 && /\{\{(.*)}\}/.test(node.textContent)
+    }
+
+    compileText(node) {
+        const exp = RegExp.$1
+        this.update(node, exp, 'text')
+    }
+
+    update(node, exp, dir) {
+        const updator = this[dir+'Updator']
+        updator && updator(node, this.$vm[exp])
+        //创建watcher实例，依赖搜集完成
+        new Watcher(this.$vm, exp, function(val) {
+            updator && updator(node, val)
+        })
+    }
+
+    textUpdator(node, value) {
+        node.textConent = value;
+    }
+}
+~~~
