@@ -795,4 +795,8 @@ stake 拿什么做赌注
 malignant tumor 恶性肿瘤
 pharmaceutical
 amputation
+
+影院灯光亮起，散场后总感觉一种说不出来的别扭，我坐在第一排竟然从《八佰》回想不起来一个有特征清晰的角色，大家使劲从头吼到尾，连炮声都压不住，编剧好不容易憋出一句严肃台词，观众笑场了，
+美术蒙太奇特效闪回把观众拖进三国演义片场，导演说我来想一场比《敦刻尔克》更震撼的音效，差点将观众周五早上吃的千层饼倒腾出来，演员说我都这么用力煽情了你怎么还不感动，好，那那我直接拔高主题
+我们一起爱国吧，你这该哭了吧。 什么？你想上厕所？那好，我掐电源了，啥？你还有意见想退票，别人情绪都这么稳定，为啥你有意见，不收割你还得了。
 wood wins categroy,the very clear winner with the higest number of points ever awarded in this section at this festival

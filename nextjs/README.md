@@ -553,3 +553,39 @@ class Comiple {
     }
 }
 ~~~
+### 13.浏览器环境调试
+~~~
+在build.js中找到umd的web-full-dev版本的入口文件
+
+npm run dev
+加上--sourcemap
+修改samples的min.js to js
+~~~
+### 14.event loop
+~~~
+console.log('promise1')
+
+const aaa = new Promise((resolve, reject) => {
+    console.log('promise2')
+    resolve()
+    console.log('promise x')
+})
+
+aaa.then(() => {
+    console.log('promise3')
+})
+
+const tt = setTimeout(()=> {
+    console.log('promise4')
+})
+
+Promise.resolve().then(function() {
+    console.log('promise5')
+}).then(function() {
+    console.log('promise6')
+})
+
+console.log('promise7')
+
+1 2 x 7 3 5 6 4
+~~~
