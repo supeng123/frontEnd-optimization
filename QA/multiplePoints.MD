@@ -758,6 +758,28 @@ funciton missingNumbers(nums) {
     return result
 }
 ~~~
+### 41.搜索二维矩阵
+~~~
+对角线查找双指针
+leetcode 240
+funciton searchMatrix(matrix) {
+    if (matrix.length == 0) return false
+    let row = matrix.length
+    let column = matrix[0].length
+    let left = 0
+    let bottom = row - 1
+    while (bottom >= 0 && left < column) {
+        if (matrix[bottom][left] > target) {
+            bottom--
+        } else if (matrix[bottom][left] < target) {
+            left++
+        } else {
+            return true
+        }
+    }
+    return false
+}
+~~~
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
 
