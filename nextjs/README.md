@@ -589,3 +589,21 @@ console.log('promise7')
 
 1 2 x 7 3 5 6 4
 ~~~
+### 15.vue.config.js
+~~~
+const port = 9090
+const title = 'config'
+module.exports = {
+    publicPath: '/bestPricatice',
+    devServer: {
+        port
+    }
+    configureWebpack: {
+        name:title
+    },
+    chainWebpack(config) {
+        config.module.rule('svg')
+        .exclude.add('src/icons')
+    }
+}
+~~~

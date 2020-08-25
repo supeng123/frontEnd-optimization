@@ -427,3 +427,13 @@ function height(node) {
     return Math.max(height(node.left), height(node.right)) + 1
 }
 ~~~
+### 24.二叉树公共祖先
+~~~
+function ancestor(root, p, q) {
+    if (!root || root.left == p || root.right == q) return root
+    let left = ancestor(root.left, p, q)
+    let right = ancestor(root.right, p, q)
+    if (left && right) return root
+    return left ? left : right
+}
+~~~
