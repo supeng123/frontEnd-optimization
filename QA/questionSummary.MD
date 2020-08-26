@@ -949,6 +949,11 @@ you get a most head start on most kids
 you know the shitty thing about all of this  is that the strange behind the counter gave
 me the free chenno that small act of kindness showed more compassion than my
 mother gave me her entire goddamn lifeAKA031CAVI
+we need to make it clear that abusing, stalking,in any way bothering your mom ever again will be more
+trouble than it's worth
+
+I definitely won't go out of my way to be nice to you again 我绝对不会再对你好了
+ithink it's best if we keep moving forwaring with our lives
 少年鸭的奇幻漂流
     去年年末，我叔准备年货将自己去年在江北喂养的鸭和鸡带回老家，当时大家觉得直接杀掉放在冰箱吃起来不新鲜，而院子门经常打开加上天气也比较冷所以最后决定圈养
 在他家空置的楼顶，等合适的时候再处置。

@@ -16,10 +16,10 @@
   - [3.Class](#3class)
     - [es5 inheritance](#es5-inheritance)
     - [typescript inheritance](#typescript-inheritance)
-      - [*public: can be used in class subclass and outside of class](#public-can-be-used-in-class-subclass-and-outside-of-class)
+      - [*public:  can be used in class subclass and outside of class](#public-can-be-used-in-class-subclass-and-outside-of-class)
       - [*private: can only be used in class](#private-can-only-be-used-in-class)
       - [*protect: can be used in class and subclass but not outside of class](#protect-can-be-used-in-class-and-subclass-but-not-outside-of-class)
-      - [*abstract class only provide the schema of the class, needs subclass to implement the concrete implementations.](#abstract-class-only-provide-the-schema-of-the-class-needs-subclass-to-implement-the-concrete-implementations)
+      - [*abstract class only provide the schema of the class,  needs subclass to implement the concrete implementations.](#abstract-class-only-provide-the-schema-of-the-class-needs-subclass-to-implement-the-concrete-implementations)
   - [4.Interface](#4interface)
     - [contrains for object](#contrains-for-object)
     - [define interface](#define-interface)
@@ -38,6 +38,7 @@
     - [export import](#export-import)
     - [Class Decoration](#class-decoration)
     - [Method Decoration](#method-decoration)
+    - [Type copy](#type-copy)
 # typescript-practice
 
 ## 1.Typescript Types
@@ -618,4 +619,17 @@ class HttpClient{
 
 the order of different type of decorations
 attribute > method > method parameter > class
+~~~
+### Type copy
+~~~
+type Copy<T> = {
+    [key in keyof T]: T[key]
+}
+
+interface Person {
+    name: string
+    age: number
+}
+
+type Chinese = Copy<Person>
 ~~~
