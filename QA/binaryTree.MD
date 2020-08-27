@@ -437,3 +437,16 @@ function ancestor(root, p, q) {
     return left ? left : right
 }
 ~~~
+### 25.二叉树交换子节点
+~~~
+function swapNodes(root) {
+    const queue = [root]
+    while (queue.length > 0) {
+        const current = queue.pop()
+        [current.left, current.right] = [current.right, current.left]
+        queue.unshift(right)
+        queue.unshift(left)
+    }
+    return root
+}
+~~~
