@@ -607,3 +607,25 @@ module.exports = {
     }
 }
 ~~~
+### 16.configure cookie
+~~~
+//client
+axio.defaults.withCredentials = true
+
+//server
+res.setHeader('Access-Control-Allow-Credentials', 'true')
+~~~
+### 17.webpack and express proxy
+~~~
+const express = require('express')
+const proxy = require('http-proxy-middleware')
+
+const app = express()
+
+app.use('/api', proxy({
+    target: 'http://localhost:4000',
+    changeOrigin: false
+}))
+
+module.exports = app
+~~~
