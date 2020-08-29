@@ -629,3 +629,126 @@ app.use('/api', proxy({
 
 module.exports = app
 ~~~
+### 18.鉴权 session
+~~~
+const session = {}
+
+const sessionKey = 'sid'
+const cookie = req.headers.cookie
+if (cookie && cookie.indexOf(sessionKey)) {
+    res.end('Come back')
+    const pattern = new RegExp(`${sessionKey}=([^;]+);?\s*`)
+    const sid = pattern.exec(cookie)[1]
+    console.log('session', sid)
+} else {
+    const sid =(Math.random()* 99996).toFixed()
+    res.setHeader('Set-Cookie', `${sessionKey}=${sid};`)
+    session[sid] = {name: 'laowang'}
+    res.end('hi laowang')
+}
+
+
+// koa 实现
+const koa = require('koa')
+const app = new koa()
+const session = require('koa-session')
+
+app.key = ['some secret']
+const SESSION_CONFIG = {
+    key: 'kkb:sess',
+    maxAge: '345346254',
+    httpOnly: true,
+    signed: false
+}
+
+app.use(session(SESSION_CONFIG, app))
+app.use(ctx => {
+    if (ctx,path == '/favicon.icon') return
+    let n = ctx.session.count || 0
+    ctx.session.count = ++n
+    ctx.body = '第'+ n + '次访问'
+})
+
+app.listen(3000)
+
+//redis 实现
+const redis = require('redis')
+const redisStore = require('koa-redis')
+const clientRedis = redis.createClient(6379, 'localhost')
+const wraper = require('co-redis')
+const client = wrap(clientRedis)
+
+const SESSION_CONFIG = {
+    key: 'kkb:sess',
+    maxAge: '345346254',
+    httpOnly: true,
+    signed: true,
+    store: redisStore({
+        client
+    })
+}
+
+app.use(async (ctx,next) =>m{
+    const keys = await client.keys('*')
+    keys.forEach(async key => {
+        console.log(await client.get(key))
+    })
+})
+
+app.use(session(SESSION_CONFIG, app))
+app.use(ctx => {
+    if (ctx,path == '/favicon.icon') return
+    let n = ctx.session.count || 0
+    ctx.session.count = ++n
+    ctx.body = '第'+ n + '次访问'
+})
+
+//鉴权中间件
+app.use((ctx, next) => {
+    if (ctx.url.indexOf('login') > -1) {
+        next()
+    } else {
+        if (!ctx.session.userInfo) {
+            ctx.body = {
+                message: 'login failed'
+            }
+        } else {
+            next()
+        }
+    }
+})
+
+router.post('/users/login', async ctx => {
+    const { body } = ctx.request
+    ctx.session.userinfo = body.username
+    ctx.body = {
+        message: 'login succeeded'
+    }
+})
+
+router.post('/users/logout', async ctx => {
+    delete ctx.session.userinfo
+    ctx.body = {
+        message: 'login out'
+    }
+})
+
+router.get('/users/getUser', async ctx => {
+    ctx.body = {
+        message: 'get userinfo succeeded',
+        userinfo: ctx.session.userinfo
+    }
+})
+
+app.use(router.routes())
+~~~
+### 19.鉴权 token
+~~~
+cookie不能跨域，不需要存在服务器
+JWT(JSON WEB TOKEN)
+token由令牌头，payload，哈希三部分组成
+
+第三方认证
+从本网站访问第三方的网站，服务器得到请求会转发请求到第三方开放的接口，
+把第三方的请求得到的token拿回到服务器然后再发送token到第三方网站得到用户信息
+~~~
