@@ -752,3 +752,76 @@ token由令牌头，payload，哈希三部分组成
 从本网站访问第三方的网站，服务器得到请求会转发请求到第三方开放的接口，
 把第三方的请求得到的token拿回到服务器然后再发送token到第三方网站得到用户信息
 ~~~
+### 20.cluster
+~~~
+可以同时占用同一个端口，适用于程序奔溃又有新的进程顶上，故障恢复，多核利用
+~~~
+
+## 2. React
+### 1.react setState
+~~~
+异步
+this.setState({
+    mean: this.state.mean + 1
+})
+同步
+this.setState(nextState => {
+    return {
+        mean: nextState + 1
+    }
+})
+~~~
+### 2.react function component with state
+~~~
+hooks
+import {userState, useEffect} React from 'react'
+
+export default function User() {
+    const [date, setDate] = useState(new Date())
+    useEffect(() => {
+        const timer = setInterval(()=> {
+            setDate({
+                data: new Date
+            })
+        },1000)
+
+        return () =>  clearInvterval(timer)
+    })
+
+    return (
+        <div>
+        {date.tolocaleTimeString()}
+        </div>
+    )
+}
+~~~
+### 3.react Context
+~~~
+import React from 'react'
+import Home from './pages/Home'
+
+const Context = React.createContext()
+const Provider = Context.Provider
+const Consumer = Context.Consumer
+
+const store = {
+    home: {},
+    user: {
+        name: 'supel'
+    }
+}
+
+function App() {
+    return (
+        <div className="app">
+            <Provider value ={store}>
+                <Consumer>
+                    {ctx => <Home {...ctx}/>}
+                </Consumer>
+            </Provider>
+        <div>
+    )
+}
+
+export default App
+~~~
