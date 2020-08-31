@@ -824,4 +824,27 @@ function App() {
 }
 
 export default App
+
+//可以用useContext拿到全局对象的数据
+~~~
+### 4.HOC(Higher-Order Components)
+~~~
+高阶组件是⼀一个⼯工⼚厂函数，它接收⼀一个组件并返回另⼀一个组件
+
+const foo = Cmp => props => {
+    return <Cmp {...props}>
+}
+
+HOC的作用和装饰器很像，所以用装饰器也可以达到同样的效果
+@withLog
+@withContent
+class Lesson extend React.Component {
+    render() {
+        return (
+            <div>
+                {this.props.stage}
+            </div>
+        )
+    }
+}
 ~~~

@@ -262,6 +262,18 @@ splice
 节流 throtte, 单位时间内多次执行函数，函数只执行一次操作
 防抖 debounce， 单位时间内操作多次操作函数， 会重新设置单位时间，直至到了单位时间草能执行函数
 
+const debounce = (fn, wait) => {
+    let timer;
+    return function() {
+        const that = this
+        const args = arguments
+        clearTimeout(timer)
+        timer = setTimeout(function(){
+            fn.apply(this, arguments)
+        }, wait)
+    }
+}
+
 在图片按需懒加载场景，用防抖的方式优化加载图片
 ~~~
 ### 31.输出结果为
