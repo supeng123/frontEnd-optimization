@@ -848,3 +848,8 @@ class Lesson extend React.Component {
     }
 }
 ~~~
+### 5.pureCompoent && Memo
+~~~
+避免重复渲染dom的优化，但只是浅比较
+shouldComponentUpdate
+~~~

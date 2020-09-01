@@ -274,6 +274,17 @@ const debounce = (fn, wait) => {
     }
 }
 
+const throtte = (fn, wait) => {
+    let previous = 0
+    return function(...args) {
+        let self = this
+        if (new Date() - previous > wait) {
+            previous = new Date()
+            fn.apply(this, args)
+        }
+    }
+}
+
 在图片按需懒加载场景，用防抖的方式优化加载图片
 ~~~
 ### 31.输出结果为
