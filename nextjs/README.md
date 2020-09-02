@@ -853,3 +853,86 @@ class Lesson extend React.Component {
 避免重复渲染dom的优化，但只是浅比较
 shouldComponentUpdate
 ~~~
+### 6.createElement
+~~~
+function createElement(type, props, ...children) {
+    let vtype
+    props.children = children
+    if (typeOf type === 'string') vtype = 1
+    if (typeOf type === 'function') {
+        vtype = type.isReactComponent ? 2 : 3
+    }
+
+    return {
+        type,
+        props,
+        vtype
+    }
+}
+
+class Component {
+    static isReactComponent = {
+
+    }
+    constructor(props) {
+        this.props = props
+    }
+}
+
+function render(vnode, container) {
+    //vnode --> node
+    //container.append(node)
+    mount(vnode, container)
+}
+
+function mount(vnode, container) {
+    const {vtype} = vnode
+    if (!vtype) {
+        mountTextNode(vnode, contianer)
+    } else if (vtype == 1) {
+        mountHtmlNode(vnode, container)
+    } else if (vtype == 2) {
+        mountClassNode(vnode, container)
+    } else {
+        mountFunction(vnode, container)
+    }
+}
+
+function mountTextNode(vnode, container) {
+    const node = document.createTextNode(vnode)
+    container.appendChild(node)
+}
+
+function mountTextNode(vnode, container) {
+    const {type, props} = vnode
+    const node = document.createElement(type)
+    const {children, ...rest} = props
+    children.map(child => {
+        if (Array.isArray(child)) {
+            child.map(c => mount(c, node))
+        }
+        mount(child, node)
+    })
+    Object.keys(rest).map(item => {
+        if (item === 'className') {
+            node.setAttribute('class', rest[item])
+        }
+        if (item.slice(0,2) == 'on') {
+            node.addEventListener("click", rest[item])
+        }
+    })
+    container.appendChild(node)
+}
+
+function mountFunction(vnode, container) {
+    const {type, props} = vnode
+    const node = type()
+    mount(node, container)
+}
+
+function mountClass(vnode, container) {
+    const {type, props} = vnode
+    const node = new type(props).render()
+    mount(node, container)
+}
+~~~
