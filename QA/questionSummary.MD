@@ -548,6 +548,35 @@ function promiseAll(promises) {
     })
 }
 ~~~
+### 50. deepCopy
+~~~
+function deepCopy(originObj, map = new WeakMap()) {
+    if(isObject(originObj)) {
+        if (map.has(originObj)) {
+            return map.get(originObj)
+        }
+        const type = [Date, RegExp, Map, Set, WeakMap, WeakSet]
+        if (type.includes(originObj.constructor)) {
+            return originObj.contructor(originObj)
+        }
+
+        const allProperties = Object.getOwnPropertyDescriptors(originObj)
+        const protoTypes = Object.getPrototypeOf(originObj)
+        const cloneObj = Object.create(protoTypes, allProperties)
+
+        for (const prop of Reflect.ownKeys(originObj)) {
+            cloneObj[prop] = isObject(originObj[prop]) && typeof originObj[prop] !== 'function' ? deepCopy(originObj[prop], map) : originObj[prop];
+        }
+        return cloneObj
+    } else {
+        return originObj
+    }
+
+    function isObject(obj) {
+        return typeof obj === 'object' || typeof obj === 'function' && obj !== null
+    }
+}
+~~~
 ### 52.验证ip地址
 ~~~
 function validIp(address) {
