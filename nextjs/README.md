@@ -936,3 +936,92 @@ function mountClass(vnode, container) {
     mount(node, container)
 }
 ~~~
+### 7.fiber
+~~~
+class Update() {
+    constructor(payload, nextStatus) {
+        this.payload = payload
+        this.nextStatus = nextStatus
+    }
+}
+
+class UpdateQueue {
+    constructor() {
+        this.baseState = null
+        this.firstUpdate = null
+        this.lastUpdate = null
+    }
+
+    enqueueUpdate(status) {
+        if (!this.firstUpdate) {
+            this.firstUpdate = this.lastUpdate = status
+        } else {
+            this.lastUpdate.nextStatus = status
+            this.lastUpdate = status
+        }
+    }
+    
+    forceUpdate() {
+        let currentState = this.baseState || {}
+        let currentUpdate = this.firstUpdate
+        while (currentUpdate) {
+            let next = typeof currentUpdate.payload === 'function' ? currentUpdate.payload(currentState) : currentState.payload
+            currentState = {...currentState, ...next}
+            currentUpdate = currentUpdate.nextStatus
+        }
+        this.firstUpdate = this.lastUpdate = null
+        this.baseState = currentState
+        return currentState
+    }
+}
+
+let queue = new UpdateQueue()
+queue.enqueueUpdate(new Update({name: 'slogan'}))
+queue.enqueueUpdate(new Update({age: 11}))
+queue.enqueueUpdate(new Update((state) => ({number: state.age + 1}))
+queue.enqueueUpdate(new Update((state) => ({number: state.age + 1}))
+queue.forceUpdate()
+~~~
+### 8.requestIdleCallback
+~~~
+//请求每帧的空余时间给用户执行callback，没有空闲时间就继续浏览器的执行，timeout是超过指定时间
+浏览器就算没有空余时间也要强制执行用户的callback
+requestIdleCallback(workLoop, {timeout: 1000})
+
+function workLoop(deadline) {
+    while ((deadline.timeRemaining() > 0 || deadline.didTimeout) && works.length > 0) {
+        performUnitOfWork()
+    }
+    if (works.length > 0) {
+        window.requestIdleCallback(workLoop, {timeout: 1000})
+    }
+}
+
+function performUnitOfWork() {
+    works.shift()()
+}
+
+works = [
+    (): => {
+       console.log('firstTask start') 
+       sleep(20)
+       console.log('firstTask finish') 
+    },
+    (): => {
+       console.log('secondTask start') 
+       sleep(20)
+       console.log('secondTask finish') 
+    },
+    (): => {
+       console.log('thirdTask start') 
+       sleep(20)
+       console.log('thirdTask finish') 
+    }
+]
+
+function sleep(delay) {
+    let lastDate = new Date()
+    while (new Date() - lastDate < delay) {
+    }
+}
+~~~

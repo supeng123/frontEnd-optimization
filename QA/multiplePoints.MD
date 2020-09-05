@@ -804,8 +804,7 @@ you'd perfer her to be a lazy parasite living off a trust fund as oppose to cont
 everyone knows what looks like to overcome barraries, fighting to help peopel live out their own dreams
 
 there are very few things that are worthwhile in life come without a cost.
-he says getting away from things every now and again, having balance in our lives can be just as
-important to our performance as practice
+he says getting away from things every now and again, having balance in our lives can be just as important to our performance as practice
 
 
 I was no better than her and that I would never do anything i never being anyone
