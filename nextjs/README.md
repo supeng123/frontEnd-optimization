@@ -982,7 +982,7 @@ queue.enqueueUpdate(new Update((state) => ({number: state.age + 1}))
 queue.enqueueUpdate(new Update((state) => ({number: state.age + 1}))
 queue.forceUpdate()
 ~~~
-### 8.requestIdleCallback
+### 8.requestIdleCallback && requestAnimationFrame
 ~~~
 //请求每帧的空余时间给用户执行callback，没有空闲时间就继续浏览器的执行，timeout是超过指定时间
 浏览器就算没有空余时间也要强制执行用户的callback
@@ -1024,4 +1024,59 @@ function sleep(delay) {
     while (new Date() - lastDate < delay) {
     }
 }
+~~~
+### 9.react fiber
+~~~
+prerequisition
+let A1 = {type: 'div', key: 'A1'}
+let B1 = {type: 'div', key: 'B1', return: A1}
+let B2 = {type: 'div', key: 'B2', return: A1}
+let C1 = {type: 'div', key: 'C1', return: B1}
+let C2 = {type: 'div', key: 'C2', return: B1}
+let C3 = {type: 'div', key: 'C3', return: B1}
+A1.child = B1
+B1.sibling = B2
+B1.child = C1
+C1.sibling = C2
+C2.sibling = C3
+
+module.exports = rootFiber = A1
+
+let rootFiber = require('./element')
+let nextUnitOfWork = null
+function workLoop(deadline) {
+    while ((deadline.timeRemaining() > 0 || deadline.didTimeout) && nextUnitOfWork) {
+        nextUnitOfWork = performUnitOfWork(nextUnitOfWork)
+    }
+    if (!nextUnitOfWork) {
+        console.log('render done')
+    } else {
+        requestIdleCallback(workLoop, {timeout: 1000})
+    }
+}
+
+function performUnitOfWork(fiber) {
+    beginWork(fiber)
+    if (fiber.child) {
+        return fiber.child
+    }
+    while (fiber) {
+        completeUnitWork(fiber)
+        if (fiber.sibling) {
+            return fiber.sibling
+        }
+        fiber = fiber.return
+    }
+}
+
+function completeUnitWork(fiber) {
+    console.log('end', fiber.key)
+}
+
+function beginWork(fiber) {
+    console.log('start', fiber.key)
+}
+
+nextUnitOfWork = rootFiber
+requestIdleCallback(workLoop, {timeout, 1000})
 ~~~
