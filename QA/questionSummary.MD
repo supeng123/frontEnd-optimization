@@ -577,6 +577,20 @@ function deepCopy(originObj, map = new WeakMap()) {
     }
 }
 ~~~
+### 51.实现reduce
+~~~
+function reduce(callback, initState) {
+    const arr = this
+    let func = callback
+    let init = initState
+
+    items.forEach(item => {
+        init = func(init, item)
+    })
+    return init
+}
+[].reduce(()=> {},{})
+~~~
 ### 52.验证ip地址
 ~~~
 function validIp(address) {
