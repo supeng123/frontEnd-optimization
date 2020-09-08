@@ -285,6 +285,20 @@ const throtte = (fn, wait) => {
     }
 }
 
+setTimeout(callback, timeout) {
+    let start = +new Date()
+    let timer
+    function loop() {
+        timer = window.requestAnimationFrame(loop)
+        if (+new Date() - start >= timeout) {
+            callback.apply(this, args)
+            windows.cancekAnimationFrame(timer)
+        }
+    }
+
+    window.requestAnimationFrame(loop)
+}
+
 在图片按需懒加载场景，用防抖的方式优化加载图片
 ~~~
 ### 31.输出结果为
