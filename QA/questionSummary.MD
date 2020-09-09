@@ -647,8 +647,13 @@ typeOf can’t check null and function
     border-bottom: 50px solid red;
 }
 ~~~
-### 57.
+### 57.清浮动
 ~~~
+父元素后加伪元素：after{display:block, clear:both; content:''}
+BFC，父元素添加overflow:hidden
+
+伪类：修饰已在render tree的节点，first-child,hover
+伪元素：修饰不在render tree的节点，first-letter,before
 ~~~
 ### 59.js中 new发生了什么
 ~~~

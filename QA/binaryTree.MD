@@ -436,6 +436,12 @@ function ancestor(root, p, q) {
     if (left && right) return root
     return left ? left : right
 }
+
+left = ancestor(2) ===> node(2)
+right = ancestor(3) ===> node(3)
+    1
+  2   3
+4  5 6  7
 ~~~
 ### 25.二叉树交换子节点
 ~~~
