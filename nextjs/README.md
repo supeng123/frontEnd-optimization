@@ -1080,3 +1080,77 @@ function beginWork(fiber) {
 nextUnitOfWork = rootFiber
 requestIdleCallback(workLoop, {timeout, 1000})
 ~~~
+### beginWork
+~~~
+//render 阶段生成fiber和effect list
+function beginWork(currentFiber) {
+    if (currentFiber.tag === TAG_ROOT) {
+        updateHostRoot(currentFiber)
+    }
+}
+
+function updateHostRoot(cuurentFiber) {
+    let newChildren = currentFiber.props.children ///[element]
+    reconcileChildren(currentFiber, newChildren)
+}
+
+function reconcileChildren(currentFiber, newChildren) {
+    let newChildIndex = 0
+    let prevSibling;
+    while (newChildIndex < newChildren.length) {
+        let newChild = newChildren[newChildIndex]
+        let tag
+        if (newChild.type == ELEMENT_TEXT) {
+            tag = TAG_TEXT
+        } else if (typeof newChild.type == 'string') {
+            tag = TAG_HOST
+        }
+        let newFiber = {
+            tag,
+            type: newChild.type,
+            props: newChild.props,
+            stateNode: null,
+            return: currentFiber
+            effectTag: PLACEMENT,
+            nextEffect: null
+        }
+        if (newFiber) {
+            if(newChildIndex == 0) {
+                currentFiber.child = newFiber
+            } else {
+                prevSibling.sibling = newFiber
+            }
+            prevSibling = newFiber
+        }
+
+        newChildIndex++
+    }
+}
+~~~
+### completeUnitOfWork
+~~~
+function completeUnitOfWork(currentFiber) {
+    let returnFiber = currentFiber.return
+    if (returnFiber) {
+        if (!returnFiber.firstEffect) {
+            returnFiber.firstEffect = currentFiber.firstEffect
+        }
+        if (currentFiber.lastEffect) {
+            if (returnFiber.lastEffect) {
+                returnFiber.lastEffect.nextEffect = currentFiber.firstEffect
+            } else {
+                returnFiber.lastEffect = currentFiber.lastEffect
+            }
+        }
+        const effectTag = currentFiber.effectTag
+        if (effectTag) {
+            if (returnFiber.lastEffect) {
+                returnFiber.lastEffect.nextEffect = currentFiber
+            } else {
+                returnFiber.firstEffect = currentFiber
+            }
+            returnFiber.lastEffect = currentFiber
+        }
+    }
+}
+~~~
