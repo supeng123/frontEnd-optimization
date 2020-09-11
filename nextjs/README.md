@@ -1129,17 +1129,20 @@ function reconcileChildren(currentFiber, newChildren) {
 ~~~
 ### completeUnitOfWork
 ~~~
+      A1
+    B1   B2
+  C1 C2 D1 D2
 function completeUnitOfWork(currentFiber) {
     let returnFiber = currentFiber.return
     if (returnFiber) {
         if (!returnFiber.firstEffect) {
-            returnFiber.firstEffect = currentFiber.firstEffect
+            returnFiber.firstEffect = currentFiber.firstEffect //a1 --> c1
         }
         if (currentFiber.lastEffect) {
             if (returnFiber.lastEffect) {
-                returnFiber.lastEffect.nextEffect = currentFiber.firstEffect
+                returnFiber.lastEffect.nextEffect = currentFiber.firstEffect //b1 --> d1
             } else {
-                returnFiber.lastEffect = currentFiber.lastEffect
+                returnFiber.lastEffect = currentFiber.lastEffect //a1 --> c2
             }
         }
         const effectTag = currentFiber.effectTag
