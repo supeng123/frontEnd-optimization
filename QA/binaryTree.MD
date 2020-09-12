@@ -456,3 +456,34 @@ function swapNodes(root) {
     return root
 }
 ~~~
+### 26.二叉树最短距离
+~~~
+function shortestDistance(root, p, q) {
+    const commonAncestor = ancestor(root, p, q)
+    let pfound = false
+    let qfound = false
+    const pNodes=[]
+    const qNodes=[]
+    getDistance(commonAncestor, p, pNodes, pfound)
+    getDistance(commonAncestor, q, qNodes, qfound)
+    return pNodes.length+qNodes.length
+    
+    function getDistance(root, target, stack, pfound) {
+        if (!root) return
+        stack.push(root.val)
+        if (root == target) {
+            isFound = true
+            return
+        }
+        if (!isFound && root.left) {
+            getDistance(root.left, target, stack, pfound)
+        }
+
+        if (!isFound && root.right) {
+            getDistance(root.right, target, stack, pfound)
+        }
+        stack.pop()
+        return
+    }
+}
+~~~

@@ -977,6 +977,46 @@ http是无状态的连接协议，每次断开再连接都要和服务端验证�
 websocket通过发送http请求，请求头包括里面包括使用的协议，连接是否升级等内容，连接上后服务端可以
 自动通信，不需要客户端轮询，节省带宽减轻服务器压力
 ~~~
+### 73.三角形
+~~~
+.triangle {
+    width: 0px;
+    border: 100 solid;
+    border-color:(red, transparent, transparent, transparent)
+}
+
+//相邻子节点样式修改
+ul > li+li {
+    border: 1px solid black;
+}
+~~~
+
+//面包屑导航
+~~~
+li:first-child:before {
+    content: "";
+}
+
+li:before {
+    content: "\27a5"
+}
+
+//outLine
+~~~
+li {
+    border: 10px solid pink
+}
+
+li+li {
+    margin-top: -10px
+}
+
+li:hover {
+    outline: 10px solid purple;
+    outline-offset:-10px
+}
+~~~
+~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
 //unsavory remnants of many hotel rooms I still wake up screamnng over
