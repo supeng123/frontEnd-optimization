@@ -1002,7 +1002,7 @@ li:before {
 }
 
 //outLine
-~~~
+
 li {
     border: 10px solid pink
 }
@@ -1015,7 +1015,16 @@ li:hover {
     outline: 10px solid purple;
     outline-offset:-10px
 }
+
 ~~~
+### 74.xss
+~~~
+cross site script
+跨站脚本攻击是用不属于本站脚本非法获取本站用户的个人信息cookie
+主要有三种类型
+反射型 通过用户访问的url，然后服务器不做处理直接返回
+存储型 通过提交表单将脚本写入数据库，数据库每次读取数据到前端页面会造成攻击
+dom修改型 通过修改页面的dom造成攻击， 如改动innerHTML中带有攻击者的脚本
 ~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate

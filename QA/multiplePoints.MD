@@ -801,7 +801,8 @@ don't let anyone ever tell you what you can and what you can't do
 you should treat me like a person who are capable of handing her own life
 you'd perfer her to be a lazy parasite living off a trust fund as oppose to contributing to the sociaty
 
-everyone knows what looks like to overcome barraries, fighting to help peopel live out their own dreams
+everyone knows what looks like to overcome barrier, fighting to help peopel live out their own dreams
+I am not alway the same here as it is at home
 
 there are very few things that are worthwhile in life come without a cost.
 he says getting away from things every now and again, having balance in our lives can be just as important to our performance as practice
