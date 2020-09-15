@@ -149,10 +149,10 @@ redirector to new website, telecommunication hijack, intranet hijack, malicious 
 
 TLS/SSL encryption
 
-1.server apply certificate from certification association center,
+1.server send its public key to apply certificate from certification association center,
 2.CA will check the validation of server domain
 3.client send http request
-4.server provide the certification
+4.server provide the certification and public key
 5.client build-in certificates list will verify the cerficate from server
 
 https.createServer({
