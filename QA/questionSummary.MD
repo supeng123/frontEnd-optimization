@@ -1034,10 +1034,20 @@ cross site request forge
 攻击者利用a网站登录的信息在B网站发送一个到a网站的请求
 
 token, samesite, 禁止refer()，验证码
-
 黑客将被攻击的网站放入iframe中，可以在服务端禁止iframe
+~~~
+### 75.webpack
+~~~
+//多页面打包需要改的配置
+entry,output,htmlWebpackPlugin({filename: "detail.html", template: "./src/index.html", chunks: ["detail"]})
 
+//babel里面配置“useBuiltIns:"usage"”会在打包时打包被项目引用的模块，而没引用的不打包减少包的体积
 
+webpack dev serve ,在dev-server里面配置hot:true开启HMR,但是针对js文件需要自己对各个模块进行处理，比如
+有个文件需要做HMR，需要在在引用出加上
+module.hot.accept("./number.js", function() {
+    console.log("这个文件改动了，请刷新")
+})
 ~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
