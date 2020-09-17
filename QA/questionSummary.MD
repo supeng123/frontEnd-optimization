@@ -1048,6 +1048,9 @@ webpack dev serve ,在dev-server里面配置hot:true开启HMR,但是针对js文�
 module.hot.accept("./number.js", function() {
     console.log("这个文件改动了，请刷新")
 })
+
+webpack loader里面是一个文件的content
+webpack plugin需要新建一个类，类里面必须包含apply方法，里面会返回一个compiler对象，供开发人员在webpack的不同的构建阶段自定义功能
 ~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
