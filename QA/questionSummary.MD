@@ -260,7 +260,7 @@ splice
 ### 30.节流防抖的说法正确的是
 ~~~
 节流 throtte, 单位时间内多次执行函数，函数只执行一次操作
-防抖 debounce， 单位时间内操作多次操作函数， 会重新设置单位时间，直至到了单位时间草能执行函数
+防抖 debounce， 单位时间内操作多次操作函数， 会重新设置单位时间，直至到了单位时间草能执行函数,全程只执行一次
 
 const debounce = (fn, wait) => {
     let timer;
@@ -1051,6 +1051,19 @@ module.hot.accept("./number.js", function() {
 
 webpack loader里面是一个文件的content
 webpack plugin需要新建一个类，类里面必须包含apply方法，里面会返回一个compiler对象，供开发人员在webpack的不同的构建阶段自定义功能
+~~~
+### 76.访问一个URL的过程和相应的优化
+~~~
+1.URL 解析 
+判断输入的URL是否合法，对URL进行字符编码操作，访问限制
+
+2.DNS 查询
+浏览器缓存检查域名，没找到通过本地的host文件去查找域名，host找不到继续发送广播DNS服务器去查找域名
+优化（dns-prefetch）
+
+3.TCP 连接
+4.处理请求
+5.相应渲染页面
 ~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
