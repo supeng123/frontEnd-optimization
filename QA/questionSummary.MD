@@ -1055,20 +1055,70 @@ webpack plugin需要新建一个类，类里面必须包含apply方法，里面�
 ### 76.访问一个URL的过程和相应的优化
 ~~~
 1.URL 解析 
-判断输入的URL是否合法，对URL进行字符编码操作，访问限制
+判断输入的URL是否合法，对URL进行字符编码操作，访问限制，
+检查缓存,如果有缓存，先去看cache-control和expired的内容，如果命中，则直接读取缓存，没有会下发一个请求比对(if-none-match,if-last-modified)和服务端
+的（etag,last-modified,命中服务端端304跳转，客户端继续使用缓存，不然重新发送资源给客户端
+注意： no-cache在浏览器使用缓存前，会往返对比 ETag，如果 ETag 没变，返回 304，则使用缓存， no-store说有内容和代理节点都不使用缓存
 
 2.DNS 查询
 浏览器缓存检查域名，没找到通过本地的host文件去查找域名，host找不到继续发送广播DNS服务器去查找域名
 优化（dns-prefetch）
 
 3.TCP 连接
+拿到域名之后开始尝试建立TCP链接，过程客户端和服务器进行三次握手，连接成功之后客户端会发送http请求包括请求头，协议，内容
 4.处理请求
+服务器解析客户端传过来的数据，对请求进行处理，然后返回数据
+优化（响应资源进行压缩，设置etag,last-modified）
 5.相应渲染页面
 ~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
 //unsavory remnants of many hotel rooms I still wake up screamnng over
 //and that's what losing a parent is like
+
+the senator was censured by the congressional ethic committee
+it makes sense to pay off your credit card balance every month
+I am not as stupid as you think I am
+it is more blessed to give than to recieve(赠与比接受更让人觉得幸福)
+he wrote this book at the age of twenty
+we are out of tissue paper, we have to go buy some
+I don't know what to say to make you feel better
+several cottages have been isolated by the flood water
+the police assembled a lot of evidence against him
+prices are double what they were two years ago
+I have done bad things that I should be punished for
+let's talk over a cup of tea shall we?
+If I had taken the plane, I would be dead now
+let me give you lift as far as the station
+it was not until I reached home that I missed my purse
+a bicycle will rust if you leave it in the rain
+it is cruel of him to say such thing to her
+this place has a mysterious atmosphere to it
+the truth is that nothing is toally true or false
+you should look after the children from time to time
+the old church on the hill dates back to the twelfth century
+my son is now as tall as I am
+more money in education will spur economic growth
+the crane, unlike the dog, has never dreamed of flying
+the end does not alway justify the means
+I'd like to find out why she said so
+scientists can easily compute the distance between planets
+that's the computer on which he writes his articles
+he sleeps during the day and works at night
+you've both been impressive today,
+how large is the polulation of new york city
+let's go and see as many things as we can
+whe she saw that they had no school, she started one
+
+the date of the festival coincides with that of the exam
+
+the river was flooded by the heavy rain
+
+it is llke looking for a needle in haystack
+take you hat off when you enter a house of worship
+i d like to ask you a few more questions
+I agree with what you say to some extend
+the internet is an invaluable source of information
 ### 129.不同二叉搜索树
 ~~~
 //leetcode 95
