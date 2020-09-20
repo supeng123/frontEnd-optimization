@@ -1070,6 +1070,17 @@ webpack plugin需要新建一个类，类里面必须包含apply方法，里面�
 服务器解析客户端传过来的数据，对请求进行处理，然后返回数据
 优化（响应资源进行压缩，设置etag,last-modified）
 5.相应渲染页面
+对服务器发送的数据解压，同时生成dom tree和css tree组成render tree, 生成layout和重绘样式
+优化（
+1.css 需放在head里，css会阻碍js
+2.js放在 DOM 解析后，浏览器会在dom解析完成之后除服DOMContentLoaded事件，defer和async都不阻塞dom渲染，多个async的script的标签会有依赖关系，在dom解析完但是在
+DOMContentLoaded事件之前执行，而async没有依赖，没有时间触发的特定时间
+3.图片压缩，sprint图
+4.对未来必须消费的资源进行preload,未来不一定用的到的资源用prefetch
+5.减少dom的layout操作，回流造成dom会频繁的构建，影响性能
+6.压缩js，css,tree shaking 不会用到的代码
+7.大数据进行预加载和懒加载
+）
 ~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
@@ -1078,8 +1089,6 @@ webpack plugin需要新建一个类，类里面必须包含apply方法，里面�
 
 the senator was censured by the congressional ethic committee
 it makes sense to pay off your credit card balance every month
-I am not as stupid as you think I am
-it is more blessed to give than to recieve(赠与比接受更让人觉得幸福)
 he wrote this book at the age of twenty
 we are out of tissue paper, we have to go buy some
 I don't know what to say to make you feel better
@@ -1089,7 +1098,7 @@ prices are double what they were two years ago
 I have done bad things that I should be punished for
 let's talk over a cup of tea shall we?
 If I had taken the plane, I would be dead now
-let me give you lift as far as the station
+
 it was not until I reached home that I missed my purse
 a bicycle will rust if you leave it in the rain
 it is cruel of him to say such thing to her
@@ -1097,7 +1106,10 @@ this place has a mysterious atmosphere to it
 the truth is that nothing is toally true or false
 you should look after the children from time to time
 the old church on the hill dates back to the twelfth century
+I am not as stupid as you think I am
+let me give you lift as far as the station
 my son is now as tall as I am
+let's go and see as many things as we can
 more money in education will spur economic growth
 the crane, unlike the dog, has never dreamed of flying
 the end does not alway justify the means
@@ -1107,7 +1119,7 @@ that's the computer on which he writes his articles
 he sleeps during the day and works at night
 you've both been impressive today,
 how large is the polulation of new york city
-let's go and see as many things as we can
+
 whe she saw that they had no school, she started one
 
 the date of the festival coincides with that of the exam
@@ -1119,6 +1131,34 @@ take you hat off when you enter a house of worship
 i d like to ask you a few more questions
 I agree with what you say to some extend
 the internet is an invaluable source of information
+a fire broke out in my neighborhood last night
+the book sitting next to me spoke to me
+the boss has a good opinion of your work, 高评价
+you get a most head start on most kids 
+you know the shitty thing about all of this is that the strange behind the counter gave me the free chenno that small act of kindness showed more compassion than my mother gave me her entire goddamn lifeAKA031CAVI
+we need to make it clear that abusing, stalking,in any way bothering your mom ever again will be more trouble than it's worth
+it is more blessed to give than to recieve(赠与比接受更让人觉得幸福)
+it is less muggy today than it was yesterday.
+his absence gave birth to all sorts of rumors
+judging from the looks of sky, it may rain this afternoon
+ebola spreads from person to person through bodily fluids
+I don't know what am going to do next
+I thought you would be full after eating that big steak
+I am going to ran a couple errands, wanna tag along
+my fater will often read newspapers during meals
+I don't feel like taking a walk this morning
+she boughts six yards of cloth for a dress 
+I always rely on him in times of trouble
+it is sometime difficult to make yourself understood in public
+Tsunamis swept through rice fields and flooded the towns
+we lost sight of the me in the crowd
+we all thought your idea to be impratial
+we were astonished hear what had happened
+some of them are healthy, but other are not
+you should try to form a habit of using your dictionaries
+she was dolled up for her big days
+how long does it take to walk to the station
+If i were in your position, i wll lend hime a hand
 ### 129.不同二叉搜索树
 ~~~
 //leetcode 95
@@ -1174,13 +1214,6 @@ function maxPath(root) {
     return ans;
 }
 ~~~
-
-you get a most head start on most kids 
-you know the shitty thing about all of this  is that the strange behind the counter gave
-me the free chenno that small act of kindness showed more compassion than my
-mother gave me her entire goddamn lifeAKA031CAVI
-we need to make it clear that abusing, stalking,in any way bothering your mom ever again will be more
-trouble than it's worth
 
 I definitely won't go out of my way to be nice to you again 我绝对不会再对你好了
 ithink it's best if we keep moving forwaring with our lives
