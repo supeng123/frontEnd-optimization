@@ -1,0 +1,92 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>防止margin重叠</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    p {
+        color: #f55;
+        background: yellow;
+        width: 200px;
+        height: 200px;
+        line-height: 100px;
+        text-align:center;
+        margin: 30px;
+        display:flex
+    }
+    .pss {
+        float: left
+    }
+    /* .element {
+        width: 100vh;
+        height: 75vh;
+        background: red;
+    } */
+
+    .left {
+        /* width: 50vw;
+        height: 200px;
+        float: left; */
+        background-color: blue;
+    }
+    .right {
+        /* width: 50vw;
+        height: 200px; */
+        /* float: right; */
+        background-color: yellow;
+    }
+    body{
+        display: flex;
+        justify-content: space-between;
+    }
+    div {
+        width: 200px;
+        height: 100px;
+        background-color: green;
+    }
+</style>
+<body>
+    <!-- <div>
+        <p class="pss">看看我的 margin是多少</p>
+        <p>看看我的 margin是多少</p>
+    </div> -->
+    <!-- <div class="element">
+        supeng
+    </div> -->
+    <!-- <div class="left"></div>
+    <div class="right"></div> -->
+    <!-- <div class="center">
+        <input type="text">
+        <input type="text">
+    </div>
+</body>
+</html> -->
+
+
+<html>
+<body>
+    <div class="login-wrap">
+        <input type="text" placeholder="输入url" class="url">
+        <br>
+        <br>
+        <button class="btn">提交</button>
+        <div class="content"></div>
+    </div>
+</body>
+<script>
+    var btn = document.querySelector('.btn');
+    var content = document.querySelector('.content');
+    
+    btn.onclick = function () {
+        var url = document.querySelector('.url').value;
+        content.innerHTML = `<a href=${url}>跳转到输入的url</a>`
+    }
+</script>
+</html>
