@@ -969,6 +969,11 @@ seq = x
 seq = y ack = x + 1
 seq = x + 1 ack = y + 1
 第三次可以携带数据
+
+四次挥手
+http1.1 长连接keep-alive,和etag更精确的缓存
+http2的功能 （多路复用）就是指一个TCP连接可以同时发送多个HTTP请求， 由于他的传输是（二进制分帧），所有流都有标识符确定内容完整
+（头部压缩）（服务端推送）
 ~~~
 ### 72.websocket
 ~~~
@@ -1051,6 +1056,8 @@ module.hot.accept("./number.js", function() {
 
 webpack loader里面是一个文件的content
 webpack plugin需要新建一个类，类里面必须包含apply方法，里面会返回一个compiler对象，供开发人员在webpack的不同的构建阶段自定义功能
+
+//DDL提取的是common需要编译的代码
 ~~~
 ### 76.访问一个URL的过程和相应的优化
 ~~~
@@ -1152,13 +1159,26 @@ I always rely on him in times of trouble
 it is sometime difficult to make yourself understood in public
 Tsunamis swept through rice fields and flooded the towns
 we lost sight of the me in the crowd
-we all thought your idea to be impratial
+we all thought your idea to be impratical
 we were astonished hear what had happened
 some of them are healthy, but other are not
 you should try to form a habit of using your dictionaries
 she was dolled up for her big days
 how long does it take to walk to the station
 If i were in your position, i wll lend hime a hand
+
+there must be a way to arrive at a diplomatic solution
+I had hoped that my mom would live until I got married
+I got up early enough to catch the first train
+if he is innocent, it follows that his wife is guilty
+the old houses were torn down to make a room for a supermarket
+the town was destroyed by the flood after the storm
+she waved her hand until the train was out of sight
+a caged cricket eat just as much as a free cricket
+a blast of cold air swept through the house
+he amassed a fortune in the stock trading during the last boom
+his mother sat up all night waiting for her son
+I wonder why they left my name off the list
 ### 129.不同二叉搜索树
 ~~~
 //leetcode 95
@@ -1246,3 +1266,39 @@ ithink it's best if we keep moving forwaring with our lives
 界限暧昧但做出自己抉择的道德困境。剧情灰色主调沉闷但结局没有《大象席地而坐》那般压抑，剧情中隐秘罪恶的推敲也没《阳光普照》警慎，张东升也没《老无所依》和《杀死伊芙》般变态的令人不寒而栗。整个剧情只是一群普通人沉溺自身幻想世界却不幸崩塌的偏执反抗，如同现在的我不懂为啥早上点的外卖现在还没送到，客服，外卖小哥不懂为啥我还不取消订单一样。
 
 不好意思啊，这个忙我帮不了啊，我父母过几个月准备把老家里的房出掉到荆州去看房子，到时候还得用我的信用担保去银行贷款。
+
+console.log(1)
+
+new Promise((resolve, reject) => {
+    console.log(2)
+    resolve()
+}).then(() => {
+    console.log(5)
+    return 5
+    }).then(() => {
+    console.log(7)
+    })
+
+setTimeout(() => {
+    console.log(9);
+    Promise.resolve().then(() => console.log(11))
+    console.log(10);
+},0)
+
+setTimeout(() => {
+    console.log(12);
+    Promise.resolve().then(() => console.log(14))
+    console.log(13);
+})
+
+new Promise((resolve, reject) => {
+    console.log(3)
+    resolve()
+}).then(() => {
+    console.log(6)
+    return 5
+    }).then(() => {
+    console.log(8)
+    })
+
+console.log(4)
