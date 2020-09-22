@@ -1089,6 +1089,40 @@ DOMContentLoaded事件之前执行，而async没有依赖，没有时间触发�
 7.大数据进行预加载和懒加载
 ）
 ~~~
+### 79.JSONP
+~~~
+function JSONP(url, parameters, key, callback) {
+    parameters[key] = 'callbackName'
+    window.callbackName = callback
+    const data = Object.keys(parameters).map(key => `${key}=${encodeURIComponent(parameters[key])}`).join('&');
+    const script = document.createElement('script')
+    script.setAttribute('type', 'text/javascript')
+    script.src = `${url}?${data}`
+    document.body.appendChild(script)
+}
+~~~
+### 80.Ajax
+~~~
+function Ajax(method, url, parameters) {
+    return new Promise((resolve, reject) => {
+        const data = Object.keys(parameters).map(key => `${key}=${encodeURIComponent(parameters[key])}`).join('&');
+        const xhr = new XMLHttpRequest()
+        xhr.setRequestHead('Content-type','x-www-form-urlencoded;charset=utf-8')
+        xhr.responseType = 'json'
+        xhr.withCredential = true
+        xhr.onreadystatechange = function() {
+            if (xhr.status == 200 && xhr.readyStatus == 4) {
+                resolve(xhr.response)
+            } else if (xhr.status >= 400) {
+                reject()
+            }
+        }
+        
+        xhr.open(method, url,true);
+        xhr.send(data);
+    })
+}
+~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
 //unsavory remnants of many hotel rooms I still wake up screamnng over
