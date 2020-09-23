@@ -314,6 +314,7 @@ a[c] ===> c.toString() ===> a['object Object'] = 'c'
 ~~~
 ### 32.null和undefinied的描述
 ~~~
+null 在 JS 的最初版本中使用的是 32 位系统，为了性能考虑使用低位存储变量的类型信息，000 开头代表是对象然而 null 表示为全零
 +null  0
 +undefined NaN
 JSON.stringify({a: undefined}) {}
@@ -1081,7 +1082,7 @@ webpack plugin需要新建一个类，类里面必须包含apply方法，里面�
 优化（
 1.css 需放在head里，css会阻碍js
 2.js放在 DOM 解析后，浏览器会在dom解析完成之后除服DOMContentLoaded事件，defer和async都不阻塞dom渲染，多个async的script的标签会有依赖关系，在dom解析完但是在
-DOMContentLoaded事件之前执行，而async没有依赖，没有时间触发的特定时间
+DOMContentLoaded事件之前执行，而async没有依赖，没有时间触发的特定时间, document.onload事件是页面上所有的DOM，样式表，脚本，图片，flash都已经加载完成了
 3.图片压缩，sprint图
 4.对未来必须消费的资源进行preload,未来不一定用的到的资源用prefetch
 5.减少dom的layout操作，回流造成dom会频繁的构建，影响性能
@@ -1122,6 +1123,16 @@ function Ajax(method, url, parameters) {
         xhr.send(data);
     })
 }
+~~~
+### 90.clientHeight,offsetHeight,scrollHeight && clientTop, offsetTop, scrollTop
+~~~
+clientHeight = height + padding-top + padding-bottom
+offsetheight = height + padding-top + padding-bottom + border-top + border-bottom
+scrollHeight = clientHeight
+
+clientTop border-top
+offsetTop 元素本身到相对的上一级父元素的距离
+scrollTop 滚动条拉动的距离
 ~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
