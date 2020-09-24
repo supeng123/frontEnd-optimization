@@ -1134,6 +1134,22 @@ clientTop border-top
 offsetTop 元素本身到相对的上一级父元素的距离
 scrollTop 滚动条拉动的距离
 ~~~
+### 91.顺序打印promise
+~~~
+let aaa = [1,2,3]
+function sequencePromises(arr) {
+    return arr.reduce((total, current)=> {
+        return total.then(() => {
+           return new Promise((r, j) => {
+               setTimeout(() => {
+                   r(console.log(current))
+               },2000);
+           })
+        })
+    }, Promise.resolve())
+}
+sequencePromises(aaa)
+~~~
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
 //unsavory remnants of many hotel rooms I still wake up screamnng over
