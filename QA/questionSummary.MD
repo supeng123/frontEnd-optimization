@@ -1150,6 +1150,14 @@ function sequencePromises(arr) {
 }
 sequencePromises(aaa)
 ~~~
+### 92.垃圾回收机制
+~~~
+垃圾回收是回收堆中不再被引用的数据，通过标记空间的算法，从根节点触发遍历所有对象，如果当前对象没有被遍历到会被认为是不可达的数据，然后进行回收处理，由于清理
+完成之后内存中存在大量不连续的空间，会对内存做整理，
+分代收集，一种为临时对象比如函数内部的申明变量，另一种是长久对象如DOM, window WEB api,
+对于引用类型，在没有引用之后会被V8自动回收， 值类型如果在闭包的情况下要等闭包没有引用才会回收，不是闭包会被副垃圾回收新生代中回收
+~~~
+MAI HANANO
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
 //unsavory remnants of many hotel rooms I still wake up screamnng over
