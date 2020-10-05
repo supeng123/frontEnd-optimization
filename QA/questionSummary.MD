@@ -1157,7 +1157,28 @@ sequencePromises(aaa)
 分代收集，一种为临时对象比如函数内部的申明变量，另一种是长久对象如DOM, window WEB api,
 对于引用类型，在没有引用之后会被V8自动回收， 值类型如果在闭包的情况下要等闭包没有引用才会回收，不是闭包会被副垃圾回收新生代中回收
 ~~~
-MAI HANANO
+### 93.图片懒加载
+~~~
+function lazyLoad() {
+    const images = document.getElementByTagName('img')
+    const len = images.length
+
+    const documentHeight = document.documentElement.clientHeight
+    const documentScrollTop = document.documentElement.scrollTop || document.body.scrollTop
+
+    for (let i = 0; i < len; i++) {
+        const currentImgHeight = images[i].offsetTop
+        if (currentImgHeight < documentHeight + documentScrollTop) {
+            image[i].src = imgs[i].getAttribute("data-src")
+        }
+    }
+}
+document.addEventListener('scroll', lazyLoad)
+~~~
+### 94.promise实现
+~~~
+~~~
+MAI HANANO780756516
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
 //unsavory remnants of many hotel rooms I still wake up screamnng over
@@ -1216,6 +1237,7 @@ we need to make it clear that abusing, stalking,in any way bothering your mom ev
 it is more blessed to give than to recieve(赠与比接受更让人觉得幸福)
 it is less muggy today than it was yesterday.
 his absence gave birth to all sorts of rumors
+I can do with it as I fucking please
 judging from the looks of sky, it may rain this afternoon
 ebola spreads from person to person through bodily fluids
 I don't know what am going to do next
@@ -1336,8 +1358,13 @@ ithink it's best if we keep moving forwaring with our lives
 
 不好意思啊，这个忙我帮不了啊，我父母过几个月准备把老家里的房出掉到荆州去看房子，到时候还得用我的信用担保去银行贷款。
 
-console.log(1)
+不能露天撸串的城市不值得停留
+本以为终于可以换各种姿势点外卖，手机打开美团发现小镇没有外卖，顿时傻了，只能自己瞎逛找餐厅。今早被房东叫过去吃完早餐，然后又把我送到指定地点教我怎么打车去蝴蝶泉。在里面逛了一圈出来然后坐车原路返回，料想今天该不会一无所获吧，小镇的交通靠走或者坐车我是不会想再重复了。正当自己想去吃点早上对门在这里定居编辑给我推荐的餐厅，发现每个地方都有点远，共享单车似乎抛弃了这个地方，但突然路口的一排电动车让我有了想法，尽管以前没骑过电瓶车，我还是一下子按着骑自行车的套路无师自通了，这突然出现的坐骑让我对找餐厅的产生了动力，另外饭后在田间，白族民居小道飞奔的快感又让我冲向洱海边，只是这边海边有些地方还在开发走了半个小时前方就被保安挡住了，带着不想再原路返回的冲动又临时调整方向去大理古城。果然和中国任何的古城都一样，或者说任何地方只要带着好玩的期许就注定会落空，悻悻回家休息，待到天黑准备出去吃点东西，小镇古城白日的喧嚣被沉默的夜色代替，视野由于没有路灯但月亮够亮依旧能辨认飘过云层轮廓，在巷子角落飘来的油烟和影影绰绰灯光让撸串的情绪倍增，回家的路上耳边我想我真是来对了地方。
+--------来这没两天不知第几回因为头发被人弄错性别了，早上蝴蝶泉的白族婆婆拿着两张白族女生服饰的照片硬要我挑件衣服拍一张，小镇的阿姨跟在我后面一个劲地说我头发扎上她盘的彩色辫子一定很好看，餐厅的老板娘一边收拾桌子一边客气的对我说您好美女帮你换一杯茶吧，更过分的是大理古城的保洁大叔，我明明看到男厕所的标识正准备走进去，他呵斥我上二楼去，等我上楼看见一女生正走出来，我心里一万个cnm，现在还忘不了大叔看我直奔他身后小便池解裤子那惊恐的眼神。
 
+console.log(1)
+DNQVND2UJCLF
+美倉あやみ
 new Promise((resolve, reject) => {
     console.log(2)
     resolve()
