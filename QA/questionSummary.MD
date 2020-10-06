@@ -1163,7 +1163,7 @@ function lazyLoad() {
     const images = document.getElementByTagName('img')
     const len = images.length
 
-    const documentHeight = document.documentElement.clientHeight
+    const documentHeight = window.innerHeight;
     const documentScrollTop = document.documentElement.scrollTop || document.body.scrollTop
 
     for (let i = 0; i < len; i++) {
@@ -1175,9 +1175,78 @@ function lazyLoad() {
 }
 document.addEventListener('scroll', lazyLoad)
 ~~~
+
+new Promise((resolve, reject) {
+
+})
 ### 94.promise实现
 ~~~
+class Promise() {
+    constructor(fn) {
+        resolveList = []
+        status = 'pending'
+        rejectList = []
+        fn(this.resolve.bind(this), this.reject.resolve.bind(this))
+    }
+    then(scb, fcb) {
+        if (scb) {
+            this.resolveList.push(scb)
+        }
+        if (fcb) {
+            this.rejectList.push(fcb)
+        }
+        return this
+    }
+
+    catch(cb) {
+        if (cb) {
+            this.rejectList.push(cb)
+        }
+        return this
+    }
+
+    resolve(data) {
+        if (this.status !== 'pending') return
+        this.status = 'fulfilled'
+        setTimeout(() => {
+            this.resolveList.forEach(promise => {
+                promise(data)
+            })
+        })
+    }
+
+    reject(error) {
+        if (this.status !== 'pending') return
+        this.status = 'rejected'
+        setTimeout(() => {
+            this.rejectList.forEach(promise => {
+                promise(error)
+            })
+        })
+    }
+
+    static resolve(data) {
+        if (data intanceof Promise) {
+            return data
+        } else {
+            return new Promise((resolve, reject) {
+                resolve(data)
+            })
+        }
+    }
+
+    static reject(error) {
+        if (error intanceof Promise) {
+            return error
+        } else {
+            return new Promise((resolve, reject) {
+                reject(error)
+            })
+        }
+    }
+}
 ~~~
+### 95.new 
 MAI HANANO780756516
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
@@ -1270,6 +1339,33 @@ a blast of cold air swept through the house
 he amassed a fortune in the stock trading during the last boom
 his mother sat up all night waiting for her son
 I wonder why they left my name off the list
+
+
+No sooner had we just finished working one tough problem than our boss sent us another straight from the top
+you have not fallen in love have you, I wont have it, haing that man become my brother-in-law, I absolutely hate that
+his boosterism makes it sound wonderful, but I wonder if he understands how hard it is going to be to actually carry out
+if it had not been that lucky and his knowledge of flying, he could never have succeeded in crossing the atlantic
+the gills of the fish are bright red is because there are many capillary vessels collected there, the same as for lungs(肺也一样)
+his utter failture at his last peace conference has taught hime to arm himself to the teeth with tricks and tactics
+I would like to say a word of thanks to all gentalman and ladies whoes care I have been in
+if you are having a temporary finiacial problems and it is the cause of you outstanding account, let me know about it
+the fact become self evident if you look at the relation between the theme and those leading research on it.
+Frank has been workingon the graveyard shift the past month so he has not been able to see any of his friends who work normal hours
+but it did not stop himself from using his mind and presenting his ideas at physical meetings around world
+If I going to have wedding ceremony, i want it to be the best ever so I wont have regrets
+perception is based , to a very large extend, on conceptual models, which are always inadequate, oftern incomplete amd sometimes profoundly wrong
+I stop worrying about it and take some actions, the anxiety that comes from doing nothing is worse than the danger you might face
+working and healthy people comtribute to the reduction of medical expenses, the rise of the eligible age for benefits and curtailment of cost
+since her parents were busy at work all the time, she spent lot of time at her friends house
+I just got a great job beacuase of the introduction from my friend, sometimes things happen whn you least expext it.
+Mrs Mico swam from Dove on the english side to France in 8 hours and 58 minutes then turned around and returned to England
+howver as living standards gradually came to rise, more and more people begain to have thier own bathroom at home
+this is the first time I work as a coordinator, so I might not have the hang of it yeat
+wood is a disappearing resource in much Africa, and these stoves burn far less wood than the stoves currently in much use(目前大量使用的炉子)
+pets loss refers to the reactions of shock and anger that occur in owners who has been bereaved(死者的亲友) of their pets
+that is to say, a language is something we learn and are taught, not something we know by instinct
+the dining hall is directly adjencent to the lobby, or rather, from where you are, it's just three steps away
+it was believed that, the success of the crops depended on the way the players threw or kicked the ball during the game
 ### 129.不同二叉搜索树
 ~~~
 //leetcode 95
