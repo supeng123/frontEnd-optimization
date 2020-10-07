@@ -1366,6 +1366,21 @@ pets loss refers to the reactions of shock and anger that occur in owners who ha
 that is to say, a language is something we learn and are taught, not something we know by instinct
 the dining hall is directly adjencent to the lobby, or rather, from where you are, it's just three steps away
 it was believed that, the success of the crops depended on the way the players threw or kicked the ball during the game
+what I noticed most about my Canadian high school was the great respect shown by students toward their teacheres
+but she had not expected to cross an ocean, enter a new and romantic-sounding country, and find herself in exactly the same position
+the greatest course of stress for men is work, while for women, human relationship comes at the top of the list
+you have to think about the example you are setting, you will never be able to lead if you don't set an example worth following
+I alway buy english language books I come cross at book store, but since I never read them, all they do is pile up
+if you lisence exceeded its validity period, you can be issued with a new license in the following way
+the stories which you will read in this book deal with some of the problems which face young people
+there was,however, a need for food to be carried from bowl to mouth, and chopsticks came along to meet the need
+at the risk of sticking my neck out, I think if we do that, we are making a big mistake
+the command of communication skills in multiple language is essential to any company providing goods and services on the world market
+since the first appearance on earth, men have gathered information and have attempted to pass the useful ideas to other men 
+a man who angers easily should learn to count to ten
+several years ago, in the course of being interviewed for a job, I was introduced to competitor for the position
+Tony realized that if he hired another crew, got more customers and did the job quicker and sloppier, he could make more money
+when you start taking medicine, it begins working on symptoms,like pain,right away, but that does not mean that ulcer heals right away
 ### 129.不同二叉搜索树
 ~~~
 //leetcode 95
