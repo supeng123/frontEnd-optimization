@@ -1381,6 +1381,19 @@ a man who angers easily should learn to count to ten
 several years ago, in the course of being interviewed for a job, I was introduced to competitor for the position
 Tony realized that if he hired another crew, got more customers and did the job quicker and sloppier, he could make more money
 when you start taking medicine, it begins working on symptoms,like pain,right away, but that does not mean that ulcer heals right away
+
+he's likely to be later, you 'd better tell him agin the meeting time is 7 to make double sure
+the precision ratio is an index that indicates how many meet search criteria out of all articles retrieved
+the book aims to provide an explaintion of modorn Japanese grammar that is as systematic and as easily understand as possible
+Today's agenda concerns the re-electiom of the student council, If anybody wishes to stand as a candidate, please raise you hand
+it is only when i can sleep at night that the ticking of the clock become loudy enough to bother me
+sales at the compamy zoomed thanks to the brisk export demand, but profit did not keep up because of the intense competition
+if you have a bone to pick with a person, you need to tell it to his face instead of saying things behind his back
+I 'd like to address that it is more convenient to control tariffs as a bloc rather than country by comtrol
+at his final examl, Bob was really put through the wringer, the test covered everything that was in the course
+despite a large surplus in merchandise trade, the current account surplus is not so big due to a deficit in invisible trade
+I think against somebody like that, my seemingly clever techniques would be seen through and then I would be defeated
+I am sure more flags were burned as a result of Congress passing that law than had ever been burned before
 ### 129.不同二叉搜索树
 ~~~
 //leetcode 95
