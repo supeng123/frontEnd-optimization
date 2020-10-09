@@ -1246,7 +1246,15 @@ class Promise() {
     }
 }
 ~~~
-### 95.new 
+### 95.AMD&&CMD&&CommonJS&&ES6
+~~~
+AMD&&CMD都是异步的模块加载方案，区别是代码执行时加载模块不同，AMD是依赖前置定义模块时要声明其依赖的模块，CMD是就近依赖，只有用到是才去加载模块
+CommonJS&ES6
+CommonJS是运行时加载，ES6是静态编译
+CommonJS是输出值的拷贝，ES6是输出的值的引用
+CommonJS导出是表达式，ES6导出是字符串
+CommonJS 中的this是指当前模块，ES6的this是undefined
+~~~
 MAI HANANO780756516
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
