@@ -1255,6 +1255,11 @@ CommonJS是输出值的拷贝，ES6是输出的值的引用
 CommonJS导出是表达式，ES6导出是字符串
 CommonJS 中的this是指当前模块，ES6的this是undefined
 ~~~
+### 96.Vue中computed和methods的区别
+~~~
+1.methods使用时，一般情况需要加括号，而computed则不需要。
+2.methods每次调用时会重新执行函数，而computed在其内部变量不变或其返回值不变的情况下多次调用只会执行一次，后续执行时直接从缓存中获取该computed的结果, 它本质上是个getter setter 函数。
+~~~
 MAI HANANO780756516
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
