@@ -1260,6 +1260,44 @@ CommonJS 中的this是指当前模块，ES6的this是undefined
 1.methods使用时，一般情况需要加括号，而computed则不需要。
 2.methods每次调用时会重新执行函数，而computed在其内部变量不变或其返回值不变的情况下多次调用只会执行一次，后续执行时直接从缓存中获取该computed的结果, 它本质上是个getter setter 函数。
 ~~~
+### 97.Event
+~~~
+function Event() {
+    this.events = {}
+}
+Event.prototype.on = function (type, fn, once = false) {
+    if (!this.events[type]) {
+        this.events[type] = []
+    }
+    if (!this.events.type.includes[fn]) {
+        this.events.type.push(fn)
+        fn.once = once
+    }
+    return this
+}
+Event.prototype.off = function (type, fn) {
+    if (this.events[type] && !fn) {
+        this.events[type] = []
+    }
+    if (this.events[type] && fn) {
+        this.events[type] = this.events[type].filter(f => f !== fn)
+    }
+    return this
+}
+Event.prototype.trigger = function (type, data, point = this) {
+    if (this.events[type]) {
+        this.events[type].forEach(f => {
+            f.call(point, data)
+            if (f.once) {
+                this.off(type, f)
+            }
+        })
+    }
+}
+Event.prototype.once = function(type, fn) {
+    this.on(type, fn, true)
+}
+~~~
 MAI HANANO780756516
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
@@ -1407,6 +1445,24 @@ at his final examl, Bob was really put through the wringer, the test covered eve
 despite a large surplus in merchandise trade, the current account surplus is not so big due to a deficit in invisible trade
 I think against somebody like that, my seemingly clever techniques would be seen through and then I would be defeated
 I am sure more flags were burned as a result of Congress passing that law than had ever been burned before
+
+the launch which had been schedualed for this morning was postponed becuase of the illness of commander
+In the evening I went out on safari again, at night I felt asleep hearing the grunting of the hippos
+if you whip the steering wheel around like that on the snowy road, the car is going to go into a slide
+the met with such violent opposition that they backed down(退缩)
+what you don't see and hear with your own eyes and ears might be true, but it might also not be true
+the diffculties of Japanese language prevent all but a handful of foreigners from approaching the literature in the original.
+I feel smart today, to a degree that is the proportion to the amount of good rest I had yesterday
+Inverting money in your home has some merit,when it is time to sell it yu can get more money
+I had words with the manage of that store, because he refused to refund my money for the TV set that was not operating properly
+I'm patching things up for your mistake so it's only natural that I get a reward appropriate to my labours
+After the hatched job my boss id after my proposal, I'm not sure how long I want to keep on working here
+if the tendencies continue, those aged 65 or more will account for the a quarter of the population within 30 years
+there is no more dangerous experiment than trying to be one thing before man's face and another behind his back
+the basis of this system is the students must take turns in teaching, they have to help each other
+Career opportunities, flex-time, satellite-offices, and more childcare facilities are required to make women at home join the work force
+when bears sleep or lie down, their postures depend on whether they want to get rid of heat or conserve it
+a buyers market is a market in which goods are plentiful, buyers have a wide range of choices, and prices are low
 ### 129.不同二叉搜索树
 ~~~
 //leetcode 95
