@@ -1298,6 +1298,22 @@ Event.prototype.once = function(type, fn) {
     this.on(type, fn, true)
 }
 ~~~
+### 98.instanceof
+~~~
+function instanceof(c, f) {
+    let proto = f.prototype
+    let c = c.__proto__
+    while(true) {
+        if (c === null) {
+            return false
+        }
+        if (c === proto) {
+            return true
+        }
+        c = c.__proto__
+    }
+}
+~~~
 MAI HANANO780756516
 //what I'm saying is that If I have been to over too far in my pursuit of the finer things and cultivating an image
 //If I have cuased you some discomfort, It's only an overzealous ex-professional hustler from the mid east trying to erradicate
