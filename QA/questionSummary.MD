@@ -248,14 +248,8 @@ slice
 
 splice
 ~~~
-### 29.哪个方法会影响原数组
+### 29.
 ~~~
-splice
-concat
-join
-slice
-
-splice
 ~~~
 ### 30.节流防抖的说法正确的是
 ~~~
@@ -505,9 +499,9 @@ Child.prototype = create(Parent.prototype)
 ~~~
 ### 45.this指向
 ~~~
-var a = function() {this.b = 3}
-var c = new a()
-var b = 7
+let a = function() {this.b = 3}
+let c = new a()
+let b = 7
 a()
 
 b = 3
@@ -595,7 +589,7 @@ function deepCopy(originObj, map = new WeakMap()) {
 ### 51.实现reduce
 ~~~
 function reduce(callback, initState) {
-    const arr = this
+    const items = this
     let func = callback
     let init = initState
 
