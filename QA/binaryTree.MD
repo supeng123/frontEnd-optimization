@@ -172,10 +172,10 @@ function deleteNodes(root, key) {
             root = null
         } else if (root.right) {
             root.val = successor(root)
-            root.right = deleteNodes(root.right, succussor)
+            root.right = deleteNodes(root.right, root.val)
         } else {
             root.val = predecessor(root)
-            root.left = deleteNodes(root.left, succussor)
+            root.left = deleteNodes(root.left, root.val)
         }
     }
     return root
@@ -222,7 +222,7 @@ function swapNodes(root) {
 ~~~
 function maxDepth(root) {
     if (root == null) return 0
-    const leftDepth = maxDepth.left)
+    const leftDepth = maxDepth(root.left)
     cosnt rightDepth = maxDepth(root.right)
     return Math.max(leftDepth, rightDepth) + 1
 }
@@ -233,7 +233,7 @@ function minDepth(root) {
     if (root == null) return 0
     const leftDepth = minDepth（root.left)
     cosnt rightDepth = minDepth(root.right)
-    if (root.left == null || root.right == null) Math.max(leftDepth, rightDepth) + 1
+    if (root.left == null || root.right == null) return Math.max(leftDepth, rightDepth) + 1
     return Math.min(leftDepth, rightDepth)
 }
 ~~~
@@ -272,6 +272,26 @@ function buildTree(preOrder, postOrder) {
 
     root.left = buildTree(preOrder.slice(1, index + 2), postOrder.slice(0, index + 1))
     root.right = buildTree(preOrder.slice(index + 2), postOrder.slice(index + 1， postOrder.length - 1))
+    return root
+}
+~~~
+### 17.从中序遍历和后序序遍历的节点集合中构造一个binaryTree
+~~~
+      1
+     /  \
+    2    3
+   / \  / \
+  4   5 6  7
+//postOrder = [4,5,2,6,7,3,1]
+//inOrder = [4,2,5,1,6,3,7]
+function buildTree(inOrder, postOrder) {
+    if (inOrder.length === 0 || postOrder.length === 0) return null
+    const rootValue = postOrder.pop()
+    const root = new ListNode(rootValue)
+    const index = inOrder.findIndex(item => item === rootValue)
+
+    root.left = buildTree(inOrder.slice(0, index), postOrder.slice(0, index))
+    root.right = buildTree(inOrder.slice(index + 1), postOrder.slice(index))
     return root
 }
 ~~~
@@ -450,8 +470,8 @@ function swapNodes(root) {
     while (queue.length > 0) {
         const current = queue.pop()
         [current.left, current.right] = [current.right, current.left]
-        queue.unshift(right)
-        queue.unshift(left)
+        queue.unshift(current.right)
+        queue.unshift(current.left)
     }
     return root
 }

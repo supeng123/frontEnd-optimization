@@ -16,7 +16,24 @@ function generateBracket(n) {
     }
 }
 ~~~
-### 2.组合
+### 2.子集
+~~~
+function subSet(nums) {
+    const result = []
+    backTrack([], 0)
+    return result
+    
+    function backTrack(tempPath, start) {
+        result.push(temPath)
+        for (let i = start ;i < nums.length; i++) {
+            tempPath.push(nums[i])
+            backTrack(temPath.slice(), i+1)
+            tempPath.pop()
+        }
+    }
+}
+~~~
+### 3.组合
 ~~~
 leetcode 39
 回溯 dfs
@@ -41,7 +58,7 @@ function generateBracket(candidates) {
     }
 }
 ~~~
-### 3.全排列
+### 4.全排列
 ~~~
 function wholePermutation(candidates) {
     const result = []
@@ -86,23 +103,7 @@ function wholePermutation(candidates) {
     }
 }
 ~~~
-### 4.子集
-~~~
-function subSet(nums) {
-    const result = []
-    backTrack([], 0)
-    return result
-    
-    function backTrack(tempPath, start) {
-        result.push(temPath)
-        for (let i = start ;i < nums.length; i++) {
-            tempPath.push(nums[i])
-            backTrack(temPath.slice(), i+1)
-            tempPath.pop()
-        }
-    }
-}
-~~~
+
 ### 5.分割回文
 ~~~
 function wholePermutation(candidates) {
