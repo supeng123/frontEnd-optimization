@@ -85,7 +85,7 @@ function staircase(n) {
     counts[0] = 1
     counts[1] = 1
     coutns[2] = 2
-    for (let i = 0 ; i <= n; i++) {
+    for (let i = 3 ; i <= n; i++) {
         counts[i] = (counts[i-1] + counts[i-2])%1000000007
     }
     return counts[n]
@@ -114,7 +114,7 @@ function differenetPath(r, c) {
             count[i][j] = count[i-1][j] + count[i][j-1]
         }
     }
-    return arr[r - 1][c - 1]
+    return count[r - 1][c - 1]
 }
 ~~~
 ### 7.不同的二叉搜索树
@@ -171,7 +171,7 @@ function minNumTotal(grid) {
     }
     dp[0][0] = grid[0][0]
     for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j <= i; j++) {
+        for (let j = 0; j < grid[0].length; j++) {
             if (i > 0) {
                 dp[i][j] = Math.min(dp[i][j], dp[i-1][j] + grid[i][j])
             }

@@ -59,7 +59,7 @@ function largestIsland(grid) {
     }
 }
 ~~~
-### 4.单词搜索
+### 4.单词搜索 && 矩阵中的路径
 ~~~
 function wordSearch(board, word) {
     board[-1] = []

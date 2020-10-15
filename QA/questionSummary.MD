@@ -1084,6 +1084,16 @@ DOMContentLoaded事件之前执行，而async没有依赖，没有时间触发�
 7.大数据进行预加载和懒加载
 ）
 ~~~
+### 77.http-equiv
+~~~
+用于模拟http请求头，可以设置过期时间，缓存，刷新
+＜meta http-equiv="expires" content="Wed, 20 Jun 2019 22:33:00 GMT"＞
+~~~
+### 78.href和src的区别
+~~~
+href是并行下载资源，不会造成阻塞，例如<link>
+src会将等待当前的资源下载完毕，造成页面阻塞，例如<script>
+~~~
 ### 79.JSONP
 ~~~
 function JSONP(url, parameters, key, callback) {
