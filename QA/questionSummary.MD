@@ -1139,6 +1139,17 @@ function Ajax(method, url, parameters) {
 
 Angular内部的所有组件都在称为view的数据结构中表示。 Angular 的解析器解析模板并创建绑定。每个绑定定义了一个需要更新的 DOM 元素的属性以及用于获取其值的表达式。在变更检测期间用于比较用途的先前值previous values存储在view的oldValues属性中的。在变更检测期间, Angular 执行了绑定,计算表达式,将它们与先前的值进行比较,并在必要时更新 DOM。在每个变更检测周期之后,Angular会运行同步检查以确保组件状态与用户界面内容同步。再次提醒,此检查是同步执行的,可能会抛出ExpressionChangedAfterItWasChecked错误
 ~~~
+### 82.react differ算法原理
+~~~
+分为三类
+1.tree differ
+之比较同层DOM节点，跨层会直接删除和创建
+2.component differ
+同类型的component用shouldComponentUpdate做判断计算
+不同类型的直接替换
+3.element differ
+主要通过key值比较区分移动或者插入删除
+~~~
 ### 90.clientHeight,offsetHeight,scrollHeight && clientTop, offsetTop, scrollTop
 ~~~
 clientHeight = height + padding-top + padding-bottom
