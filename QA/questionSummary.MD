@@ -1150,6 +1150,14 @@ Angular内部的所有组件都在称为view的数据结构中表示。 Angular 
 3.element differ
 主要通过key值比较区分移动或者插入删除
 ~~~
+### 83.react 事件机制
+~~~
+react的事件不是绑定在各个DOM元素上，而是统一被react自定义绑定在document上，react对原始的事件做了自己的包装合成，这样
+可以做到浏览器的兼容，简化事件绑定逻辑提高性能，
+事件注册 组件挂载阶段对组件的所有申明事件挂载在document上，并制定统一处理事件函数dispatchEvent
+事件存储 所有事件放在一个对象里缓存，触发时拿出来去执行
+事件分发 在事件处理函数dispatchEvent中批量处理开始合成的事件
+~~~
 ### 90.clientHeight,offsetHeight,scrollHeight && clientTop, offsetTop, scrollTop
 ~~~
 clientHeight = height + padding-top + padding-bottom
