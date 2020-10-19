@@ -1158,6 +1158,12 @@ react的事件不是绑定在各个DOM元素上，而是统一被react自定义�
 事件存储 所有事件放在一个对象里缓存，触发时拿出来去执行
 事件分发 在事件处理函数dispatchEvent中批量处理开始合成的事件
 ~~~
+### 83.react fiber
+~~~
+react fiber是将之前版本的stack reconciler替换为fiber reconciler, 因为之前的任务在对visual dom比较时不能中断会一直占用主线程，导致
+主线程布局和交互阻塞导致卡顿，而fiber tree作为一个可以中断和恢复的链表，把虚拟节点的最小单元按优先级进行划分可以在每帧空闲时执行最小单元任务达到页面流畅运行，
+在commit的阶段是一次性更新dom，不会中断
+~~~
 ### 90.clientHeight,offsetHeight,scrollHeight && clientTop, offsetTop, scrollTop
 ~~~
 clientHeight = height + padding-top + padding-bottom
