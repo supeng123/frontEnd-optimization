@@ -317,7 +317,7 @@ funtion longestPanlindrome(nums) {
     for (let i = 0; i < nums.length; i++) {
         map.set(nums[i], i)
         if (map.size > 2) {
-            let minIndex = tree.length - 1
+            let minIndex = nums.length - 1
             for (let [fruit, index] of map) {
                 if (index < minIndex) minIndex = index
             }
