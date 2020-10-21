@@ -1138,6 +1138,10 @@ function Ajax(method, url, parameters) {
 调用所有子组件的的 AfterViewInit 的生命周期钩子
 
 Angular内部的所有组件都在称为view的数据结构中表示。 Angular 的解析器解析模板并创建绑定。每个绑定定义了一个需要更新的 DOM 元素的属性以及用于获取其值的表达式。在变更检测期间用于比较用途的先前值previous values存储在view的oldValues属性中的。在变更检测期间, Angular 执行了绑定,计算表达式,将它们与先前的值进行比较,并在必要时更新 DOM。在每个变更检测周期之后,Angular会运行同步检查以确保组件状态与用户界面内容同步。再次提醒,此检查是同步执行的,可能会抛出ExpressionChangedAfterItWasChecked错误
+
+优化，
+改为onPush策略，子组件所有绑定的指令只有在引用改变才会触发变更检查，markForcheck
+changeDectionRef,手动detach所有不需要进行变更检查的组件，用detectChanges执行局部的变更检查
 ~~~
 ### 82.react differ算法原理
 ~~~
