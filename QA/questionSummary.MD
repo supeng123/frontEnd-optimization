@@ -1162,11 +1162,46 @@ react的事件不是绑定在各个DOM元素上，而是统一被react自定义�
 事件存储 所有事件放在一个对象里缓存，触发时拿出来去执行
 事件分发 在事件处理函数dispatchEvent中批量处理开始合成的事件
 ~~~
-### 83.react fiber
+### 84.react fiber
 ~~~
 react fiber是将之前版本的stack reconciler替换为fiber reconciler, 因为之前的任务在对visual dom比较时不能中断会一直占用主线程，导致
 主线程布局和交互阻塞导致卡顿，而fiber tree作为一个可以中断和恢复的链表，把虚拟节点的最小单元按优先级进行划分可以在每帧空闲时执行最小单元任务达到页面流畅运行，
 在commit的阶段是一次性更新dom，不会中断
+~~~
+### 85.写一个排序算法
+~~~
+function insertSort(nums) {
+    let temp, j
+    for (let i = 1; i < nums.length; i++) {
+        temp = nums[i]
+        j = i
+        while (j > 0 && nums[j-1] > temp) {
+            nums[j] = nums[j-1]
+            j--
+        }
+        nums[j] = temp
+    }
+    return nums
+}
+
+function quickSort(nums) {
+    if (nums.length <=1 ) return nums
+    let pivotIndex = Math.floor(nums.length / 2);
+    let pivot = nums.splice(pivotIndex, 1)[0];
+    //let pivotIndex = nums.length >> 1
+    //let pivot = nums[pivotIndex]
+    console.log(pivotIndex, pivot)
+    let less = []
+    let big = []
+    for (let i = 0 ; i < nums.length; i++) {
+        if (nums[i] < pivot) {
+            less.push(nums[i])
+        } else {
+            big.push(nums[i])
+        }
+    }
+    return quickSort(less).concat([pivot], quickSort(big))
+}
 ~~~
 ### 90.clientHeight,offsetHeight,scrollHeight && clientTop, offsetTop, scrollTop
 ~~~
