@@ -229,6 +229,21 @@ function maxDepth(root) {
 ~~~
 ### 13.二叉树最小深度
 ~~~
+function BFS(root) {
+    if (root == null) return 0
+    const queue = [root]
+    let depth = 1
+    while (queue.length > 0) {
+        let size = queue.length;
+        for (let i = 0; i < size; i++) {
+            let cur = queue.shift()
+            if (!cur.left && ! cur.right) return depth
+            cur.left && queue.push(cur.left)
+            cur.right && queue.push(cur.right)
+        }
+        depth++
+    }
+}
 function minDepth(root) {
     if (root == null) return 0
     const leftDepth = minDepth（root.left)
