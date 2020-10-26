@@ -1323,6 +1323,41 @@ class Promise() {
             })
         }
     }
+
+    static all(arraylist) {
+        let result = []
+        let index  = 0
+        return new Promise((resolve, reject) => {
+            for (let p of arraylist) {
+                if (isPromise(p)) {
+                    p.then(data => {
+                        result[index] = data
+                        index++
+                        if (result.length == arraylist.length) {
+                            resolve(result)
+                        }
+                    })
+                } else {
+                    result[index] = p
+                    index++
+                }
+            }
+        })
+
+        function isPromise(o) {
+            return typeof o === 'object' && typeof 0[then] == 'function'
+        }
+    }
+
+    static race() {
+        let result = []
+        let index  = 0
+        return new Promise((resolve, reject) => {
+            for (let p of arraylist) {
+                p.then(resolve, reject)
+            }
+        })
+    }
 }
 ~~~
 ### 95.AMD&&CMD&&CommonJS&&ES6
