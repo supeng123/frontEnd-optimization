@@ -1203,6 +1203,39 @@ function quickSort(nums) {
     return quickSort(less).concat([pivot], quickSort(big))
 }
 ~~~
+### 86.实现convert函数转7进制
+~~~
+function convert(num) {
+    if (num === 0) return '0'
+    let res = ''
+    let isPositive = num > 0
+    if (!isPositive) num = -num
+    while (num !== 0) {
+        let mod = num%7
+        res += mod
+        num = Math.floor(num/7)
+    }
+    res = res.split('').reverse().join('')
+    return isPositive ? res : '-'+res
+}
+/\$\{(.+?)\}/g
+/\$\{([^\s*])\}/g
+~~~
+### 87.模板替换引擎函数
+~~~
+let t2 = "My name is ${ name }, I'm ${ age } years old."
+let d = { name: ' F', age: 20 }
+
+function render(template, data) {
+    const exp = /\$\{(.+?)\}/g;
+    var match;
+    while (exp.exec(template)) {
+        template = template.replace(match[0], data[match[1].trim()]);
+    }
+    return template
+}
+render(t2,d)
+~~~
 ### 90.clientHeight,offsetHeight,scrollHeight && clientTop, offsetTop, scrollTop
 ~~~
 clientHeight = height + padding-top + padding-bottom
@@ -1722,3 +1755,12 @@ new Promise((resolve, reject) => {
     })
 
 console.log(4)
+
+
+var TemplateEngine = function(tpl, data) {
+    var re = /<%([^%>]+)?%>/g, match;
+    while(match = re.exec(tpl)) {
+        tpl = tpl.replace(match[0], data[match[1]])
+    }
+    return tpl;
+}
