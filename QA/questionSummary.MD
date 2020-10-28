@@ -1227,14 +1227,96 @@ let t2 = "My name is ${ name }, I'm ${ age } years old."
 let d = { name: ' F', age: 20 }
 
 function render(template, data) {
-    const exp = /\$\{(.+?)\}/g;
+    var exp = /\$\{(.+?)\}/g;
     var match;
-    while (exp.exec(template)) {
-        template = template.replace(match[0], data[match[1].trim()]);
+    const array = []
+    while (match = exp.exec(template)) {
+        array.push({t:match[0], v:match[1].trim()})
+        <!-- template = template.replace(match[0], data[s]); -->
+    }
+    <!-- return array -->
+
+    for (let obj of array) {
+        template = template.replace(obj.t, data[obj.v])
     }
     return template
 }
 render(t2,d)
+
+示例二：'[abc[bcd[def]]]' --> {value: 'abc', children: {value: 'bcd', children: {value: 'def'}}}
+
+function normalize(str) {
+    let key
+    const obj = {}
+    let cur = obj
+    const matchedArray = str.match(/\w+/g)
+    while (key = matchedArray.shift()) {
+        cur.value = key
+        if(matchedArray.length == 0) break
+        cur.children = {}
+        cur = cur.children
+    }
+    return obj
+}
+normalize('[abc[bcd[def]]]')
+
+
+const fn = arr => {
+  const res = []
+  const map = arr.reduce((res, item) => ((res[item.id] = item), res), {})
+  console.log(map)
+  for (const item of Object.values(map)) {
+    if (!item.pId) {
+      res.push(item)
+    } else {
+      const parent = map[item.pId]
+      parent.child = parent.child || []
+      parent.child.push(item)
+    }
+  }
+  return res
+}
+map[1]{id:1, child:[{id:2, pId:1}]}
+map[2]{id:2, pId:1, child:[{id:3, pId:2}]}
+map[4]{id:2, pId:1, child:[{id:3, pId:2}]}
+
+[{id:1},{id:4}]
+
+// const arr = [{id: 1}, {id:2, pId: 1}, {id: 3, pId: 2}, {id: 4}, {id:3, pId: 2}, {id: 5, pId: 4}]
+~~~
+### 88.normalize
+~~~
+function traverse(num) {
+    let num1 = num/10
+    let yu = num%10
+    if (num1 < 1) {
+        return num
+    } else {
+        num1 = Math.floor(num1)
+        return`${yu}${traverse(num1)}`
+    }
+}
+
+function queryString(url) {
+    let result = {}
+    let urlObj = new URL(url).searchParams
+    for (let [key, value] of urlObj.entries()) {
+        result[key] = value ?? ''
+    }
+    return result
+}
+
+~~~
+### 89. 二进制转base64
+~~~
+function charTobinary(text) {
+   return text.split('').map(i => i.charCodeAt().toString(2).padStart(8, 0)).join('')
+}
+
+'1.000.000.000'
+function toLocaleString(str) {
+    return Number(str).toLocaleString('DE')
+}
 ~~~
 ### 90.clientHeight,offsetHeight,scrollHeight && clientTop, offsetTop, scrollTop
 ~~~
