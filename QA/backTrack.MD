@@ -79,6 +79,29 @@ function wholePermutation(candidates) {
     }
 }
 
+function twoDemensionArrayPermutation(arrays) {
+    const len = arrays.length
+    let result = ['']
+
+    for(let i = 0; i < len; i++) {
+        result = traverse(arrays[i], result)
+    }
+    console.log(result)
+    return result
+
+    function traverse(arr1, res) {
+        const arr = []
+        for (let i = 0; i < res.length; i++) {
+            for (let j = 0; j < arr1.length; j++) {
+                const temp = res[i]+arr1[j]
+                arr.push(temp)
+            }
+        } 
+        return arr
+    }
+}
+twoDemensionArrayPermutation([['a','b'],['c','d'],['e','f']])
+
 function wholePermutation(candidates) {
     const result = []
     const map = {}

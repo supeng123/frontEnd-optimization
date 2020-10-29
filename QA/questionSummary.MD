@@ -447,7 +447,7 @@ async1 stop
 promise2
 setTimeout
 ~~~
-### 42.设计一个bind函数
+### 42.设计一个bind && apply函数
 ~~~
 function Animal(name, color) {
     this.name = name;
@@ -619,6 +619,14 @@ function validIp(address) {
     return "Neither";
 }
 ~~~
+### 53.new的实现
+~~~
+function new(fn, ...args) {
+    const obj = Object.create(fn.prototype)
+    const res = fn.apply(obj, args)
+    return res instanceof Object ? res : obj
+}
+~~~
 ### 54.js浮点数 0.1+0.2 === 0.3 ？
 ~~~
 No，根据IEEE754标准，两个浮点数相加会将每个浮点数转化为二进制，而二进制是没有这么精确
@@ -650,11 +658,32 @@ BFC，父元素添加overflow:hidden
 伪类：修饰已在render tree的节点，first-child,hover
 伪元素：修饰不在render tree的节点，first-letter,before
 ~~~
+### 58.实现flatten
+~~~
+function flatten(arrays) {
+    return arrays.reduce((total, current)=> {
+         total = Array.isArray(current)? [...total, ...flatten(current)]: [...total, current]
+         return total
+    },[])
+}
+var arr=[1,2,3,[4,5],[6,[7,[8]]]]
+flatten(arr)
+
+new Array(length).fill(null).map((_,i)=>obj[i+1])
+大小写互换
+function changecase(str) {
+    return str.replace(/\w/g, (s)=> {
+        return s === s.toLowerCase()? s.toUpperCase(): s.toLowerCase()
+    })
+}
+changecase('AbCdEfG')
+~~~
 ### 59.js中 new发生了什么
 ~~~
 const Obj = {}
 Obj.__proto__ == ClassA.prototype
 ClassA.call(Obj)
+https://wangyaxing.cn/blog/algorithm/
 ~~~
 ### 60.async函数设计
 ~~~
@@ -735,6 +764,9 @@ class Queue {
         })
     }
 }
+~~~
+### 61.大小写互换
+~~~
 ~~~
 ### 69.大文件断点续传
 ~~~
