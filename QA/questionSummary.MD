@@ -475,6 +475,19 @@ Function.prototype.myBind = function() {
     Fn.prototype = Object.create(thatFunc.prototype)
     return Fn
 }
+
+Function.prototype.apply = function(context) {
+    if （type of this !== 'function'){
+        throw new TypeError('not a function')
+    }
+    context = context || window
+    context.fn = this
+    
+    let result
+    result = context.fn(...arguments)
+    delete context.fn
+    return result
+}
 ~~~
 ### 43.Object.create原理
 ~~~
@@ -765,8 +778,59 @@ class Queue {
     }
 }
 ~~~
-### 61.大小写互换
+### 61.entry output 互转
 ~~~
+var entry = {
+a: {
+ b: {
+   c: {
+     dd: 'abcdd'
+   }
+ },
+ d: {
+   xx: 'adxx'
+ },
+ e: 'ae'
+}
+}
+
+// 要求转换成如下对象
+var output = {
+'a.b.c.dd': 'abcdd',
+'a.d.xx': 'adxx',
+'a.e': 'ae'
+}
+
+function entryToOutPut(entry, current, output={}) {
+    for (let key in entry) {
+        let keyName = `${current}${key}`
+        if (typeof entry[key] === 'object') {
+            entryToOutPut(entry[key], keyName+".", output)
+        } else {
+            output[keyName] = entry[key]
+        }
+    }
+    return output
+}
+entryToOutput(entry, '', {})
+
+function outputToEntry(output) {
+    const keys = Object.keys(output)
+    const entry = {}
+    for (let key of keys) {
+        const everykey = key.split('.')
+        everykey.reduce((total, current, index, array) => {
+            if (index == array.length -1) {
+                total[current] = output[key]
+                return
+            } else {
+                total[current] = total[current] || {}
+                return total[current]
+            }
+        }, entry)
+    }
+    return entry
+}
 ~~~
 ### 69.大文件断点续传
 ~~~
