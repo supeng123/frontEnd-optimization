@@ -482,7 +482,7 @@ Function.prototype.apply = function(context) {
     }
     context = context || window
     context.fn = this
-    
+
     let result
     result = context.fn(...arguments)
     delete context.fn
@@ -830,6 +830,20 @@ function outputToEntry(output) {
         }, entry)
     }
     return entry
+}
+~~~
+### 62.函数科里化
+~~~
+function curry(fn, args) {
+    var len = fn.length
+    var args = args || []
+    return (_args) {
+        var _args = [].slice.call(arguments)
+        Array.prototype.unshift.apply(_args, args)
+        
+        if (_args.length < len) return curry.call(null, fn, _args)
+        return fn.apply(null, _args)
+    }
 }
 ~~~
 ### 69.大文件断点续传
