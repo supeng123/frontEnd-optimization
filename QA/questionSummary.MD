@@ -777,6 +777,20 @@ class Queue {
         })
     }
 }
+
+function retryPromise(fn, times=3) {
+    return new Promise((resolve, reject) => {
+        while (times--) {
+            try {
+                var ret = await fn()
+                resolve(ret)
+                break;
+            } catch (error) {
+                if (!times) reject(error)
+            }
+        }
+    })
+}
 ~~~
 ### 61.entry output 互转
 ~~~
@@ -1956,3 +1970,4 @@ var TemplateEngine = function(tpl, data) {
     }
     return tpl;
 }
+从《我的天才女友》俩人互相追赶到《后翼弃兵》一个人的史诗，内核都是讲“我”的觉醒，“我”从集体意识中的理所当然中抽离出来，“我”不是光鲜正确需要颂扬或同情的圭臬，“我”是对自身认知不断挣脱的捏造者。
