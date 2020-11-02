@@ -860,6 +860,16 @@ function curry(fn, args) {
     }
 }
 ~~~
+### 63.数组乱序
+~~~
+function mixArray(arr) {
+    let sign = 1
+    return arr.sort((a, b) => {
+        sign = Math.random() > 0.5 ? 1 : -1
+        return (a-b)*sign
+    })
+}
+~~~
 ### 69.大文件断点续传
 ~~~
 document.getElementById('file').addEventListener('change',  async (event) => {
