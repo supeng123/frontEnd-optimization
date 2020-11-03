@@ -1319,6 +1319,13 @@ function insertSort(nums) {
 }
 
 function quickSort(nums) {
+    let pivot = nums.pop()
+    let left = nums.filter(i => i < pivot)
+    let right = nums.filter(i => i >= pivot)
+    return quickSort(left).concat([pivot], quickSort(right))
+}
+
+function quickSort(nums) {
     if (nums.length <=1 ) return nums
     let pivotIndex = Math.floor(nums.length / 2);
     let pivot = nums.splice(pivotIndex, 1)[0];
