@@ -870,6 +870,40 @@ function mixArray(arr) {
     })
 }
 ~~~
+### 64.flex:0 1 auto
+~~~
+flex-grow, 默认为0，如果有剩余空间，将按比例放大
+flex-shrink,默认为1，如果空间不足，按比例缩小
+flex-basis
+
+<div class="container">
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  .container {
+    width: 600px;
+    height: 300px;
+    display: flex;
+  }
+  .left {
+    flex: 1 2 300px;
+    background: red;
+  }
+  .right {
+    flex: 2 1 200px;
+    background: blue;
+  }
+</style>
+
+left的空间为300 + 1/3 * 100
+right的空间为200 + 2/3 * 100
+~~~
 ### 69.大文件断点续传
 ~~~
 document.getElementById('file').addEventListener('change',  async (event) => {
@@ -1988,3 +2022,4 @@ var TemplateEngine = function(tpl, data) {
     return tpl;
 }
 从《我的天才女友》俩人互相追赶到《后翼弃兵》一个人的史诗，内核都是讲“我”的觉醒，“我”从集体意识中的理所当然中抽离出来，“我”不是光鲜正确需要颂扬或同情的圭臬，“我”是对自身认知不断挣脱的捏造者。
+
