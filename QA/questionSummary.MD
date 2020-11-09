@@ -943,7 +943,7 @@ class Dialog {
         document.addEventListener('mouseup', this.handleMouseUp.bind(this))
         model.appendChild(this.dialog)
     }
-    
+
     close() {
         this.dialog.removeEventListener('mousedown', this.handleMouseDown)
         document.removeEventListener('mousemove', this,handleMouseMove)
@@ -2092,3 +2092,37 @@ var TemplateEngine = function(tpl, data) {
 从《我的天才女友》俩人互相追赶到《后翼弃兵》一个人的史诗，内核都是讲“我”的觉醒，“我”从集体意识中的理所当然中抽离出来，“我”不是光鲜正确需要颂扬或同情的圭臬，“我”是对自身认知不断挣脱的捏造者。
 
 今天是2020-11-05，去年同一天我的签证审核通过，而在今天我却还没能进入新西兰而签证失效，我无法知道当我明白东风已走的心情，那些处心积虑的努力在时间面前变得苍白无力，过去的半年每一天都不禁自问当时如果提前走，如果当时早就考好驾照，这些假设如今都没了意义，如果自己无法理解荒唐的由来只能任其放任游荡，这一年我失去以往对亲情的渴望，每次当我接到父母的电话和讯息我会变得莫名的烦躁，我似乎又到了原先的那个我，对亲切东西转瞬即逝的幻灭感越来越强，冷漠的人性底色又串到了面前，我不关心世上任何的纠纷别离，我看到廉价的眼泪从其他人掉下来感到憎恶，我想我也会一直孤单下去，尽管三十年来我从来没有把这当回事，那些看过的书，写过的文字，记过的单词，练习过的面试题，在这一刻都变得无足轻重，一朵没人看好的野草，一直靠一股带着愤怒的傻气长到现在，我自己似乎眼前有滤镜把过往的荆棘和不堪略过，不然单薄的身体以何去对抗周遭的破裂，我总是发现我过往由于太执着于一处而看不太清周围的处境，以至于现在当别人讨论到具体事情时和我所想的反差越来越大，我遗失了一些我从来不曾察觉的地方，我也记不起当时的激情和想象，这些都被日复一日所谓有意义的工作肢解成匿名的碎片消失在死去的脑细胞里，一场慢性的自杀，我看不清我的样子，它越来越模糊和这世上所有迷失的人一样。
+
+
+var ul = document.getElementById("ul");
+var fragment = document.createDocumentFragment();
+for (var i = 0; i < 20; i++) {
+    var li = document.createElement("li");
+    li.innerHTML = "index: " + i;
+    fragment.appendChild(li);
+}
+ul.appendChild(fragment);
+
+function doSth(fn){
+  // todo: your code here
+  let start = Number(new Date())
+  let t 
+  let self = this
+  
+  window.requestAnimationFrame(loopfn)
+  function loopfn(){
+  	t = window.requestAnimationFrame(loopfn)
+    if (Number(new Date()) - start >= 1000) {
+    	start = Number(new Date())
+    	fn.apply(self, ...arguments)
+    }
+  }
+}
+
+const fn = doSth(()=>{
+  console.log('hello alibaba');
+})
+
+setInterval(() => {
+	fn();
+},10)
