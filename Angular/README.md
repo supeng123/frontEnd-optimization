@@ -71,16 +71,16 @@ export class ProductEffects {
 }
 
 
-switchMap Cancels the current subscription/request and can cause race condition
-Use for get request or cancelable requests like searches
-
 concatMap Runs subscriptions/requests in order and is less performant
 Use for get, post and put requests when order is important
 
 mergeMap Runs subscriptions/requests in parallel
 Use for put, post and delete methods when order is not important
 
-exhaustMap Ignores all subsequent subscriptions/requests until it completes
+switchMap Cancels the current subscription/request and can cause race condition
+Use for get request or cancelable requests like searches 永远取最新的
+
+exhaustMap Ignores all subsequent subscriptions/requests until it completes 永远取第一个出来的
 Use for login when you do not want more requests until the initial one is completed
 
 //app.module
@@ -122,4 +122,38 @@ function rxjsFunction() {
 
 promiseFunction().then(console.log)
 rxjsFunction().subscribe(console.log)
+~~~
+### Rxjs operators
+~~~
+combineLatest 返回多个abservable产生各自最新的结果，结果个数和observable的个数一样
+merge 拿多个abservable的结果中最新的一个
+
+var ob = combineLatest(
+    fromEvent(document, 'click'),
+    fromEvent(document, 'dblclick')
+).subscribe([v1,v2] => {
+    console.log(`${v1.clientX}, ${v2.clientX}`)
+})
+
+var ob = forkJoin(
+    fromEvent(document, 'click').pipe(take(1)),
+    fromEvent(document, 'dblclick').pipe(take(1))
+).subscribe([v1,v2] => {
+    console.log(`${v1.clientX}, ${v2.clientX}`)
+})
+
+startWith 用在一个observable依赖前面返回一个特定值
+
+var ob = fromEvent(document, 'click').pipe(
+    startWith([1,2,3])
+).subscribe(console.log)
+
+三元运算符iif
+const firstOrSecond = iif(
+    () => (return true),
+    of('first'),
+    of('second')
+).subscribe(console.log)
+
+//scan,reduce, scan不需要每个observable返回值，reduce需要
 ~~~
