@@ -972,6 +972,17 @@ class Dialog {
     }
 }
 ~~~
+### 66.如何优化SPA首屏加载速度慢
+~~~
+1.将共用的js库通过script引入，减少bundle的大小，让浏览器并行下载资源提高下载速度
+2.路由懒加载，减少bundle体积
+3.root插入loading，或杂合骨架图
+4.预加载
+5.设置http缓存
+6.SSR
+7.tree shaking
+8.service work
+~~~
 ### 69.大文件断点续传
 ~~~
 document.getElementById('file').addEventListener('change',  async (event) => {
@@ -1951,6 +1962,7 @@ the basis of this system is the students must take turns in teaching, they have 
 Career opportunities, flex-time, satellite-offices, and more childcare facilities are required to make women at home join the work force
 when bears sleep or lie down, their postures depend on whether they want to get rid of heat or conserve it
 a buyers market is a market in which goods are plentiful, buyers have a wide range of choices, and prices are low
+you hava made offerings way above what it would take to get that window up there
 ### 129.不同二叉搜索树
 ~~~
 //leetcode 95

@@ -157,3 +157,24 @@ const firstOrSecond = iif(
 
 //scan,reduce, scan不需要每个observable返回值，reduce需要
 ~~~
+### angular 路由resolve
+~~~
+提前拿数据，避免到component中onInit时去拿反应慢
+
+@Injectable()
+export class HomeResolveService implements Resolve<HomeDataType> {
+    constructor(private homeService: HomeService, private singerService: SingerService) {}
+    resolve(): Observable<HomeDataType> {
+        return forkJoin([
+            this.homeService.getBanners(),
+            this.singerService.getEnterSinger()
+        ]).pipe(first())
+    }
+}
+
+
+然后在component 通过路由拿到所有resolve的值,HomeDatas需要暴露到module的import参数里 resolve模块
+this.route.data.pipe(map(res => res.HomeDatas)).subscribe(res => {
+    console.log(res)
+})
+~~~
