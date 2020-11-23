@@ -983,6 +983,118 @@ class Dialog {
 7.tree shaking
 8.service work
 ~~~
+### 67. this指向
+~~~
+//first
+let x = 2
+var y = 3
+function test(){
+    console.log(this)
+    console.log(this.x);
+    console.log(this.y)
+}
+test()
+result: window, undefined, 3
+当this做普通函数，指向调用者window，x是块级作用域，y会挂在window上所以能找到值
+
+//second
+var name = "window";
+var Bob = {
+    name: "Bob",
+    showName: function(){
+        alert(this.name);
+    }
+};
+var Tom = {
+    name: "Tom",
+    showName: function(){
+        //第一段
+        var first = Bob.showName;
+        first();
+        //第二段
+        var second = Bob.showName();
+    }
+};
+
+Tom.showName();
+当前first作为匿名函数时，this指向window所以结果为window,直接调用则是Bob
+
+//third
+ar name = "window";
+    
+var someone = {
+    name: "Bob",
+    showName: function(){
+        alert(this.name);
+    }
+};
+
+var other = {
+    name: "Tom"
+};    
+
+someone.showName.apply();    //window
+someone.showName.apply(other);    //Tom
+apply用于改变函数执行时的当前对象，当无参数时，当前对象为window，有参数时当前对象为该参数。于是这个例子Bob成功偷走了Tom的名字
+
+//fourth
+var fun = new Function("alert(this)");
+fun();
+此时function还未实例化，func()调用者是window,所以this指向window
+
+//five
+function foo() {
+  console.log(this.a);
+};
+var obj = {
+  a: 2,
+  foo: foo
+};
+function bar(fn) {
+  fn();
+};
+var a = "biubiubiu";
+bar(obj.foo);
+实际上参数也是隐式赋值，但是参数传入函数中，并在函数中执行。此时也是直接引用了函数foo，因此也是单纯的函数调用，采用了默认绑定全局对象
+凡是没有定义在对象，构造函数或prototype的函数指向全局
+
+var b = 'window'
+var obj = {
+    b: 'inside',
+    c: function() {
+        setTimeout(() => {
+            console.log('c in:'+ this.b)
+        },0)
+        console.log('c out:'+ this.b)
+    },
+    d: () => {
+        setTimeout(function(){
+            console.log('d in' + this.b)
+        },0)
+        console.log('d out:'+ this.b)
+    },
+    e() {
+        console.log('e: '+ this.b)
+    },
+    f() {
+        return slogan;
+        function slogan() {
+            console.log('f: ' + this.b)
+        }
+    },
+    g() {
+        return () => {
+            console.log('g: ' + this.b);
+        };
+    }
+}
+
+obj.c()
+obj.d()
+obj.e()
+obj.f()()
+obj.g()()
+~~~
 ### 69.大文件断点续传
 ~~~
 document.getElementById('file').addEventListener('change',  async (event) => {
@@ -2055,6 +2167,8 @@ ithink it's best if we keep moving forwaring with our lives
 本以为终于可以换各种姿势点外卖，手机打开美团发现小镇没有外卖，顿时傻了，只能自己瞎逛找餐厅。今早被房东叫过去吃完早餐，然后又把我送到指定地点教我怎么打车去蝴蝶泉。在里面逛了一圈出来然后坐车原路返回，料想今天该不会一无所获吧，小镇的交通靠走或者坐车我是不会想再重复了。正当自己想去吃点早上对门在这里定居编辑给我推荐的餐厅，发现每个地方都有点远，共享单车似乎抛弃了这个地方，但突然路口的一排电动车让我有了想法，尽管以前没骑过电瓶车，我还是一下子按着骑自行车的套路无师自通了，这突然出现的坐骑让我对找餐厅的产生了动力，另外饭后在田间，白族民居小道飞奔的快感又让我冲向洱海边，只是这边海边有些地方还在开发走了半个小时前方就被保安挡住了，带着不想再原路返回的冲动又临时调整方向去大理古城。果然和中国任何的古城都一样，或者说任何地方只要带着好玩的期许就注定会落空，悻悻回家休息，待到天黑准备出去吃点东西，小镇古城白日的喧嚣被沉默的夜色代替，视野由于没有路灯但月亮够亮依旧能辨认飘过云层轮廓，在巷子角落飘来的油烟和影影绰绰灯光让撸串的情绪倍增，回家的路上耳边我想我真是来对了地方。
 --------来这没两天不知第几回因为头发被人弄错性别了，早上蝴蝶泉的白族婆婆拿着两张白族女生服饰的照片硬要我挑件衣服拍一张，小镇的阿姨跟在我后面一个劲地说我头发扎上她盘的彩色辫子一定很好看，餐厅的老板娘一边收拾桌子一边客气的对我说您好美女帮你换一杯茶吧，更过分的是大理古城的保洁大叔，我明明看到男厕所的标识正准备走进去，他呵斥我上二楼去，等我上楼看见一女生正走出来，我心里一万个cnm，现在还忘不了大叔看我直奔他身后小便池解裤子那惊恐的眼神。
 
+
+
 你之所以那么嚣张只是你脖子上的链子还在奴隶主手上
 console.log(1)
 DNQVND2UJCLF
@@ -2106,6 +2220,9 @@ var TemplateEngine = function(tpl, data) {
 今天是2020-11-05，去年同一天我的签证审核通过，而在今天我却还没能进入新西兰而签证失效，我无法知道当我明白东风已走的心情，那些处心积虑的努力在时间面前变得苍白无力，过去的半年每一天都不禁自问当时如果提前走，如果当时早就考好驾照，这些假设如今都没了意义，如果自己无法理解荒唐的由来只能任其放任游荡，这一年我失去以往对亲情的渴望，每次当我接到父母的电话和讯息我会变得莫名的烦躁，我似乎又到了原先的那个我，对亲切东西转瞬即逝的幻灭感越来越强，冷漠的人性底色又串到了面前，我不关心世上任何的纠纷别离，我看到廉价的眼泪从其他人掉下来感到憎恶，我想我也会一直孤单下去，尽管三十年来我从来没有把这当回事，那些看过的书，写过的文字，记过的单词，练习过的面试题，在这一刻都变得无足轻重，一朵没人看好的野草，一直靠一股带着愤怒的傻气长到现在，我自己似乎眼前有滤镜把过往的荆棘和不堪略过，不然单薄的身体以何去对抗周遭的破裂，我总是发现我过往由于太执着于一处而看不太清周围的处境，以至于现在当别人讨论到具体事情时和我所想的反差越来越大，我遗失了一些我从来不曾察觉的地方，我也记不起当时的激情和想象，这些都被日复一日所谓有意义的工作肢解成匿名的碎片消失在死去的脑细胞里，一场慢性的自杀，我看不清我的样子，它越来越模糊和这世上所有迷失的人一样。
 
 
+当看见手机一个关于时间的记录器的数字跳转成30时，想到无法再去说服自己仍然可以毫无顾忌大肆宣称自己所做的一切都可以以年少轻狂作为借口，似乎一下子被抛到另一块地方，这地方的空气比之前更浑浊，满眼都是疲于奔命的人群，这条道拥挤到每个毛孔渗出的汗液能将你融化。有些期望如果再次拿出来和预期做出对比越发怀疑这过程是否可以有实质性的内容可以被谈起，如果你只呆在一个地方，你甚至能察觉到身边人都在变话，而你的变化和你几年前刚进来公司没有任何实质的变化，你似乎挣得了更多的钱但是远远未达到你那是以为之后会有的水平，而试探性的面试过后会增加你的自我怀疑自己所有做的所谓的自我学习是否真的如自己认为一样别人会给予同样的尊重，你关在一个房子里闭门造车4年，你认为自己能在之后跳出来时必然能随心所欲做出选择，但你始终被自己所谓的勤奋的表面所欺骗，你所谓的努力在任何人的眼里都是无用功，不在于你花了多少时间说服感动了自己。从昨天到今天凌晨把《火线》看完，里面每个人都在很努力满足自己的欲望，把自己的理想投射在自己所谓让世界更美好的想象中，但每个人都不过是人类文明阶层链调下的最基本的循环，那些我们以为只要做到某点就必然会有好的结局局限思维最好和世间其他不管偶然还是必然的事件交错后开始背道而驰，你认为你自己所谓的进步只是世上任何角落人生形态的缩影，同样你的堕落也和那些人相护相应，放弃你认为自己做对了做坏了事情的执念或许能稍微揉搓让你倍感无常的轮回恐惧。
+我想人生路上已经走了一半，上半程总是在众人的推推搡搡中前行没有太明确的目的而且总活在随遇而安的自我安慰中郁郁不平，下半程走成什么样子我不想再唯唯诺诺躲躲藏藏，我得重新规划我的时间运用，我得试着把自己满意放在最前面，我得让我存在的时间在这须臾之间制造一点声音。
+
 var ul = document.getElementById("ul");
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < 20; i++) {
@@ -2138,3 +2255,12 @@ const fn = doSth(()=>{
 setInterval(() => {
 	fn();
 },10)
+
+function create() {
+    let obj = {};
+    let f = [].shift.call(arguments);
+    obj.__proto__ = f.prototype;
+    let result = f.apply(obj, arguments);
+    return result instanceof Object ? result : obj;
+}
+
