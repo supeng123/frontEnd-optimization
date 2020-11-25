@@ -178,3 +178,70 @@ this.route.data.pipe(map(res => res.HomeDatas)).subscribe(res => {
     console.log(res)
 })
 ~~~
+### 创建动态模板比如实时广告
+~~~
+import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy, Directive, ViewContainerRef, Type } from '@angular/core';
+
+@Directive({
+    selector: ['ad-host']
+})
+class AdDirective {
+    contructor(public viewContainerRef:ViewContainerRef) {}
+}
+
+class AdItem {
+    constructor(public component: Type<any>, public data: any) {}
+}
+
+interface AdComponent {
+    data: any
+}
+
+@Component({
+  selector: 'app-ad-banner',
+  template: `
+              <div class="ad-banner-example">
+                <h3>Advertisements</h3>
+                <ng-template ad-host></ng-template>
+              </div>
+            `
+})
+export class AdBannerComponent implements OnInit, OnDestroy {
+  @Input() ads: AdItem[];
+  currentAdIndex = -1;
+  @ViewChild(AdDirective, {static: true}) adHost: AdDirective;
+  interval: any;
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+
+  ngOnInit() {
+    this.loadComponent();
+    this.getAds();
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.interval);
+  }
+
+  loadComponent() {
+    this.currentAdIndex = (this.currentAdIndex + 1) % this.ads.length;
+    const adItem = this.ads[this.currentAdIndex];
+
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(adItem.component);
+
+    const viewContainerRef = this.adHost.viewContainerRef;
+    viewContainerRef.clear();
+
+    const componentRef = viewContainerRef.createComponent(componentFactory);
+    (<AdComponent>componentRef.instance).data = adItem.data;
+  }
+
+  getAds() {
+    this.interval = setInterval(() => {
+      this.loadComponent();
+    }, 3000);
+  }
+}
+
+entryComponents: [ HeroJobAdComponent, HeroProfileComponent ],
+~~~
