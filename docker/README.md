@@ -4,39 +4,172 @@ keep the consistence between different environment
 container is the instance of image
 ~~~
 
-## Basic Commands
+## Docker deamon
+### 1.start or restart docker server
 ~~~
-**start container
-docker run IMAGE[COMMAND][ARG...]
--i --interactive=true|false
--t --tty=true|false
+systemctl start docker
+systemctl restart docker
+~~~
+### 2.stop docker server
+~~~
+systemctl stop docker
+~~~
+### 3.check docker server status
+~~~
+systemctl status docker
+~~~
+### 4.start docker server after machine start up
+~~~
+systemctl enable docker
+~~~
+## Docker Images
+### 1.check local images
+~~~
+docker images [OPTIONS][REPSITORY]
+-a --all=false
+-f --filter=[]
+--no-trunc
+-q --quiet=false
 
+//docker images -q can get all IMAGE_ID, if you want to delete all images you can use
+docker rmi `docker images -q`
+~~~
+### 2.check and find if there's image in repository
+~~~
+docker search[OPTIONS] IMAGE_NAME
+--automated=false
+--no-trunc=false
+-s --starts=0
+
+//example
+docker search -s 3 ubuntu
+~~~
+### 3.pull image from remote repository
+~~~
+docker pull [OPTIONS] IMAGE_NAME:[TAG]
+
+//example
+docker pull redis:5.0
+~~~
+### 4.push image to remote repository
+~~~
+docker push dormacypress/nginx
+~~~
+### 5.create new image from container
+~~~
+docker commit [OPTION] CONTAINER_NAME [REPOSITORY[TAG]]
+-a --author
+-m --message
+-p --pause=true
+
+docker commit -a 'supeng' -m 'nginx' commit_test supeng/nginx-test
+~~~
+### 6.delete image
+~~~
+docker rmi IMAGE_NAME
+docker inspect IMAGE_NAME
+
+//example
+docker rmi redis:5.0
+docker rmi redis:dev720cs9fj39
+~~~
+### 7.set docker proxy
+~~~
+** --registry-mirror 
+1.modify docker configuration. vim /etc/default/docker
+2.add   DOCKER_OPTS="--registry-mirror=http://MIRROR_ADDR"
+~~~
+
+## Docker Container
+### 1.start a container
+~~~
+docker run IMAGE[COMMAND][ARG...]
+-i --interactive=true|false (run behind the scence)
+-t --tty=true|false (termial)
+
+docker run --name=container01 -i -t redis:5.0 /bin/bash
+~~~
+### 2.check && start && stop && remove container
+~~~
 docker inspect CONTAINER
 docker ps -al
-docker run --name=container01 -i -t IMAGE /bin/bash
-docker start -i container01
-docker rm container01
 
+docker start container01 -i
+
+docker stop container02
+docker kill contianer02
+
+docker rm container01
+~~~
+### 3.run container without check in
+~~~
+docker run --name=container02 -id redis /bin/bash
+-d(deamon) run from the behind
+
+**then check in container
+docker exec [-d][-i][-t] CONTAINER_NAME
+docker exec container02 -id /bin/bash
 
 **CTRL+P CTL+Q to exit without terminate the container
-docker run --name container02 -d IMAGE /bin/bash
--d run from the behind
-
-**check logs
+~~~
+### 4.check logs
+~~~
 docker logs [-f]-[t][-tail] CONTAINER_NAME
 -f --follows=true|false
 -t --timestamps=true|false
 --tail='all'
-
+~~~
+### 5.check process and start new one
+~~~
 **check process in container
 docker top CONTAINER_NAME
+~~~
+## Docker Volumn
+### 1.create Volumn
+~~~
+docker run ... -v host machine absoulte directory:container absoulte directory
 
-**start new process in container
-docker exec [-d][-i][-t] CONTAINER_NAME
+//example
+docker run -id --name=supeng -v /root/data:/root/data_container centos:7 /bin/bash
 
-**stop container
-docker stop container02
-docker kill contianer02
+//mount several volumns （\ indicates change line with multiple commands）
+docker run -id --name=supeng1 -v /root/data:/root/data_container \
+-v /root/data2:/root/data_container2 \
+-v /root/data3:/root/data_container3
+~~~
+### 2.configure Volumn container for other containers
+~~~
+//create slogan volumn container
+docker run -it --name=slogan -v /sharedContainer centos:7 /bin/bash
+
+//create other containers(c1, c2, c3) to share the info
+docker run -it --name=c1 --volumn-from slogan centos:7 /bin/bash
+docker run -it --name=c2 --volumn-from slogan centos:7 /bin/bash
+docker run -it --name=c3 --volumn-from slogan centos:7 /bin/bash
+~~~
+## Docker Deployment
+### 1.pull mysql images and create mysql project
+~~~
+docker search mysql
+docker pull mysql:5.6
+mkdir ~/mysql
+cd ~/mysql
+~~~
+### 2.create mysql container
+~~~
+docker run -id \
+-p 3307:3306 \  //host:container
+--name=c_mysql \
+-v $PWD/conf:/etc/mysql/conf.d \
+-v $PWD/logs:/logs \
+-v $PWD/data:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=123456 \ //initializing env password
+mysql:5.6
+~~~
+### 3.enter mysql container
+~~~
+docker exec -it c_mysql /bin/bash
+mysql -uroot -p123456
 ~~~
 ### nginx setting by docker
 ~~~
@@ -62,42 +195,7 @@ docker inspect nginx-web
 //IPAddress is the container ip address
 //docker exec nginx-web nginx to restart the nginx process 
 ~~~
-## Docker Images
-~~~
-docker images [OPTIONS][REPSITORY]
--a --all=false
--f --filter=[]
---no-trunc
--q --quiet=false
 
-docker rmi IMAGE_NAME
-docker inspect IMAGE_NAME
-
-//find the images in repository
-docker search[OPTIONS] IMAGE_NAME
---automated=false
---no-trunc=false
--s --starts=0
-//example
-docker search -s 3 ubuntu
-
-//pull image from remote repository
-docker pull [OPTIONS] IMAGE_NAME:[TAG]
-** --registry-mirror 
-1.modify docker configuration. vim /etc/default/docker
-2.add   DOCKER_OPTS="--registry-mirror=http://MIRROR_ADDR"
-
-//push images from local 
-docker push dormacypress/nginx
-
-//create new image from container
-docker commit [OPTION] CONTAINER_NAME [REPOSITORY[TAG]]
--a --author
--m --message
--p --pause=true
-
-docker commit -a 'supeng' -m 'nginx' commit_test supeng/nginx-test
-~~~
 ### docker process
 ~~~
 vi etc/default/docker
