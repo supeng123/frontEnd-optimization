@@ -63,6 +63,10 @@ docker commit [OPTION] CONTAINER_NAME [REPOSITORY[TAG]]
 -p --pause=true
 
 docker commit -a 'supeng' -m 'nginx' commit_test supeng/nginx-test
+
+docker commit contianerId imagesNameSql:1.0
+docker save -o imageName.tar:1.0
+docker load -i imageName.tar
 ~~~
 ### 6.delete image
 ~~~
@@ -171,6 +175,69 @@ mysql:5.6
 docker exec -it c_mysql /bin/bash
 mysql -uroot -p123456
 ~~~
+## Docker compose for MEAN
+### 1.docker file for front end
+~~~
+FROM node:6
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app
+RUN npm cache clean
+RUN npm install
+COPY . /usr/src/app
+EXPOSE 4200
+CMD ["npm","start"]
+~~~
+### 2.docker file for back end
+~~~
+FROM node:6
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app
+RUN npm cache clean
+RUN npm install
+COPY . /usr/src/app
+EXPOSE 3000
+CMD ["npm","start"]
+~~~
+### 3.install docker compose
+~~~
+sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+~~~
+### 4.create docker yml file
+~~~
+version: '3.0' # specify docker-compose version
+ 
+# Define the services/ containers to be run
+services:
+ angular: # name of the first service
+  build: angular-app # specify the directory of the Dockerfile
+  ports:
+  - "4200:4200" # specify port mapping
+ 
+ express: # name of the second service
+  build: express-server # specify the directory of the Dockerfile
+  ports:
+  - "3000:3000" #specify ports mapping
+  links:
+  - database # link this service to the database service
+ 
+ database: # name of the third service
+  image: mongo # specify image to build container from
+  ports:
+  - "27017:27017" # specify port forwarding
+~~~
+### 5.set up servers
+~~~
+docker-compose build
+docker-compose up
+
+refer to https://medium.com/edureka/docker-compose-containerizing-mean-stack-application-e4516a3c8c89
+
+https://scotch.io/tutorials/create-a-mean-app-with-angular-2-and-docker-compose
+~~~
+
 ### nginx setting by docker
 ~~~
 ** steps
@@ -240,6 +307,7 @@ docker info
 
 *example ONBUILD COPY index.html /usr/share/nginx/html
 
+docker build -f ./dockerfilename -t slogan_image:1 .
 ~~~
 ## Docker Bridge
 ~~~
