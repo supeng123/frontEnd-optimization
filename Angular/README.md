@@ -245,3 +245,48 @@ export class AdBannerComponent implements OnInit, OnDestroy {
 
 entryComponents: [ HeroJobAdComponent, HeroProfileComponent ],
 ~~~
+### elementRef && templateRef && viewContainerRef
+~~~
+elementref 能拿到dom原生节点的信息
+templateRef 能拿到ng-template的信息
+viewContainerRef 可以通过templateRef创建管理视图
+~~~
+### contentChild && viewChild
+~~~
+都可以通过定义拿到子组件里面的属性方法
+viewchild是直接拿到子组件
+contentchild 是ng-content的内容投影
+https://www.cnblogs.com/banluduxing/p/10394387.html
+~~~
+### InjectionToken
+~~~
+构造函数中非 Type 类型的参数只能通过 @Inject(Something) 的方式注入
+~~~
+### Forward Reference
+~~~
+通过引入 forwardRef 让我们可以在使用构造注入时，使用尚未定义的依赖对象类型
+
+@Injectable()
+class Socket {
+  constructor(private buffer: Buffer) { }
+}
+console.log(Buffer); // undefined
+@Injectable()
+class Buffer {
+  constructor(@Inject(BUFFER_SIZE) private size: Number) { }
+}
+console.log(Buffer); // [Function: Buffer]
+
+//alternative
+import { forwardRef } from'@angular2/core';
+
+@Injectable()
+class Socket {
+  constructor(@Inject(forwardRef(() => Buffer)) 
+      private buffer) { }
+}
+
+class Buffer {
+  constructor(@Inject(BUFFER_SIZE) private size: Number) { }
+}
+~~~
