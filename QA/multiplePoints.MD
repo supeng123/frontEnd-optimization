@@ -780,6 +780,33 @@ funciton searchMatrix(matrix) {
     return false
 }
 ~~~
+### 43.和为S的连续序列
+~~~
+function continousSequence(target) {
+    let position = 1
+    let index = 1
+    const result = []
+    let innerList = []
+    let sum = 0
+    while (position < target/2) {
+        for (let i = 0; i < target; i++) {
+            innerlist.push(i)
+            sum += i
+            if (sum == target) {
+                result.push(innerList)
+            }
+            if (sum >= target) {
+                innerList  = []
+                sum = 0
+                index++
+                position = index
+                break
+            }
+        }
+    }
+    return result
+}
+~~~
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
 
