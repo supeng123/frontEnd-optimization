@@ -807,6 +807,7 @@ function continousSequence(target) {
     return result
 }
 ~~~
+
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
 

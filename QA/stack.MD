@@ -263,7 +263,9 @@ function MinStack() {
 }
 MinStack.prototype.push = function(x) {
     this.stack.push(x)
-    this.minStack.push(Math.min(Math.min(...this.minStack), x))
+    if(this.minStack.length == 0 || x < this.minStack[this.minStack.length-1]) {
+        this.minStack.push(x)
+    }
 }
 
 MinStack.prototype.pop = function() {
