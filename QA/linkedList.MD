@@ -300,3 +300,24 @@ function intersection(HeadA, HeadB) {
     return a
 }
 ~~~
+### 14.复制链表
+function copyLinkList(head) {
+    const m = new Map()
+    let cur = head
+    while (cur) {
+        const newNode = new Node(cur.val)
+        m.set(cur, newNode)
+        cur = cur.next
+    }
+    cur = head
+    while (cur) {
+        const newNode = m.get(cur);
+        const nextNode = m.get(cur.next)
+        const randomNode = m.get(cur.random)
+        if (nextNode) newNode.next = nextNode
+        if (randomNode) newNode.random = randomNode
+        cur = cur.next
+    }
+    return m.get(head)
+}
+~~~
