@@ -281,3 +281,35 @@ function maxSqure (matrix) {
     return Math.pow(max,2)
 }
 ~~~
+### 13.把数字翻译成字符串
+~~~
+function translateNum(num) {
+    const str = num.toString()
+
+    function dfs(str, index) {
+        if (index >= str.length - 1) return 1
+        const num = Number(str[index]+str[index+1])
+        if (num >= 10 && num < 26) {
+            return dfs(str, index+1) + dfs(str, index+2)
+        } else {
+            return dfs(str, index+1)
+        }
+    }
+    return dfs(str, 0)
+}
+
+function translateNum(str) {
+    const dp = new Array(str.length+1)
+    dp[0] = 1
+    dp[1] = 1
+    for (let i = 2; i <= str.length; i++) {
+        const num = Number(str[i-2]+str[i-1])
+        if (num >= 10 && num < 26) {
+            dp[i] = dp[i-2] + dp[i-1]
+        } else {
+            dp[i] = dp[i-1]
+        }
+    }
+    return dp[]
+}
+~~~
