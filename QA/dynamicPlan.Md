@@ -313,3 +313,35 @@ function translateNum(str) {
     return dp[]
 }
 ~~~
+### 14.股票的最大利润
+~~~
+function profit(prices) {
+    const len = prices.length
+    if (!len || len === 0) return 0
+    const dp = new Array(len).fill(0)
+    let min = prices[0]
+    for (let i = 0; i < len; i++) {
+        min = Math.min(prices[i], min)
+        dp[i] = Math.max(dp[i - 1], prices[i] - min)
+    }
+    return dp[len-1]
+}
+~~~
+### 15.交换和
+~~~
+~~~
+### 16.单词拆分
+~~~
+~~~
+### 17.最长公共子序列
+~~~
+~~~
+### 18.连续子数组的最大和
+~~~
+~~~
+### 19.丑数
+~~~
+~~~
+### 20.最长不含重复字符的子字符串
+~~~
+~~~
