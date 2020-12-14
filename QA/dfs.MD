@@ -62,26 +62,27 @@ function largestIsland(grid) {
 ### 4.单词搜索 && 矩阵中的路径
 ~~~
 function wordSearch(board, word) {
-    board[-1] = []
-    board.push([])
+    
+    function dfs(row, column, index) {
+        if (row < 0 || column < 0 || row >= board.length || column >= board[0].length || board[row][column] !== word[index]) return 
+        if (index == board.length - 1) return true
+
+        let temp = board[row][column]
+        board[row][column] = '-'
+        let res = dfs(row-1, column, index+1) ||
+                    dfs(row+1, column, index+1) ||
+                    dfs(row, column-1, index+1) ||
+                    dfs(row, column+1, index+1) ||
+        board[row][column] = temp
+        return res
+    }
+
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[0].length; j++) {
-            if (board[i][j] == word[0] && dfs(i,j, 0)) return true
+            if dfs(i,j,0) return true
         }
     }
     return false
-
-    function dfs(row, column, index) {
-        if (index+1 == word.length) return true
-        let temp = board[row][column]
-        board[row][column] = false
-        if (board[row+1][column] == word[index+1] && dfs(row+1,column, index + 1)) return true
-        if (board[row-1][column] == word[index+1] && dfs(row-1,column, index + 1)) return true
-        if (board[row][column+1] == word[index+1] && dfs(row,column+1, index + 1)) return true
-        if (board[row][column-1] == word[index+1] && dfs(row,column-1, index + 1)) return true
-        board[row][column] = temp
-        return
-    }
 }
 ~~~
 ### 5.机器人的活动范围

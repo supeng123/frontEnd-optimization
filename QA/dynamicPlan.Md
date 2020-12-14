@@ -341,6 +341,20 @@ function profit(prices) {
 ~~~
 ### 19.丑数
 ~~~
+function uglyNumber(n) {
+    const dp = []
+    dp[0] = 1
+    let two = 0
+    let five = 0
+    let three = 0
+    for (let i = 0; i <= n; i++) {
+        dp[i] = Math.min(dp[two]*2, dp[three]*3, dp[five]*5)
+        if (dp[i] == dp[two]*2) two++
+        if (dp[i] == dp[three]*3) three++
+        if (dp[i] == dp[five]*5) five++
+    }
+    return dp[n-1]
+}
 ~~~
 ### 20.最长不含重复字符的子字符串
 ~~~
