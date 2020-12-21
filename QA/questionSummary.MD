@@ -2248,30 +2248,6 @@ for (var i = 0; i < 20; i++) {
 }
 ul.appendChild(fragment);
 
-function doSth(fn){
-  // todo: your code here
-  let start = Number(new Date())
-  let t 
-  let self = this
-  
-  window.requestAnimationFrame(loopfn)
-  function loopfn(){
-  	t = window.requestAnimationFrame(loopfn)
-    if (Number(new Date()) - start >= 1000) {
-    	start = Number(new Date())
-    	fn.apply(self, ...arguments)
-    }
-  }
-}
-
-const fn = doSth(()=>{
-  console.log('hello alibaba');
-})
-
-setInterval(() => {
-	fn();
-},10)
-
 function create() {
     let obj = {};
     let f = [].shift.call(arguments);
@@ -2279,4 +2255,84 @@ function create() {
     let result = f.apply(obj, arguments);
     return result instanceof Object ? result : obj;
 }
+
+A lot of、lots of、plenty of修饰可数名词复数和不可数名词
+A number of、large number of修饰可数名词复数
+A great deal of修饰不可数名词
+the number of+可数名词复数作主语，特指数量是多少，谓语用单数
+A number of scientists are single
+许多科学家都是单身
+The number of scientists in the lab is five
+实验室里的科学家人数是五人
+
+
+单数：some、any、each、every、either、nether等
+复数：many、few、ones、both、others等
+不可数：much、little、all等
+复合：something、someone、nothing、nobody等
+
+Other
+表示不同种类的另一个，其余
+Do you like other styles?
+你喜欢其他的款式吗？
+
+Another
+表示同种类的另一个，又一个
+I have another story.
+我有另一个故事
+
+The other
+表示两个里面的另一个
+Why not try the other box?
+为什么不尝试另外一个盒子？
+
+Others
+表示其余的人或物，指大部分
+Some students are playing football, 
+and others are watching them.
+有些学生正在踢球，其他学在看他们踢
+
+The others
+表示其余的人或物，指全部
+John and the others are here.
+约翰和其他人都在这
+
+many a...或more than one+名词做主语，谓语用单数
+Many a man is smoking
+很多男人在抽烟
+More than one man is smoking
+不止一个男人在抽烟
+
+one and a half+复数名词做主语，谓语用单数
+One and a half watermelons is in the fridge
+冰箱里有一个半西瓜
+
+one+of+复数名词结构中，谓语用单数
+One of the students in our school is from the United States
+我们学校有一名来自美国的学生
+
+就近原则（距离谓语近的名词，决定谓语单复数）
+or，either...or...(二选一),neither...nor...（两个都不选，选另外一个）,not only...but...(also)（不仅而且，两个都）连接并列作主语
+His friends or he was dead（他的朋友们或者他已经死了）
+He or his friends were dead （他或者他的朋友们已经死了）
+Either my brothers or mother is going to the garden（我弟弟或者妈妈要去花园）
+Either mother or my brothers are going to the garden（妈妈或者我弟弟要去花园）
+Neither two apples nor one banana is vegetable（两个苹果和一个香蕉都不是蔬菜）
+Neither one apple nor two bananas are vegetables（一个苹果和两个香蕉都不是蔬菜）
+Not only my friends but also my girlfriend was wrong（不仅是我朋友我女朋友也错了）
+Not only my girlfriend but also my friends were wrong（不仅是我女朋友我朋友也错了）
+
+就远原则（距离谓语远的名词，决定谓语单复数）
+四除（but，except，besides，in addition to）五和（with，along with，together with，combined with，as well as）包括（including）而不是（rather than，instead of）
+Peter, but his roommates, is friendly.（皮特人很好，除了他室友）
+Peter, except his roommates, is friendly. （皮特人很好，除了他室友）
+Peter, besides his roommates, is friendly. （皮特人很好，除了他室友）
+
+
+
+
+
+
+
+
 
