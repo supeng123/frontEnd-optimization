@@ -251,3 +251,140 @@ A live album.（一个现场专辑）
 lively表示活泼的、生动的
 Her lively mind.（他灵活的头脑）
 ~~~
+## 副词
+### wards,wise结尾的副词
+~~~
+inwards、eastwards、clockwise、likewise
+~~~
+### 形容词副词一样
+~~~
+hard、late、fast、tight
+~~~
+### 其他副词
+~~~
+so、very、just
+~~~
+### most mostly
+~~~
+most（名词、形容词、副词）表示最、很、十分
+mostly（副词）表示主要地、大部分地
+
+The most outlandish ideas.
+最奇特的想法
+The atoms themselves are mostly empty space.
+原子本身大部分的空间是空隙
+~~~
+### farther、further
+~~~
+表示地点距离远时候，两个词都能用，表示更远
+如果要表示更多、额外，要用further
+具体的远用farther或者further，抽象的远用further
+
+Can we walk farther/further tomorrow?
+我们明天能走远点吗？
+See under for further information.
+更多内容详见下文
+~~~
+### sometimes、sometime、some times、some time
+~~~
+sometimes：有时候
+sometime：未来的某个时候
+some times：很多次（一次once、两次twice）
+some time：一些时间
+
+Sometimes I go shopping in the mall.
+有时候去我大商场购物
+Peter, I will meet your mother sometime.
+皮特,我哪天去见下你的妈妈
+You have treated me quite some times recently. Now it's my turn.
+你已经请我好几次了，这次轮到我请你了
+I should stay home some time.
+我应该待在家一段时间
+~~~
+### also, nor
+~~~
+also：肯定句的谓语动词之前，系动词之后
+nor：放在句首
+
+You are also Chinese.
+你也是中国人
+Nor is Peter anywhere a good man.
+皮特也不是个好人
+~~~
+### 副词比较级变化，规则跟形容词比较级一样，形容词比较级特殊结构副词一样能用
+~~~
+原级：A+实意动词+as+副词原形+as+B
+You play basketball as well as Xukun Cai.
+你篮球打的跟蔡徐坤一样好
+
+比较级：A+实意动词+副词比较级+than+B
+I know you better than she.
+我比她更了解你
+
+最高级：A+实意动词+the+副词最高级+B
+Rice grows the best in soil fertile.
+水稻在肥沃土地里生长得最好
+~~~
+## 动词
+### 动词分类
+~~~
+实意动词：walk、eat、make等
+系动词：is、are、look等
+感官动词（feel、look、smell、sound、seem）
+变化动词（get、become、turn、grow）
+保持动词（keep、stay、remain、rest）
+
+静态动词：own、cost、consist，ave、own、want、contain ，love、hate，know、think、understand、believe等
+动词短语：come out、depend on、pay off等
+
+不能做谓语
+加动词一起可以做谓语
+助动词：have、do、shall、will、should、can等
+情态动词：can、may、must、need等
+
+常见的不及物动词有：come，lie，agree，go，fly，work，listen，happen等。常见的及物动词有：have，eat，say，find，buy，cut，make，take，tell等。
+及物动词后跟宾语，才能表达完整的语义。如：She's reading a magazine.她正在读一本杂志。不及物动词后不跟宾语，也能够表达具体语义。如：He is looking around.他环顾四周。如果想接宾语，动词后面必须加上介词，
+及物动词可以用于主动语态，大多有被动语态；不及物动词有主动语态，但没有被动语态
+~~~
+### 动词原形
+~~~
+1.与助动词或情态动词一起构成谓语, 要用原形
+Do you like English?（你喜欢英语吗?）
+
+2.祈使句的谓语动词,要用原形
+Don’t move.（别动）
+
+3.感官动词的宾语与宾补构成逻辑上的主谓关系，表示动作的最后结果或全过程时，作宾补的动词要用原形
+I heard a coin drop.（我听到一个硬币掉了下）
+
+4.使役动词后的宾语与作宾补的动词构成逻辑上的主谓关系时，动词要用原形
+He let Jack lead the way.（他让杰克在前面带路）
+
+5.两个以上的并列不定式用and或or连接起来，动词要用原形
+Let’s go and play football.（我们去踢球）
+
+6.在why not…和why…句型中，not和why后直接跟动词原形，构成反问，表示“建议、劝告、责备或提醒”等。
+Why not use my bicycle?（为什么不用我的自行车呢?）　
+　
+7.动词help后是宾+宾补，其宾补由动词充当时，动词用原形
+I was helped to clean the room by her.（他帮我打扫房间）
+
+8.do,does,did与动词原形连用　
+Do be careful!（一定要当心! ）　
+
+9.不定式作介词but和except的宾语，当其前有实意动词do时，后面的动词不定式要省略to
+Jack had nothing to do but/except watch TV.（杰克除了看电视外无事可做）
+
+10.在一些固定的句型中，如had better（最好）,would rather （宁愿）,would rather…that…（宁愿…而不）等后面的动词要用原形
+You had better have a good rest.（你最好好好休息一下）　
+~~~
+### 动名词 && 现在分词
+~~~
+动名词起着名词的功能，常在句子中充当主语、定语、表语等成分
+现在分词来构成进行时态，与助动词be搭配构成句子的谓语，现在分词在句中还可以充当定语、表语和状语
+~~~
+### 过去式 && 过去分词
+~~~
+过去式单独做谓语，表示过去某个时间发生动作
+过去分词是动词的非谓语形式，表示被动或者完成
+~~~
