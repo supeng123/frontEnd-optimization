@@ -387,4 +387,98 @@ You had better have a good rest.（你最好好好休息一下）　
 ~~~
 过去式单独做谓语，表示过去某个时间发生动作
 过去分词是动词的非谓语形式，表示被动或者完成
+The concert given by their friends was a success
+~~~
+### 动词时态
+#### 过去的过去
+~~~
+had been doing
+过去完成进行时
+had done
+过去完成时
+
+~~~
+#### 过去
+~~~
+was/were doing
+过去进行时
+did
+一般过去时
+have been doing
+现在完成进行时
+have done
+现在完成时
+~~~
+#### 过去的将来
+~~~
+would do
+一般过去将来时
+would be doing
+过去将来进行时
+would have been doing
+过去将来完成进行时
+would have done
+过去将来完成时
+~~~
+#### 现在
+~~~
+do
+一般现在时
+am/is/are doing
+现在进行时
+
+一般现在时表示将来，主句为将来时态或者表示将来意思时，时间/条件状语从句要用一般现在时表示将来：
+I will tell him the news when he comes back.（他回来的时候，我将告诉他这个消息）
+~~~
+#### 将来
+~~~
+will do
+一般将来时
+will be doing
+将来进行时
+will have been doing
+将来完成进行时
+will have done
+将来完成时
+~~~
+### 主动改被动一共四步
+~~~
+1、把主动句的宾语改成被动句的主语
+
+2、把主动句的谓语动词改成，被动句谓语形式be+过去分词，并且人称和单复数要随着新主语变化，时态保持不变
+
+3、把主动句的主语前面加by，放到谓语之后，变化人称宾格，如果看前面就知道是谁被谁做了什么，或者上下文有交代是谁，可以省略by加主语
+
+4、其他句子成分保持不变
+~~~
+### 常用的被动语态形式
+~~~
+一般现在时------ am/is/are+过去分词 ------ I kill you——You are killed by me
+一般过去时------ was/were+过去分词 ------ I killed you——You were killed by me
+一般将来时------ will be+过去分词 ------ I will kill you——You will be killed by me
+
+现在进行时------ am/is/are+being+过去分词 ------ I am killing you——You are being killed by me
+过去进行时------ was/were+being+过去分词 ------ I was killing you——You were being killed by me
+
+现在完成时------ have/has+been+过去分词 ------ I have killed you——You have been killed by me
+过去完成时------ had+been+过去分词 ------ I had killed you——You had been killed by me
+将来完成时------ will+have been+过去分词 ------ I will have killed you——You will have been killed by me
+
+情态动词------ can/could/should/would等+be+过去分词 ------I can kill you——You can be killed by me
+~~~
+### 双宾的被动语态可以改两句
+~~~
+把间接宾语改成被动语态的主语，直接宾语留着原位
+把直接宾语改成被动语态的主语，间接宾语前面加to或for
+
+He gave her some money. 他给了她一些钱
+She was given some money（by him）. 她被（他）给了一些钱
+Some money was given to her（by him）. 一些钱被（他）给了她
+~~~
+### 宾补的被动语态只能改一句
+~~~
+主动语态的宾语改成主语， 宾补在被动语态中做主语的宾补
+
+We made him manger.我们选他做经理
+He was made manger （by us）.他被（我们）选做经理
 ~~~
