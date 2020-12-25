@@ -482,3 +482,62 @@ Some money was given to her（by him）. 一些钱被（他）给了她
 We made him manger.我们选他做经理
 He was made manger （by us）.他被（我们）选做经理
 ~~~
+### 非谓语动词
+#### 定义
+~~~
+不做谓语的动词，不定式，动名词，（现在过去）分词
+The teacher told us to do the homework.
+老师叫我们做家庭作业
+I like swimming.
+我喜欢游泳
+He sat there and reading a newspaper.
+他坐在那看着报纸
+We heard about polluted air information.
+我们听到了空气被污染的消息
+~~~
+#### 什么时候不加to
+~~~
+1、跟助动词can, could, might, should, will, may, must, ought to, shall一起不加to
+I can do it.
+
+2、跟感官动词（see, watch, observe, hear, listen to, feel等）一起不加to
+I saw him enter the house.
+
+3、跟使役动词（let, make, have, keep, help等）一起不加to
+Let me try  it.
+
+4、跟why（not）一起不加to
+Why not go out for a walk on a sunny day？ 
+
+5、跟know一起有时候不加to
+若know为现在式，不定式是限于to be，这时候to不能省略
+We knew her to be honest.
+若know为完成式或过去式，结构中不定式用除to be外的其他动词不定式，这个时候可以省略to
+We have never known him tell a lie. 
+
+6、介词except、but后不加to
+She tries everything except cook.
+
+7、主语部分带do不定式做表语省略to
+All you do now is complete the form.
+
+8、当两个或多个作用相同的不定式并列时，第一个不定式前用to，其余不定式前的to可以省略
+He told me to stay there and wait for him. 
+~~~
+#### 什么时候不能省to
+~~~
+当使役动词、感官动词用于被动语态时，要补上在主动语态中省略的to
+
+She was made to feel happy by the great news. 
+这个好消息使她感到高兴
+
+The woman was seen to enter a bank. 
+有人看见这个女人进了一家银行
+~~~
+#### 现在分词和动名词区分，看意思是否有正在进行，看句子成分
+~~~
+现在分词（状语、表语、定语、宾补）: a swimming boy 正在游泳的男孩  He sat here and reading a book.他坐在那看着书
+
+动名词（主语、宾语、表语、定语、宾补）:a swimming suit 泳衣learning a foreign language is difficult.学一门外语很难
+I enjoy dancing.我喜欢跳舞
+~~~
