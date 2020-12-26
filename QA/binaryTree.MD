@@ -1,6 +1,6 @@
 ### 1.路径总和
 ~~~
-leecode 113
+leetcode 113
 深度优先遍历 前序遍历 注意传入的path是引用类型需要slice保持单次路径的独立
 function pathSum (root, sum) {
     const paths = []
@@ -17,6 +17,31 @@ function pathSum (root, sum) {
         }
         preOrder(node.left, path.slice(0))
         preOrder(node.right, path.slice(0))
+    }
+}
+
+leetcode 112
+function pathSum(root, sum) {
+    if (!root) return false
+    if (root.left == null && root.right == null) return root.val === sum
+    reurn pathSum(root.left, sum - root.val) || pathSum(root.right, sum - root.val)
+}
+
+leetcode 437
+function pathSum(root, sum) {
+    if (root == null) return 0
+    int res = findPath(root, sum)
+    res += pathSum(root.left, sum)
+    res += pathSum(root.right, sum)
+    return res
+
+    findPath(node, num) {
+        if (node == null) return 0
+        let res = 0
+        if (node.val == num) res += 1
+        res += findPath(node.left, num - node.val)
+        res += findPath(node.right, num - node.val)
+        return res
     }
 }
 ~~~
@@ -366,7 +391,7 @@ BinaryTree.prototype.deserilized = function(data) {
     }
 }
 ~~~
-### 19.二叉树最近公共祖先
+### 19.二叉搜索树最近公共祖先
 ~~~
 function ancester(root, p, q) {
     if ((root.val-p.val)*(root.val-q.val) <= 0) return root
@@ -465,7 +490,7 @@ function height(node) {
 ### 24.二叉树公共祖先
 ~~~
 function ancestor(root, p, q) {
-    if (!root || root.left == p || root.right == q) return root
+    if (!root || root == p || root == q) return root
     let left = ancestor(root.left, p, q)
     let right = ancestor(root.right, p, q)
     if (left && right) return root
@@ -520,5 +545,23 @@ function shortestDistance(root, p, q) {
         stack.pop()
         return
     }
+}
+~~~
+### 27.完全二叉树的节点个数
+~~~
+leetcode 222
+function countNodes(root) {
+    return root ? countNodes(root.left) + countNodes(root.right) + 1 : 0
+}
+~~~
+### 28.将有序数组转换为二叉搜索树
+~~~
+function changeArrayToBinaryTree(arr) {
+    if(arr.length === 0) return null;
+    let mid = arr.length >> 1
+    root = new TreeNode(arr[mid])
+    root.left = changeArrayToBinaryTree(arr.slice(0, mid))
+    root.right = changeArrayToBinaryTree(arr.slice(mid + 1))
+    return root
 }
 ~~~
