@@ -37,7 +37,7 @@ function subSet(nums) {
 ~~~
 leetcode 39
 回溯 dfs
-function generateBracket(candidates) {
+function generateBracket(candidates， target) {
     const result = []
     candidates.sort((a, b) => a - b)
     let tempPath = []
@@ -57,6 +57,31 @@ function generateBracket(candidates) {
         }
     }
 }
+
+leetcode 77
+function combination(n, k) {
+    const res = []
+    dfs([], 1)
+    function dfs(temp, start) {
+        if (temp.length == k) {
+            console.log(`得到一个结果啦：`, temp)
+            res.push(temp.slice())
+            return
+        }
+        for (let i = start; i <= n; i++) {
+            temp.push(i)
+            console.log(i,`被加了进来，此时temp为:`, temp)
+            dfs(temp, i+1)
+            console.log('终于遍历完了')
+            temp.pop()
+            console.log(i,`被删了，此时temp为:`, temp)
+        }
+    }
+    return res
+}
+
+combination(4, 2)
+
 ~~~
 ### 4.全排列
 ~~~
@@ -151,7 +176,7 @@ function wholePermutation(candidates) {
         let l = start
         let r = end
         while (l < r) {
-            if (s[l++] !== r[r--]) return false
+            if (s[l++] !== s[r--]) return false
         }
         return true
     }
@@ -225,5 +250,174 @@ function sum(nums, target) {
         }
     }
     return count
+}
+~~~
+### 9.恢复ip地址
+~~~
+leetcode 93
+function restoreIpAddress(strings) {
+    const res = []
+    dfs(strings, [])
+
+    funtion isValid(numbers) {
+        if(numbers.length > 3) return
+        return numbers[0] == '0' ? numbers.length == 1 : parseInt(numbers) < 256
+    }
+
+    function dfs(remains, temp) {
+        if (isValid(remains) && temp.length == 3) {
+            res.push([...temp, remains].join('.'))
+            return
+        }
+
+        for (let i = 1; i < 4; i++) {
+            if (isValid(remains.substr(0, i))) dfs(remains.substr(i), [...temp, remains.substr(0, i)])
+        }
+    }
+    return res  
+}
+~~~
+### 1.甲板上的战舰
+~~~
+leetcode 419
+dfs
+function countBattleShips(board) {
+    let row = board.length
+    let column = board[0].length
+    let counts = 0
+    for (let i = 0; i < row; i++) {
+        for (let j = 0; j < column; j++) {
+            if (board[i][j] === 'X') {
+                counts++
+                dfs(i, j)
+            }
+        }
+    }
+    return counts
+
+    function dfs(r, c) {
+        if (
+            r < 0 || c < 0 ||
+            r >= row || c >= column || board[r][c] !== 'X'
+        ) return
+        board[r][c] = '0'
+        dfs(r-1, c)
+        dfs(r+1, c)
+        dfs(r, c+1)
+        dfs(r, c-1)
+    }
+}
+~~~
+### 2.路径总和
+~~~
+leetcode 112
+~~~
+### 3.岛屿的最大面积
+~~~
+leetcode 695
+function largestIsland(grid) {
+    let result = 0
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[0].length; j++) {
+            if (grid[i][j] = '1') {
+                const counts =  dfs(i, j)
+                result = Math.max(result, counts)
+            }
+        }
+    }
+
+    dfs(row ,column) {
+        if (row < 0 || column < 0 || row >= grid.length || column >= grid.length || grid[row][column] == '0') return
+        grid[row][column] = '0'
+        let count = 1
+        count += grid(row-1, column)
+        count += grid(row+1, column)
+        count += grid(row, column-1)
+        count += grid(row, column+1)
+        return count
+    }
+}
+~~~
+### 4.单词搜索 && 矩阵中的路径
+~~~
+function wordSearch(board, word) {
+    
+    function dfs(row, column, index) {
+        if (row < 0 || column < 0 || row >= board.length || column >= board[0].length || board[row][column] !== word[index]) return 
+        if (index == board.length - 1) return true
+
+        let temp = board[row][column]
+        board[row][column] = '-'
+        let res = dfs(row-1, column, index+1) ||
+                    dfs(row+1, column, index+1) ||
+                    dfs(row, column-1, index+1) ||
+                    dfs(row, column+1, index+1) ||
+        board[row][column] = temp
+        return res
+    }
+
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[0].length; j++) {
+            if dfs(i,j,0) return true
+        }
+    }
+    return false
+}
+~~~
+### 5.机器人的活动范围
+~~~
+function robots(m, n, k) {
+    const set = new Set()
+    let count = 0
+    dfs(0, 0)
+    return count
+    function dfs (row, column) {
+        if (row < 0 || column < 0 || row >= m || column >= n || set.has(`${m}${n}`) || sum(row) + sum(column) > k) return
+        set.add(`{m}{n}`)
+        count++
+        dfs(row-1, column)
+        dfs(row+1, column)
+        dfs(row, column-1)
+        dfs(row, column+1)
+    }
+
+    function sum(num) {
+       return  num.toString().split('').reduce((total, cur) => Number(total) + Number(cur))
+    }
+}
+~~~
+### 6.数字翻译成字符串
+~~~
+function translator(nums) {
+    cons s = nums.toString()
+
+    function dfs(index) {
+        if (index >= s.length - 1) {
+            return 1
+        }
+        const number = Number(s[index]+s[index+1])
+        if (number > 10 && number < 26) {
+            return dfs(index+1) + dfs(index+2)
+        } else {
+            return dfs(index+1)
+        }
+    }
+    return dfs(0)
+}
+~~~
+### 7.打家劫舍
+~~~
+function robber(root) {
+    const rootStatus = dfs(root)
+    return Math.max(rootStatus[0], rootStatus[1])
+    
+    function dfs(node) {
+        if (node == null) return [0, 0]
+        let l = dfs(node.left)
+        let r = dfs(node.right)
+        let rob = node.val + l[1] + r[1]
+        let notRob = Math.max(l[0], l[1]) + Math.max(r[0], r[1])
+        return [rob, notRob]
+    }
 }
 ~~~
