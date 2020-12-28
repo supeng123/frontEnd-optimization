@@ -541,3 +541,316 @@ The woman was seen to enter a bank.
 动名词（主语、宾语、表语、定语、宾补）:a swimming suit 泳衣learning a foreign language is difficult.学一门外语很难
 I enjoy dancing.我喜欢跳舞
 ~~~
+### 名词性从句
+#### 主语从句
+~~~
+主语从句一定不能放句首的情况
+If/whether引导的主语从句
+It is uncertain 4whether/if he will come this evening.不确定他今晚是否会来
+
+It is said开头的结构
+It is said that he never laughed.据说他从来不笑
+
+It happens、It occurs结构
+It happens to me that I meet my professor.我碰巧遇到我的教授
+
+It doesn’t matter how/whether结构
+It doesn‘t matter how it happened.它发生没有什么关系
+
+疑问句的时候
+Is it sure that you will come back here？确定你要回到这里吗？
+~~~
+##### 如何区别it主语从句和强调句
+~~~
+判断方法：去的掉it、be、that之后看句子是否完整
+
+It is certain that he will come here.
+肯定他会来这里
+
+It was in the hospital that I saw the Peter.
+我在医院看见的是皮特
+~~~
+#### 宾语从句
+~~~
+当主句是一般现在时或者一般将来时的时候，从句可以任何时态
+当主句是一般过去时的时候，从句时态必须是过去时范围内的时态
+~~~
+##### 宾语从句的it做形式宾语
+~~~
+动词find、feel、consider、make、believe、think等后面有宾补的时候
+要用it做形式宾语，将that宾语从句后置
+
+I find it interesting that talking to you. 
+我觉得同你谈话很有意思
+
+I think it best that you should stay here. 
+我认为你最好住这
+~~~
+##### 宾语从句的否定转移
+~~~
+think、believe、imagine、suppose、guess等否定时，会转移到从句上
+ 
+I don’t believe that the car is good.
+我相信这车不好
+
+I don’t think that he will come back now.
+我认为他现在不会回来
+~~~
+##### that不能省略的时候
+~~~
+1、当主句谓语动词带两个或以上的宾语从句时候，可以省略第一个that，其他的从句that不能省
+I realize you are a hero and that everybody accepts your leadership.
+我意识到你是个英雄，每个人都接受你的领导
+
+2、宾语从句的主语是非谓语动词或者主语从句，that不能省
+He said that studying English is very hard.
+他说学英语非常难
+
+3、主语中的谓语动词是固定搭配时候，that不能省
+Mary has made up her mind that she will study hard for the scholarship.
+玛丽已经打定主意，她将努力学习拿奖学金。
+
+4、当宾语从句的主语是this或者that时候，或者this或that做主语的定语，that不能省
+He said that this would lead their ancestors to earth.
+他说将把他们的祖先带到地球
+
+5、宾语从句放在in、except、but等介词后面，that不能省
+He is a good student except that he is a little careless.
+他是个好学生，除了有的粗心以外
+
+6、it做形式宾语时候，that不能省
+We thought it strange that you did not come yesterday.
+我们认为很奇怪，你昨天没来
+
+7、that宾语从句放句首表示强调，that不能省
+That he ever said such a thing, I can not believe.
+我不能相信，他曾经说过这样的话
+
+8、主句谓语动词和宾语从句自己有插入语时候，that不能省
+Everyone could see, I believe, that Peter was really afraid.
+每个人都可以看到，我相信，彼得很害怕
+
+9、宾语从句的之前或之后紧跟一个状语的时候，that不能省
+He suddenly caught sight of the boy and realized at once that he had seen him before.
+他突然发现了这个男孩，立刻意识到自己曾经见过他
+~~~
+#### 表语从句
+~~~
+ 1、that引导：
+The reason was that he was late for school.原因是他上学迟到了
+2、whether、as、as if引导：
+The question is whether they will be able to help us.问题是他们是否能够为我们提供帮助
+3、连接代词who、whom、whose、what、which、等在表语从句做主语和宾语：
+The problem is who we can get to replace her.问题是我们可以代替谁
+4、连接副词where、when、how、why：
+This is where they once lived.这是他们曾经住过的地方
+5、连词because：
+I think it is because you are doing too much.我认为这是因为你做太多了
+6、一些表示建议劝说命令的名词后面：
+My suggestion is that we should start early tomorrow.我的建议是我们明天早点开始
+~~~
+#### 同位语从句
+##### 同位语从句和定语从句的区别
+~~~
+先行词的区别：
+同位语从句前面只能是idea, fact, news, suggestion等有内在含义的名词
+定语从句前面可以是名词、代词、部分句子，整个句子
+
+The news that he will come here.（同位语从句）
+他要来这里的消息
+He will come here, which made us very excited.（定语从句）
+他会来这里，这让我们非常兴奋
+~~~
+### 定语从句
+~~~
+用一个句子代替句子的定语，修饰先行词（名词或代词）
+定语从句=先行词+关系词+从句
+
+修饰人who, whose, whom, that
+
+修饰物which, that, whose
+
+修饰其他when, where, why
+~~~
+#### 定语从句做什么怎么看
+~~~
+后面是动作就是做主语
+The boy who is playing basketball is from our class.
+打篮球的男孩是我们班的
+
+后面是完整句子就是做宾语
+Peter is a good boy whom I want to see.
+皮特是我想见到的好男孩
+
+先行词和后面从句翻译要有的字就是做定语
+He has a friend whose father is a doctor.
+他有一个做朋友的父亲是医生
+~~~
+#### when、where、why
+~~~
+关系副词（when、where、why）定语从句可以替换成
+介词+which引导的定语从句
+
+The time when we got together finally arrived.
+The time in which we got together finally arrived.
+我们在一起的时间终于到了
+
+China is the country where I was born.
+China is the country in which I was born.
+我出生在中国这个国家
+
+The reason why she was moved to China.
+The reason for which she was moved to China.
+之所以她搬到中国
+~~~
+#### 只能用that的定语从句
+~~~
+先行词是everything, anything, nobody, nothing等代词，先行词被every, any, all, some, little等代词修饰
+You have everything that you could ever need.
+你有你所能需要的一切
+
+先行词是序数词或被序数词修饰
+She is the first that you were loved.
+她是第一个被你爱的人
+
+先行词是最高级或被最高级修饰
+This is the best car that I have ever seen.
+这是我见过最好的车
+
+先行词被the only、the very修饰
+It is the only thing that might work.
+只有那样才管用
+
+先行词前面有who、which等疑问代词
+Who is the man that is standing by the gate？
+站在门口的人是谁？
+
+先行词是人和动物，人和物
+We talking about the car and Peter that is so funny.
+我们正在聊这车和皮特真的很搞笑
+~~~
+#### 只能用which不能用that的定语从句
+~~~
+指物时候的引导非限定性定语从句
+ I have a car, which is a sport car.
+我有一辆车，它是一辆跑车
+
+关系词之前有介词
+The school in which he once studied is very famous.
+他曾经就读的学校非常有名
+~~~
+#### 限制定语从句和非限定定语从句
+~~~
+用逗号与主句隔开，只对先行词补充说明，删掉以后不影响主句，主句意思还是完整的，翻译成主句的并列句
+
+限定定语从句： Peter was the only person who is a policeman.
+皮特是唯一的警察
+
+非限定定语从句： I have a car, which is a sport car.
+我有一辆车，它是一辆跑车
+~~~
+#### 只能用who不能用that的定语从句
+~~~
+先行词为one、anyone、those
+We were the ones who killed her.
+我们才是杀害她的凶手
+
+先行词是人称代词
+Only you who can save her.
+只有你能救她
+~~~
+### 状语从句
+#### 时间
+~~~
+常见引导词when、as、while、as soon as、before、after、since、not until、until/till
+
+特殊引导词the minute, the moment, the second, every time, the day, the instant, immediately, directly, no sooner than, hardly when, scarcely when, as soon as
+
+用no sooner...than, hardly...when, scarcely...when引导从句部分倒装
+
+No sooner had I arrived home than it began to rain.我一到家就开始下雨了
+Every time I listen to your advice, I get into trouble.　　每当我听取你的建议时，我就会惹上麻烦
+While John was watching TV, his wife was cooking.　　当约翰看电视时，他的妻子正在做饭
+~~~
+#### 目的
+~~~
+常用引导词so that、in order that
+
+特殊引导词lest、in case、for fear that、in the hope that
+
+The boss asked the secretary to hurry up with the letters so that he could sign them.老板要求秘书赶快写信件以便他能在上面签字
+The teacher raised his voice on purpose that the students in the back could hear more clearly.为了让后面的学生听得更清楚，老师有意地提高了他的声音
+~~~
+#### 原因
+~~~
+常见引导词because、since、as
+
+特殊疑问词seeing that、now、that、in that、considering
+
+My friends dislike me because I am handsome and successful.　　我的朋友都不喜欢我，因为我又英俊又成功
+Now that everybody has come, let is begin our conference.　　既然每个人都到了，让我们开始我们的会议吧
+~~~
+#### 地点
+~~~
+常见引导词where
+
+特殊引导词wherever, anywhere, everywhere
+
+Where there is no rain, farming is difficult or impossible.　　在没有雨水的地方，耕作是困难的或根本不可能的
+They were good persons. Where they went, there they were warmly welcomed.　　他们都是好人。因此他们走到哪里都受到热烈欢迎
+You should have put the book where you found it.你应该把书放回原来的地方
+~~~
+#### 结果
+~~~
+常用引导词so...that, such...that
+
+特殊引导词such that, to the degree, to the extent that, to such a degree that
+
+It is such a good chance that we must not miss it.这是一个好机会，千万不能错过它
+To such a degree was he excited that he could not sleep last night.他激动到这个程度，以至于他昨晚睡不着
+This news is exciting, so that he jumped up.
+这个消息太令人激动了，以至于他跳了起来
+~~~
+#### 条件
+~~~
+常用引导词if，unless
+特殊引导词as/so long as, only if, providing/provided that, suppose that, in case that, on condition that
+
+We’ll start our project if the president agrees.如果总统同意，我们将开始我们的项目
+You will certainly succeed so long as you keep on trying.只要你继续努力，你一定会成功的
+~~~
+#### 让步
+~~~
+常见引导词though, although, even if, even though
+
+特殊引导词as(必须倒装)，while（一般在句首），no matter...，in spite of the fact that，while，whatever，whoever，wherever，however，whichever
+
+The old man always enjoys swimming even though the weather is rough.老人都很喜欢游泳，即使天气很恶劣
+No matter how hard he tried, she could not change her mind.不论他如何努力，她都不会改变她的主意
+~~~
+#### 比较
+~~~
+常见引导词as（同级比较）that（不同程度的比较）
+
+特殊疑问词the more...the more...,just as...,so...,a is to b what/as x is to y, no...more than, not a so much as b
+
+The house is three times as big as ours.这房子是我们的三倍大
+The more you exercise, the healthier you will be.你运动的越多，你就越健康
+~~~
+#### 方式
+~~~
+常见引导词as，as if，how
+
+特殊引导词the way
+
+She behaved as if she were the boss.她表现得好像她是老板
+we teach our children the way our parents have taught us.我们用父母教导我们的方式教导我们的孩子
+~~~
+#### 可以省略主语和be动词
+~~~
+主句和从句的主语一致时候，或者从句主语是it
+从句谓语动词是be动词
+
+When ( the museum is ) completed , the museum will be open to the public next year .当博物馆完成，该博物馆将于明年向公众开放
+He will go to the seaside for his holiday if (it is ) possible.如果可能，他将去海边度假的话
+~~~
