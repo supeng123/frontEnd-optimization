@@ -854,3 +854,52 @@ we teach our children the way our parents have taught us.我们用父母教导�
 When ( the museum is ) completed , the museum will be open to the public next year .当博物馆完成，该博物馆将于明年向公众开放
 He will go to the seaside for his holiday if (it is ) possible.如果可能，他将去海边度假的话
 ~~~
+### 倒装
+#### 部分倒装
+~~~
+将句子的谓语一部分（助动词、情态动词、be动词）置于主语之前
+如果句子的谓语没有助动词或者情态动词，需要添加助动词do、does、did再把它放到主语前面
+
+I have never seen a car so fast before.
+Never before have I seen a car so fast.
+我以前从未见过这么快的车
+~~~
+#### only修饰的状语在句首
+~~~
+只有这样了才能有机会交新朋友
+Only in this way can you have plenty of chances to make new friends.
+
+直到那个时候我才开始喜欢她
+Only then did I begin to like her.
+~~~
+#### 某些否定意义的词在句首
+~~~
+never, hardly, little, not, nowhere
+
+我从来没有见过她
+Never before have I seen her.
+
+在哪里都找不到这样高质量的学校
+Nowhere can you find a good quality school.
+
+Not only…But also, Not only…But…as well; 
+No sooner…that; hardly…when
+在句首，只是前半部分倒装
+
+这个可怜的人不仅被捕，而且还被送入监狱 
+Not only had the poor man been arrested, but he had been sent to prison as well.
+
+No sooner had he said than we would do the job.
+
+Hardly had I got into the home when it began to rain
+~~~
+#### as引导的让步状语从句，谓语动词以后部分倒装
+~~~
+今天虽然晴天，但我不出去
+Though it is sunny day, I shall not go out.
+The sunny day as it is, I shall not go out.
+
+尽管他努力工作，但他仍然贫困潦倒
+Though he worked hard, He is still penniless.
+Hard as he worked, He is still penniless.
+~~~

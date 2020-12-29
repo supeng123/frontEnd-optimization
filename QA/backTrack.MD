@@ -421,3 +421,41 @@ function robber(root) {
     }
 }
 ~~~
+### 8.n皇后
+~~~
+function nQueens(n) {
+    const res = []
+    for (let i = 0 ; i < n; i++) {
+        res[i] = new Array(n).fill('.')
+    }
+
+    function dfs(r) {
+        if (r === n) {
+            res.map((l) => {
+                return l.join('')
+            })
+            return
+        }
+        for (let c = 0; c < n; c++) {
+            if (isValid(r, c)) {
+                res[r][c] = 'Q'
+                dfs(i + 1)
+                res[r][c] = '.'
+            } 
+        }
+    }
+
+    function isValid(row, column) {
+        for (let i = 0; i < row; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (res[row][column] == 'Q' && (j == column || i + j == row + colum || i - j == row - column)) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+    return res
+}
+~~~
