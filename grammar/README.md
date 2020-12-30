@@ -903,3 +903,61 @@ The sunny day as it is, I shall not go out.
 Though he worked hard, He is still penniless.
 Hard as he worked, He is still penniless.
 ~~~
+### 虚拟语气
+#### 虚拟现在过去将来
+~~~
+      条件（从句）                      结果（主句）
+现在  动词过去式  be动词用were           should/would/could/might+动词原形
+过去  had+过去分词                      should/would/could/might+have+过去分词
+将来  should+动词原形 were to+动词原形   should/would/could/might+动词原形
+
+从句对现在虚拟
+If I were you, I would marry him without any hesitation.
+从句对过去虚拟
+If you had come yesterday, you would have met he.
+从句对将来虚拟
+If it should rain, the crops would be saved.
+~~~
+#### as if && if only
+~~~
+表示与将来情况不同：if only/ as if＋ 从句主语＋would(could, might)+动词原形
+I told her if only/ as if she would try again.
+我告诉她，如果她会再试一次
+
+表示与现在情况不同：if only/ as if＋从句主语＋动词过去式
+I told her if only/ as if I didn't live in London.
+我告诉她，如果我不住在伦敦
+
+表达与过去情况不同：if only/ as if＋从句主语＋would/could have/had＋过去分词
+I told her if only/ as if you had come to my birthday party.
+我告诉她，你要是来我的生日晚会就好了
+~~~
+### 双否
+#### not fail to do && never fail to do
+~~~
+You can not fail to obey it.
+你不可能不遵守它
+
+The cat never fail to fascinate human beings.
+猫总是让人类着迷
+~~~
+#### can not…too（越…越）
+~~~
+You can not drive too carefully.
+你开车越小心越好
+~~~
+#### no shortage of（不缺）
+~~~
+there is no shortage of good ideas here.
+这里不乏好主意
+~~~
+#### deny
+~~~
+No one could deny the fact that…没人能否认
+No one could deny the fact that everybody was happy.
+没有人能否认大家都很高兴
+
+There is no denying that…不可否认
+There is no denying that everybody was happy.
+不可否认大家都很高兴
+~~~
