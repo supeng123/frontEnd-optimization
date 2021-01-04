@@ -267,6 +267,21 @@ function jump(nums) {
     }
     return maxJump === 0
 }
+//动态规划算法
+function jump(nums) {
+    let len = nums.length
+    const dp = new Array(len).fill(false)
+    dp[0] = true
+    for (let i = 1; i < len; i++) {
+        for (let j = 0; j < i; j++) {
+            if (nums[j] + j >= i && dp[j])  {
+                dp[i] = true
+                break
+            }
+        }
+    }
+    return dp[len-1]
+}
 ~~~
 ### 15.除自身以外数组的乘积
 ~~~

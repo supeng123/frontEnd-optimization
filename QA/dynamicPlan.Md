@@ -207,7 +207,7 @@ leetcode 322
 function changes (coins, num) {
     const dp = new Array(num).fill(Inifinity)
     dp[0] = 0
-    for (let i = 1; i < nums; i++) {
+    for (let i = 1; i < num; i++) {
         for (let coin of coins) {
             if (i - coin > 0) {
                 dp[i] = Math.min(dp[i], dp[i-coin]+1)
@@ -215,6 +215,21 @@ function changes (coins, num) {
         }
     }
     dp[num] === Infinity ? -1 : dp[num]
+}
+
+function changes(coins = [2,5,7], num) {
+    if (num == 0) return 0
+    let res = Math.Infinite
+    if (x >= 2) {
+        res = Math.min(changes(num - 2) + 1, res)
+    }
+    if (x >= 5) {
+        res = Math.min(changes(num - 5) + 1, res)
+    }
+    if (x >= 7) {
+        res = Math.min(changes(num - 7) + 1, res)
+    }
+    return res
 }
 
 leetcode 588
