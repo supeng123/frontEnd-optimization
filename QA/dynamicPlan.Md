@@ -374,3 +374,20 @@ function uglyNumber(n) {
 ### 20.最长不含重复字符的子字符串
 ~~~
 ~~~
+### 20.最长连续子序列
+~~~
+leetcode 674
+funciton longestSeqence(nums) {
+    let max = 0
+    const dp = new Array(nums.length).fill(1)
+    for (let i = 0; i < nums.length; i++) {
+        if (i > 0 && nums[i] > nums[i-1]) {
+            dp[i] = dp[i-1] + 1
+        }
+        if (dp[i] > max) {
+            max = dp[i]
+        }
+    }
+    return max
+}
+~~~
