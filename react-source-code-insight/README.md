@@ -14,6 +14,8 @@
 - [Scheduler](#scheduler)
 - [ReactFiberBeginWork](#reactfiberbeginwork)
 - [completeUniteOfWork](#completeuniteofwork)
+- [React Hooks In Detail](#react-hooks-in-detail)
+  - [useState for primitive value && object && array](#usestate-for-primitive-value--object--array)
 ### how jsx transfer to js
 ~~~
 // when we write plain html'
@@ -430,4 +432,60 @@ diffProperties(
 compare the oldProps and newProps and put all new updates to the updatePayload
 
 unwindwork()
+~~~
+### React Hooks In Detail
+~~~
+reason 1 don't have to use this keyword
+reason 2 allow reuse stateful logic
+~~~
+#### useState for primitive value && object && array
+~~~
+import React, {useState} from 'react'
+
+funciton HookCount(){
+  const initialCount = 0
+  const [count, setCount] = useState(initialCount)
+  const [name, setName] = useState({firstName:'', lastName:''})
+  const [name, setItems] = useState([])
+
+  const incrementTen = () => {
+    for (let i = 0; i < 10; i++) {
+      setCount(prevCount => prevCount + 1)
+    }
+  }
+
+  const addItem = () => {
+    setItems([...items, {
+      id: items.length,
+      value: Math.floor(Math.random()*10) + 1
+    }])
+  }
+
+  return (
+    Count: {count}
+    <button onClick={() => setCount(initialCount)}>Reset</button>
+    <button onClick={() => setCount(count + 1)}>Increment</button>
+    <button onClick={() => setCount(count - 1)}>Decrement</button>
+    <button onClick={() => setCount(prevCount => prevCount + 5)}>Jump to 5</button>
+    <button onClick={incrementTen}>Jump to 10</button>
+
+    <form>
+      <input type='text' value={name.firstName} onChange={e => setName({...name, firstName: e.target.value})}>
+      <input type='text' value={name.firstName} onChange={e => setName({...name, lastName: e.target.value})}>
+      <h2>Your first name {name.firstName}</h2>
+      <h2>Your last name {name.lastName}</h2>
+    </form>
+
+    <div>
+      <button onClick={addItem}> addItem</button>
+      <ul>
+        {items.map(item) => (
+          <li key={item.id}>{item.value}</li>
+        )}
+      </ul>
+    </div>
+  )
+}
+
+export default HookCount
 ~~~
