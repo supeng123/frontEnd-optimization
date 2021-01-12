@@ -16,6 +16,7 @@
 - [completeUniteOfWork](#completeuniteofwork)
 - [React Hooks In Detail](#react-hooks-in-detail)
   - [useState for primitive value && object && array](#usestate-for-primitive-value--object--array)
+  - [useEffect](#useeffect)
 ### how jsx transfer to js
 ~~~
 // when we write plain html'
@@ -488,4 +489,34 @@ funciton HookCount(){
 }
 
 export default HookCount
+~~~
+#### useEffect
+~~~
+use to replace componentWillMount, componentWillUpdate, componentWillUnmount
+
+function DataFetching() {
+  const [posts, setPosts] = useState([])
+  const [id, setId] = useState(1)
+
+  useEffect(() => {
+    axio.get(`http://geurhgeurgher${id}`)
+    .then(res => {
+      setPosts(res.data)
+    })
+    .catch(err => {
+      console.log
+    })
+
+    return () => {
+      // use for replace componentWillUnmount hook
+    }
+  }, []) // use for replace componentWillUpdate hook
+
+  return (
+    <div>
+      <input type='text' value={id} onChange={e => setId(e.target.value)} />
+      {posts.map(post => <li key=>{post.id}>{post.title}<li>)}
+    </div>
+  )
+}
 ~~~
