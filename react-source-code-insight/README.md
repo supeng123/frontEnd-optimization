@@ -17,6 +17,8 @@
 - [React Hooks In Detail](#react-hooks-in-detail)
   - [useState for primitive value && object && array](#usestate-for-primitive-value--object--array)
   - [useEffect](#useeffect)
+  - [useReducer](#usereducer)
+  - [useReducer with useEffect](#usereducer-with-useeffect)
 ### how jsx transfer to js
 ~~~
 // when we write plain html'
@@ -518,5 +520,83 @@ function DataFetching() {
       {posts.map(post => <li key=>{post.id}>{post.title}<li>)}
     </div>
   )
+}
+~~~
+#### useReducer
+~~~
+App.js
+
+import {useReducer} from 'react'
+
+export const store = React.createContext()
+
+const reducer = (state = 0, action) {
+  switch(state) {
+    case 'increment':
+      return state + 1
+    case 'increment':
+      return state - 1
+    case 'reset':
+      return 0
+    default:
+      return state
+  }
+}
+
+function App() {
+  const [count, dispatch] = useReducer(reducer, 0)
+  return (
+    <Store.Provider value={{countState: count, countDispatch: dispatch}}>
+      <div className='App'>
+        <ComponentA />
+        <ComponentB />
+        <ComponentC />
+      </div>
+    </Store.Provider>
+  )
+}
+
+ComponentA.js
+
+import {useContext} from 'react'
+import {Store} from '.App'
+
+function ComponentA() {
+  const countStore= useContext(Store)
+
+  return (
+    <button onClick={() => countStore.dispatch('increment')}>Increment</button>
+    <button onClick={() => countStore.dispatch('decrement')}>Decrement</button>
+    <button onClick={() => countStore.dispatch('reset')}>Reset</button>
+  )
+}
+~~~
+#### useReducer with useEffect
+~~~
+const initialState = {}
+const reducer = (state = initialState, action) {
+  switch(action.type) {
+    case 'Success':
+      return {...state, post: action.payload}
+    case 'Error':
+      return {...state, error: action.payload}
+    default:
+      return state
+  }
+}
+
+function DataFetching() {
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  useEffect(() => {
+    axio
+      .get('httpreqeuest')
+      .then(response => {
+        dispatch({type: 'Success', payload: response.data})
+      })
+      .catch(error => {
+        dispatch({type: 'Error'})
+      })
+  }, [])
 }
 ~~~
