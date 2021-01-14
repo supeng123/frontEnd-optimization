@@ -19,6 +19,8 @@
   - [useEffect](#useeffect)
   - [useReducer](#usereducer)
   - [useReducer with useEffect](#usereducer-with-useeffect)
+  - [useCallback](#usecallback)
+  - [useMemo](#usememo)
 ### how jsx transfer to js
 ~~~
 // when we write plain html'
@@ -598,5 +600,65 @@ function DataFetching() {
         dispatch({type: 'Error'})
       })
   }, [])
+}
+~~~
+#### useCallback
+~~~
+userCallback is a hook that will return a memorized version of callback function that only changes if
+one of the dependencies has changed
+It is useful when passing callbacks to optimized child components that rely on the reference equility to 
+prevent unnecessary renders
+
+function callbackExample() {
+  const [age, setAge] = useState(25)
+  const [salary, setSalary] = useState(2500)
+
+  const incrementAge = useCallback(() => {
+    setAge(age + 1)
+  }, [age])
+
+  const incrementSalary = useCallback(() => {
+    setSalary(salary + 1000)
+  }, [salary])
+
+  return (
+    <div> 
+      <Title>
+      <Count text='Age' count = {age} />
+      <Count text='Salary' count = {salary} />
+      <ChildButton handleClick = {incrementAge}/>
+      <ChildButton handleClick = {incrementSalary}/>
+    /div>
+  )
+}
+~~~
+#### useMemo
+~~~
+Invokes the provided function & caches the result
+
+function Counter() {
+  const [countOne, setCountOne] = useState(0)
+  const [countTwo, setCountTwo] = useState(0)
+
+  const incrementOne = () => {
+    setCountOne(countOne + 1)
+  }
+  const incrementTwo = () => {
+    setCountOne(countTwo + 1)
+  }
+
+  const isEven = useMemo(() => {
+    let i = 0
+    while (i < 20000000000) i++
+    return countOne % 2 === 0
+  },[countOne])
+
+  return (
+    <div> 
+      <button onClick={incrementOne}>{countOne}</button>
+      <span>{isEven ? 'Even' : 'Odd'}
+      <button onClick={incrementTwo}>{countTwo}</button>
+    </div>
+  )
 }
 ~~~
