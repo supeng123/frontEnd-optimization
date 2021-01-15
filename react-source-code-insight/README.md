@@ -21,6 +21,7 @@
   - [useReducer with useEffect](#usereducer-with-useeffect)
   - [useCallback](#usecallback)
   - [useMemo](#usememo)
+  - [useRef](#useref)
 ### how jsx transfer to js
 ~~~
 // when we write plain html'
@@ -658,6 +659,31 @@ function Counter() {
       <button onClick={incrementOne}>{countOne}</button>
       <span>{isEven ? 'Even' : 'Odd'}
       <button onClick={incrementTwo}>{countTwo}</button>
+    </div>
+  )
+}
+~~~
+#### useRef
+~~~
+use ref to get the dom constructure or save reference
+
+function HookTimer() {
+  const [time, setTime] = useState(0)
+  const intervalRef = useRef()
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setTimer(pre => pre + 1)
+    },1000)
+    return () => {
+      clearInterval(intervalRef.current)
+    }
+  }, [])
+
+  return (
+    <div>
+      Hook Timer - {timer}
+      <button onClick={() => clearInterval(intervalRef.current)}>clear interval</button>
     </div>
   )
 }
