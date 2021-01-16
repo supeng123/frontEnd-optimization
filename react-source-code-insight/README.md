@@ -22,6 +22,7 @@
   - [useCallback](#usecallback)
   - [useMemo](#usememo)
   - [useRef](#useref)
+  - [custom hook](#custom-hook)
 ### how jsx transfer to js
 ~~~
 // when we write plain html'
@@ -687,4 +688,52 @@ function HookTimer() {
     </div>
   )
 }
+~~~
+#### custom hook
+~~~
+import { useState } from 'react'
+
+funtion useInput(initialValue) {
+  const [value, setValue] = useState(initialValue)
+  const rest = () => {
+    setValue(initialValue)
+  }
+
+  const bind = {
+    value,
+    onChange: e => {
+      setValue(e.target.value)
+    }
+  }
+
+  return [value, bind, reset]
+}
+export default useInput
+
+function UserForm() {
+  const [firstName, bindFirstName, restFirstName] = useInput('')
+  const [lastName, bindLastName, restLastName] = useInput('')
+
+  const submitHandler = e => {
+    e.preventDefault()
+    resetFirstName()
+    resetLastName()
+  }
+
+  return (
+    <div>
+      <form onSubmit={submitHandler}>
+        <div>
+          <label>First Name</label>
+          <input {...bindFirstName} type='text' />
+        </div>
+        <div>
+          <label>Lastt Name</label>
+          <input {...bindLastName} type='text' />
+        </div>
+      </form>
+    </div>
+  )
+}
+
 ~~~
