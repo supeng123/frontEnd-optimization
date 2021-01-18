@@ -48,7 +48,15 @@ function removeRepeat (arr) {
 leecode 66
 从后往前遍历
 function addOne (arr) {
-    
+    for (let i = arr.length - 1; i > 0; i--) {
+        if (arr[i] < 9) {
+            arr[i] = arr[i] + 1
+            return arr
+        } else {
+            arr[i] = 0
+        }
+    }
+    return [1].concat
 }
 ~~~
 ### 4.按奇偶or(正负)数排序
