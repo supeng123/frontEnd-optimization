@@ -2257,7 +2257,8 @@ function create() {
 }
 
 
-
+registry=https://registry.npm.taobao.org/
+pianku.li、mypianku.com、pianku.one、topianku.com
 
 
 

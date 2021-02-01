@@ -350,6 +350,21 @@ function profit(prices) {
 ~~~
 ### 17.最长公共子序列
 ~~~
+function commonSequence(str1, str2) {
+    const m = str1.length
+    const n = str2.length
+    const dp = Array.from(new Array(m+1), () => new Array(n+1).fill(0))
+    for (let i = 1; i <= m, i++) {
+        for (let j = 1; j <=n; j++) {
+            if (str1[i] == str2[j]) {
+                dp[i][j] = dp[i-1][j-1] + 1
+            } else {
+                dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1])
+            }
+        }
+    }
+    return dp[m][n]
+}
 ~~~
 ### 18.连续子数组的最大和
 ~~~
@@ -391,3 +406,33 @@ funciton longestSeqence(nums) {
     return max
 }
 ~~~
+
+function addRepeatedCerts(filterList, treeTable, certificates) {
+    const taCerts = []
+    const caCerts = []
+    const eeCerts = []
+    certificates.forEach(cert => {
+        if (!filterList.includes(cert.serialNumber)) {
+            if (cert.certiType === 'TA') taCerts.push({data: cert})
+            if (cert.certiType === 'CA') caCerts.push({data: cert})
+            if (cert.certiType === 'EA') eeCerts.push({data: cert})
+        }
+    })
+    const caGroups = _.gropBy(caCerts, cert => cert.data.issueBy)
+    const eeGroups = _.gropBy(eeCerts, cert => cert.data.issueBy)
+
+    treeTable.forEach(ta => {
+        if (caGroups[ta.data.issueTo]) {
+            ta.children.concat(caGroups[ta.data.issueTo])
+            delete caGroups[ta.data.issueTo]
+        }
+        ta.children.forEach(ca => {
+            if (eeGroups[ca.data.issueTo]) {
+                ca.children.concat(eaGroups[ca.data.issueTo])
+                delete eeGroups[ca.data.issueTo]
+            }
+        })
+    })
+
+    return treeTable.concat(taCerts).concat(caGroups.values()).concat(eeGroups.values());
+}       
