@@ -389,7 +389,7 @@ function uglyNumber(n) {
 ### 20.最长不含重复字符的子字符串
 ~~~
 ~~~
-### 20.最长连续子序列
+### 21.最长连续子序列
 ~~~
 leetcode 674
 funciton longestSeqence(nums) {
@@ -406,33 +406,19 @@ funciton longestSeqence(nums) {
     return max
 }
 ~~~
-
-function addRepeatedCerts(filterList, treeTable, certificates) {
-    const taCerts = []
-    const caCerts = []
-    const eeCerts = []
-    certificates.forEach(cert => {
-        if (!filterList.includes(cert.serialNumber)) {
-            if (cert.certiType === 'TA') taCerts.push({data: cert})
-            if (cert.certiType === 'CA') caCerts.push({data: cert})
-            if (cert.certiType === 'EA') eeCerts.push({data: cert})
-        }
-    })
-    const caGroups = _.gropBy(caCerts, cert => cert.data.issueBy)
-    const eeGroups = _.gropBy(eeCerts, cert => cert.data.issueBy)
-
-    treeTable.forEach(ta => {
-        if (caGroups[ta.data.issueTo]) {
-            ta.children.concat(caGroups[ta.data.issueTo])
-            delete caGroups[ta.data.issueTo]
-        }
-        ta.children.forEach(ca => {
-            if (eeGroups[ca.data.issueTo]) {
-                ca.children.concat(eaGroups[ca.data.issueTo])
-                delete eeGroups[ca.data.issueTo]
-            }
-        })
-    })
-
-    return treeTable.concat(taCerts).concat(caGroups.values()).concat(eeGroups.values());
-}       
+### 21.数组乘积
+~~~
+function maxofproduct(nums) {
+    const maxDp = []
+    const minDp = []
+    maxDp[0] = nums[0]
+    minDp[0] = nums[0]
+    let max = 0
+    for (let i = 1; i < nums.length; i++) {
+        maxDp[i] = Math.max(nums[i], nums[i]*maxDp[i-1], nums[i]*minDp[i-1])
+        minDp[i] = Math.min(nums[i], nums[i]*maxDp[i-1], nums[i]*minDp[i-1])
+        max = Math.max(maxDp[i], max)
+    }
+    return max
+}
+~~~
