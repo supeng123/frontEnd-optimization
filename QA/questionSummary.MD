@@ -488,6 +488,26 @@ Function.prototype.apply = function(context) {
     delete context.fn
     return result
 }
+//example https://muyiy.cn/blog/3/3.3.html#call%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0
+Function.prototype.call2 = function(context) {
+    // 首先要获取调用call的函数，用this可以获取
+    console.log(this)
+    console.log(this === bar) //true
+    context.fn = this; 		// foo.fn = bar
+    context.fn();			// foo.fn()
+    delete context.fn;		// delete foo.fn
+}
+
+// 测试一下
+var foo = {
+    value: 1
+};
+
+function bar() {
+    console.log(this.value);
+}
+
+bar.call2(foo); // 1
 ~~~
 ### 43.Object.create原理
 ~~~
