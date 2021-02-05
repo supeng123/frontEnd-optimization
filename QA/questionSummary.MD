@@ -879,6 +879,19 @@ function curry(fn, args) {
         return fn.apply(null, _args)
     }
 }
+
+function add() {
+    let args = [].slice.call(arguments)
+    let fn = function() {
+        let fn_args = [].slice.call(arguments)
+        return add.apply(null, args.concat(fn_args))
+    }
+    fn.toString = function() {
+        return args.reduce((a,b) => a+b)
+    }
+    return fn
+}
+add(1)(2)(3)
 ~~~
 ### 63.数组乱序
 ~~~
