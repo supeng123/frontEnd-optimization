@@ -605,6 +605,7 @@ function deepCopy(originObj, map = new WeakMap()) {
         const allProperties = Object.getOwnPropertyDescriptors(originObj)
         const protoTypes = Object.getPrototypeOf(originObj)
         const cloneObj = Object.create(protoTypes, allProperties)
+        map.set(originObj, cloneObj)
 
         for (const prop of Reflect.ownKeys(originObj)) {
             cloneObj[prop] = isObject(originObj[prop]) && typeof originObj[prop] !== 'function' ? deepCopy(originObj[prop], map) : originObj[prop];
