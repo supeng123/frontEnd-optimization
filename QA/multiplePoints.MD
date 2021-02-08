@@ -694,11 +694,13 @@ function wordsDistance (arr, word1, word2) {
     let min = Infinity
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] == word1) {
+            index1 = i
             if (index2 >= 0) {
                 min = Math.min(min, Math.abs(i - index2))
             }
         }
         if (arr[i] == word2) {
+            index2 = i
             if (index1 >= 0) {
                 min = Math.min(min, Math.abs(i - index1))
             }

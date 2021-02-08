@@ -459,3 +459,40 @@ function nQueens(n) {
     return res
 }
 ~~~
+### 水域大小
+~~~
+function areaOfWater(matrix) {
+    let m = matrix.length
+    let n = matrix[0].length
+    let min = 0
+    let area = 0
+    const result
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (matrix[m][n] === 0) {
+                area = 0
+                dfs(i, j)
+                result.push(area)
+            }
+        }
+    }
+
+    return result
+
+    function dfs(l, r) {
+        if (l < 0 || r < 0 || l >=m || r >=n) return
+        if (matrix[l][r]) {
+            matrix[l][r] = 1
+            area++
+            dfs(l+1, r)
+            dfs(l-1, r)
+            dfs(l+1, r+1)
+            dfs(l+1, r-1)
+            dfs(l-1, r-1)
+            dfs(l-1, r+1)
+            dfs(l, r+1)
+            dfs(l, r-1)
+        }
+    }
+}
+~~~
