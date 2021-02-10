@@ -832,6 +832,30 @@ function continousSequence(target) {
     return result
 }
 ~~~
+### 44.部分排序
+~~~
+function partsort(randomArray) {
+    let r = -1
+    let l = -1
+    let max = -Infinity
+    let min = Infinity
+    for (let i = 0; i < randomArray.length; i++) {
+        if (randomArray[i]>=max) {
+            max = randomArray[i]
+        } else {
+            r = i
+        }
+    }
+    for (let i = randomArray.length-1; i >= 0; i--) {
+        if (randomArray[i]<=min) {
+            min = randomArray[i]
+        } else {
+            l = i
+        }
+    }
+    return [l,r]
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
