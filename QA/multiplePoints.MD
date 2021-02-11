@@ -856,6 +856,18 @@ function partsort(randomArray) {
     return [l,r]
 }
 ~~~
+### 45.跳水板
+~~~
+function jumpboard(short, longer, k) {
+    if (!k) return []
+    if (short === longer) return [k*short]
+    const res
+    for (let i = 0;i <= k; i++) {
+        res.push(i*short + (k-i)*longer)
+    }
+    return res.sort((a,b)=>a-b)
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
