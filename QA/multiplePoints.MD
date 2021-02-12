@@ -868,6 +868,25 @@ function jumpboard(short, longer, k) {
     return res.sort((a,b)=>a-b)
 }
 ~~~
+### 46.最小差
+~~~
+function leastDifference(arr1,arr2) {
+    arr1.sort((a,b)=>a-b)
+    arr2.sort((a,b)=>a-b)
+    let res
+    let m = 0
+    let n = 0
+    while (m < arr1.length && n < arr2.length) {
+        res = Math.min(res, Math.abs(arr1[m]-arr2[n]))
+        if (arr1[m] < arr2[n]) {
+            m++
+        } else {
+            n++
+        }
+    }
+    return res
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
