@@ -887,6 +887,19 @@ function leastDifference(arr1,arr2) {
     return res
 }
 ~~~
+### 峰与谷
+~~~
+[5,4,3,2,1]
+[4,5,3,2,1]
+[4,5,2,3,1]
+function wiggleSort(nums) {
+    nums.sort((a,b)=>b-a) 
+    for (let i = 0; i < nums.length; i+2) {
+        [nums[i],nums[i+1]] = [nums[i+1], nums[i]]
+    }
+    return nums
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
