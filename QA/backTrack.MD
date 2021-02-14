@@ -18,6 +18,7 @@ function generateBracket(n) {
 ~~~
 ### 2.子集
 ~~~
+[],[1],[1,2],[1,2,3],[1,3],[2],[2,3],[3]
 function subSet(nums) {
     const result = []
     backTrack([], 0)
