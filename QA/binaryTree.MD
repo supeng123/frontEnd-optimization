@@ -45,7 +45,7 @@ function pathSum(root, sum) {
     }
 }
 ~~~
-### 2.相同的树 && 另一个数的子树 && 树的子结构
+### 2.相同的树 && 另一个数的子树 && 树的子结构 && 求和路径
 ~~~
 leetcode 572
 function isSubTree(p, q) {
@@ -68,6 +68,17 @@ function isSubStructure(p, q) {
         if (q == null) return true
         if (p == null) return false
         return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+    }
+}
+
+function pathSum(root, sum) {
+    if (root == null) return 0
+    return dfs(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum)
+
+    function dfs(node, sum) {
+        if (node == null) return 0
+        sum = sum - node.val
+        return (sum == 0 ? 1 : 0) + dfs(node.left, sum) + dfs(node.right, sum)
     }
 }
 ~~~
@@ -242,6 +253,7 @@ function swapNodes(root) {
     [root.left, root.right] = [swapNodes(root.right), swapNodes(root.left)];
     return root
 }
+15133693983
 ~~~
 ### 12.二叉树最大深度
 ~~~
