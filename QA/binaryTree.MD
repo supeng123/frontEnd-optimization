@@ -453,6 +453,19 @@ var inorderSuccessor = function(root, p) {
     }
     return result
 }
+
+inorderSuccessor = function(root, p) {
+    if (root == null) return null
+    if (root.val < p.val) {
+        return inorderSuccessor(root.right,p) 
+    } else if (root.val == p.val) {
+        const node = root.right
+        while (node && node.left) node = node.left
+        return node
+    } else {
+        return inorderSuccessor(root.left,p) || root
+    }
+}
 ~~~
 ### 22.堆排序
 ~~~
