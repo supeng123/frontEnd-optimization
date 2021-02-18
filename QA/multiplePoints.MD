@@ -900,6 +900,26 @@ function wiggleSort(nums) {
     return nums
 }
 ~~~
+### 48.合法二叉搜索树
+~~~
+function isValidBST(root) {
+    let isValid = true
+    let lastNode = null
+    dfs(root)
+    
+    function dfs(node) {
+        if (node == null || !isValid) return
+        if (node.left) dfs(node.left)
+        if (node.val <= lastNode) {
+            isValid = false
+            return;
+        }
+        lastNode = node.value
+        if (node.right) dfs(node.right)
+    }
+    return isValid
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
