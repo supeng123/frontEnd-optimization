@@ -920,6 +920,28 @@ function isValidBST(root) {
     return isValid
 }
 ~~~
+### 49.特定深度节点链表
+~~~
+function treeToLinkList(root) {
+    const res = []
+    if (root == null) return res
+    const queue = [root]
+    while (queue.length > 0) {
+        const dummyhead = {}
+        let cur = dummyHead
+        const len = queue.length
+        for (let i = 0; i < len; i++) {
+            const node = queue.shift()
+            cur.next = new ListNode(node.val)
+            cur = cur.next
+            if (node.left) queue.push(node.left)
+            if (node.right) queue.push(node.right)
+        }
+        res.push(dummyHead.next)
+    }
+    return res
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
