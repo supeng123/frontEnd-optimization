@@ -590,3 +590,17 @@ function changeArrayToBinaryTree(arr) {
     return root
 }
 ~~~
+### 29.最小高度树
+~~~
+function leastHeightTree(list) {
+    if (list.length === 0) return null
+    return build(list)
+    function build(arr) {
+        const index = arr.length >> 1
+        const root =  new Node(arr[index])
+        root.left = build(arr.slice(0, index))
+        root.right = build(arr.slice(index+1))
+        return root
+    }
+}
+~~~
