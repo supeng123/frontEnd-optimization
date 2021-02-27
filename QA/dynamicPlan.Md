@@ -39,7 +39,7 @@ funtion rob(nums) {
     return memo[nums.length - 1]
 }
 ~~~
-### 3.最大子序和
+### 3.最大子序和 && 连续子数组的最大和
 ~~~
 //leetcode 53
 当前位置的值与当前位置加上上一次的最大值比较
@@ -55,8 +55,30 @@ funtion maxSubArray(nums) {
     }
     return max
 }
+    let max = -Infinity
+    let sum = -Infinity
+    for (let i = 0; i < nums.length; i++) {
+        sum = Math.max(nums[i]+sum, nums[i])
+        max = Math.max(sum, max)
+    }
+    return max
+}
+
+function maxSubArray(nums) {
+    let max = -Infinity
+    let sum = 0
+    for (let i = 0; i < nums.length; i++) {
+        if (sum < 0) {
+            sum = nums[i]
+        } else {
+            sum += nums[i]
+        }
+        max = Math.max(sum, max)
+    }
+    return max
+}
 ~~~
-### 4.乘积最大子数组
+### 4.乘积最大子数组 && 数组乘积
 ~~~
 //leetcode 152
 当前位置的值与当前位置乘以上一次的最大值（上一次最小值）比较
@@ -197,6 +219,23 @@ function lengthOfLIS (nums) {
             }
         }
         max = Math.max(max, dp[i])
+    }
+    return max
+}
+~~~
+### 21.最长连续子序列
+~~~
+leetcode 674
+funciton longestSeqence(nums) {
+    let max = 0
+    const dp = new Array(nums.length).fill(1)
+    for (let i = 0; i < nums.length; i++) {
+        if (i > 0 && nums[i] > nums[i-1]) {
+            dp[i] = dp[i-1] + 1
+        }
+        if (dp[i] > max) {
+            max = dp[i]
+        }
     }
     return max
 }
@@ -366,31 +405,10 @@ function commonSequence(str1, str2) {
     return dp[m][n]
 }
 ~~~
-### 18.连续子数组的最大和
+### 18.
 ~~~
-function maxSubArray(nums) {
-    let max = -Infinity
-    let sum = -Infinity
-    for (let i = 0; i < nums.length; i++) {
-        sum = Math.max(nums[i]+sum, nums[i])
-        max = Math.max(sum, max)
-    }
-    return max
-}
 
-function maxSubArray(nums) {
-    let max = -Infinity
-    let sum = 0
-    for (let i = 0; i < nums.length; i++) {
-        if (sum < 0) {
-            sum = nums[i]
-        } else {
-            sum += nums[i]
-        }
-        max = Math.max(sum, max)
-    }
-    return max
-}
+
 ~~~
 ### 19.丑数
 ~~~
@@ -412,38 +430,8 @@ function uglyNumber(n) {
 ### 20.最长不含重复字符的子字符串
 ~~~
 ~~~
-### 21.最长连续子序列
+### 21.
 ~~~
-leetcode 674
-funciton longestSeqence(nums) {
-    let max = 0
-    const dp = new Array(nums.length).fill(1)
-    for (let i = 0; i < nums.length; i++) {
-        if (i > 0 && nums[i] > nums[i-1]) {
-            dp[i] = dp[i-1] + 1
-        }
-        if (dp[i] > max) {
-            max = dp[i]
-        }
-    }
-    return max
-}
-~~~
-### 21.数组乘积
-~~~
-function maxofproduct(nums) {
-    const maxDp = []
-    const minDp = []
-    maxDp[0] = nums[0]
-    minDp[0] = nums[0]
-    let max = 0
-    for (let i = 1; i < nums.length; i++) {
-        maxDp[i] = Math.max(nums[i], nums[i]*maxDp[i-1], nums[i]*minDp[i-1])
-        minDp[i] = Math.min(nums[i], nums[i]*maxDp[i-1], nums[i]*minDp[i-1])
-        max = Math.max(maxDp[i], max)
-    }
-    return max
-}
 ~~~
 ### 22.三步问题
 ~~~
