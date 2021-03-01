@@ -104,3 +104,29 @@ function getAge(...args) {
 }
 getAge(21) //object
 ~~~
+### 12.eval
+~~~
+const sum = eval('10*10+5') //number 105
+~~~
+### 13.hasOwnProperty
+~~~
+const obj = {1: 'a', 2: 'b', 3: 'c'}
+const set = new Set([1,2,3,4,5])
+obj.hasOwnProperty('1') //true 1和‘1’都是对象可识别属性
+obj.hasOwnProperty(1) //true
+set.has('1') //false
+set.has(1) //true
+~~~
+### 14.对象属性覆盖
+~~~
+const obj = {1: 'a', 2: 'b', 1: 'c'}
+console.log(obj) //{1: 'c', 2: 'b'} 对象重复键值会覆盖前面
+~~~
+### 15.string prototype
+~~~
+String.prototype.giveLydiaPizza = () => {
+    return 'just give him a pizza'
+}
+const name = 'supeng'
+name.giveLydiaPizza() //'just give him a pizza' 字符串原型挂载方法所有字符串都共享
+~~~
