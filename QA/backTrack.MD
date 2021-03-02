@@ -501,3 +501,25 @@ function areaOfWater(matrix) {
     }
 }
 ~~~
+### 21.分割等和子集
+~~~
+leetcode 416
+function canPartition(nums) {
+    const sum = nums.reduce((a, b)=> a+=b);
+    if (sum%2) return false
+    const target = sum/2
+    const memo = new Map()
+
+    function dfs(curSum, i) {
+        if (i >= nums.length || curSum > target) return false
+        if (curSum = target) return true
+        const key = curSum+'&'+i
+        if (memo.has(key)) {
+            return memo.get(key)
+        }
+        const res = dfs(curSum+nums[i], i+1) || dfs(curSum, i+1)
+        memo.set(key, res)
+        return res
+    }
+}
+~~~
