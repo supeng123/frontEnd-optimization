@@ -942,6 +942,21 @@ function treeToLinkList(root) {
     return res
 }
 ~~~
+### 396 旋转函数
+~~~
+var maxRotateFunction = function(A) {
+    function getMax(arr) {
+        return arr.reduce((total, item, index)=> total+=item*index,0)
+    }
+    let max = getMax(A)
+    const len = A.length
+    for (let i = 0; i < len - 1; i++) {
+        A.unshift(A.pop())
+        max = Math.max(max, getMax(A))
+    }
+    return max
+};
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
