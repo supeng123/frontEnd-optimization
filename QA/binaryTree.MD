@@ -604,3 +604,22 @@ function leastHeightTree(list) {
     }
 }
 ~~~
+### 30.二叉树中的最长交错路径
+~~~
+leetcode 1372
+var longestZigzag = function(root) {
+    let max = 0
+    dfs(root)
+    return max
+    function dfs(node) {
+        if (!node) return [-1, -1]
+        const [ll, lr] = dfs(node.left)
+        const [rl, rr] = dfs(node.right)
+        const l = lr + 1
+        const r = rl + 1
+        max = Math.max(max, l)
+        max = Math.max(max, r)
+        return [l, r]
+    }
+};
+~~~

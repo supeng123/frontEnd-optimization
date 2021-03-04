@@ -942,8 +942,9 @@ function treeToLinkList(root) {
     return res
 }
 ~~~
-### 396 旋转函数
+### 旋转函数
 ~~~
+leetcode 396 
 var maxRotateFunction = function(A) {
     function getMax(arr) {
         return arr.reduce((total, item, index)=> total+=item*index,0)
