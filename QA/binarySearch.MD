@@ -95,3 +95,43 @@ function pairSum(nums, target) {
     return result
 }
 ~~~
+### 6.online election
+~~~
+leetcode 911
+var onLineElection = function(persons, times) {
+    let lead = -1
+    let votes = {}
+    this.times = times
+    this.leadings = []
+    for (let i = 0; i < times.length; i++) {
+        const person = persons[i]
+        if (votes[person] == undefined) {
+            votes[person] = 0
+        }
+        votes[person]++
+        if (lead == -1) {
+            lead = person
+        }
+        if (votes[person] >= votes[lead]) {
+            lead = person
+        }
+        this.leadings.push(lead)
+    }
+}
+
+onLineElection.prototype.query = function(t) {
+    let left = 0
+    let right = this.times.length-1
+    while (left <= right) {
+        let mid = Math.floor((left+right)/2)
+        if (this.times[mid] == t) {
+            return this.leadings[mid]
+        } else if (this.times[mid] > t) {
+            right = mid -1
+        } else {
+            left = mid + 1
+        }
+    }
+    return this.leadings[right]
+}
+~~~
