@@ -958,6 +958,25 @@ var maxRotateFunction = function(A) {
     return max
 };
 ~~~
+### 包含所有三种字符的子字符串数目
+~~~
+leetcode 1358
+var numberOfSubstrings = function(s) {
+    const len = s.length
+    let res = 0
+    const map = {a : 0, b : 0, c : 0}
+    for (let i = 0, j = 0; i < len; i++) {
+        const current = s[i]
+        map[current]++
+        while(j < len && map[a]>0 && map[b] > 0 && map[c] > 0) {
+            map[s[j]]--
+            j++
+        }
+        res +=j
+    }
+    return res
+};
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
