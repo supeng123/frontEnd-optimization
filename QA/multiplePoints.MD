@@ -977,6 +977,38 @@ var numberOfSubstrings = function(s) {
     return res
 };
 ~~~
+### 包多次求和构造目标数组
+~~~
+leetcode 1354
+var isPossible = function(target) {
+    if (target.length < 2) return target[0] == 1
+    let sum = target.reduce((total, cur) => total+cur, 0)
+    let largest = getMax(target)
+    
+    while(largest[0] > 1) {
+        var remain = sum - largest[0]
+        var x = largest[0] % remain
+        if (remain == 1) return true
+        if (largest[0] < remain || x == 0) return false
+        target[largest[1]] = x
+        sum = remain+x
+        largest = getMax(target)
+    }
+    return true
+
+    function getMax(list) {
+        var res = list[0]
+        var resIdx = 0
+        for (let i = 0; i < list.length; i++) {
+            if (list[i] > res) {
+                res = list[i]
+                resIdx = i
+            }
+        }
+        return [res, resIdx]
+    }
+};
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
