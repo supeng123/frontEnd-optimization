@@ -1009,6 +1009,24 @@ var isPossible = function(target) {
     }
 };
 ~~~
+### 最多可以参加的会议数目
+~~~
+leetcode 1353
+var maxEvents = function(events) {
+   let hSet = new Set()
+   event.sort((a,b) => a[1] != b[1] ? a[1] - b[1] : a[0] - b[0])
+   event.forEach(e => {
+       for (let i = e[0]; i <= e[1]; i++) {
+           if (!hSet.has(i)) {
+               hSet.add(i)
+               break
+            }
+       }
+       
+   })
+   return hSet.size
+};
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
