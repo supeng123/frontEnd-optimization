@@ -1027,6 +1027,32 @@ var maxEvents = function(events) {
    return hSet.size
 };
 ~~~
+### 制造字母异位词的最小步骤数
+~~~
+leetcode 1347
+var minSteps = function(s, t) {
+    const map = {}
+    let res = 0
+    const len = s.length
+    if (len < 1) return 0
+    for (let i = 0, j = 0; i < len && j < len; i++,j++) {
+       const one = s[i]
+       const two = t[j]
+       if (map[one] == undefined) {
+           map[one] = 0
+       }
+       if (map[two] == undefined) {
+           map[two] = 0
+       }
+       map[one]++
+       map[two]--
+    }
+    for (let key in map) {
+        res += Math.abs(map[key])
+    }
+    return res/2
+};
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
