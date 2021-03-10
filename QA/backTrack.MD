@@ -523,3 +523,35 @@ function canPartition(nums) {
     }
 }
 ~~~
+### 22.jump game
+~~~
+leetcode 1340
+var maxJumps = function(arr, d) {
+    let len = arr.length
+    const memo = new Array(n).fill(-1)
+
+    function recur(index) {
+        if (memo[imdex] !== -1) {
+            return memo[index]
+        }
+        let res = 1
+        //往右边眺
+        for (let j = i+1; j < len && j <= i+d && arr[index] > arr[j]; j++){
+            res = Math.max(res, recur(j)+1)
+        }
+
+        //往左边边眺
+        for (let j = i-1; j >= 0 && j >= i-d && arr[index] > arr[j]; j--){
+            res = Math.max(res, recur(j)+1)
+        }
+        memo[index] = res
+        return res
+    }
+
+    let res = 1
+    arr.forEach((item, idx) => {
+        res = Math.max(res, recur(idx))
+    })
+    return res
+}
+~~~
