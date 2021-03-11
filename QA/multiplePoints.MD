@@ -1053,6 +1053,30 @@ var minSteps = function(s, t) {
     return res/2
 };
 ~~~
+### 大小为 K 且平均值大于等于阈值的子数组数目(滑动窗口)
+~~~
+leetcode 1343
+var numOfSubarrays = function(arr, k, threshold) {
+    let len = arr.length
+    let count = 0
+    let i = 0
+    let sum = 0
+    for (i; i < k; i++) {
+        sum += arr[i]
+    }
+
+    while(i < len) {
+        if (sum/k >= threshold) {
+            count++
+        }
+        sum -= arr[i-k]
+        sum += arr[i]
+        i++
+    }
+    if (sum/k >= threshold) count++
+    return count
+};
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
