@@ -1077,6 +1077,32 @@ var numOfSubarrays = function(arr, k, threshold) {
     return count
 };
 ~~~
+### 分裂二叉树的最大乘积
+~~~
+leetcode 1339
+function maxProduct(root) {
+    let res = 0
+    const total = sum(root)
+    split(root)
+    return res
+
+    function split(node) {
+        if (!node) return 0
+        const left = split(node.left)
+        const right = split(node.right)
+        res = Math.max(res, (sum-left)*left)
+        res = Math.max(res, (sum-right)*right)
+        return left+right+node.val
+    }
+
+    function sum(node) {
+        if(!node) return 0
+        const left = sum(node.left)
+        const right = sum(node.right)
+        return left+right+node.val
+    }
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
