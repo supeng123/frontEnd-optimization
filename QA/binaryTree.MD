@@ -623,3 +623,29 @@ var longestZigzag = function(root) {
     }
 };
 ~~~
+### 31.分裂二叉树的最大乘积
+~~~
+leetcode 1339
+function maxProduct(root) {
+    let res = 0
+    const total = sum(root)
+    split(root)
+    return res
+
+    function split(node) {
+        if (!node) return 0
+        const left = split(node.left)
+        const right = split(node.right)
+        res = Math.max(res, (sum-left)*left)
+        res = Math.max(res, (sum-right)*right)
+        return left+right+node.val
+    }
+
+    function sum(node) {
+        if(!node) return 0
+        const left = sum(node.left)
+        const right = sum(node.right)
+        return left+right+node.val
+    }
+}
+~~~

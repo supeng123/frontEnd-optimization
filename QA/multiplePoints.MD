@@ -1077,30 +1077,26 @@ var numOfSubarrays = function(arr, k, threshold) {
     return count
 };
 ~~~
-### 分裂二叉树的最大乘积
+### 数组大小减半
 ~~~
-leetcode 1339
-function maxProduct(root) {
+leetcode 1338
+function minSetSize(arr) {
+    const len = arr.length
+    let n = len
     let res = 0
-    const total = sum(root)
-    split(root)
+    const map = {}
+    arr.forEach(item => {
+        if (!map[item]) map[item]=0
+        map[item]++
+    })
+    const list = Object.keys(map).sort((a, b) => map[b]-map[a])
+    for (let i = 0; i < list.length; i++) {
+        const key = list[i]
+        n -= map[key]
+        res++
+        if (n <= len/2) return res
+    }
     return res
-
-    function split(node) {
-        if (!node) return 0
-        const left = split(node.left)
-        const right = split(node.right)
-        res = Math.max(res, (sum-left)*left)
-        res = Math.max(res, (sum-right)*right)
-        return left+right+node.val
-    }
-
-    function sum(node) {
-        if(!node) return 0
-        const left = sum(node.left)
-        const right = sum(node.right)
-        return left+right+node.val
-    }
 }
 ~~~
 
