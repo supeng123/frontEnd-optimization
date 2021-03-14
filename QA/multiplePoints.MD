@@ -1099,6 +1099,45 @@ function minSetSize(arr) {
     return res
 }
 ~~~
+### 最多可以买到的苹果数量
+~~~
+leetcode 1196
+function maxAppleSize(arr, target) {
+    let sum = 0
+    let res = 0
+    arr.sort((a,b) => a -b)
+    for (let i = 0; i < arr.length; i++) {
+        const apple = arr[i]
+        if (sum >= target) {
+            break
+        }
+        res++
+        sum += apple
+    }
+    return sum > target ? res - 1 : res
+}
+~~~
+### “气球” 的最大数量
+~~~
+leetcode 1189
+var maxNumberOfBalloons = function(text) {
+    const map = {a: 0, b: 0, l: 0, n: 0, o: 0}
+    Array.from(text).forEach(c => {
+        if (map[c] !== undefined) {
+            map[c]++
+        }
+    })
+    map['l'] = Math.floor(map['l']/2)
+    map['o'] = Math.floor(map['o']/2)
+    let minValue = Number.MAX_VALUE
+    Object.keys(map).forEach(item => {
+        if (map[item] < minValue) {
+            minValue = map[item]
+        }
+    })
+    return minValue
+};
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
