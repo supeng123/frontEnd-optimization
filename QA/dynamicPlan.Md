@@ -430,9 +430,7 @@ function uglyNumber(n) {
 ### 20.最长不含重复字符的子字符串
 ~~~
 ~~~
-### 21.
-~~~
-~~~
+
 ### 22.三步问题
 ~~~
 function threeSteps(n) {
@@ -445,5 +443,30 @@ function threeSteps(n) {
         dp[i] = (dp[i-1]+dp[i-2]+dp[i-3])%1000000007
     }
     return dp[n]
+}
+~~~
+### 23.不同的子序列
+~~~
+leetcode 115
+function differentSequence(S, T) {
+    S = '' + S
+    T = '' + T
+    const sLength= S.length
+    const tLength = T.length
+    const dp = Array.from(new Array(tLength), () => new Array(sLength).fill(0))
+    for (let j= 0; j < sLength; j++) {
+        dp[0][j] = 1
+    }
+
+    for (let i = 0; i < sLength; i++) {
+        for (let j = 0; j < tLength; j++) {
+            if (S[j] === T[j]) {
+                dp[i][j] = dp[i-1][j-1] + dp[i][j-1]
+            } else {
+                dp[i][j] = dp[i][j-1]
+            }
+        }
+    }
+    return dp[tLength-1][sLength-1]
 }
 ~~~
