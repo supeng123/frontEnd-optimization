@@ -649,3 +649,25 @@ function maxProduct(root) {
     }
 }
 ~~~
+### 32.二叉树着色
+~~~
+leetcode 1145
+function btreeGameWinningMove(root, n, x) {
+    let left,right;
+    const red = x
+    sum(root)
+    return Math.max(Math.max(left,right), n-left-right-1) > n/2
+
+    function sum(node) {
+        if(!node) return 0
+        const l = sum(node.left)
+        const r = sum(node.right)
+        if (node.val == red) {
+            left = l
+            right = r
+        }
+        return left+right+1
+    }
+
+}
+~~~
