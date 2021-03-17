@@ -1138,6 +1138,29 @@ var maxNumberOfBalloons = function(text) {
     return minValue
 };
 ~~~
+### 字符串转整数
+~~~
+leetcode 8
+var atoi = function(text) {
+    let i = 0
+    let sign = 1
+    let res = 0
+    while (str.charAt(i) == ' ') i++
+    if (str.charAt(i) == '+') {
+        i++
+    } else if (str.charAt(i) == '-') {
+        sign = -1
+        i++
+    }
+    while (str.charAt(i)>= '0' && str.charAt(i) <= '9') {
+        res = res*10 + (str.charAt(i)-0)
+        if (res*sign >=2147483647) return 2147483647
+        if (res*sign <=-2147483648) return -2147483648
+        i++
+    }
+    return res*sign
+};
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
