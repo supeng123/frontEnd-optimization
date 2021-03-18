@@ -528,20 +528,20 @@ function canPartition(nums) {
 leetcode 1340
 var maxJumps = function(arr, d) {
     let len = arr.length
-    const memo = new Array(n).fill(-1)
+    const memo = new Array(len).fill(-1)
 
     function recur(index) {
-        if (memo[imdex] !== -1) {
+        if (memo[index] !== -1) {
             return memo[index]
         }
         let res = 1
         //往右边眺
-        for (let j = i+1; j < len && j <= i+d && arr[index] > arr[j]; j++){
+        for (let j = index+1; j < len && j <= index+d && arr[index] > arr[j]; j++){
             res = Math.max(res, recur(j)+1)
         }
 
         //往左边边眺
-        for (let j = i-1; j >= 0 && j >= i-d && arr[index] > arr[j]; j--){
+        for (let j = index-1; j >= 0 && j >= index-d && arr[index] > arr[j]; j--){
             res = Math.max(res, recur(j)+1)
         }
         memo[index] = res

@@ -671,3 +671,115 @@ function btreeGameWinningMove(root, n, x) {
 
 }
 ~~~
+### 33.重组字符串
+~~~
+leetcode 676
+function reOrganizeString(S) {
+    let counts = {}
+    for (let i = 0; i < S.length; i++) {
+        let c = S.charAt(i)
+        if (!counts[c]) counts[c] = 0
+        counts[c]++
+    }
+
+    let heap = new Heap()
+    for (let key in counts) {
+        if (counts[key] > ((S.length+1)/2)) return ''
+        heap.insert({val: counts[key], content:key})
+    }
+
+    let res = []
+    let lastC
+    while (heap.size() > 2) {
+        let node1 = heap.extractMax()
+        let node2 = heap.extractMax()
+        if (node1.content != lastC) {
+            res.push(node1.content)
+            res.push(node2.content)
+            lastC = node2.content
+        } else {
+            res.push(node2.content)
+            res.push(node1.content)
+            lastC = node1.content
+        }
+
+        node1.val--
+        node2.val--
+        if (node1.val > 0) {
+            heap.insert(node1)
+        }
+        if (node2.val > 0) {
+            heap.insert(node2)
+        }
+
+        if (heap.size() > 0) {
+            let node1 = heap.extractMax()
+            res.push(node1.content)
+        }
+    }
+    return res.join('')
+}
+
+let Heap = function() {
+    this.list = []
+}
+
+Heap.prototype.insert = function (node) {
+    this.list.push(node)
+    let k = this.list.length
+
+    while (k > 0) {
+        let p = Math.floor((k-1)/2)
+        if (this.list[p].val < this.list[k].val) {
+            let temp = this.list[p]
+            this.list[p] = this.list[k]
+            this.list[k] = temp
+
+            k = p
+        } else {
+            break
+        }
+    }
+}
+
+Heap.prototype.extractMax = function() {
+    let k = this.size()
+    let res 
+    if (k == 0) return
+    if (k == 1) {
+        return this.list.pop()
+    } else {
+        res = this.list[0]
+        this.list[0] = this.list.pop()
+    }
+
+    k = 0
+    let left = 2*k+1
+    while (left < this.size()) {
+        let right = left+1
+        let max = left
+        
+        if (right < this.size()) {
+            if (this.list[right].val > this.list[left].val) {
+                max = right
+            }
+        }
+
+        if (this.list[k].val < this.list[max].val) {
+            let temp = this.list[k]
+            this.list[k] = this.list[max]
+            this.list[max] = temp
+
+            k = max
+            left = 2*k+1
+        } else {
+            break
+        }
+    }
+    return res
+}
+
+Heap.prototype.size = function() {
+    return this.list.length
+}
+~~~
