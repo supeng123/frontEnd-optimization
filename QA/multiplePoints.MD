@@ -1161,6 +1161,41 @@ var atoi = function(text) {
     return res*sign
 };
 ~~~
+### 字符串转整数
+~~~
+leetcode 498
+var diagonalTraverse = function(matrix) {
+    if (matrix.length == 0 || matrix[0].length == 0) return []
+    const m = matrix.length
+    const n = matrix[0].length
+    const res = []
+    let i = 0
+    let j = 0
+    for (let k = 0; k < m*n; k++) {
+        res.push(matrix[i][j])
+        if ((i+j)%2==0) {
+            if (n-1 == j) {
+                i++
+            } else if (i == 0) {
+                j++
+            } else {
+                i--
+                j++
+            }
+        } else {
+            if (m-1 == i) {
+                j++
+            } else if (j == 0) {
+                i++
+            } else {
+                i++
+                j--
+            }
+        }
+    }
+    return res
+};
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
