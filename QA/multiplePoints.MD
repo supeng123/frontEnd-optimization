@@ -1161,7 +1161,7 @@ var atoi = function(text) {
     return res*sign
 };
 ~~~
-### 字符串转整数
+### 对角线遍历
 ~~~
 leetcode 498
 var diagonalTraverse = function(matrix) {

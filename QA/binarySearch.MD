@@ -135,3 +135,36 @@ onLineElection.prototype.query = function(t) {
     return this.leadings[right]
 }
 ~~~
+### 搜索旋转排序数组
+~~~
+function rotateListSearch(list, target) {
+    let left = 0
+    let right = list.length - 1
+    let mid
+
+    while (left <= right) {
+        mid = Math.floor(left+(right-left)/2)
+        if (list[target] == list[mid]) return true
+
+        if (list[left] == list[mid]) {
+            left++
+            continue
+        }
+
+        if (list[left] <= list[mid]) {
+            if (target >= list[left] && target < list[mid]) {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        } else {
+            if (target <= list[right] && target > list[mid]) {
+                left = mid + 1
+            } else {
+                right = mid - 1
+            }
+        }
+    }
+    return false
+}
+~~~
