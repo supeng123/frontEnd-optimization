@@ -321,3 +321,42 @@ function copyLinkList(head) {
     return m.get(head)
 }
 ~~~
+### 15.反转k个一组链表
+~~~
+function reverseLinkedListInKgroup(head, k) {
+    function reverse(head, tail) {
+        pre = tail.list
+        cur = head
+        while (cur != tail) {
+            let next = cur.next
+            cur.next = pre
+            pre = cur
+            cur = next
+        }
+        return [tail, head]
+    }
+
+    let dummyNode = new ListNode(0)
+    dummyNode.next = head
+    let pre = dummyNode
+
+    while(head) {
+        let tail = head
+        for (let i = 0; i < k; i++) {
+            tail = tail.next
+            if (!tail) return dummyNode.next
+        }
+
+        let nex = tail.next
+        [head, tail] = reverse(head, tail)
+
+        pre.next = head
+        tail.next = nex
+        pre = tail
+        head = tail.next
+    }
+
+    return dummyNode.next
+ 
+}
+~~~
