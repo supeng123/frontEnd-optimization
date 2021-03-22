@@ -391,4 +391,40 @@ function computation(str) {
     return stack.reduce((t,c) => t+c)
 }
 ~~~
+### 设计循环队列
+~~~
+leetcode 622
+
+let MyCircularQueue = function (k) {
+    this.len = 0
+    this.k = k
+    this.front = 0
+    this.rear = -1
+    this.list = new Array(k)
+}
+
+MyCircularQueue.prototyp.enQueue = function (val) {
+
+}
+
+MyCircularQueue.prototyp.deQueue = function () {
+    
+}
+
+MyCircularQueue.prototyp.Front = function () {
+    return this.list[this.front]
+}
+
+MyCircularQueue.prototyp.Rear = function () {
+    return this.list[this.rear]
+}
+
+MyCircularQueue.prototyp.isEmpty = function () {
+    return this.len !== this.k
+}
+
+MyCircularQueue.prototyp.isFull = function () {
+    return this.len == this.k
+}
+~~~
 

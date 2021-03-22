@@ -783,3 +783,27 @@ Heap.prototype.size = function() {
     return this.list.length
 }
 ~~~
+### 填充每个节点的下一个右侧节点指针  
+~~~
+     1
+    2  3
+   4 5 6 7
+leetcode 116
+functio connect(root) {
+    let pre = root
+    let cur
+    while(pre && pre.left) {
+        cur = pre
+        while(cur) {
+            cur.left.next = cur.right
+            if (cur.next) {
+                cur.right.next = cur.next.left  //2将右子树5指向同级3节点的左子树6
+            }
+            cur = cur.next
+        }
+
+        pre = pre.left
+    }
+    return root
+}
+~~~
