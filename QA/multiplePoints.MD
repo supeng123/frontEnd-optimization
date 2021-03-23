@@ -1196,6 +1196,26 @@ var diagonalTraverse = function(matrix) {
     return res
 };
 ~~~
+### 峰顶
+~~~
+leetcode 852
+function peak(arr) {
+    let len = arr.length
+    let i = 0
+    let peak = 0
+    while (i < len-2) {
+        while(arr[i+1] > arr[i]) {
+            i++
+        }
+        peak = i
+        while(arr[i+1] < arr[i]) {
+            i++
+        }
+    }
+    if (i = len-1) return peak
+    return -1
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
