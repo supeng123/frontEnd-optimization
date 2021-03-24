@@ -96,3 +96,45 @@ function intersection(nums) {
     )]
 }
 ~~~
+### 6.常数时间插入、删除和获取随机元素
+~~~
+leetcode 380
+var RandomizedSet = function() {
+    this.map = {}
+    this.list = []
+};
+
+RandomizedSet.prototype.insert = function(val) {
+    if (this.map[val] === undefined) {
+        this.list.push(val)
+        this.map[val] = this.list.length-1
+        return true
+    }
+    return false
+};
+
+RandomizedSet.prototype.remove = function(val) {
+    if (this.map[val] === undefined) return false
+    const index = this.map[val]
+    const len = this.list.length
+    if (index !== len-1) {
+        this.list[index] = this.list[len-1]
+        this.map[this.list[len-1]] = index
+    }
+    this.list.pop()
+    delete this.map[val]
+    return true
+};
+
+RandomizedSet.prototype.getRandom = function() {
+    let res,
+    let count = 0
+    for (let i = 0; i < this.list.length; i++) {
+        count++
+        let index = Math.floor(Math.random()*count)
+        if(index == 0) return i
+    }
+    return this.nums[res]
+};
+
+~~~
