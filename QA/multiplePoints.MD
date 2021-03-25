@@ -1216,6 +1216,16 @@ function peak(arr) {
     return -1
 }
 ~~~
+### 缺失的数字
+~~~
+leetcode 268
+function missingNumber(arr) {
+    const len = arr.length
+    const target = Math.min(len*(len+1)/2)
+    const sum = arr.reduce((a,b)=>a+b,0)
+    return target-sum
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
