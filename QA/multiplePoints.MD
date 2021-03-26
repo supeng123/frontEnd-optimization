@@ -1226,6 +1226,22 @@ function missingNumber(arr) {
     return target-sum
 }
 ~~~
+### 汉明距离
+~~~
+leetcode 461
+function HammingDistance(a, b) {
+    const aString = a.toString(2)
+    const bString = b.toString(2)
+    const maxLength = Math.max(aString.length, bString.length)
+    const newA = aString.padStart(maxLength， 0)
+    const newB = bString.padStart(maxLength， 0)
+    let res = 0
+    for (let i = 0; i < len; i++) {
+        if(newA[i]!=newB[i]) res++
+    }
+    return res
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
