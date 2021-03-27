@@ -1242,6 +1242,27 @@ function HammingDistance(a, b) {
     return res
 }
 ~~~
+### 合并区间
+~~~
+leetcode 56
+function mergeInterval(list) {
+    const len = list.length
+    const res = []
+    list.sort((a, b) => a[0]-b[0])
+    res.push(list[0])
+    for (let i = 1; i < len; i++) {
+        const pre = res[res.length-1]
+        if (pre[1] >= list[i][0]) {
+            const max = Math.max(pre[1], list[i][1])
+            pre[1] = max
+        } else {
+            res.push(list[i])
+        }
+    }
+
+    return res
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
