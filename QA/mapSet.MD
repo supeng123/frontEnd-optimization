@@ -138,3 +138,45 @@ RandomizedSet.prototype.getRandom = function() {
 };
 
 ~~~
+### 76.最小覆盖子串
+~~~
+leetcode 76
+slide window
+function minimumSub(s, t) {
+    const map = {}
+    let missingCharactors = 0
+    for (let i = 0; i < t.length; i++) {
+        if (map[t[i]] == undefined) {
+            map[t[i]] = 1
+            missingCharactors++
+        } else {
+            map[t[i]]++
+        }
+    }
+
+    let right = 0; 
+    let left = 0
+    let res = Infinity
+    let resL
+    for (right < s.length; right++) {
+        const cur = s[right]
+        if (map[cur] !== undefined) {
+            map[cur]--
+        }
+        if (map[cur] == 0) {
+            missingCharactors--
+        }
+        while (missingCharactors == 0) {
+            if (right - left + 1 < res) {
+                res = Math.min(res, len)
+                resL = left
+            }
+            let leftCharactor = s[left]
+            if (map[leftCharactor] !== undefined) map[leftCharactor]++
+            if (map[leftCharactor] > 0) missingCharactors++
+            left++
+        }
+    }
+    return s.substring(resL, resL+res)
+}
+~~~
