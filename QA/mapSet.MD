@@ -138,7 +138,7 @@ RandomizedSet.prototype.getRandom = function() {
 };
 
 ~~~
-### 76.最小覆盖子串
+### 7.最小覆盖子串
 ~~~
 leetcode 76
 slide window
@@ -178,5 +178,27 @@ function minimumSub(s, t) {
         }
     }
     return s.substring(resL, resL+res)
+}
+~~~
+### 8.单词接龙
+~~~
+leetcode 127
+function ladderzlength(beginWord, endWord, wordList) {
+    const wordSet = new Set(wordList)
+    let q = [[beginWord, 1]]
+    while(q.length > 0) {
+        let [word, level] = q.shift()
+        if(word == endWord) return level
+        for (let i = 0; i < word.length; i++) {
+            for (let j = 0; j < 122; j++) {
+                const newWord = word.slice(0,i)+String.fromCharCode(j)+word.slice(i+1)
+                if (wordSet.has(newWord)) {
+                    q.push([newWord, level+1])
+                    wordSet.delete(newWord)
+                }
+            }
+        }
+    }
+    return 0
 }
 ~~~
