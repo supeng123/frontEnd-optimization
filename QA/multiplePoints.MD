@@ -595,6 +595,22 @@ funtion Panlindrome(s) {
     }
     return count
 }
+funtion countSubstring(s) {
+    let count = 0;
+    let total = s.length*2-1
+    let start = 0
+    while (start < total) {
+        let left = Math.min(start/2)
+        let right = left + start%2
+        while (left >= 0 && right < total && s.charAt(left) == s.charAt(right)) {
+            left--
+            right++
+            count++
+        }
+        start++
+    }
+    return count
+}
 ~~~
 ### 29.区间合并
 ~~~
