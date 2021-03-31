@@ -190,7 +190,7 @@ function ladderzlength(beginWord, endWord, wordList) {
         let [word, level] = q.shift()
         if(word == endWord) return level
         for (let i = 0; i < word.length; i++) {
-            for (let j = 0; j < 122; j++) {
+            for (let j = 0; j <= 122; j++) {
                 const newWord = word.slice(0,i)+String.fromCharCode(j)+word.slice(i+1)
                 if (wordSet.has(newWord)) {
                     q.push([newWord, level+1])
