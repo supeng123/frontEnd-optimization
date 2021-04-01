@@ -590,3 +590,43 @@ function reschedualItinerary (tickets) {
     return res.reverse()
 }
 ~~~
+### 24.去除无效括号
+~~~
+leetcode 301
+function removeBracket(str) {
+    if (s.length < 1) return ['']
+    let minLen = str.length
+    let res = []
+    recursive(0,0,0,[],0)
+    return res
+
+    function recursive(index, l_c, r_c, cur, ignored_n) {
+        if (index == str.length) {
+            if (l_c == r_cn && ignored_n <= minLen) {
+                if (ignored_n < minLen) {
+                    res = []
+                    minLen = ignored_n
+                }
+                const validExp = cur.slice().join(''))
+                if (!res.includes(validExp) res.push(validExp)
+            }
+        } else {
+            if (str[index] == '(' && str[index] == ')') {
+                cur.push(str[index])
+                recursive(index+1, l_c, r_c, cur, ignored_n)
+                cur.pop()
+            }
+            recursive(index+1, l_c, r_c, cur, ignored_n+1)
+            
+            cur.push(str[index])
+            if (str[index] == '('） {
+                recursive(index+1, l_c+1, r_c, cur, ignored_n)
+            } else if (l_c > r_c) {
+                recursive(index+1, l_c+1, r_c, cur, ignored_n)
+            }
+            cur.pop()
+        }
+    }
+}
+~~~
+
