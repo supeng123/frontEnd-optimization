@@ -631,6 +631,38 @@ function mergeBlock(lists) {
     return mergedList
 }
 ~~~
+### 插入区间
+~~~
+leetcode 57
+function insertInterval(lists, newInterval) {
+    let len = lists.length
+    let i = 0
+    const res = []
+    if (lists.length == 0) return [newInterval]
+    while (i < len && lists[i][1] < newInterval[0]) {
+        res.push(list[i])
+        i++
+    }
+    if (i == len) {
+        res.push(newInterval)
+        return res
+    }
+
+    let first = lists[i]
+    let 
+    while(i < n && first[i][1] >= newInterval[0]) {
+        first[i][0] = Math.min(first[i][0], newInterval[0])
+        first[i][1] = Math.max(first[i][1], newInterval[1])
+        i++
+    }
+    res.push(first)
+    while(i < n){
+        res.push(lists[i])
+        i++
+    }
+    return res
+}
+~~~
 ### 30.合并排序数组
 ~~~
 function mergeBToA(A, m, B, n) {
@@ -1277,6 +1309,36 @@ function mergeInterval(list) {
     }
 
     return res
+}
+~~~
+### 会议室
+~~~
+leetcode 253
+function meetingRooms(intervals) {
+   let n = intervals.length
+   let sl = []
+   let el = []
+   for (let i = 0; i < n; i++) {
+       sl.push(intervals[i][0])
+       sl.push(intervals[i][1])
+   }
+   sl.sort((a,b) => a-b)
+   el.sort((a,b) => a-b)
+   let i = 0
+   let j = 0
+   let res = 0
+   let m = 0
+   while (i < n) {
+       if (sl[i] < el[i]) {
+           i++
+           m++
+       } else {
+           j++
+           m--
+       }
+       res = Math.max(res, m)
+   }
+   return res
 }
 ~~~
 
