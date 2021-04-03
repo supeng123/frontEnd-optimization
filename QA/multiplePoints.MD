@@ -530,6 +530,9 @@ function threeSum(nums, target) {
 ~~~
 leetcode 31
 三指针,或全排列回溯
+从右往左找到最高点的左侧，
+再从右边找到比左侧更大的一位数进行交换
+最高点到结尾进行交换升序排列
 function nextPermutation(nums) {
     if (nums.length < 2) return nums
     let start = nums.length - 2
@@ -1339,6 +1342,30 @@ function meetingRooms(intervals) {
        res = Math.max(res, m)
    }
    return res
+}
+~~~
+### 灯泡开关
+~~~
+leetcode 1375
+function numTimesAllBlue(light) {
+    let res = 0
+    let cur = 1
+    let left = {}
+    let maxLight = 0
+    
+    light.forEach(l => {
+        left[l] = true
+        maxLight = Math.max(maxLight, l)
+        if (l >= cur) {
+            while(left[cur]) {
+                cur++
+            }
+            if (cur-1 == maxLight) {
+                res++
+            }
+        }
+    })
+    return res
 }
 ~~~
 
