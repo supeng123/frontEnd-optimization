@@ -1368,6 +1368,57 @@ function numTimesAllBlue(light) {
     return res
 }
 ~~~
+### 考场就座 
+~~~
+leetcode 855
+function ExamRomm(n) {
+    this.students = []
+    this.N = n
+}
+
+ExamRomm.prototype.seat = function() {
+    if (this.students.length == 0) {
+        this.students.push(0)
+        return 0
+    }
+
+    let pre = -1
+    let maxDist = this.students[0]
+    let seat = 0
+
+    for (let i = 0; i < this.students.length; i++) {
+        const cur = this.students[i]
+        if (pre > -1) {
+            const d = Math.floor((cur-pre)/2)
+            if (d > maxDist) {
+                maxDist = d
+                seat = pre + d
+            }
+        }
+        pre = cur
+    }
+
+    if (this.N-1 - this.students[this.students.length-1] > maxDist) {
+        seat = this.N -1
+    }
+
+    let i = 0
+    while (i < this.students.length && this.students[i] < seat) {
+        i++
+    }
+    this.students.splice(i, 0 ,seat)
+
+    return seat
+}
+
+ExamRomm.prototype.leave = function() {
+    let i = 0
+    while (i < this.students.length && this.students[i] != p) {
+        i++
+    }
+    this.students.splice(i, 1)
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot

@@ -636,8 +636,8 @@ function maxProduct(root) {
         if (!node) return 0
         const left = split(node.left)
         const right = split(node.right)
-        res = Math.max(res, (sum-left)*left)
-        res = Math.max(res, (sum-right)*right)
+        res = Math.max(res, (res-left)*left)
+        res = Math.max(res, (res-right)*right)
         return left+right+node.val
     }
 
@@ -805,5 +805,55 @@ functio connect(root) {
         pre = pre.left
     }
     return root
+}
+~~~
+### 二叉搜索树迭代器
+~~~
+leetcode 173
+
+var BSTIterator = fucntion (root) {
+    this.stack = []
+    let cur = root
+    while(cur) {
+        this.stack.push(cur)
+        cur = cur.left
+    }
+}
+
+BSTIterator.prototype.hasNext = function() {
+    return this.stack.length > 0
+}
+
+BSTIterator.prototype.next = function() {
+    if (this.stack.length <= 0) return null
+    let n = this.stack.pop()
+    let cur = n.right
+    while(cur) {
+        this.stack.push(cur)
+        cur = cur.left
+    }
+    return n.val
+}
+~~~
+### 二叉树最深的子树
+~~~
+leetcode 865
+function deepestSubtree(root) {
+    if (root == null) return null
+    const result = recur(root)
+    return result[1]
+
+    function recur(node) {
+        if (!node) return [0, null]
+        const l = recur(node.left)
+        const r = recur(node.right)
+        if (l[0] > r[0]) {
+            return [l[0]+1, l]
+        } else if (l[0] < r[0]) {
+            return [r[0]+1, r]
+        } else {
+            return [l[0]+1, node]
+        }
+    }
 }
 ~~~
