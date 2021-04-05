@@ -848,9 +848,9 @@ function deepestSubtree(root) {
         const l = recur(node.left)
         const r = recur(node.right)
         if (l[0] > r[0]) {
-            return [l[0]+1, l]
+            return [l[0]+1, l[1]]
         } else if (l[0] < r[0]) {
-            return [r[0]+1, r]
+            return [r[0]+1, r[1]]
         } else {
             return [l[0]+1, node]
         }

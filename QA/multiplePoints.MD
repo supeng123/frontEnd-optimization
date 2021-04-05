@@ -1419,6 +1419,31 @@ ExamRomm.prototype.leave = function() {
     this.students.splice(i, 1)
 }
 ~~~
+### 每隔 n 个顾客打折
+~~~
+leetcode 1357
+function Casher(n, discount, products, prices) {
+    this.n = n
+    this.discount = 1 - discount/100
+    this.products = {}
+    products.forEach((product, index) => {
+        if (!this.products[product]) {
+            this.products[product] = prices[index]
+        }
+    })
+    this.number = 0
+}
+
+Casher.prototype.getBill = function (product, amount) {
+    this.number++
+    let factor = 1
+    if (this.number%this.n == 0) factor = this.discount
+    const res = product.reduce((total, cur, index) => {
+        return total + this.products[cur]*factor*amount[index]
+    },0)
+    return res
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
