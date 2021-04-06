@@ -1444,6 +1444,33 @@ Casher.prototype.getBill = function (product, amount) {
     return res
 }
 ~~~
+### 种花问题
+~~~
+leetcode 605
+function plantFlower(list, n) {
+    let number = 0
+    for (let i = 0; i < list.length; i++) {
+        if (list[i]== 0 && list[i-1] !== 1 && list[i+1] !== 1) {
+            number++
+        }
+    }
+    return number >= n
+}
+~~~
+### 同构字符串
+~~~
+leetcode 205
+function reversePolish(s, t) {
+    const sMap = {}
+    const tMap = {}
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] != t[i]) return false
+        s[i] = i+1
+        t[i] = i+1
+    }
+    return true
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot

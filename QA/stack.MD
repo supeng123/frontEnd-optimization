@@ -404,27 +404,67 @@ let MyCircularQueue = function (k) {
 }
 
 MyCircularQueue.prototyp.enQueue = function (val) {
-
+    if (!this.isFull()) {
+        this.rear = (this.rear + 1)%this.k;
+        this.list[this.rear] = value
+        this.len++
+        return true
+    }
+    return false
 }
 
 MyCircularQueue.prototyp.deQueue = function () {
-    
+    if (!this.isEmpty()) {
+        let temp = this.list[this.front]
+        this.front = (this.front+1)%this.k
+        this.len--
+        return true
+    }
+    return false
 }
 
 MyCircularQueue.prototyp.Front = function () {
-    return this.list[this.front]
+    return this.isEmpty() ? -1 : this.list[this.front]
 }
 
 MyCircularQueue.prototyp.Rear = function () {
-    return this.list[this.rear]
+    return this.isEmpty() ? -1 : this.list[this.rear]
 }
 
 MyCircularQueue.prototyp.isEmpty = function () {
-    return this.len !== this.k
+    return this.len == 0
 }
 
 MyCircularQueue.prototyp.isFull = function () {
     return this.len == this.k
+}
+~~~
+### 逆波兰表达式
+~~~
+leetcode 150
+function reversePolish(list) {
+    const stack = []
+    const expList = ['+', '-', '*', '/']
+    for (let i = 0; i < list.length; i++) {
+        if (expList.includes(list[i])) {
+            const back = stack.pop()-0
+            const pre = stack.pop()-0
+            let res
+            if (list[i] == '+') {
+                res = pre + back
+            } else if (list[i] == '-') {
+                res = pre - back
+            } else if (list[i] == '*') {
+                res = pre + back
+            } else {
+                res = (pre/back) > 0 ? Math.floor(pre/back) : Math.ceil(pre/back)
+            }
+            stack.push(res)
+        } else {
+            stack.push(list[i])
+        }
+    }
+    return stack[0]
 }
 ~~~
 
