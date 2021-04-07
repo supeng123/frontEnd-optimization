@@ -857,3 +857,20 @@ function deepestSubtree(root) {
     }
 }
 ~~~
+### 二叉树上下颠倒
+~~~
+leetcode 156
+function upToDown(root) {
+    return recur(root)
+
+    function recur(node) {
+        if (!node || !node.left) return node
+        const resNode = recur(node.left)
+        node.left.left = node.right
+        node.left.right = node
+        node.left = null
+        node.right = null
+        return resNode
+    }
+}
+~~~
