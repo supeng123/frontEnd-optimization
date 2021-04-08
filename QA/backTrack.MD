@@ -629,4 +629,65 @@ function removeBracket(str) {
     }
 }
 ~~~
+### 我能赢吗
+~~~
+leetcode 464
+function canIwin(maxChoosableInteger, desiredTotal) {
+    let sum = (1+maxChoosableInteger)*maxChoosableInteger/2
+    if (sum < desiredTotal) return false
+    if (desiredTotal <=0 ) return true
+    let memo = {}
+    let initialNums = new Array(maxChoosableInteger).fill(0)
+    initialNums = initialNums.map((item, index) => {
+        return index+1
+    })
 
+    return recur(initialNums, desiredTotal)
+
+    function recur(nums, target) {
+        let str = nums.join('')
+        if (memo[str]) {
+            returm memo[str]
+        }
+        if (nums[nums.length-1] >= target) {
+            memo[str] = true
+            return true
+        }
+
+        for (let i = 0; i < nums.length; i++) {
+            let nextNums = nums.slice(0,i).cancat(nums.slice(i+1))
+            if (!recur(nextNums, taget-nums[i])) {
+                memo[str] = true
+                return true
+            }
+        }
+
+        memo[str] = false
+        return false
+    }
+}
+~~~
+
+### 加权嵌套序列和 II  
+~~~
+leetcode 364
+function deepSumInverse (nestedList) {
+    let weighted = 0
+    let unWeighted = 0
+    let list = nestedList
+    while (list.length > 0) {
+        let nextLevelList = []
+        for (let i = 0; i < list.length; i++) {
+            let c = list[i]
+            if (c.isInteger()) {
+                unWeighted += c.getInteger()
+            } else {
+                nextLevelList = nextLevelList.concat(c.getList())
+            }
+        }
+        weighted += unWeighted
+        list = nextLevelList
+    }
+    return weighted
+}
+~~~
