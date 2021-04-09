@@ -168,3 +168,10 @@ function rotateListSearch(list, target) {
     return false
 }
 ~~~
+### 找到平方根
+~~~
+leetcode 633
+function findSqure(n) {
+    
+}
+~~~

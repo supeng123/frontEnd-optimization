@@ -874,3 +874,65 @@ function upToDown(root) {
     }
 }
 ~~~
+### 找到叶子节点
+~~~
+leetcode 366
+function findLeaves(root) {
+
+    let res = []
+    let cur = root
+    while (cur) {
+        let removed = []
+        let needRemove = dfs(root, removed)
+        res.push(removed)
+        if (needRemove) {
+            cur = null
+        }
+    }
+
+    function dfs(n, removed) {
+        if (!n.left && !n.right) {
+            removed.push(n.val)
+            return true
+        }
+        if (n.left) {
+            let needRemove = dfs(n.left, removed)
+            if (needRemove) {
+                n.left = null
+            }
+        }
+        if (n.right) {
+            let needRemove = dfs(n.right, removed)
+            if (needRemove) {
+                n.right = null
+            }
+        }
+        return false
+    }
+}
+~~~
+### 二叉树中最大二叉搜索树之和
+~~~
+leetcode 1373
+function sumBT(root) {
+    let res = 0
+    dfs(root)
+    return res
+
+    function dfs(n) {
+        //min, max, total
+        if (!n) return [Number.MAX_SAFE_NUMBER, Number.MIN_SAFE_NUMBER, 0]
+        const left = dfs(n.left)
+        const right = dfs(n.right) 
+        if (left && left[1] < n.val && right && right[0] > n.val) {
+            let total = n.val + left[2] + right[2]
+            res = Math.max(res, total)
+            return [Math.min(left[0], n.val), Math.max(right[1], n.val), total]
+        }
+        
+        return  null
+    }
+
+
+}
+~~~
