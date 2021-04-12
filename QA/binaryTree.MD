@@ -164,8 +164,8 @@ function balanceTree(root) {
     
     function helper(node) {
         if (node == null) return 0
-        let leftVal = helper(node.left)
-        let rightVal = helper(node.right)
+        let leftVal = Math.max(0, helper(node.left))
+        let rightVal = Math.max(0, helper(node.right))
         let newPath = node.val + leftVal + rightVal
         maxSum = Math.max(newPath, maxSum)
         return node.val + Math.max(leftVal, rightVal)

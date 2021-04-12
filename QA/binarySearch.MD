@@ -135,7 +135,7 @@ onLineElection.prototype.query = function(t) {
     return this.leadings[right]
 }
 ~~~
-### 搜索旋转排序数组
+### 7.搜索旋转排序数组
 ~~~
 function rotateListSearch(list, target) {
     let left = 0
@@ -168,10 +168,62 @@ function rotateListSearch(list, target) {
     return false
 }
 ~~~
-### 找到平方根
+### 8.找到平方根
 ~~~
 leetcode 633
 function findSqure(n) {
-    
+    for (let i = 0; i*i < n; i++) {
+        let end = n - (i*i)
+        if (binarySeach(0, end, end)) return true
+    }
+    return false
+
+    function binarySeach(l, r, target) {
+        if (l > r) return
+        let mid = (l+r) >> 1
+        if (mid*mid == target) {
+            return true 
+        } else if (mid*mid < target) {
+            return binarySeach(mid+1, r, target)
+        } else {
+            return binarySeach(l, mid-1, target)
+        }
+    }
+}
+~~~
+### 9.基于时间的键值存储
+~~~
+leetcode 981
+function TimeMap() {
+    let map = {}
+}
+TimeMap.prototype.set(key, value, timestamp) {
+    if (this.map[key] === undefined) {
+        this.map[key] = []
+    }
+    this.map[key].push([value, timestamp])
+}
+TimeMap.prototype.get(key, timestamp) {
+    const list = this.map(key)
+    if (!list) return ''
+    const len = list.length
+    if (timestamp > list[len-1][1]) {
+        return list[len-1][0]
+    } else if (timestamp < list[0][1]) {
+        return ''
+    }
+    let l = 0
+    let r = len
+    while (l < r) {
+        let mid = (l+r) >> 1
+        if (list[mid][1] == timestamp) {
+            return list[mid][0]
+        } else if (list[mid][1] > timestamp) {
+            r = mid - 1
+        } else {
+            l = mid + 1
+        }
+    }
+    return list[l][0]
 }
 ~~~
