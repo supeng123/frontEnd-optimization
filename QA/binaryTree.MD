@@ -936,3 +936,44 @@ function sumBT(root) {
 
 }
 ~~~
+### 实现前缀树
+~~~
+leetcode 208
+function Trie() {
+    this.children = {}
+}
+Trie.prototype.insert = function(word) {
+    let cur = this
+    for (let i = 0; i < word.length; i++) {
+        let w = word[i]
+        if (!cur.children[w]) {
+            cur.children[c] = new Trie()
+        }
+        cur = cur.children[c]
+    }
+    cur.isWord = true
+};
+
+Trie.prototype.search = function(word) {
+    let cur = this
+    for (let i = 0; i < word.length; i++) {
+        let w = word[i]
+        if (!cur.children[w]) {
+            return false
+        }
+        cur = cur.children[c]
+    }
+    return cur.isWord === true
+};
+Trie.prototype.startsWith = function(prefix) {
+    let cur = this
+    for (let i = 0; i < prefix.length; i++) {
+        let w = word[i]
+        if (!cur.children[w]) {
+            return false
+        }
+        cur = cur.children[c]
+    }
+    return true
+};
+~~~

@@ -138,48 +138,7 @@ RandomizedSet.prototype.getRandom = function() {
 };
 
 ~~~
-### 7.最小覆盖子串
-~~~
-leetcode 76
-slide window
-function minimumSub(s, t) {
-    const map = {}
-    let missingCharactors = 0
-    for (let i = 0; i < t.length; i++) {
-        if (map[t[i]] == undefined) {
-            map[t[i]] = 1
-            missingCharactors++
-        } else {
-            map[t[i]]++
-        }
-    }
 
-    let right = 0; 
-    let left = 0
-    let res = Infinity
-    let resL
-    for (right < s.length; right++) {
-        const cur = s[right]
-        if (map[cur] !== undefined) {
-            map[cur]--
-        }
-        if (map[cur] == 0) {
-            missingCharactors--
-        }
-        while (missingCharactors == 0) {
-            if (right - left + 1 < res) {
-                res = Math.min(res, len)
-                resL = left
-            }
-            let leftCharactor = s[left]
-            if (map[leftCharactor] !== undefined) map[leftCharactor]++
-            if (map[leftCharactor] > 0) missingCharactors++
-            left++
-        }
-    }
-    return s.substring(resL, resL+res)
-}
-~~~
 ### 8.单词接龙
 ~~~
 leetcode 127
@@ -200,5 +159,33 @@ function ladderzlength(beginWord, endWord, wordList) {
         }
     }
     return 0
+}
+~~~
+### 9.最长连续序列
+~~~
+leetcode 128
+function longestSequence(nums) {
+    if (!nums || nums.length <1 ) return 0
+    nums.sort((a,b)=> a-b)
+
+    let res = 1;
+    let i = 0
+    while (i < nums.length) {
+        let pre = i 
+        let cur = i+1
+        let repeated = 0
+        while (nums[cur] == nums[pre] || nums[cur] == nums[pre]+1) {
+            if (nums[cur] == nums[pre]) repeated++
+            pre = cur
+            cur++
+        }
+        res = Math.max(res, pre+1-i-repeated)
+        if (pre > i) {
+            i = pre
+        } else {
+            i++
+        }
+    }
+    return res
 }
 ~~~
