@@ -691,3 +691,37 @@ function deepSumInverse (nestedList) {
     return weighted
 }
 ~~~
+### 花括号展开
+~~~
+leetcode 1087
+function expand(S) {
+    const res = []
+    const n = S.length
+    recur(0, [])
+    return res
+
+    functiom recur(i, cur) {
+        if (i == n) {
+            res.push(cur.slice().join(''))
+        }
+        let c = S[i]
+        if (c != '{' && c != '}') {
+            cur.push(c)
+            recur(i+1, cur)
+            cur.pop()
+        } else if (c == '{') {
+            let j = i
+            while (S[j] != '}') {
+                j++
+            }
+            const temp = S.substring(i+1, j)
+            const list = temp.split(',').sort()
+            for (let t = 0; t < list.length; t++) {
+                cur.push(list[t])
+                recur(j+1, cur)
+                cur.pop()
+            }
+        }
+    }
+}
+~~~

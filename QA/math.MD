@@ -61,3 +61,35 @@ function angle (hour, minutes) {
     return Math.min(360-degree, degree)
 }
 ~~~
+### 最小面积矩形
+~~~
+leetcode 939
+let res  = Number.MAX_SAFE_INTEGER
+    const grid = {}
+    const n = points.length
+    for (i = 0; i < n; i++) {
+        const p = points[i]
+        key = p[0] + '+' + p[1]
+        grid[key] = true
+    }
+    console.log(grid)
+    for (let i = 0; i < n; i++) {
+        for (let j = 1; j < n; j++) {
+            const pointA = points[i]
+            const pointB = points[j]
+            const ax = pointA[0]
+            const ay = pointA[1]
+            const bx = pointB[0]
+            const by = pointB[1]
+            if (ax != bx && ay != by) {
+                
+                if (grid[ax+'+'+by] && grid[bx+'+'+ay]) {
+                    // console.log(ax+'+'+by, bx+'+'+ay)
+                    const area = Math.abs(by-ay)*Math.abs(bx-ax)
+                    res = Math.min(res, area)
+                }
+            }
+        }
+    }
+    return res == Number.MAX_SAFE_INTEGER ? 0 : res
+~~~

@@ -977,3 +977,43 @@ Trie.prototype.startsWith = function(prefix) {
     return true
 };
 ~~~
+### 二叉树的垂序遍历 
+~~~
+leetcode 987
+function verticalTraversal(root) {
+    const m = {}
+    dfs(root, 0, 0)
+
+    const keys = Object.keys(m).sort((a,b) => a - b)
+    const res = []
+    console.log('keys:', m)
+
+    for (let i = 0; i < keys.length; i++) {
+        const my = m[keys[i]]
+        // console.log('my:', my)
+        let yKeys = Object.keys(my).sort((a,b) => a-b)
+        // console.log('yKeys:', yKeys)
+        let temp = []
+        for (let j = 0; j < yKeys.length; j++) {
+            my[yKeys[j]].sort((a,b) => a-b)
+            temp = temp.concat(my[yKeys[j]]) 
+        }
+        res.push(temp)
+    }
+    return res
+
+    function dfs(node, x, y) {
+        if (!node) return
+        if (m[x] == undefined) {
+            m[x] = {}
+            m[x][y] = [node.val]
+        } else if (m[x][y] == undefined) {
+            m[x][y] = [node.val]
+        } else {
+            m[x][y].push(node.val)
+        }
+        dfs(node.left, x-1, y+1)
+        dfs(node.right, x+1, y+1)
+    }
+}
+~~~
