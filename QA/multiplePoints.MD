@@ -1471,6 +1471,69 @@ function reversePolish(s, t) {
     return true
 }
 ~~~
+### 总和至少为K最短子数组
+~~~
+leetcoe 862
+function shortestSubarry(A, K) {
+    let sums = [0]
+    A.forEach((a, index)=> sums.push(sums[index]+a))
+
+    let B = []
+    let res = A.length
+
+    for(let j = 0; j < sums.length; j++) {
+        while (B.length > 0 && sums[j] <= sums[B[B.length-1]]) {
+            B.pop()
+        }
+
+        while (B.length > 0 && sums[j] - sums[B[0]] >= k) {
+            res = Math.min(res, j-B.shift())
+        }
+        B.push(j)
+    }
+
+    return res < A.length + 1 ? res : -1
+}
+~~~
+### 情感丰富的词语
+~~~
+leetcode 809
+function expressiveWords(S, words) {
+    let res  = 0
+    words.forEach(w => {
+        if (isExpressive(w)) res++
+    })
+    return res
+
+    function isExpressive(w) {
+        let m = S.length
+        let n = w.length
+        let i = 0
+        let j = 0
+        while (i < m && j < n) {
+            let w1 = S[i]
+            let w2 = w[j]
+            if (w1 !== w2) {
+                return false
+            }
+            let e1 = i
+            let e2 = j
+            while (e1 < m && S[e1] == w1) {
+                e1++
+            }
+            while (e2 < n && S[e2] == w2) {
+                e2++
+            }
+            const len1 = e1-i
+            const len2 = e2-j
+            if (len1 < len2 || (len1 < 3 && len1 != len2)) return false
+            i++
+            j++
+        }
+        return  i == S.length && j == w.length
+    }
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot

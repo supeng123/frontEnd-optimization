@@ -1017,3 +1017,57 @@ function verticalTraversal(root) {
     }
 }
 ~~~
+### 翻转相同搜索二叉树
+~~~
+leetcode 961
+function flipTree(root1, root2) {
+    function dfs(n1, n2) {
+        if (!n1 && !n2) {
+            return true
+        } else if (!n1 || !n2) {
+            return false
+        } else if (n1.val != n2.val) {
+            return false
+        }
+
+        return (dfs(n1.left, n2.right) && dfs(n1.right, n2.left))
+        || (dfs(n1.left, n2.left) && dfs(n1.right, n2.right))
+    }
+    return dfs(root1, root2)
+}
+~~~
+### 删点成林
+~~~
+leetcode 1110
+function deleteForest(root, deleted) {
+    const m = {}
+    const res = []
+    deleted.forEach((a) => m[a] = true)
+    dfs(root, true)
+    return res
+
+    function dfs(n, shouldBeDelete) {
+        if (!n) {
+            return
+        }
+        if (m[n.val]) {
+            dfs(n.left, true)
+            dfs(n.right, true)
+            return true
+        }
+        if (shouldBeDelete) {
+            res.push(n)
+        }
+
+        let left = dfs(n.left, false)
+        if (left) {
+            n.left = null
+        }
+        let right = dfs(n.right, false)
+        if (right) {
+            n.right = null
+        }
+
+    }
+}
+~~~
