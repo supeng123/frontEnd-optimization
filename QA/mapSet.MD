@@ -189,3 +189,33 @@ function longestSequence(nums) {
     return res
 }
 ~~~
+### 组队排名
+~~~
+leetcode 1366
+function ranks(votes) {
+    let len = votes[0].length
+    const rank = {}
+    votes.forEach(v => {
+        for (let i = 0; i < len; i++) {
+            let c= v[i]
+            if (rank[c] === undefined) {
+                rank[c] = new Array.fill(0)
+            }
+            rank[c][i]++
+        }
+    })
+
+    let res = Object.keys(rank).sort((a,b) => {
+        let listA = rank[a]
+        let listB = rank[b]
+        for (let i = 0; i < len; i++) {
+            if (listA[i] != listB[i]) {
+                return listB[i] - listA[i]
+            }
+        }
+        return a > b ? 1 : -1
+    })
+
+    return res.join('')
+}
+~~~
