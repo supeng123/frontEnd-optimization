@@ -219,3 +219,42 @@ function ranks(votes) {
     return res.join('')
 }
 ~~~
+###
+~~~
+leetcode 1056
+function confusingNumber(N) {
+    let n = N + ''
+    const rotated = {0: 0, 1:1, 6:9, 9:6, 8:8}
+    for (let i = n.length-1; i>= 0; i--) {
+        const c = n[i]
+        if (rotated[c] === undefined) {
+            return false
+        }
+        res.push(rotated[c])
+    }
+    return res.join('') != n
+}
+
+leecode 1088
+funtion confusingNUmberII(N) {
+    let res = 0
+    const nums = [0,1,6,8,9]
+    const rotated = {0: 0, 1:1, 6:9, 9:6, 8:8}
+
+    function recur(v, r, digits) {
+        if (v > N) return
+        if (v != r) {
+            res++
+        }
+        nums.forEach(n => {
+            recur(v*10+n, rotated[n]*digits+r, digits*10)
+        })
+    }
+
+    recur(1,1,10)
+    recur(6,9,10)
+    recur(9,6,10)
+    recur(8,8,10)
+    return res
+}
+~~~

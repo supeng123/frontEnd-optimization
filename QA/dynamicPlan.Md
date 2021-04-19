@@ -470,3 +470,28 @@ function differentSequence(S, T) {
     return dp[tLength-1][sLength-1]
 }
 ~~~
+### 不同的子序列
+~~~
+leetcode 940
+function distinctSubseq(S) {
+    const len = S.length
+    const module = 1000000007
+    const dp = new Array(len+1).fill(0)
+    dp[0] = 1
+    const visited = {}
+    for (let i = 1; i <= len; i++) {
+        dp[i] = dp[i-1]*2
+        const c = S[i-1]
+        if (visited[c]) {
+            dp[i] -= dp[visited[c]-1]
+        }
+        visited[c] = i
+        dp[i] %= module
+    }
+    dp[len]--
+    if (dp[len] < 0) {
+        dp[len] += module
+    }
+    return dp[len]
+}
+~~~
