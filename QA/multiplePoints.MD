@@ -290,6 +290,21 @@ function jump(nums) {
     }
     return dp[len-1]
 }
+
+leetcode 45
+function minJumpII(nums) {
+    let maxJump = 0
+    let end = 0
+    let step = 0
+    for (let i = 0; i < nums.length; i++) {
+        maxJump = Math.max(nums[i]+i, maxJump)
+        if (i == end) {
+            step++
+            end = maxJump
+        }
+    }
+    return step
+}
 ~~~
 ### 15.除自身以外数组的乘积
 ~~~
@@ -1461,14 +1476,49 @@ function plantFlower(list, n) {
 ~~~
 leetcode 205
 function reversePolish(s, t) {
-    const sMap = {}
-    const tMap = {}
-    for (let i = 0; i < s.length; i++) {
-        if (s[i] != t[i]) return false
-        s[i] = i+1
-        t[i] = i+1
+    if (s.length !== t.length) return false
+        let mapS = {}
+        let mapT = {}
+        for (let i = 0; i < s.length; i++) {
+            const charactorS = s[i]
+            const charactorT = t[i]
+            if (mapS[charactorS] != mapT[charactorT]) return false
+            if (mapS[charactorS] == undefined &&  mapT[charactorT] == undefined) {
+                mapS[charactorS] = i+1
+                mapT[charactorT] = i+1
+            } 
+        }
+        return true
     }
-    return true
+}
+
+leetcode 890
+function findAndReplacePattern(word, pattern) {
+    cont pMap = {}
+    let pMapping = ''
+    for (let i = 0; i < pattern.length; i++) {
+        const c = pattern[i]
+        if (pMap[c] == undefined) {
+            pMap[c] = i
+        }
+        pMapping = pMapping + pMap[c]
+    }
+
+    let res = []
+    for (let i = 0; i < word.length; i++) {
+        let wMap = {};
+        let wMapping = ''
+        let w = words[i]
+        for (let j = 0; j < w.length; j++) {
+            const c = w[j]
+            if (wMap[c] == undefined) {
+                wMap[c] = j
+            }
+            wMapping = wMapping + wMap[c]
+        }
+        if (wMapping == pMapping) res.push(wMapping)
+    }
+    return res
 }
 ~~~
 ### 总和至少为K最短子数组
@@ -1527,11 +1577,35 @@ function expressiveWords(S, words) {
             const len1 = e1-i
             const len2 = e2-j
             if (len1 < len2 || (len1 < 3 && len1 != len2)) return false
-            i++
-            j++
+            i = e1
+            j = e2
         }
         return  i == S.length && j == w.length
     }
+}
+~~~
+### 车队
+~~~
+leetcode 853
+function carFleet(target, position, speed) {
+    const n = position.length
+    const cars  = []
+    if (n < 2) return n
+    for (let i = 0; i < n; i++) {
+        const arriveTime = (target-position[i])/speed[i]
+        cars.push([position[i], arriveTime])
+    }
+    cars.sort((a,b) => a[0]-b[0])
+    console.log(cars)
+    let res = 0
+    for (let j = n-1; j>0; j--) {
+        if (cars[j][1] < cars[j-1][1]) {
+            res++
+        } else {
+            cars[j-1][1] = cars[j][1]
+        }
+    }
+    return res+1
 }
 ~~~
 
