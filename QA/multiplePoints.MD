@@ -1433,6 +1433,31 @@ ExamRomm.prototype.leave = function() {
     }
     this.students.splice(i, 1)
 }
+
+到最近的人的最大距离
+leetcode 849
+function maxDistance(seats) {
+    let i = 0
+    let n = seats.length
+    while (i < n && seats[i] == 0) {
+        i++
+    }
+    let res = i
+    let pre = i
+    for (let j = i+1; j < n; j++) {
+        if (seats[j] == 0) {
+            continue
+        }
+        res = Math.max(res, Math.floor((j-pre)/2))
+        pre = j
+    }
+    i = n-1
+    while (i >= 0 && seats[i] == 0) {
+        i--
+    }
+    res = Math.max(res, n-1-i)
+    return res
+}
 ~~~
 ### 每隔 n 个顾客打折
 ~~~
@@ -1606,6 +1631,58 @@ function carFleet(target, position, speed) {
         }
     }
     return res+1
+}
+~~~
+### 一把顺子
+~~~
+leetcode 846
+function isNstriaghtHand(hand, W) {
+    let count = {}
+    hand.forEach(h => {
+        if (count[h] == undefined) {
+            count[h] = 0
+        }
+        count[h]++
+    })
+    const discards =  Object.keys(count).sort((a,b)=> a-b)
+
+    for (let i = 0; i < discards.length; i++) {
+        const card = discards[i]-0
+        const c = count[card]
+        if (c == 0) {
+            continue
+        }
+        for (let j = card; j< card+W; j++) {
+            if (count[j] === undefined) {
+                return false
+            }
+            count[j] -= c
+            if (count[j] < 0) {
+                return false
+            }
+        }
+    }
+    return true
+}
+~~~
+### 字符串相加
+~~~
+leetcode 415
+function add(num1, num2) {
+    const res  = []
+    let m = num1.length - 1
+    let n = num2.length - 1
+    let curry = 0
+    while (m >=0 || n >= 0) {
+        const x = m >= 0 ? num1.charAt(m)-0 : 0
+        const y = n >= 0 ? num2.charAt(n)-0 : 0
+        const sum = x + y
+        res.push(sum%10)
+        curry = Math.floor(sum/10)
+        m--
+        n--
+    }
+    return res.reverse().join('')
 }
 ~~~
 

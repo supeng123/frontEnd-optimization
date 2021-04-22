@@ -93,3 +93,20 @@ let res  = Number.MAX_SAFE_INTEGER
     }
     return res == Number.MAX_SAFE_INTEGER ? 0 : res
 ~~~
+### 删除字符串中的所有相邻重复项
+~~~
+leetcode 1209
+function deleteRepeated(s, k) {
+    const stack = []
+    for (let i = 0; i < s.length; i++) {
+        const pre = stack.pop()
+        if (!pre || pre[0] != s[i]) {
+            stack.push(pre)
+            stack.push(s[i])
+        } else if (pre.length < k-1) {
+            stack.push(pre+s[i])
+        }
+    }
+    return stack.join('')
+}
+~~~
