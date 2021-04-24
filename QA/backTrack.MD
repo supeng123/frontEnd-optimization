@@ -725,3 +725,23 @@ function expand(S) {
     }
 }
 ~~~
+### 组合总和
+~~~
+leetcode 377
+function combinationSum(nums, target) {
+    const m = new Map()
+    return backtrack(target)
+
+    function backtrack(target) {
+        if (target < 0) return 0
+        if (target === 0) return 1
+        if (m.has(target)) return m.get(target)
+        let res  = 0
+        for (let i = 0; i < nums.length; i++) {
+            res += backtrack(taregt-nums[i])
+        }
+        m.set(target, res)
+        return res
+    }
+}
+~~~

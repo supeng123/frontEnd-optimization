@@ -1685,6 +1685,24 @@ function add(num1, num2) {
     return res.reverse().join('')
 }
 ~~~
+### 能否连接形成数组
+~~~
+leetcode 1640
+function canBeLinked(arr, pieces) {
+    cosnt map = new Map()
+    for (let i = 0 ; i < pieces.length; i++) {
+        map.set(pieces[i][0], pieces)
+    }
+    for (let i = 0; i < arr.length; i++) {
+        const temp = m.get(arr[i])
+        if (!temp) return false
+        for (let j = 0; j < temp.length; i++,j++) {
+            if (temp[j] !== arr[i]) return false
+        }
+    }
+    return true
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot
