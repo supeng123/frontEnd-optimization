@@ -1703,6 +1703,33 @@ function canBeLinked(arr, pieces) {
     return true
 }
 ~~~
+### 字符串的查找与替换
+~~~
+leetcode 833
+function findAndReplace(S, indexes, sources, targets) {
+    const m = {}
+    for (let i = 0; i < indexes.length; i++) {
+        const n = indexes[i]
+        const s = sources[i]
+        if (S.substring(n, n+s.length) === s) {
+            m[n] = i
+        }
+    }
+
+    let res  = ''
+    let i = 0
+    while ( i < S.length) {
+        if (m[i] > -1) {
+            res += targets[m[i]]
+            i += sources[m[i]].length
+        } else {
+            res += S[i]
+            i++
+        }
+    }
+    return res
+}
+~~~
 
 autism characterized by difficulty in communicating
 we give hope to people with limitation that those limitations are not what they think they are that they do have a shot

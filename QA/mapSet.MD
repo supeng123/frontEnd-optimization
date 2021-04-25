@@ -258,3 +258,24 @@ funtion confusingNUmberII(N) {
     return res
 }
 ~~~
+### 有效的数独
+~~~
+leetcode 36
+function valid(matrix) {
+    const set = new Set()
+    for (let i = 0;  i < matrix.length; i++) {
+        for (let j = 0; j < matrix.length; j++) {
+            const number = matrix[i][j]
+            if (number == '-') continue
+            const r = `${number}r${i}`
+            const c = `${number}c${j}`
+            const zone = `${number}z(${Math.floor(i/3)}, ${Math.floor(j/3)})`
+            if (set.has(r) || set.has(c) || set.has(zone)) return false
+            set.add(r)
+            set.add(c)
+            set.add(zone)
+        }
+    }
+    return false
+}
+~~~
