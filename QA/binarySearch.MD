@@ -227,3 +227,30 @@ TimeMap.prototype.get(key, timestamp) {
     return list[l][0]
 }
 ~~~
+### 在 D 天内送达包裹的能力
+~~~
+leetcode 1011
+function dilever(weights, D) {
+    let l = Math.max(...weights)
+    let r = weights.reduce((a,b) => a + b, 0)
+    while (l < r) {
+        const mid = Math.floor((left+right)/2)
+        let need = 1
+        let cur = 0
+        for (let w of weights) {
+            if (cur+w > mid) {
+                need++
+                cur = 0
+            }
+            cur += w
+        }
+
+        if (need <= D) {
+            r = mid
+        } else {
+            left = mid+1
+        }
+    }
+    return left
+}
+~~~

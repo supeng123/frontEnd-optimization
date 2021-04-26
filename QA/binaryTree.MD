@@ -1071,3 +1071,27 @@ function deleteForest(root, deleted) {
     }
 }
 ~~~
+### 恢复二叉搜索树
+~~~
+leetcode 99
+function revertTree(root) {
+    let pre = new TreeNode(-Infinite)
+    let err1 = null
+    let err2 = null
+    function inorder(node) {
+        if (!node) return
+        inorder(node.left)
+        if (pre.val >= node.val && err1 == null) {
+            err1 = pre
+        }
+        if (pre.val >= node.val && err1 != null) {
+            err2 = node
+        }
+        inorder(node.right)
+    }
+    inorder(root)
+    const temp = err1.val
+    err1.val = err2.val
+    err2.val = temp
+}
+~~~
