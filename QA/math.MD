@@ -110,3 +110,17 @@ function deleteRepeated(s, k) {
     return stack.join('')
 }
 ~~~
+### z字型变换
+~~~
+leetcode 6
+function zTransformation(s, numRows) {
+    const list = new Array(numRows).fill('')
+    const m = 2*numRows-2
+    for (let i = 0 ; i <  s.length; i++) {
+        const x = i%m
+        const row = Math.min(x, m-x)
+        list[row] += s[i]
+    }
+    return list.join('')
+}
+~~~
