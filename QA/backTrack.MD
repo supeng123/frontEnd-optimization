@@ -745,3 +745,32 @@ function combinationSum(nums, target) {
     }
 }
 ~~~
+### 青蛙跳河
+~~~
+leetcode 403
+function fogJump(stones) {
+    const set = new Set()
+    return backTrack(stones, 0 , 0, set)
+    function backTrack(stones, index, k, set) {
+        const cur = index*1000 + k
+        if (set.has(cur)){
+            return false
+        } else {
+            set.add(cur)
+        }
+        for (let i = index+1; i < stones.length; i++) {
+            const gap = stones[i] - stones[index]
+            if (gap >= k - 1 && gap <= k+1) {
+                if (backTrack(stones, i, gap, set)) {
+                    return true
+                }
+            } else if (gap > k+1) {
+                break
+            }
+            
+        }
+
+        return index == stones.length - 1
+    }
+}
+~~~
