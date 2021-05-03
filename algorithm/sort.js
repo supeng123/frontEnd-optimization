@@ -327,6 +327,25 @@ function dfsTraversal(number) {
     }
 }
 
+function bbb () {
+    for (let a = 0; a <= 9; a++) {
+        for (let b = 0; b <=9; b++) {
+            for (let c = 0; c<=9; c++) {
+                if (a != b && b != c && c != a) {
+                    const ab = `${a}${b}`
+                    const bca = `${b}${c}${a}`
+                    const abc = `${a}${b}${c}`
+                    const result = Number(abc)-Number(bca)
+                    console.log(ab, result)
+                    if (result ==Number(ab)) {
+                        console.log(ab, bca, abc)
+                    }
+                }
+            }
+        }
+    }
+}
+//54 495 549
 
 var LRUCache = class {
 
@@ -366,3 +385,18 @@ var LRUCache = class {
         cache.set(key, value);
     };
 };
+
+function abc(a, b,c) {
+    const x1 = (-b+Math.sqrt((b**2)-4*a*c))/(2*a)
+    const x2 = (-b-Math.sqrt((b**2)-4*a*c))/(2*a)
+    return [x1, x2]
+}
+//abc(1,1,0)
+abc(0,0,0)
+abc(0,1,0)
+abc(0,0,1)
+abc(0,1,1)
+abc(1,0,0)
+
+abc(1,0,1)
+abc(1,1,1)
