@@ -124,3 +124,17 @@ function zTransformation(s, numRows) {
     return list.join('')
 }
 ~~~
+### 将每个元素替换为右侧最大元素
+~~~
+leetcode 1299
+function replaceElements(arr) {
+    let cur = -1
+    let len = arr.length - 1
+    let res = []
+    while (len > 0) {
+        res[len] = cur
+        cur = Math.max(cur, arr[len])
+    }
+    return res
+}
+~~~
