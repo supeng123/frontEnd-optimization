@@ -653,13 +653,9 @@ function validIp(address) {
     return "Neither";
 }
 ~~~
-### 53.new的实现
+### 53.substr && subString
 ~~~
-function new(fn, ...args) {
-    const obj = Object.create(fn.prototype)
-    const res = fn.apply(obj, args)
-    return res instanceof Object ? res : obj
-}
+
 ~~~
 ### 54.js浮点数 0.1+0.2 === 0.3 ？
 ~~~
@@ -718,6 +714,12 @@ const Obj = {}
 Obj.__proto__ == ClassA.prototype
 ClassA.call(Obj)
 https://wangyaxing.cn/blog/algorithm/
+
+function new(fn, ...args) {
+    const obj = Object.create(fn.prototype)
+    const res = fn.apply(obj, args)
+    return res instanceof Object ? res : obj
+}
 ~~~
 ### 60.async函数设计
 ~~~
@@ -1017,7 +1019,7 @@ class Dialog {
 7.tree shaking
 8.service work
 ~~~
-### 67. this指向
+### 67.this指向
 ~~~
 //first
 let x = 2

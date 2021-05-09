@@ -254,3 +254,38 @@ function dilever(weights, D) {
     return left
 }
 ~~~
+### 制作 m 束花所需的最少天数
+~~~
+leetcode 1482
+function days(bloomday, m, k) {
+    if (bloomday.length < m*k) return -1
+    let l = 1
+    let r = Math.max(...bloomday)
+    while (l <= r) {
+        let mid = (r + l) >> 1
+        if (canMake(mid)) {
+            r = mid - 1
+        } else {
+            l = mid + 1
+        }
+    }
+    return l
+
+    function canMake(day) {
+        let count = 0
+        let temp = 0
+        for (let i = 0; i < bloomday.length; i++) {
+            if (bloomday[i] <= day) {
+                temp++
+                if (temp == k) {
+                    count++
+                    temp = 0
+                }
+            } else {
+                temp = 0
+            }
+        }
+        return count >= m
+    }
+}
+~~~
