@@ -391,12 +391,11 @@ function abc(a, b,c) {
     const x2 = (-b-Math.sqrt((b**2)-4*a*c))/(2*a)
     return [x1, x2]
 }
-//abc(1,1,0)
+//abc(1,1,0)(1,0,0)
 abc(0,0,0)
 abc(0,1,0)
 abc(0,0,1)
 abc(0,1,1)
 abc(1,0,0)
-
 abc(1,0,1)
 abc(1,1,1)

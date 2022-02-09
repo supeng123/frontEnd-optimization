@@ -279,27 +279,3 @@ function valid(matrix) {
     return false
 }
 ~~~
-### 砖墙
-~~~
-leetcode 554
-function bricks(wall) {
-    let leastBricks = 0
-    let m = {}
-    let max  = 0
-    for (let i = 0; i < wall.length; i++) {
-        const widths = wall[i]
-        let sum = 0
-        for (let j = 0; j < widths.length - 1; j++) {
-            sum = sum + widths[j]
-            if (m[sum] == undefined) {
-                m[sum] = 0
-            }
-            n[sum]++
-        }
-    }
-    for (let key in m) {
-        max = Math.max(m[key], max)
-    }
-    return wall.length - max
-}
-~~~

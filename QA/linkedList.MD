@@ -301,6 +301,7 @@ function intersection(HeadA, HeadB) {
 }
 ~~~
 ### 14.复制链表
+~~~
 function copyLinkList(head) {
     const m = new Map()
     let cur = head
@@ -360,3 +361,53 @@ function reverseLinkedListInKgroup(head, k) {
  
 }
 ~~~
+### 16.合并多个有序链表
+~~~
+leetcode 23
+function mergeMultipleList(lists) {
+    function mergeTwoLists(a, b) {
+        let x = a
+        let y = b
+        const dummyNode = new ListNode(0)
+        let cur = dummyNode
+        while (x != null && y != null) {
+            if (x.val <= y.val) {
+                cur.next = new ListNode(x.val)
+                x = x.next
+            } else {
+                cur.next = new ListNode(y.val)
+                y = y.next
+            }
+            cur = cur.next
+            if (x != null) cur.next = x
+            if (y != null) cur.next = y
+        }
+        return dummyNode.next
+    }
+
+    if (lists.length == 0) return null
+    if (lists.length == 1) return lists[0]
+
+    let curLists = lists
+    while (curLists.length > 1) {
+        let newLists = []
+        let i = 0
+        let len = curlists.length
+        let j = len - 1
+        while (i <= j) {
+            if (i == j) {
+                newLists.push(curLists[i])
+            } else {
+                const mergedList = mergeTwoLists(curLists[i], curLists[j])
+                newLists.push(mergedList)
+            }
+            i++
+            j--
+        }
+        curLists = newLists
+    }
+    return curLists[0]
+}
+~~~
+[1,2]
+[0,0,0,0,1,2]

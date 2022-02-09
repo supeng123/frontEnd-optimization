@@ -130,3 +130,66 @@ String.prototype.giveLydiaPizza = () => {
 const name = 'supeng'
 name.giveLydiaPizza() //'just give him a pizza' 字符串原型挂载方法所有字符串都共享
 ~~~
+#### 16.nodejs事件循环
+~~~
+1.准备执行js文件    //node index.js
+2.检查有没有如下task，timers, OS tasks, threadpool,如果没有退出程序  
+3.如果有setTimeout, setIntervals,开始执行
+4.如果有OS task的回调或线程池的task，开始执行 //OS tasks像http请求会直接给OS底层处理，线程池的task想文件的读取，hash加盐会丢给libuv线程池
+5.暂停或者等待所有task
+6.执行setImmidiate function
+7.Handle close event
+~~~
+### 17.use cache redis
+~~~
+const mongoose = require('mongoose')
+const redis = require('redis')
+const util = require('util')
+
+const redisUrl = 'redis://127.0.0.1:7678'
+const client = redis.createClient(redisUrl)
+client.hget = util.promisify(client.hget)
+const exec = mongoose.Query.prototype.exec
+
+mongoose.Query.prototype.exec = async function() {
+    if (!this.useCache) {
+        return exec.apply(this, arguments)
+    }
+    const key = JSON.stringify(Object.assign({}, this.getQuery(), {
+        collection: this.mongooseCollection.name
+    }))
+
+    const cacheValue = await client.hget(this.hashKey, key)
+    if (cacheValue) {
+        const doc = JSON.parse(cacheValue)
+
+        return Array.isArray(doc) ?
+        doc.map(d => new this.model(d)) :
+        new this.model(doc)
+    }
+
+    const result =  exec.apply(this, arguments)
+    client.hset(this.hashKey, key, JSON.stringify(result))
+}
+
+mongoose.Query.prototype.cache = function(options) {
+    this.useCache = true
+    this.hashKey = JSON.stringify(options.key || '')
+    return this
+}
+
+//use it as middleware
+function clearHash(hashKey) {
+    client.del(JSON.stringify(hashKey))
+}
+
+module.exports = async (req, res, next) => {
+    await next()
+    clearHash(req.user.id)
+}
+~~~
+### 18.pm2 && worker
+~~~
+pm2 take advantage of cpus of computer, and its libuv pool automatically when use build-in hash function, but worker is alternative
+which will never use libuv pool.
+~~~

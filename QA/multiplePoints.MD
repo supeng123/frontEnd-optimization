@@ -934,25 +934,7 @@ function jumpboard(short, longer, k) {
     return res.sort((a,b)=>a-b)
 }
 ~~~
-### 46.最小差
-~~~
-function leastDifference(arr1,arr2) {
-    arr1.sort((a,b)=>a-b)
-    arr2.sort((a,b)=>a-b)
-    let res
-    let m = 0
-    let n = 0
-    while (m < arr1.length && n < arr2.length) {
-        res = Math.min(res, Math.abs(arr1[m]-arr2[n]))
-        if (arr1[m] < arr2[n]) {
-            m++
-        } else {
-            n++
-        }
-    }
-    return res
-}
-~~~
+
 ### 峰与谷
 ~~~
 [5,4,3,2,1]
@@ -1022,25 +1004,6 @@ var maxRotateFunction = function(A) {
         max = Math.max(max, getMax(A))
     }
     return max
-};
-~~~
-### 包含所有三种字符的子字符串数目
-~~~
-leetcode 1358
-var numberOfSubstrings = function(s) {
-    const len = s.length
-    let res = 0
-    const map = {a : 0, b : 0, c : 0}
-    for (let i = 0, j = 0; i < len; i++) {
-        const current = s[i]
-        map[current]++
-        while(j < len && map[a]>0 && map[b] > 0 && map[c] > 0) {
-            map[s[j]]--
-            j++
-        }
-        res +=j
-    }
-    return res
 };
 ~~~
 ### 包多次求和构造目标数组

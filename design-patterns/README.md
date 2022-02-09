@@ -345,6 +345,53 @@ let circle = new Shape('circle' red)
 circle.draw()
 let triangle = new Shape('triangle', yellow)
 triangle.draw()
+
+//实体与行为的抽象分离
+// 1.abstract Class
+public interface FileLoader {
+    upload(path: string): Object
+    check(object: Object): Boolean
+}
+//2.entity class
+public class FileUploaderImpl implement FileLoader {
+    private executor:fileUploaderExecutor = null
+    constructor(executor:fileUploaderExecutor) {
+        this.executor = executor
+    }
+
+    upload(path: string): Object {
+        return this.executor.uploadFile(path)
+    }
+
+    check(object: Object): Boolean {
+        return this.executor.checkFile(object)
+    }
+}
+//3.abstract behaivor
+public interface FileUploaderExecutor {
+    uploadFile(path: String): Object
+    checkFile(object: Object): Boolean
+}
+//4/ entity behaivor
+public class LinuxFileUploadExecutor implement FileUploaderExecutor {
+    uploadFile(path: String):Object {
+        return null
+    }
+    checkFile(object: Object):Boolean {
+        return false
+    }
+}
+
+public class WindowsFileUploadExecutor implement FileUploaderExecutor {
+    uploadFile(path: String):Object {
+        return null
+    }
+    checkFile(object: Object):Boolean {
+        return false
+    }
+}
+
+
 ~~~
 
 ### Command Pattern

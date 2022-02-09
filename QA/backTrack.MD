@@ -452,7 +452,7 @@ function nQueens(n) {
 
     function isValid(row, column) {
         for (let i = 0; i < row; i++) {
-            for (let j = 0; j < 3; j++) {
+            for (let j = 0; j < column; j++) {
                 if (res[row][column] == 'Q' && (j == column || i + j == row + colum || i - j == row - column)) {
                     return false
                 }

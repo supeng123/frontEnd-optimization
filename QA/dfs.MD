@@ -12,20 +12,24 @@ function wordBreak(s, wordDict) {
     })
 
     function recur(start) {
-        if (start > s.length-1) return [[]]
-        if (memo[start] !== undefined) return memo[start]
-        res = []
-        for (let i = start+1; i <= s.length; i++) {
-            let word = s.substring(0, i)
-            if (wordMap[word]) {
-                let rest = recur(i)
-                for (let j = 0; j < rest.length; j++) {
-                    res.push([word, ...rest[j]])
+        if (memo[start]) {
+            return memo[start];
+        }
+        if (start > s.length - 1) { 
+            return [[]];
+        }
+        const res = [];
+        for (let i = start + 1; i <= s.length; i++) {
+            const word = s.substring(start, i); 
+            if (wordMap[word]) { 
+                const restRes = recur(i);
+                for (const restWords of restRes) {
+                    res.push([word].concat(restWords));
                 }
             }
         }
-        memo[start] = res
-        return res
+        memo[start] = res;
+        return res;
     }
 }
 ~~~
