@@ -2182,6 +2182,78 @@ function maxPath(root) {
     return ans;
 }
 ~~~
+### Angular Questions
+~~~
+difference of Angular SEO, SSR, Lazy Loading, CLI ,component%contoller, TS%JS
+Angular Annotation is kind the implementation of decorators it tells what the kind of the class is
+Angular metadata tells angular how to deal with class like input,output changedetection template
+
+Directive changet the behavior of HTML DOM, structure/attribute/component(directive with template) directive
+
+four bindings, interpolation binding, property bindings, event bindings, two way bindings
+explain the architecture of angular. (template,directive, component, module, serive, bindings, dependency injection)
+lazy loading, loading on demand, divided into serveral modules, using loadchildren
+dependency injection. is an appliaction design pattern where rather than creating an instance inside a component, angular injects it
+via constructor, use providers property in modules, and injectable decorator for service, decoupling class dependencies, you don't have
+to change everywhere
+ng serve build angular application in memory, ng build is on the disk
+
+lifecycle of angular (ngOnChange ngOninit ngDocheck ngAfterContentInit ngAfterContentChecked ngAfterViewInit ngAfterViewChecked ngDestory)
+why rxjs
+Observables and Observer
+
+curly brackets for var let const
+~~~
+### difference of state VS props
+~~~
+state, mutable, can be changed, can not have state, can not pass to children, holds info about component
+props, immutable, readonly, can have props, can pass to children, allow pass one component to anther
+~~~
+### class an function component
+~~~
+class hold the states and have lifecycle, can be reused
+function more simple without any benefits from above
+
+getDeriveStatefromProps ---> componentDidMount ---> shouldComponentUpdate ---> getSnapshotBeforeUpdate ---> componentDidUpdate
+---> componentDidUnmount
+~~~
+### Angular performace
+~~~
+base.component.ts
+import {Component, Directive, OnDestroy} from '@angular/core'
+import { Observable , Subscription} from 'rxjs'
+
+@Directive()
+export abstract class BaseComponent implements OnDestroy {
+    private subscriptions: Subscription[] = [];
+    constructor() {}
+    
+    handleSubscription(source: Observable<T>, handle: Function) {
+        const sub = source.subscribe((data) => {
+            handle(data)
+        })
+        this.subscriptions.push(sub)
+    }
+
+    ngOnDestroy(): void {
+        for (const sub of this.subscriptions) {
+            sub.unsubscribe()
+        }
+    }
+}
+
+export class UsingComponent extends BaseComponent implements Oninit {
+    constructor() {
+        super()
+    }
+
+    onInit(): void {
+        this.handleSubscription(this.observable$, (data: any) => {
+            this.data = data
+        })
+    }
+}
+~~~
 
 I definitely won't go out of my way to be nice to you again 我绝对不会再对你好了
 ithink it's best if we keep moving forwaring with our lives
@@ -2299,4 +2371,17 @@ pianku.li、mypianku.com、pianku.one、topianku.com
 
 
 
+today I am going to show your my tiny demo that I have been working on for the last few days,
+firstly, I'd like to share the background of this task, as you can see in miro board, we have
+ui task about putting some of the dashboards from Logi to our web application main view.
+the primary function of this task is getting all dashboards and show each one representive chart in our main view,
+there will be an expand icon in the top right corner of the preview image, after clicking this icon, there
+will be the details of one dashboard popping up which contains all the charts, 
+of course you can check all the charts in detail, if you click the closing icon, everything goes back the main view.
 
+now let's go to the real example 
+the reason you can see one preview image in our main view is because I can get the chart you selected in Logi, as you can see, the color of the selected charts will be highlighted in this dashboard with blue color, so I will present this chart as preview image.
+
+I think that's probably all things I have done, I don't know if you have any questions about this presentation
+
+preliminary research

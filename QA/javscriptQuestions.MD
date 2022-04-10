@@ -193,3 +193,82 @@ module.exports = async (req, res, next) => {
 pm2 take advantage of cpus of computer, and its libuv pool automatically when use build-in hash function, but worker is alternative
 which will never use libuv pool.
 ~~~
+### 19. Proxy extends
+~~~
+const puppeteer = require('puppeteer')
+
+class CustomPage {
+    static async build() {
+        const broswer = await puppeteer.launch({
+            headless: false
+        })
+        const page = await browser.newPage()
+        const customPage = new CustomPage(page, browser)
+
+        return new Proxy(customPage, {
+            get: function(target, property) {
+                return customPage[property] || browser[property] || page[property]
+            }
+        })
+
+        constructor(page, browser) {
+            this.page = page
+            this.browser = browser
+        }
+
+        close() {
+            this.broser.close()
+        }
+
+        async login() {
+            const user = await userFactory()
+            const {session, sig} = sessionFactory(user)
+
+            await this.page.setCookie({name: 'session', value: session})
+            await this.page.setCookie({name: 'session.sig', value: sig})
+            await this.page.goto('localhost:3000')
+            await this.page.waitFor('a[href="/auth/logout"]')
+        }
+    }
+}
+
+sessionFatory.js
+const Buffer = require('safe-buffer').Buffer
+const Keygrip = require('keygrip')
+const keys = require('../../config/keys')
+const keygrip = new Keygrip([keys.cookieKey])
+
+module.expors = user => {
+    const sessionObject = {
+        passport: {
+            user: user._id.toString()
+        }
+    }
+
+    const session = Buffer.from(JSON.stringify(sessionObject)).toString('base64')
+    const sig = keygrip.sign('session='+session)
+    return {session, sig}
+}
+
+package.json jest config
+{
+    "setupTestFrameworkScriptFile": './test/setup.js'
+}
+
+setup.js
+require('../models/User')
+const mongoose = require('mongoose')
+const keys = require('../config/keys')
+
+mongoose.Promise = global.Promise
+mongoose.connect(keys.mongoURI, {useMongoClient: true})
+
+
+userFactory.js
+const mongoose = require('mongoose')
+const User = mongoose.model('User')
+
+module.exports = () => {
+    return new User({}).save()
+}
+~~~
