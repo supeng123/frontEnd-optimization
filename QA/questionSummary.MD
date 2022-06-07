@@ -2182,8 +2182,22 @@ function maxPath(root) {
     return ans;
 }
 ~~~
+### box sizing
+~~~
+面向对象
+how the height and width of the box be defined, border box contains the border padding and content
+
+css sprites images decrease the amount of http requests, are used to minimize the load time of web page by
+combine multiple small pictures into one single picture
+
+cookies is a small data gets from website and stored in user's machine by web browser that uses to access to the website, cookie is
+used to remember information for later use and record browering activities on website
+~~~
 ### Angular Questions
 ~~~
+Ahead of time compiles Angular html and ts code into Javascripts during the building phase, before the browser downloads and runs codes
+Just in time is way of compilinng computer code to machine code during execution or run time
+
 difference of Angular SEO, SSR, Lazy Loading, CLI ,component%contoller, TS%JS
 Angular Annotation is kind the implementation of decorators it tells what the kind of the class is
 Angular metadata tells angular how to deal with class like input,output changedetection template
@@ -2199,10 +2213,25 @@ to change everywhere
 ng serve build angular application in memory, ng build is on the disk
 
 lifecycle of angular (ngOnChange ngOninit ngDocheck ngAfterContentInit ngAfterContentChecked ngAfterViewInit ngAfterViewChecked ngDestory)
-why rxjs
+why rxjs  to deal with async data stream, 
 Observables and Observer
+observable is rxjs object to emit async stream, use Observer to listen to the data stream comes from abservables
+rxjs vs Promise
+promise can not be canceld while rxjs can, promise returns single value while rxjs produces stream of data
 
 curly brackets for var let const
+
+closures is a javascript feature where inner function has access to the outer function's varibles
+
+undefined means variable has declared but not assgined a value
+null is assinged value means variable contains no value
+undeclared means variable does not exist in program
+~~~
+### virtual dom
+~~~
+light representation of the ream DOM in the memory
+
+pure component comes from React.Component calls and does a shadow comparison of props and state 
 ~~~
 ### difference of state VS props
 ~~~
@@ -2254,6 +2283,7 @@ export class UsingComponent extends BaseComponent implements Oninit {
     }
 }
 ~~~
+
 
 I definitely won't go out of my way to be nice to you again 我绝对不会再对你好了
 ithink it's best if we keep moving forwaring with our lives
@@ -2385,3 +2415,284 @@ the reason you can see one preview image in our main view is because I can get t
 I think that's probably all things I have done, I don't know if you have any questions about this presentation
 
 preliminary research
+
+1.整数除法
+let len = 0; while(a>=b) {a -=b, len++}
+2.二进制加法
+Bigint('0b'+'a').toString(2)
+3.前n个数字二进制中 1 的个数
+number.toString(2).filter(i = i ==  1)
+4.只出现一次的数字 
+number.indexOf(target, index)
+5.单词长度的最大乘积
+arr.push([i, j]), arr.sort((a,b) => word[b[0]].length * word[b[1]].length - word[a[0]].length * word[a[1]].length)
+6.排序数组中两个数字之和
+two pointers, start=0, end=length-1 sum = numbers[start] + number[end]
+7.数组中和位0的三个数
+three sum, two pointers
+8.和大于等于target的最短子数组(连续子数组)
+slide window, while (end < length) { sum += nums[end];while(sum >= target) {min = Math.min(right-start+1, min), sum -= number[start++]}; end++}
+9.乘积小于k的子数组(连续子数组)
+slide window, while (end < lengh) { product*=nums[end], while (start <=end && product>=k) {product/=nums[start++]}, if(start<=end){count+=end-start+1}, end++}
+10.和为k的子数组(连续子数组)
+prefix sum , map = new Map([[0,1]]), res=0,sum=0; for (let n of nums){ sum+= n; res += map.get(sum-k) | 0; map.set(sum, map.get(sum)|0 + 1)} return res
+
+11.0 和 1 个数相同的子数组
+prefix sum ,map.set(0, -1); res=0,pre=0 for(let i =0;i<n;i++){pre += nums[i] ==0 ?-1:1; if(map.has(pre)){res=Math.max(res, i-map.get(pre))} else {map.set(pre,i)}}
+12.左右两边子数组的和相等(连续子数组)
+prefix&posfix sum, end = nums.length-2; posSum[end] = nums[end]+posSum[end+1], start=1 preSum[start] = nums[start]+preSum[start-1],if (preSum[i] === posSum[i])
+13.二维子矩阵的和(连续子数组)
+preSum[i][j] = preSum[i-1][j]+ preSum[i][j-1] - preSum[i-1][j-1]
+preSum[row2+1][col2+1]-preSum[row1][col2+1]-preSum[row2+1][col1] + preSum[row1][col1]
+14. 字符串中的变位词
+slide window  ++cnt2[s2[i].charCodeAt() - 'a'.charCodeAt()]; --cnt2[s2[i - n].charCodeAt() - 'a'.charCodeAt()]; cnt1.toString() === cnt2.toString()
+15. 字符串中的所有变位词
+slide window counts[s[i].charCodeAt() - 'a'.charCodeAt()]--; counts[s[i-p.length].charCodeAt() - 'a'.charCodeAt()]++;
+16.不含重复字符的最长子字符串
+set, max = Math.max(set.size(), max) ; while(set.has(s[i])) {set.delete(s[j]) j++} set.add(s[i])
+17.含有所有字符的最短字符串
+slide window 
+18.有效的回文
+two pointers， reverse(),  string.replace(/[a-z0-9]/g, '')
+19.最多删除一个字符得到回文
+two pointers， h(i, j-1) || h(i+1, j)
+20. 回文子字符串的个数
+two pointers. for (let i =0; i<n;i++){s1, s2,  for(let j=i; j<n;j++) { s1 += s[j], s2 = s[j] + s2, if(s1===s2) count++}} return count
+21.删除链表的倒数第 n 个结点
+slow fast pointers,  slow = dummy, fast = n, while(fast !=null) {slow = slow.next, fast = fast.next} slow.next = slow.next.next
+22.链表中环的入口节点
+three pointers,  slow, fast, after, while(fast.next){slow = slow.next, fast = fast.next.next, if (slow === fast){ while (after != slow){slow.next after.next}}}
+23. 两个链表的第一个重合节点
+let a = headA, b = headB, while(a!=b) {a = a ? a.next: headB, b = b ? b.next: headA} return a
+24. 反转链表
+let pre = null, while (cur){next = cur.next, cur.next = pre, pre = cur, cur = next} return pre
+25. 链表中的两数相加
+stack, reverse()
+26. 重排链表
+fast slow pointers, reverse linkedlist, 
+27. 回文链表
+reverse(), two pointers
+
+28.展开多级双向链表
+cur = head, while (cur!= null){ nextNode = cur.next, childNode = cur.child, cur.next = childNode, cur.child = null, childNode.pre = cur
+    while(childNode.next != null){ childNode = childNode.next} childNode.next = nextNode, if (nextNode != null){nextNode.pre = childNode}, cur= cur.next} return head
+29.排序的循环链表
+30.插入，删除和随机访问都是O（1）的容器
+m = map(), list = array(), m.set(val, list.length) list.push(val); valIndex = m.get(val), m.set(list[list.length-1], valIndex)list[valIndex] = list[list.length-1] list.pop(), m.delete(val)
+31.最近最少使用缓存
+LRU, double-linkedlist, dummyHead, dummyTail  addHead(), removeNode(), popTail(){return tail}, dic.delete(tail.key), capacity, count
+32.有效的变位词
+map sort()
+33.变位词组
+map sort()
+1.  外星语言是否排序
+dic[order[i].charCodeAt() - 'a'.charCodeAt()] = i for (let i = 0; i <len ;i++) { index, while(index< wordlength1 && index<wordlength2) return index===wordlength1}
+35. 最小时间差
+sort(), min = 60*24 - arr[len-1] + arr[0]  Math.min(arr[i+1]-arr[i], min)
+36. 后缀表达式
+stack， if (cur === '+') back = stack.pop, pre = stack.pop(), res = pre + back, stack.push(res)
+37.小行星碰撞
+stack, stack[stack.length-2] > 0 && stack[stack.length-1] < 0, after= stack.pop(),pre= stack.pop() stack.push(Math.abs(pre) > Math.abs(back) ? pre : back)
+38.每日温度
+stack increment res[i] = new Array(len).fill(0), while(len > 0) { while (stack.length && tem[i] >= tem[stack[stack.length-1]]){ stack.pop()}}
+if (stack.length) res[i] = stack[stack.length-1] - i; stack.push(i)  //stack.top is larger than current
+下一个更大元素 I
+stack increment map , while(len > 0) { while (stack.length && num2[i] >= stack[stack.length-1]){ stack.pop()}}
+if (stack.length) map.set(num2[i], stack.length ? stack[stack.length-1] : -1); stack.push(num2[i])  //stack.top is larger than current
+39.直方图最大矩形面积
+40.矩阵中最大的矩形
+stack increment heights = [0, ...heights, 0] for (let i = 0; i < height.length; i++) { while(heights[i] < heights[stack[stack.length-1]]){ calcuIndex=stack.pop()
+    maxArea = Math.max(maxArea, heights[calcuIndex] * (i - stack[stack.length-1] - 1)) stack.push(i)}}
+41.滑动窗口的平均值
+queue.  this.sum -= this.queue.shift(), this.arr.push(val),  this.sum += val, return this.sum / this.arr.length
+42.最近请求次数
+queue, while(this.queue[0] < t-3000) { this.queue.shift()} return this.queue.length
+43.往完全二叉树添加节点
+BFS, queue = [root], while(queue[0] && queue[0].left && queue[0].right) {queue.push(queue[0].left), queue.push(queue[0].right), queue.shift()}
+if (!queue[0].left) queue[0].left = newNode else queue[0].right = newNode, return queue[0].val
+44.二叉树每层最大值
+BFS, while(len--) { max = Math.max(node.val, max)} res.push(max)
+45.二叉树最底层最左边叶子结点
+BFS, res.push([]), while(n--) res[level].push(cur.val) return res[res.length-1][0]
+46.二叉树的右侧视图
+BFS,  while (q.length) {while(n--){ const cur = queue.shift(), if(n === 0){res.push(cur.val)}}}
+47.二叉树剪枝
+48.序列化与反序列化二叉树
+preorder, JSON.stringify(),  val = d.shift(), root.left = build(d), root.right = build(d) return root
+
+49.从根节点到叶子结点路径
+preorder dfs if(!node) return 0, sum = presum*10+node.val if(!node.left&&!node.right) return sum  dfs(node.left, sum)+dfs(node.right, sum)
+50.向下的路径节点之和
+preorder dfs  preOrder(node){ dfs(node, node.val); preOrder(node.left), preOrder(node.right)}, dfs(node, cur){
+    if(cur === sum) res++ if(!node.left&&!node.right) return, dfs(node.left, cur+node.left.val) dfs(node.right, cur+node.right.val)
+}
+or, summing(node,val){let count=0 if(!node) return 0 if(val ===node.val)count++, count+=summing(node.left, val-node.val),count+=summing(node.right, val-node.val)}
+res = summing(root, sum) res += pathsum(root.left, sum) res += pathsum(root.right, sum) 
+51.节点之和最大路径
+dfs(node) if(!node)return 0, l = Math.max(dfs(node.left), 0) r = Math.max(dfs(node.right), 0) max=Math.max(l+r+node.val, max) return node.val+Math.max(l,r)
+52.展平二叉搜索树
+preOrder, res=new TreeNode(-1), cur= res dfs(node){if(!node)return, dfs(node.left),cur.right = node, node.left= null, cur=node, dfs(node.right)} return res.right
+53.二叉搜索树中的中序后继
+inorder, flag
+1.  所有大于等于节点的值之和
+reverse preOrder dfs(node){if(!node)return; dfs(node.right), sum +=node.val, node.val=sum, dfs(node.left)} return root
+55. 二叉搜索树迭代器
+while(node) {stack.push(node) node = node.left},, next(), n = stack.pop(), while(current = n.right){current = current.left, stack.push(current)}
+56. 二叉搜索树中两个节点之和
+hash
+57.值和下标之差都在给定的范围内
+1.  日程表
+binary search if(this.times[index-1][1]>start||this.times[index][0]<end) return false, this.times.splice(index, 0, [start, end])
+59. 数据流的第 K 大数值
+heap
+60. 出现频率最高的 k 个数字
+sort
+61.和最小的 k 个数对
+heap
+62. 实现前缀树
+this.children={}, let cur = this for(let w of word) {if (!cur.children[w]) cur.children[w] = new Tie(), cur= cur.children[w]}, cur.end=true
+for (let w of prefix) {if (!cur.children[w]) return false, cur = cur.children[w]} return true
+063. 替换单词
+TieTree(), node = this.root, base='',for(let c of word) {if(!node[c]) node[c] = new Tie(), node = node[c],base+=c; if(node.isend) return base}
+64. 神奇的字典
+Map, Tie, for(let w of dictory){const list = this.map.get(w.length)||[], list.push(w), this.map.set(w.length, list)}
+const targetlist = this.map.get(targetword.length), for(w of targetlist){count=0, for (let i = 0; i< targetword.length; i++){ if(targeword[i]!=w[i]) count++}}
+return count >1
+65. 最短的单词编码
+reverse prefix,root={} words.sort((a,b)=> b.length-a.length) for(let word of words){ let flag = false, cur= root for(let i = word.length-1; i>=0; i--){
+    if(!cur[word[i]]){ cur[word[i]] = {}, flag= true, cur= cur[word[i]]}  if(flag){ res += word.length+1}}} return res
+66. 单词之和
+prefix Tie, this.dic[key]=val, sum(prefix){root={} cur = root, for (let s of prefix){if(!cur[s]){cur[s] = {}, cur = cur[s] } cur.flag=true}  for(let key of this.dic){ let current = root, for(k of key){ if(!current[k]){ break}eles{ current = current[k]}, if(current.flag){ res += this.dic[key]}}}}
+67. 最大的异或
+68. 查找插入位置
+binary search, let l = 0, let r = nums.length, while(l < r) { let mid = Math.floor(l +(r-l)/2), if(nums[mid] ==target){ return mid}else if(nums[mid]>target){
+    r = mid-1} else{ l =mid+1}, return l}
+69. 山峰数组的顶部
+if (i > 0 && arr[i] > arr[i + 1]) {break, ans= i}
+70. 排序数组中只出现一次的数字
+const index = nums.indexOf(nums[i]) const findIndex = nums.indexOf(nums[i], index+1) if (findIndex < 0) return nums[index]
+71.  按权重生成随机数
+72.  求平方根
+binary search, let l = 1, let r = x, while ( l <= x ){ let mid = Math.floor(l + (r-l)/2);  if(mid <= x/mid){ if(mid+1 > x/(mid+1){ return mid} l=mid+1)else{
+r = mid - 1};return 0}
+73.狒狒吃香蕉
+binary search, l= 1; r =Math.max([...piles]), canEat = (pile) => piles.reduce((a,b)=> a + Math.ceil(b/pile), 0), while (l < r){ let mid = Math.floor(l+(r-l)/2)
+ if (canEat(mid) <= k) {r = mid} else { l = mid+1} return l}
+74. 合并区间
+stack， const[pstart, pend] = stack[stack.length-1], if (pend >= current[i][start])  newEnd = Math.max(pEnd, current[i]end)
+75. 数组相对排序
+(let l1 of arr1) {if (!arr[2.includes(l1)]) {other.push(l1)}},other.sort, for (let l2 of arr2) {filters = l1.filter(i = i ===l2), res = [...res, ...filters]}
+return [...res, ...others]
+76. 数组中第k大的数字
+sort()
+77. 链表排序
+slow, fast pointers to get two linkedlist, merge(leftnode, rightnode)
+78. 合并排序链表
+same as above, curList = lists,  while(curlist.length>1) { newlist=[] l = 0; r = curlist.length-1, while (i <= j){ if(i==j){ newlist.push(curlist[i])}} else {
+    const mergedList = merge(curlist[i], curlist[j]), newlist.push(mergedList)
+} i++,j--, curlists = newLists}, return curlist[0]
+79.  所有子集
+start 如果不加一说明当个元素可以重复选择， 加一说明当个元素只能选一次， ！visite[i-1] 说明上个元素已经选过被pop()了，如果这次元素与上一个还相等可以剪枝了
+1.  含有 k 个元素的组合
+backTrack(start, path) {if (path.length >= k) {if (path.length === k) {res.push(path.slice()}}return, for}
+81. 允许重复选择元素的组合
+backTrack(start, path) always backTrack(start, path)
+82. 含有重复元素集合的组合
+backTrack(start, path) if(i > start && nums[i] == nums[i-1]) continue
+83.  没有重复元素集合的全排列
+backTrack(path, visited) if (visite[i]) continue
+84.含有重复元素集合的全排列 
+backTrack(path, visited){ if (path.length >= nums.length){ if(path.length===nums.length){res.push(path.slice())}, return} for (let i=0; i<nums.length;i++){
+if(visited[i] || (i>0 && nums[i] === nums[i-1] && !visited[i-1])) continue, visited[i]=true, path.push(nums[i]) backTrack(path, visited), visited[i]=false,path.pop()}}
+85. 生成匹配的括号
+dfs(n, n, cur),  dfs(l, r, cur){if (l == 0 && r==0){res.push(cur), dfs(l-1, r, cur+'('), if(r>l){ dfs(l, r-1, cur+')')}}}
+86. 分割回文子字符串
+backtrack(start, path){ if (start === s.length){res.push(path) return}, for(let i = start; i < s.length;i++){ if(isPalidrome(s, start, i){
+    path.push(s.slice(start, i+1)), backtrack(i+1, path), path.pop()})}}
+87. 复原 IP 
+backtrack(start, path){ if (start === s.length && path.length==4){res.push(path) return}, for(let i = start; i < s.length;i++){ if(isValid(s, start, i){
+    path.push(s.slice(start, i+1)), backtrack(i+1, path), path.pop()})}}, 
+    isValid(s, start, i) {s = s.slice(start, i+1), if((s.length>3 && s+ >255) || (s.length>1 && s[0] == "0")) return false}
+88.爬楼梯的最少成本
+dp[0] = 0; dp[1] = 0; dp[i] = Math.min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2])
+89.房屋偷盗
+dp[0] = nums[0], dp[1] = Math.min(nums[0], nums[1]), dp[i] = Math.min(dp[i-1], dp[i-2]+nums[i])
+90.环形房屋偷盗
+arr1 = arr.slice(0, len-1)  arr2 = arr.slice(1, len) Math.max(dp(arr1),dp(arr2))
+91.粉刷房子
+dp[i][0] = Math.min(dp[i-1][1],dp[i-1][2])+cost[i][0],dp[i][1] = Math.min(dp[i-1][0],dp[i-1][2])+cost[i][1],dp[i][2] = Math.min(dp[i-1][1],dp[i-1][0])+cost[i][2]
+92.翻转字符
+Math.min(leftArr[i]+rightArr[j], min), leftArr[i] = arr[i]==='1'? sum+1: sum, rightArr[i] = arr[i]==='0'? sum+1: sum,
+93.最长斐波那契数列
+three loop, k<i<j; if(arr[k]+arr[j] == arr[i]){arr[k][i] = 2, arr[i][j] = arr[k][i]+1, max = Math.max(arr[i][j], max)}
+94.最少回文分割
+95.最长公共子序列
+dp=Array.from(new Array(m+1) => new Array(n+1).fill(0)) ,if(text1[i-1] === text2[j-1]){dp[i][j] = dp[i-1][j-1]+1} else {dp[i][j]=Math.max(dp[i-1][j], dp[i][j-1])},dp[m][]
+96.字符串交织
+dfs cache, memo = Array.from(new Array(m+1) => new Array(n+1).fill(0)), check(i, j, k){if(memo[i][j]) return memo[i][j], if(k === s3.length) return memo[i][j]=true
+isValid=false, if(i < s1.length && s1[i] ==s3[k]) {isValid = check(i+1, j, k+1)}  if(j < s2.length && s2[j] ==s3[k]) {isValid = isValid || check(i, j+1, k+1)}
+returm memo[i][j] = isValid}, check(0,0,0)
+97.子序列的数目
+dfs cache memo = Array.from(new Array(s.length), () => new Array(t.length).fill(1)), helper(i, j){ if(j <0) return 1, if(i <0) return 0; if(memo[i][j] != -1) return memo[i][j],  if(s[i] === t[j]){ memo[i][j] = helper(i-1,j-1) + helper(i-1, j)} else { memo[i][j] = helper(i-1, j)}, return memo[i][j]}
+98.路径的数目
+dp[i][0]= 1; dp[0][j] = 1; dp[i][j] = dp[i-1][j]+dp[i][j-1], dp[n-1][m-1]
+99.最小路径之和
+dp[0][0]= grid[0][0]; dp[0][j] = 1; i>0 dp[i-1][j] = dp[i-1][j]+grid[i][j], j > 0, dp[i][j] = dp[i][j-1]+grid[i][j], min = Math.min(dp[i][j], min)
+100.三角形中最小的路径之和
+dp[0][0]= grid[0][0]; dp[0][j] = 1; i>0&j<i dp[i][j] = dp[i-1][j]+grid[i][j], j > 0, dp[i][j] = dp[i-1][j-1]+grid[i][j], min = Math.min(dp[i][j], min)
+
+101.分割等和子集
+0-1背包 dp = new Array(target+1).fill(0), dp[0] = true, for(let i = 0; i < nums.length; i++){ for(let j = target; j >=nums[i]; j--){
+    dp[j] = dp[j] || dp[j-nums[i]]}}
+102. 加减的目标值
+0-1背包 target = (sum + s) / 2, dp = new Array(target+1).fill(0), dp[0] = 1,  for(let i = 0; i < nums.length; i++){ for(let j = target; j >=nums[i]; j--){
+    dp[j] += dp[j-nums[i]]}}, dp[target]
+103. 最少的硬币数目
+完全背包 dp = new Array(target+1).fill(Infinity), dp[0] = 0 for(let i = 0; i < coins.length; i++>) { for(let j = 1; j <= target; i++){
+    if (j-coin[i]>=0) { dp[j] = Math.min(dp[j], dp[j-coins[i]]+1 )}}}
+104. 排列的数目
+组合背包 dp = new Array(target+1).fill(0), dp[0] = 1; for(let i = 0; i <= target; i++) { for(let j = 0; j <= nums.length; j++) {
+    if (i >= nums[j]){ dp[i] += dp[i-nums[j]]}}}, return dp[target]
+105. 岛屿的最大面积
+dfs(x, y){let count = 0; if(x>=0&&y>=0&&x<m-1&&y<n-1) {grid[x][y] =2, count++, count += dfs(x-1,y), count += dfs(x+1, y), count += dfs(x, y-1)
+ count += dfs(x, y+1), return count}}
+106. 二分图
+bfs, for(let i = 0; i < n; i++) { if (!BFS(i) return false), return true}, BFS(index){}
+107. 矩阵中的距离(01矩阵)
+BFS，ans = Array.from(new Array(m), () => new Array(n).fill(-1)); for(let i=0; i<m ; i++){for (let j = 0; j < n; j++) { if(matrix[i][j] == 0){ ans[i][j] =0
+queue.push([i,j])}}};  dist=0, while(queue.length){dist++, for(let i = 0; i < queue.length; i++){ const [x, y] = queue.shift()
+    if (x+1 < m  && ans[x+1][y]) {queue.push([x+1, y]), ans[x+1][y] = dist}
+    if (x-1 >= 0 && ans[x-1][y]) {queue.push([x-1, y]), ans[x-1][y] = dist}
+    if (y < n && ans[x][y+1]) {queue.push([x, y+1]), ans[x][y+1] = dist}
+    if (y >= 0 && ans[x][y-1]) {queue.push([x, y-1]), ans[x][y-1] = dist}
+}} return ans
+108. 单词演变
+bfs queue = [[beginword, 1]]; while(queue.length) { const [word, level] = queue.shift(), if(word === endword) return level;
+for (let i = 0; i < word.length; i++){ for (let j = 97; j < 123; j++){
+    const newWord = word.slice(0, i) + String.fromCharCode(c) + word.slice(i+1), if(!wordSet.has(newWord){ queue.push([newWord,level+1])
+    wordSet.add(newWord)})}}}
+
+109.开密码锁
+bfs， visit={}
+110.所有路径
+dfs, ans= [], dfs(0, [0]); dfs(cur, path){if(cur===graph.length-1){ans.push([...path])};  for(let val of graph[cur]){
+    path.push(val), dfs(val, path), path.pop()}}
+111.计算除法
+UnionFind
+112.最长递增路径
+dfs, memo = Array.from(new Array(m), () => new Array(n)), dfs(matrix, i, j, m, n, memo){ if (matrix[i][j]) return matrix[i][j]; let max = 1; for(let i=0;i<4;i++){
+    const x= i+coorx[k]  const y= j+coory[k], if(x >= 0 && x < m && y >= 0 && y < n && matrix[x][y] > matrix[i][j]) {max = Math.max(max, 1 + dfs(matrix, x, y, m, n, memo));} return memo[i][j] = max
+}}
+113.课程顺序
+115.省份数量
+UnionFind
+116.相识的字符串
+UnionFind, const n = strs.length const m = strs[0].lenngth;const f = new Array(n).fill(0).map((element, index) => index);
+for (let i = 0; i < n; i++) {for (let j = i+1; j<; j++) { cosnt fi= find(i) const fj = find(j)} if (fi === fj) continue if check(strs[i], strs[j], m) { f[fi] = fj}}
+f.reduce((a,b,index) => a+=f[index]===index ? 1 :0, 0 )
+find(x){return f[x] === x? x: (f[x] = find(f[x]))}, check(a, b, len){let num =0; for (let i=0; i < len; i++) if(a[i]!==b[i]) num++, if(num>2){return false}, return true}
+117.多余的边
+UnionFind, const father = new Array(edges.length+1).fill(0).map((v, i) => i); for(let edge of edges){ const fx = find(edge[0]; const fy = find(edge[1])
+    if(fx==fy){res = edge} else { father[fy] = fx}}; return res
+118.最长连续序列
+set
